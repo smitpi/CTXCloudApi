@@ -45,10 +45,10 @@ Function Get-CTXAPI_Token {
 	param(
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$client_id = '02ba0b44-5997-4b3f-a3d0-d1b1514d2537',
+		[string]$client_id,
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$client_secret = 'VaMg_Ghixo_KvdoX9UPlWQ=='
+		[string]$client_secret
 )
 
 $tokenUrl = 'https://api-us.cloud.com/cctrustoauth2/root/tokens/clients'
