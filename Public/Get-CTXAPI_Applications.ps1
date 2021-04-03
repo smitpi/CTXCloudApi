@@ -57,7 +57,11 @@ $headers += @{
 	'Citrix-CustomerId' = $customerId
 	Accept              = 'application/json'
 }
-((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items
+$apps = @()
+(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
+    $apps += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications/$_" -Headers $headers).Content | ConvertFrom-Json)
+    }
+$apps
 
 
 
