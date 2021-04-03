@@ -3,7 +3,7 @@
 
 .VERSION 1.0.0
 
-.GUID a89d5b14-84f0-4461-ae32-fecbc349aa80
+.GUID 49c09b99-1918-4fc5-b536-26162b1f0cff
 
 .AUTHOR Pierre Smit
 
@@ -26,22 +26,22 @@
 .EXTERNALSCRIPTDEPENDENCIES 
 
 .RELEASENOTES
-Created [03/04/2021_01:49] Initital Script Creating
+Created [03/04/2021_12:08] Initital Script Creating
 
 #>
 
 <# 
 
 .DESCRIPTION 
- get cloud service info 
+ details about ctx objects 
 
 #> 
 
 Param()
 
 
-Function Get-CTXAPI_Machines {
-                PARAM(
+Function Get-CTXAPI_Hypervisors {
+               PARAM(
 					[Parameter(Mandatory = $true, Position = 0)]
                	 	[ValidateNotNullOrEmpty()]
 					[string]$CustomerId,
@@ -59,9 +59,7 @@ $headers += @{
 }
 
 
-((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines" -Headers $headers).Content | ConvertFrom-Json).items
-
-
+((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/hypervisors" -Headers $headers).Content | ConvertFrom-Json).items
 
 
 } #end Function

@@ -41,27 +41,27 @@ Param()
 
 
 Function Get-CTXAPI_Applications {
-                PARAM(
-					[Parameter(Mandatory = $true, Position = 0)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$CustomerId,
-					[Parameter(Mandatory = $true, Position = 1)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$SiteId,
-                	[Parameter(Mandatory = $true, Position = 2)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$ApiToken)
+	PARAM(
+		[Parameter(Mandatory = $true, Position = 0)]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerId,
+		[Parameter(Mandatory = $true, Position = 1)]
+		[ValidateNotNullOrEmpty()]
+		[string]$SiteId,
+		[Parameter(Mandatory = $true, Position = 2)]
+		[ValidateNotNullOrEmpty()]
+		[string]$ApiToken)
 
-$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)"}
-$headers += @{
-	'Citrix-CustomerId' = $customerId
-	Accept              = 'application/json'
-}
-$apps = @()
-(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-    $apps += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications/$_" -Headers $headers).Content | ConvertFrom-Json)
-    }
-$apps
+	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
+	$headers += @{
+		'Citrix-CustomerId' = $customerId
+		Accept              = 'application/json'
+	}
+	$apps = @()
+	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
+		$apps += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications/$_" -Headers $headers).Content | ConvertFrom-Json)
+	}
+	$apps
 
 
 
