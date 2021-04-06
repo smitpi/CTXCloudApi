@@ -69,7 +69,8 @@ PowerShellVersion = '3.0'
 # NestedModules = @()
 
 # Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-FunctionsToExport = @()
+FunctionsToExport = 'Get-CTXAPI_Applications','Get-CTXAPI_CloudServices','Get-CTXAPI_ConfigAudit','Get-CTXAPI_ConfigLog','Get-CTXAPI_DeliveryGroups','Get-CTXAPI_Hypervisors','Get-CTXAPI_MachineCatalogs','Get-CTXAPI_Machines','Get-CTXAPI_ResourceLocation','Get-CTXAPI_Sessions','Get-CTXAPI_Siteid','Get-CTXAPI_Token','Get-CTXAPI_VDAUptime','Get-CTX_VDAUptime'
+
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()
