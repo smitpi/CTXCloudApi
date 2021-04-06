@@ -31,7 +31,6 @@ Updated [06/04/2021_09:03] Script Fle Info was updated
 
 #> 
 
-#Requires -Module ImportExcel
 
 <# 
 
@@ -42,7 +41,6 @@ details about ctx objects
 Requires –Modules ImportExcel
 
 #> 
-#Requires –Modules ImportExcel
 Param()
 
 
