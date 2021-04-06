@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 8e3eaddb-c8e2-4cd6-8a70-0fbea6245f4d
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_01:54] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- get cloud config log 
+get cloud config log
 
 #> 
 

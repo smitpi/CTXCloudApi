@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 3b47fbca-6d13-4688-9161-5043088b967c
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_01:32] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- get cloud Resource Locations 
+get cloud Resource Locations
 
 #> 
 

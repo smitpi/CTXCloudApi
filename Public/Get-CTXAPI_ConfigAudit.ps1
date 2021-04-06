@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 5d786907-3d5c-431d-a8ad-eadbacf8bd5f
 
@@ -27,13 +27,19 @@
 
 .RELEASENOTES
 Created [03/04/2021_10:50] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+#Requires -Module ImportExcel
 
 <# 
 
 .DESCRIPTION 
- details about ctx objects 
+details about ctx objects 
+
+
+Requires –Modules ImportExcel
 
 #> 
 #Requires –Modules ImportExcel

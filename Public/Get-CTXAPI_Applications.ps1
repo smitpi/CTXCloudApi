@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID be2a50c0-7921-4bcb-a556-606bdf5f4ca7
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_01:17] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- get cloud apps 
+get cloud apps
 
 #> 
 

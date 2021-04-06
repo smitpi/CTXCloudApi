@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 4ad090f6-2553-4c76-8eac-4484dccafb7e
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_00:59] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- get cloud token 
+get cloud token
 
 #> 
 

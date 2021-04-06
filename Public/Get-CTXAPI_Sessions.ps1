@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID ee88aaa7-ac78-46f9-896b-3b29aea20a00
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_01:17] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- get cloud Sessions 
+get cloud Sessions
 
 #> 
 

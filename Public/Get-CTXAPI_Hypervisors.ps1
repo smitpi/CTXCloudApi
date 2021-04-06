@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 49c09b99-1918-4fc5-b536-26162b1f0cff
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_12:08] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- details about ctx objects 
+details about ctx objects
 
 #> 
 

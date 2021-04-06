@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 1c10d8b3-8ca1-4658-8e1b-fa1a99eaa3db
 
@@ -27,13 +27,16 @@
 
 .RELEASENOTES
 Created [03/04/2021_01:17] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- get cloud groups 
+get cloud groups
 
 #> 
 
