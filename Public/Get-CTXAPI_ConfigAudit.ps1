@@ -1,4 +1,4 @@
-
+#Requires –Modules ImportExcel
 <#PSScriptInfo
 
 .VERSION 1.0.1
@@ -38,7 +38,7 @@ Updated [06/04/2021_09:03] Script Fle Info was updated
 details about ctx objects 
 
 
-Requires –Modules ImportExcel
+
 
 #> 
 Param()
