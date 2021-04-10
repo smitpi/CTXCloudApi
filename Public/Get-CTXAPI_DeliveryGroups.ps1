@@ -44,27 +44,27 @@ Param()
 
 
 Function Get-CTXAPI_DeliveryGroups {
-                PARAM(
-					[Parameter(Mandatory = $true, Position = 0)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$CustomerId,
-					[Parameter(Mandatory = $true, Position = 1)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$SiteId,
-                	[Parameter(Mandatory = $true, Position = 2)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$ApiToken)
+	PARAM(
+		[Parameter(Mandatory = $true, Position = 0)]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerId,
+		[Parameter(Mandatory = $true, Position = 1)]
+		[ValidateNotNullOrEmpty()]
+		[string]$SiteId,
+		[Parameter(Mandatory = $true, Position = 2)]
+		[ValidateNotNullOrEmpty()]
+		[string]$ApiToken)
 
-$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)"}
-$headers += @{
-	'Citrix-CustomerId' = $customerId
-	Accept              = 'application/json'
-}
+	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
+	$headers += @{
+		'Citrix-CustomerId' = $customerId
+		Accept              = 'application/json'
+	}
 
-$Delgroups = @()
-(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-    $DelGroups += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups/$_" -Headers $headers).Content | ConvertFrom-Json)
-    }
-$DelGroups
+	$Delgroups = @()
+	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
+		$DelGroups += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups/$_" -Headers $headers).Content | ConvertFrom-Json)
+	}
+	$DelGroups
 
 } #end Function

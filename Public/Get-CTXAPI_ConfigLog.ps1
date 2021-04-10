@@ -44,28 +44,28 @@ Param()
 
 
 Function Get-CTXAPI_ConfigLog {
-                PARAM(
-					[Parameter(Mandatory = $true, Position = 0)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$CustomerId,
-					[Parameter(Mandatory = $true, Position = 1)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$SiteId,
-					[Parameter(Mandatory = $true, Position = 2)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$Days,
-                	[Parameter(Mandatory = $true, Position = 3)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$ApiToken)
+	PARAM(
+		[Parameter(Mandatory = $true, Position = 0)]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerId,
+		[Parameter(Mandatory = $true, Position = 1)]
+		[ValidateNotNullOrEmpty()]
+		[string]$SiteId,
+		[Parameter(Mandatory = $true, Position = 2)]
+		[ValidateNotNullOrEmpty()]
+		[string]$Days,
+		[Parameter(Mandatory = $true, Position = 3)]
+		[ValidateNotNullOrEmpty()]
+		[string]$ApiToken)
 
-$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)"}
-$headers += @{
-	'Citrix-CustomerId' = $customerId
-	Accept              = 'application/json'
-}
+	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
+	$headers += @{
+		'Citrix-CustomerId' = $customerId
+		Accept              = 'application/json'
+	}
 
 
-((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/ConfigLog/Operations?days=$days" -Headers $headers).Content | ConvertFrom-Json).items
+	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/ConfigLog/Operations?days=$days" -Headers $headers).Content | ConvertFrom-Json).items
 
 
 

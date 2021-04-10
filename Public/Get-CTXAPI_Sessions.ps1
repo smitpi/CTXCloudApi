@@ -44,24 +44,24 @@ Param()
 
 
 Function Get-CTXAPI_Sessions {
-                PARAM(
-					[Parameter(Mandatory = $true, Position = 0)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$CustomerId,
-					[Parameter(Mandatory = $true, Position = 1)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$SiteId,
-                	[Parameter(Mandatory = $true, Position = 2)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$ApiToken)
+	PARAM(
+		[Parameter(Mandatory = $true, Position = 0)]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerId,
+		[Parameter(Mandatory = $true, Position = 1)]
+		[ValidateNotNullOrEmpty()]
+		[string]$SiteId,
+		[Parameter(Mandatory = $true, Position = 2)]
+		[ValidateNotNullOrEmpty()]
+		[string]$ApiToken)
 
-$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)"}
-$headers += @{
-	'Citrix-CustomerId' = $customerId
-	Accept              = 'application/json'
-}
+	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
+	$headers += @{
+		'Citrix-CustomerId' = $customerId
+		Accept              = 'application/json'
+	}
 
 
-((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/sessions" -Headers $headers).Content | ConvertFrom-Json).items
+	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/sessions" -Headers $headers).Content | ConvertFrom-Json).items
 
 } #end Function

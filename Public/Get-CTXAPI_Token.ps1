@@ -52,17 +52,17 @@ Function Get-CTXAPI_Token {
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
 		[string]$client_secret
-)
+	)
 
-$tokenUrl = 'https://api-us.cloud.com/cctrustoauth2/root/tokens/clients'
+	$tokenUrl = 'https://api-us.cloud.com/cctrustoauth2/root/tokens/clients'
 
-$response = Invoke-WebRequest $tokenUrl -Method POST -Body @{
-	grant_type    = 'client_credentials'
-	client_id     = $client_id
-	client_secret = $client_secret
-}
-$token = $response.Content | ConvertFrom-Json
-$token.access_token
+	$response = Invoke-WebRequest $tokenUrl -Method POST -Body @{
+		grant_type    = 'client_credentials'
+		client_id     = $client_id
+		client_secret = $client_secret
+	}
+	$token = $response.Content | ConvertFrom-Json
+	$token.access_token
 
 
 

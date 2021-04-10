@@ -44,24 +44,24 @@ Param()
 
 
 Function Get-CTXAPI_Siteid {
-                PARAM(
-					[Parameter(Mandatory = $true, Position = 0)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$CustomerId,
-                	[Parameter(Mandatory = $true, Position = 1)]
-               	 	[ValidateNotNullOrEmpty()]
-					[string]$ApiToken)
+	PARAM(
+		[Parameter(Mandatory = $true, Position = 0)]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerId,
+		[Parameter(Mandatory = $true, Position = 1)]
+		[ValidateNotNullOrEmpty()]
+		[string]$ApiToken)
 
-$headers = @{
-	Authorization = "CwsAuth Bearer=$($ApiToken)"
-}
-$headers += @{
-	'Citrix-CustomerId' = $customerId
-	Accept              = 'application/json'
-}
+	$headers = @{
+		Authorization = "CwsAuth Bearer=$($ApiToken)"
+	}
+	$headers += @{
+		'Citrix-CustomerId' = $customerId
+		Accept              = 'application/json'
+	}
 
 
-$me = Invoke-WebRequest 'https://api-us.cloud.com/cvadapis/me' -Headers $headers
-($me.Content | ConvertFrom-Json).customers.sites.id
+	$me = Invoke-WebRequest 'https://api-us.cloud.com/cvadapis/me' -Headers $headers
+	($me.Content | ConvertFrom-Json).customers.sites.id
 
 } #end Function
