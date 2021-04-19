@@ -57,16 +57,76 @@ Function Get-CTXAPI_LatestSessionAudit {
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
+		[ValidateNotNullOrEmpty()]
 		[Parameter(Mandatory = $false, Position = 4)]
-		[switch]$ExportToExcel = $false,
+		[int]$hours,
 		[Parameter(Mandatory = $false, Position = 5)]
+		[switch]$ExportToExcel = $false,
+		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
 
+	$RegistrationState = [PSCustomObject]@{
+		0 = 'Unknown'
+		1 = 'Registered'
+		2 = 'Unregistered'
+	}
+	$ConnectionState = [PSCustomObject]@{
+		0 = 'Unknown'
+		1 = 'Connected'
+		2 = 'Disconnected'
+		3 = 'Terminated'
+		4 = 'PreparingSession'
+		5 = 'Active'
+		6 = 'Reconnecting'
+		7 = 'NonBrokeredSession'
+		8 = 'Other'
+		9 = 'Pending'
+	}
+	$ConnectionFailureType = [PSCustomObject]@{
+		0 = 'None'
+		1 = 'ClientConnectionFailure'
+		2 = 'MachineFailure'
+		3 = 'NoCapacityAvailable'
+		4 = 'NoLicensesAvailable'
+		5 = 'Configuration'
+	}
+	$SessionFailureCode = [PSCustomObject]@{
+		0   = 'Unknown'
+		1   = 'None'
+		2   = 'SessionPreparation'
+		3   = 'RegistrationTimeout'
+		4   = 'ConnectionTimeout'
+		5   = 'Licensing'
+		6   = 'Ticketing'
+		7   = 'Other'
+		8   = 'GeneralFail'
+		9   = 'MaintenanceMode'
+		10  = 'ApplicationDisabled'
+		11  = 'LicenseFeatureRefused'
+		12  = 'NoDesktopAvailable'
+		13  = 'SessionLimitReached'
+		14  = 'DisallowedProtocol'
+		15  = 'ResourceUnavailable'
+		16  = 'ActiveSessionReconnectDisabled'
+		17  = 'NoSessionToReconnect'
+		18  = 'SpinUpFailed'
+		19  = 'Refused'
+		20  = 'ConfigurationSetFailure'
+		21  = 'MaxTotalInstancesExceeded'
+		22  = 'MaxPerUserInstancesExceeded'
+		23  = 'CommunicationError'
+		24  = 'MaxPerMachineInstancesExceeded'
+		25  = 'MaxPerEntitlementInstancesExceeded'
+		100 = 'NoMachineAvailable'
+		101 = 'MachineNotFunctional'
+	}
+
+
 
 	$Today = Get-Date -Format yyyy-MM-ddTHH:mm:ss.ffffZ
-	$LastWeek = ((Get-Date).AddHours(-48)).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
+	$LastWeek = ((Get-Date).AddHours(-$hours)).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
 
 	$SessionURI = 'https://api-' + $region + '.cloud.com/monitorodata\Sessions?$apply=filter(StartDate ge ' + $LastWeek + ' and StartDate le ' + $Today + ' )'
 	$ConnectionsURI = 'https://api-' + $region + '.cloud.com/monitorodata\Connections?$apply=filter(LogOnStartDate ge ' + $LastWeek + ' and LogOnStartDate le ' + $Today + ' )'
@@ -81,29 +141,49 @@ Function Get-CTXAPI_LatestSessionAudit {
 		Accept              = 'application/json'
 	}
 
-	$sessions = ((Invoke-WebRequest -Uri $SessionURI -Headers $headers).Content | ConvertFrom-Json).value
-	$sessionsMetric = ((Invoke-WebRequest -Uri $SessionMetricURI -Headers $headers).Content | ConvertFrom-Json).value
-	$connections = ((Invoke-WebRequest -Uri $ConnectionsURI -Headers $headers).Content | ConvertFrom-Json).value
-	$users = ((Invoke-WebRequest -Uri $UsersURI -Headers $headers).Content | ConvertFrom-Json).value
-	$machines = ((Invoke-WebRequest -Uri $MachinesURI -Headers $headers).Content | ConvertFrom-Json).value
+	function fetch-odata {
+		[CmdletBinding()]
+		param(
+			[string]$URI,
+			[System.Collections.Hashtable]$headers)
+		$data = @()
+		$NextLink = $URI
+		While ($Null -ne $NextLink) {
+			$tmp = Invoke-WebRequest -Uri $NextLink -Headers $headers | ConvertFrom-Json
+			$tmp.Value | ForEach-Object { $data += $_ }
+			$NextLink = $tmp.'@odata.NextLink' 
+		}
+		return $data
+	}
+
+
+
+	$sessions = fetch-odata -URI $SessionURI -headers $headers
+	$sessionsMetric = fetch-odata -URI $SessionMetricURI -headers $headers
+	$connections = fetch-odata -URI $ConnectionsURI -headers $headers
+	$users = fetch-odata -URI $UsersURI -headers $headers
+	$machines = fetch-odata -URI $MachinesURI -headers $headers
+
 
 	$data = @()
-	foreach ($connection in $connections) {
+	foreach ($session in $sessions) {
 		try {
-			$session = $sessions | Where-Object { $_.SessionKey -like $connection.SessionKey }
+			$connection = ($connections | Where-Object { $_.SessionKey -eq $session.SessionKey })[-1]
 			$user = $users | Where-Object { $_.id -like $session.UserId }
 			$mashine = $machines | Where-Object { $_.id -like $session.MachineId }
-			$avgrtt = 0
-			$sessionsMetric | Where-Object { $_.Sessionid -like $connection.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
-			$avgrtt = $avgrtt / ($sessionsMetric | Where-Object { $_.Sessionid -like $connection.SessionKey }).count
-		} catch { Write-Warning 'Not enough data' }
+			try {
+				$avgrtt = 0
+				$sessionsMetric | Where-Object { $_.Sessionid -like $session.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
+				$avgrtt = $avgrtt / ($sessionsMetric | Where-Object { $_.Sessionid -like $Session.SessionKey }).count
+			} catch {}
+		} catch { Write-Warning "Not enough data - $_.Exception.Message" }
 		$data += [PSCustomObject]@{
 			FullName                 = $user.FullName
 			Upn                      = $user.upn
 			DnsName                  = $mashine.DnsName
 			IPAddress                = $mashine.IPAddress
 			IsInMaintenanceMode      = $mashine.IsInMaintenanceMode
-			CurrentRegistrationState = $mashine.CurrentRegistrationState
+			CurrentRegistrationState = $RegistrationState.($mashine.CurrentRegistrationState)
 			OSType                   = $mashine.OSType
 			ClientName               = $connection.ClientName
 			ClientVersion            = $connection.ClientVersion
@@ -117,13 +197,11 @@ Function Get-CTXAPI_LatestSessionAudit {
 			AuthenticationDuration   = $connection.AuthenticationDuration
 			LogOnDuration            = $session.LogOnDuration
 			EndDate                  = $session.EndDate
-			ExitCode                 = $session.ExitCode
+			ExitCode                 = $ConnectionFailureType.($session.ExitCode)
 			FailureDate              = $session.FailureDate
-			ConnectionState          = $session.ConnectionState
+			ConnectionState          = $ConnectionState.($session.ConnectionState)
 			AVG_ICA_RTT              = $avgrtt
 		}
-
-
 	}
 
 	if ($ExportToExcel) {
@@ -190,11 +268,7 @@ $Global:ProvisioningType = @{
     2 = @{"Name" = "PVS"; "Description" = "Machine provisioned by Provisioning Services (may be physical, blade, VM,...)."};
     3 = @{"Name" = "Manual"; "Description" = "No automated provisioning."}
 }
-$Global:RegistrationState = @{
-    0 = @{"Name" = "Unknown"; "Description" = "Unknown"};
-    1 = @{"Name" = "Registered"; "Description" = "Machine is currently registered."};
-    2 = @{"Name" = "Unregistered"; "Description" = "Machine has been unregistered."}
-}
+
 
 
 
