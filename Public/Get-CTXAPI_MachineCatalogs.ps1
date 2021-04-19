@@ -55,11 +55,12 @@ Function Get-CTXAPI_MachineCatalogs {
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
 
-	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
-	$headers += @{
+	$headers = [System.Collections.Hashtable]@{
+		Authorization       = "CwsAuth Bearer=$($ApiToken)"
 		'Citrix-CustomerId' = $customerId
 		Accept              = 'application/json'
 	}
+
 	$MachineCat = @()
 	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
 		$MachineCat += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$_" -Headers $headers).Content | ConvertFrom-Json)

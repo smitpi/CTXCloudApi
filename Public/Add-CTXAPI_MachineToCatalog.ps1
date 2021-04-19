@@ -63,10 +63,11 @@ Function Add-CTXAPI_MachineToCatalog {
 
 	if ($MachineName.split('\')[1] -like $null) { Write-Error 'MachineName needs to be in the format DOMAIN\Hostname'; halt }
 
-	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
-	$headers += @{'Citrix-CustomerId' = $customerId }
-	$headers += @{Accept = 'application/json' }
-
+	$headers = [System.Collections.Hashtable]@{
+		Authorization       = "CwsAuth Bearer=$($ApiToken)"
+		'Citrix-CustomerId' = $customerId
+		Accept              = 'application/json'
+	}
 
 
 	$body = @{MachineName = $MachineName } 

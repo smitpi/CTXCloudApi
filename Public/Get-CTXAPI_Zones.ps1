@@ -54,8 +54,8 @@ Function Get-CTXAPI_Zones {
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
 
-	$headers = @{Authorization = "CwsAuth Bearer=$($ApiToken)" }
-	$headers += @{
+	$headers = [System.Collections.Hashtable]@{
+		Authorization       = "CwsAuth Bearer=$($ApiToken)"
 		'Citrix-CustomerId' = $customerId
 		Accept              = 'application/json'
 	}

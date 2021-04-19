@@ -174,11 +174,11 @@ Function Get-CTXAPI_LatestSessionAudit {
 			try {
 				$avgrtt = 0
 				$sessionsMetric | Where-Object { $_.Sessionid -like $session.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
-				$avgrtt = $avgrtt / ($sessionsMetric | Where-Object { $_.Sessionid -like $Session.SessionKey }).count
+				$avgrtt = $avgrtt / ($sessionsMetric | Were-Object { $_.Sessionid -like $Session.SessionKey }).count
 			} catch {}
 		} catch { Write-Warning "Not enough data - $_.Exception.Message" }
 		$data += [PSCustomObject]@{
-			FullName                 = $user.FullName
+			<#FullName                 = $user.FullName
 			Upn                      = $user.upn
 			DnsName                  = $mashine.DnsName
 			IPAddress                = $mashine.IPAddress
@@ -206,13 +206,14 @@ Function Get-CTXAPI_LatestSessionAudit {
 
 	if ($ExportToExcel) {
 		[string]$ExcelReportname = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-		$data | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
-	} else { $data | Out-GridHtml;$data }
+$data | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
+#>	
+  } else { $data | Out-GridHtml;$data }
 
 
 
-} #end Function
-<#
+	} #end Function
+	<#
 $Global:AllocationType = @{
     0 = @{"Name" = "Unknown"; "Description" = "Unknown. When the Broker does not send an allocation type."};
     1 = @{"Name" = "Static"; "Description" = "Machines get assigned to a user either by the admin or on first use. This relationship is static and changes only if an admin explicitly changes the assignments."};
@@ -231,6 +232,49 @@ $Global:CatalogType = @{
     4 = @{"Name" = "Pvs"; "Description" = "This catalog kind is for managed machines that are provisioned using Provisioning Services. All machines in this type of catalog are managed, and so must be associated with a hypervisor connection. Only shared desktops are suitable for this catalog kind."};
     5 = @{"Name" = "Pvd"; "Description" = "A personal vDisk catalog is similar to a single-image catalog, but it also uses personal vDisk technology."};
     6 = @{"Name" = "PvsPvd"; "Description" = "A Provisioning Services-personal vDisk (PvsPvd) catalog is similar to a Provisioning Services catalog, but it also uses personal vDisk technology."}
+}
+$Global:HotfixChangeType = @{
+    0 = @{"Name" = "Remove"; "Description" = "Removed"};
+    1 = @{"Name" = "Add"; "Description" = "Added"}
+}
+$Global:DeliveryType = @{
+    0 = @{"Name" = "DesktopsOnly"; "Description" = "Only desktops are published."};
+    1 = @{"Name" = "AppsOnly"; "Description" = "Only applications are published."};
+    2 = @{"Name" = "DesktopsAndApps"; "Description" = "Both desktops and applications are published."}
+}
+$Global:DesktopKind = @{
+    0 = @{"Name" = "Private"; "Description" = "Private"};
+    1 = @{"Name" = "Shared"; "Description" = "Shared"}
+}
+$Global:LifecycleState = @{
+    0 = @{"Name" = "Active"; "Description" = "Default value - entity is active"};
+    1 = @{"Name" = "Deleted"; "Description" = "Object was deleted"};
+    2 = @{"Name" = "RequiresResolution"; "Description" = "Object was created, but values are missing, so a background process should poll to update missing values"};
+    3 = @{"Name" = "Stub"; "Description" = "Stub object - for example, a Machine or Session that didn't really exist but is created by internal processing logic to preserve data relationships"}
+}
+$Global:MachineRole = @{
+    0 = @{"Name" = "VDA"; "Description" = "VDA machine"};
+    1 = @{"Name" = "DDC"; "Description" = "DDC machine"};
+    2 = @{"Name" = "DDC, VDA"; "Description" = "Machine acting as VDA and DDC"}
+}
+$Global:PersistentUserChanges = @{
+    0 = @{"Name" = "Unknown"; "Description" = "Unknown"};
+    1 = @{"Name" = "Discard"; "Description" = "User changes are discarded."};
+    2 = @{"Name" = "OnLocal"; "Description" = "User changes are persisted locally."};
+    3 = @{"Name" = "OnPvd"; "Description" = "User changes are persisted on the Pvd."}
+}
+$Global:ProvisioningType = @{
+    0 = @{"Name" = "Unknown"; "Description" = "Unknown"};
+    1 = @{"Name" = "MCS"; "Description" = "Machine provisioned by Machine Creation Services (machine must be a VM)."};
+    2 = @{"Name" = "PVS"; "Description" = "Machine provisioned by Provisioning Services (may be physical, blade, VM,...)."};
+    3 = @{"Name" = "Manual"; "Description" = "No automated provisioning."}
+}
+
+
+
+
+
+#>  6 = @{"Name" = "PvsPvd"; "Description" = "A Provisioning Services-personal vDisk (PvsPvd) catalog is similar to a Provisioning Services catalog, but it also uses personal vDisk technology."}
 }
 $Global:HotfixChangeType = @{
     0 = @{"Name" = "Remove"; "Description" = "Removed"};
