@@ -132,12 +132,12 @@ Function Get-CTXAPI_ConnectionReport {
 	foreach ($connection in $mondata.Connections) {
 		try {
 			$OneSession = $mondata.session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
-			$user = $users | Where-Object { $_.id -like $OneSession.UserId }
-			$mashine = $machines | Where-Object { $_.id -like $OneSession.MachineId }
+			$user = $mondata.users | Where-Object { $_.id -like $OneSession.UserId }
+			$mashine = $mondata.machines | Where-Object { $_.id -like $OneSession.MachineId }
 			try {
 				$avgrtt = 0
-				$SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
-				$avgrtt = $avgrtt / ($SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
+				$mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
+				$avgrtt = $avgrtt / ($mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
 			} catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
 		} catch { Write-Warning "Error processing - $_.Exception.Message" }
 		$data += [PSCustomObject]@{
@@ -166,7 +166,7 @@ Function Get-CTXAPI_ConnectionReport {
 			EndDate                  = $OneSession.EndDate
 			ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
 			FailureDate              = $OneSession.FailureDate
-			AVG_ICA_RTT              = $avgrtt
+			AVG_ICA_RTT              = [math]::Round($avgrtt)
 		}
 	}
 
