@@ -13,11 +13,6 @@
 
 	# Version number of this module.
 	ModuleVersion     = '0.0.7'
-
-	# Supported PSEditions
-	# CompatiblePSEditions = @()
-
-	# ID used to uniquely identify this module
 	GUID              = '8eb35bf0-e1d3-4b42-9285-d8010a1c13a7'
 
 	# Author of this module
@@ -68,75 +63,55 @@
 	# Modules to import as nested modules of the module specified in RootModule/ModuleToProcess
 	# NestedModules = @()
 
+
 	# Functions to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no functions to export.
-	FunctionsToExport = 'Add-CTXAPI_MachineToCatalog', 'et-CTXAPI_Applications', Get-CTXAPI_ColudServices', Get-CTXAPI _ConfigAudit ,' P 'Get-CTXAIConfigLog', 'GliveryGroups ,' _ 'Get-CTXAPIHalthCheck',_HypervisGrs','Get-CTXAPI_ConnectionReporttAIReporestessionAudelOperationst,'', 'Get-CTXAPIh_LowLev             'API_Machinesi,'neCatalogs', 'Guet-CTX             'GAPI_Sessions',t-CTXATPI_ResorceLoction', 'Get-CToreFrXntSe v rs',et-CXCAPI_Siteid', Get-CTXAPPI_Store             'Get-TXAPI_Token', 'Get-CTXAI_VDAUptime', 'Get-CTXAPI_Zones'
-
-	# Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-	CmdletsToExport   = @()
-
-	# Variables to export from this module
-	# VariablesToExport = @()
-
-	# Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-	AliasesToExport   = @()
-
-	# DSC resources to export from this module
-	# DscResourcesToExport = @()
-
-	# List of all modules packaged with this module
-	# ModuleList = @()
-
-	# List of all files packaged with this module
-	# FileList = @()
+	FunctionsToExport = 'Add-CTXAPI_MachineToCatalog', 'Get-CTXAPI_Applications', 
+	'Get-CTXAPI_CloudServices', 'Get-CTXAPI_ConfigAudit', 
+	'Get-CTXAPI_ConfigLog', 'Get-CTXAPI_DeliveryGroups', 
+	'Get-CTXAPI_HealthCheck', 'Get-CTXAPI_Hypervisors', 
+	'Get-CTXAPI_LatestSessionAudit', 'Get-CTXAPI_LowLevelOperations', 
+	'Get-CTXAPI_MachineCatalogs', 'Get-CTXAPI_Machines', 
+	'Get-CTXAPI_ResourceLocation', 'Get-CTXAPI_Sessions', 
+	'Get-CTXAPI_Siteid', 'Get-CTXAPI_StoreFrontServers', 
+	'Get-CTXAPI_Token', 'Get-CTXAPI_VDAUptime', 'Get-CTXAPI_Zones','Get-CTXAPI_MonitorData'
 
 	# Private data to pass to the module specified in RootModule/ModuleToProcess. This may also contain a PSData hashtable with additional module metadata used by PowerShell.
 	PrivateData       = @{
 
-		  PSData = @{
+		PSData = @{
 
-			     # Tags applied to this module. These help with module discovery in online galleries.
-			Tags       = 'Citrix'
+			# Tags applied to this module. These help with module discovery in online galleries.
+			Tags = 'Citrix'
 
-			     # A URL to the license for this module.
-			     # LicenseUri = ''
+			# A URL to the license for this module.
+			# LicenseUri = ''
 
-			     # A URL to the main website for this project.
-			 ro  ctUje ri = 'https://github.com/smitpi/CTXCloudApi'
+			# A URL to the main website for this project.
+			ProjectUri   = 'https://github.com/smitpi/CTXCloudApi'
 
-			     # A URL to an icon representing this module.
-			     # IconUri = ''
+			# A URL to an icon representing this module.
+			# IconUri = ''
 
-			     # ReleaseNotes of this module
+			# ReleaseNotes of this module
 			#      Release = 'tions'
 
-			     # Prerelease string of this module
-			     # Prerelease = ''
+			# Prerelease string of this module
+			# Prerelease = ''
 
-			     # Flag to indicate whether the module requires explicit user acceptance for install/update/save
-			     # RequireLicenseAcceptance = $false
+			# Flag to indicate whether the module requires explicit user acceptance for install/update/save
+			# RequireLicensce = $false
 
-			     # External dependent modules of this module
-			     # ExternalModuleDependencies = @()
+			# External dependent modules of this module
+			# ExternalModuleDependencies = @()
 
-		  } # End of PSData hashtable
+		} # End of PSData hashtable
 
- } # End of PrivateData hashtable
-
-	# elpInfo URI of this module
-	# elpInfoURI = ''
-
-	# efault prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
-	# efaultCommandPrefix = ''
-
-}
-
- } # End of PrivateData hashtable
+} # End of PrivateData hashtable
 
 # HelpInfo URI of this module
 # HelpInfoURI = ''
 
 # Default prefix for commands exported from this module. Override the default prefix using Import-Module -Prefix.
 # DefaultCommandPrefix = ''
-
 }
 
