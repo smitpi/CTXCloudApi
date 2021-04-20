@@ -1,8 +1,9 @@
+
 <#PSScriptInfo
 
 .VERSION 1.0.0
 
-.GUID c42d9457-55ce-4d08-8128-ce3a9c4c7e78
+.GUID ccc3348a-02f0-4e82-91bf-d65549ca3533
 
 .AUTHOR Pierre Smit
 
@@ -12,7 +13,7 @@
 
 .TAGS Citrix
 
-.LICENS$regionRI
+.LICENSEURI
 
 .PROJECTURI
 
@@ -25,24 +26,26 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [17/04/2021_15:54] Initital Script Creating
+Created [20/04/2021_10:46] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
 <# 
+
+
 #requires –Modules ImportExcel,PSWriteHTML,PSWriteColor
 
 .DESCRIPTION 
- Reports on the last x hours of connections 
+ Report on connections 
 
 #> 
 
 Param()
 
 
-Function Get-CTXAPI_LatestSessionAudit {
+Function Get-CTXAPI_ConnectionReport {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -123,65 +126,12 @@ Function Get-CTXAPI_LatestSessionAudit {
 		101 = 'MachineNotFunctional'
 	}
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
-	}
-	function Export-Odata {
-		[CmdletBinding()]
-		param(
-			[string]$URI,
-			[System.Collections.Hashtable]$headers)
-		$data = @()
-		$NextLink = $URI
-		While ($Null -ne $NextLink) {
-			$tmp = Invoke-WebRequest -Uri $NextLink -Headers $headers | ConvertFrom-Json
-			$tmp.Value | ForEach-Object { $data += $_ }
-			$NextLink = $tmp.'@odata.NextLink' 
-		}
-		return $data
-	}
-
-	$now = Get-Date -Format yyyy-MM-ddTHH:mm:ss.ffffZ
-	$past = ((Get-Date).AddHours(-$hours)).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
-
-	$tmpuri = [PSCustomObject]@{
-		ApplicationActivitySummariesURI = 'https://api-' + $region + '.cloud.com/monitorodata\ApplicationActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ApplicationErrorsURI            = 'https://api-' + $region + '.cloud.com/monitorodata\ApplicationErrors?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ApplicationFaultsURI            = 'https://api-' + $region + '.cloud.com/monitorodata\ApplicationFaults?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ApplicationsURI                 = 'https://api-' + $region + '.cloud.com/monitorodata\Applications'
-		CatalogsURI                     = 'https://api-' + $region + '.cloud.com/monitorodata\Catalogs'
-		ConnectionFailureLogsURI        = 'https://api-' + $region + '.cloud.com/monitorodata\ConnectionFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ConnectionsURI                  = 'https://api-' + $region + '.cloud.com/monitorodata\Connections?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		DesktopGroupsURI                = 'https://api-' + $region + '.cloud.com/monitorodata\DesktopGroups'
-		DesktopOSDesktopSummariesURI    = 'https://api-' + $region + '.cloud.com/monitorodata\DesktopOSDesktopSummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		HypervisorsURI                  = 'https://api-' + $region + '.cloud.com/monitorodata\Hypervisors'
-		MachineMetricURI                = 'https://api-' + $region + '.cloud.com/monitorodata\MachineMetric?$filter=(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )'
-		MachineFailureLogsURI           = 'https://api-' + $region + '.cloud.com/monitorodata\MachineFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		MachinesURI                     = 'https://api-' + $region + '.cloud.com/monitorodata\Machines'
-		ResourceUtilizationURI          = 'https://api-' + $region + '.cloud.com/monitorodata\ResourceUtilization?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ServerOSDesktopSummariesURI     = 'https://api-' + $region + '.cloud.com/monitorodata\ServerOSDesktopSummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		SessionActivitySummariesURI     = 'https://api-' + $region + '.cloud.com/monitorodata\SessionActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		SessionMetricsURI               = 'https://api-' + $region + '.cloud.com/monitorodata\SessionMetrics?$apply=filter(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )'
-		SessionURI                      = 'https://api-' + $region + '.cloud.com/monitorodata\Sessions?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		UsersURI                        = 'https://api-' + $region + '.cloud.com/monitorodata\Users'
-	}
-	$ApiURI = $tmpuri.psobject.properties | Select-Object name,value
-
-	$ApiURI | ForEach-Object {
-		try {
-			[string]$apiname = $_.name.Replace('URI','')
-			Write-Color -Text 'Exporting:',$apiname -Color Yellow,Cyan
-			New-Variable -Name $apiname -Value (Export-Odata -URI $_.value -headers $headers) -Force
-		} catch { Write-Error "Error fetching data -" $apiname }
-	}
-
+	$mondata = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours
 
 	$data = @()
-	foreach ($connection in $connections) {
+	foreach ($connection in $mondata.Connections) {
 		try {
-			$OneSession = $session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
+			$OneSession = $mondata.session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
 			$user = $users | Where-Object { $_.id -like $OneSession.UserId }
 			$mashine = $machines | Where-Object { $_.id -like $OneSession.MachineId }
 			try {
@@ -227,6 +177,8 @@ Function Get-CTXAPI_LatestSessionAudit {
 		$data | Out-GridHtml -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader 
 		$data
 	}
+
+
 
 
 

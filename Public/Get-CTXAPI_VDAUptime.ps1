@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID bc970a9f-0566-4048-8332-0bceda215135
 
@@ -9,33 +9,39 @@
 
 .COMPANYNAME iOCO Tech
 
-.COPYRIGHT 
+.COPYRIGHT
 
 .TAGS Citrix
 
-.LICENSEURI 
+.LICENSEURI
 
-.PROJECTURI 
+.PROJECTURI
 
-.ICONURI 
+.ICONURI
 
 .EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS 
+.REQUIREDSCRIPTS
 
-.EXTERNALSCRIPTDEPENDENCIES 
+.EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
 Created [06/04/2021_11:17] Initital Script Creating
+Updated [20/04/2021_10:43] Script Fle Info was updated
 
-#>
+.PRIVATEDATA
+
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Uses Registration date to calculate uptime 
+Uses Registration date to calculate uptime 
 
- #Requires Modules ImportExcel
+#Requires Modules ImportExcel
+
 #> 
 
 Param()

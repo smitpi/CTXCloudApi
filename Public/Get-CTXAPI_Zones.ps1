@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 8474c4cc-e529-4c1f-8820-9b299fe9fa19
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [11/04/2021_09:19] Initital Script Creating
+Updated [20/04/2021_10:43] Script Fle Info was updated
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Get zones servers from api 
+Get zones servers from api
 
 #> 
 

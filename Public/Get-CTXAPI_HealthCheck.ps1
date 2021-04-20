@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 537fc472-0d06-40de-b672-9a507443cf44
 
@@ -9,33 +9,39 @@
 
 .COMPANYNAME iOCO Tech
 
-.COPYRIGHT 
+.COPYRIGHT
 
 .TAGS Citrix
 
-.LICENSEURI 
+.LICENSEURI
 
-.PROJECTURI 
+.PROJECTURI
 
-.ICONURI 
+.ICONURI
 
 .EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS 
+.REQUIREDSCRIPTS
 
-.EXTERNALSCRIPTDEPENDENCIES 
+.EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
 Created [10/04/2021_14:59] Initital Script Creating
+Updated [20/04/2021_10:42] Script Fle Info was updated
 
-#>
+.PRIVATEDATA
+
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Quick healthcheck to show whats offline 
+Quick healthcheck to show whats offline 
 
 #Requires –Modules PSWriteHTML
+
 #> 
 
 

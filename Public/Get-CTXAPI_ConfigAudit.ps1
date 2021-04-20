@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.2
 
 .GUID 5d786907-3d5c-431d-a8ad-eadbacf8bd5f
 
@@ -9,27 +9,32 @@
 
 .COMPANYNAME iOCO Tech
 
-.COPYRIGHT 
+.COPYRIGHT
 
 .TAGS Citrix
 
-.LICENSEURI 
+.LICENSEURI
 
-.PROJECTURI 
+.PROJECTURI
 
-.ICONURI 
+.ICONURI
 
 .EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS 
+.REQUIREDSCRIPTS
 
-.EXTERNALSCRIPTDEPENDENCIES 
+.EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
 Created [03/04/2021_10:50] Initital Script Creating
 Updated [06/04/2021_09:03] Script Fle Info was updated
+Updated [20/04/2021_10:42] Script Fle Info was updated
+
+.PRIVATEDATA
 
 #> 
+
+
 
 
 <# 
@@ -38,8 +43,6 @@ Updated [06/04/2021_09:03] Script Fle Info was updated
 details about ctx objects 
 
 #Requires Modules ImportExcel
-
-
 
 #> 
 Param()
