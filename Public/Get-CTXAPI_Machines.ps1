@@ -41,7 +41,7 @@ Updated [20/04/2021_10:43] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-get cloud service info
+Get details about VDA Machines
 
 #> 
 

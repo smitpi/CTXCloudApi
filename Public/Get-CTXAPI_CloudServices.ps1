@@ -41,8 +41,7 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-get cloud service info
-
+Get details on the cloud services.
 #> 
 
 Param()

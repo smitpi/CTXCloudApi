@@ -38,7 +38,7 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-add stand alone box to catalog
+Add manually installed machine to a catalog
 
 #> 
 

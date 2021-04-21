@@ -38,7 +38,7 @@ Updated [20/04/2021_10:43] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-Get the detailed steps for an operation
+Get the detailed steps for an High Level Operation
 
 #> 
 

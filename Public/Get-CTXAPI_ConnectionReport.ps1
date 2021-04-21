@@ -33,17 +33,14 @@ Created [20/04/2021_10:46] Initital Script Creating
 #>
 
 <# 
-
-
-#requires –Modules ImportExcel,PSWriteHTML,PSWriteColor
-
 .DESCRIPTION 
- Report on connections 
+ Report on connections in the last x hours
 
 #> 
 
 Param()
 
+#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 
 Function Get-CTXAPI_ConnectionReport {
 	PARAM(
@@ -64,7 +61,8 @@ Function Get-CTXAPI_ConnectionReport {
 		[Parameter(Mandatory = $false, Position = 4)]
 		[int]$hours,
 		[Parameter(Mandatory = $false, Position = 5)]
-		[switch]$ExportToExcel = $false,
+		[ValidateSet('Excel', 'HTML')]
+		[string]$Export,
 		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
@@ -170,11 +168,11 @@ Function Get-CTXAPI_ConnectionReport {
 		}
 	}
 
-	if ($ExportToExcel) {
+	if ($Export -eq 'Excel') {
 		[string]$ExcelReportname = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
 		$data | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
-	} else { 
-		$data | Out-GridHtml -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader 
+	} elseif ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
+	else { 
 		$data
 	}
 

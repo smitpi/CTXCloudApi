@@ -40,13 +40,13 @@ Updated [20/04/2021_10:43] Script Fle Info was updated
 .DESCRIPTION 
 Uses Registration date to calculate uptime 
 
-#Requires Modules ImportExcel
+
 
 #> 
 
 Param()
 
-
+#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 Function Get-CTXAPI_VDAUptime {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
@@ -61,10 +61,12 @@ Function Get-CTXAPI_VDAUptime {
 		[Parameter(Mandatory = $false, Position = 3)]
 		[ValidateNotNull()]
 		[ValidateNotNullOrEmpty()]
-		[switch]$ExportToExcel = $false,
 		[Parameter(Mandatory = $false, Position = 4)]
+		[ValidateSet('Excel', 'HTML')]
+		[string]$Export,
+		[Parameter(Mandatory = $false, Position = 5)]
 		[ValidateScript( { (Test-Path $_) })]
-		[string]$ReportPath = 'c:\temp\'
+		[string]$ReportPath = $env:temp
 	)
 	$Complist = @()
 	Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken | ForEach-Object {
@@ -105,9 +107,13 @@ Function Get-CTXAPI_VDAUptime {
 			DayOfWeek         = $CompUptime.DayOfWeek
 		}
 	}
-	if ($ExportToExcel -eq $true) {
+
+if ($Export -eq 'Excel') {
 		[string]$ExcelReportname = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-		$complist | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter
-	} else { $Complist }
+		$complist | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
+	} elseif ($Export -eq 'HTML') { $complist | Out-GridHtml -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
+	else { 
+		$complist
+	}
 
 } #end Function

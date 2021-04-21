@@ -41,7 +41,7 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-details about ctx objects
+Details about Citrix Hypervisors (Hosts)
 
 #> 
 

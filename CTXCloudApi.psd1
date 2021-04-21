@@ -80,7 +80,7 @@
 	'Get-CTXAPI_ResourceLocation', 'Get-CTXAPI_Sessions', 
 	'Get-CTXAPI_Siteid', 'Get-CTXAPI_StoreFrontServers', 
 	'Get-CTXAPI_Token', 'Get-CTXAPI_VDAUptime', 'Get-CTXAPI_Zones', 
-	'Get-CTXAPI_MonitorData'
+	'Get-CTXAPI_MonitorData','Get-CTXAPI_ResourceUtilization'
 
 	# Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 	CmdletsToExport   = @()

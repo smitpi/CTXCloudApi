@@ -38,13 +38,11 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-Quick healthcheck to show whats offline 
-
-#Requires –Modules PSWriteHTML
+Quick Health Check to show whats online and offline 
 
 #> 
 
-
+#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 Function Get-CTXAPI_HealthCheck {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]

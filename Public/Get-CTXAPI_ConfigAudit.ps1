@@ -40,14 +40,13 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-details about ctx objects 
+Report on Citrix Configuration.
 
-#Requires Modules ImportExcel
 
 #> 
 Param()
 
-
+#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 Function Get-CTXAPI_ConfigAudit {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]

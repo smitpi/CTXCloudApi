@@ -41,7 +41,7 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-get cloud config log
+Get high level configuration changes in the last x days
 
 #> 
 

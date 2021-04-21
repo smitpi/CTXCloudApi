@@ -38,7 +38,7 @@ Updated [20/04/2021_10:43] Script Fle Info was updated
 <# 
 
 .DESCRIPTION 
-Get zones servers from api
+Get zones details from api
 
 #> 
 
