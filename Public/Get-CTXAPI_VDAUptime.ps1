@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.2
 
 .GUID bc970a9f-0566-4048-8332-0bceda215135
 
@@ -28,25 +28,27 @@
 .RELEASENOTES
 Created [06/04/2021_11:17] Initital Script Creating
 Updated [20/04/2021_10:43] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
 .PRIVATEDATA
 
 #> 
+
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 
 
 <# 
 
 .DESCRIPTION 
-Uses Registration date to calculate uptime 
-
-
+Uses Registration date to calculate uptime
 
 #> 
 
 Param()
 
-#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 Function Get-CTXAPI_VDAUptime {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
@@ -58,16 +60,14 @@ Function Get-CTXAPI_VDAUptime {
 		[Parameter(Mandatory = $true, Position = 2)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-		[Parameter(Mandatory = $false, Position = 3)]
-		[ValidateNotNull()]
-		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 4)]
-		[ValidateSet('Excel', 'HTML')]
-		[string]$Export,
 		[Parameter(Mandatory = $false, Position = 5)]
+		[ValidateSet('Excel', 'HTML')]
+		[string]$Export = 'Host',
+		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateScript( { (Test-Path $_) })]
-		[string]$ReportPath = $env:temp
-	)
+		[string]$ReportPath = $env:temp)
+
+
 	$Complist = @()
 	Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken | ForEach-Object {
 		$lastBootTime = [Datetime]::ParseExact($_.LastDeregistrationTime, 'M/d/yyyy h:mm:ss tt', $null)
@@ -108,12 +108,9 @@ Function Get-CTXAPI_VDAUptime {
 		}
 	}
 
-if ($Export -eq 'Excel') {
-		[string]$ExcelReportname = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-		$complist | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
-	} elseif ($Export -eq 'HTML') { $complist | Out-GridHtml -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
-	else { 
-		$complist
-	}
+	if ($Export -eq 'Excel') { $complist | Export-Excel -Path ($ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+	if ($Export -eq 'HTML') { $complist | Out-GridHtml -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
+	if ($Export -eq 'Host') { $complist }
 
 } #end Function
+

@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID ce76995e-894d-40ee-ac4a-f700cd9abd01
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [20/04/2021_12:17] Initital Script Creating
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Get monitoring data 
+Get monitoring data
 
 #> 
 
@@ -58,7 +61,7 @@ Function Get-CTXAPI_MonitorData {
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 4)]
+		[Parameter(Mandatory = $true, Position = 4)]
 		[int]$hours)
 
 	$headers = [System.Collections.Hashtable]@{
@@ -104,28 +107,46 @@ Function Get-CTXAPI_MonitorData {
 		SessionMetricsURI               = 'https://api-' + $region + '.cloud.com/monitorodata\SessionMetrics?$apply=filter(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )'
 		SessionURI                      = 'https://api-' + $region + '.cloud.com/monitorodata\Sessions?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
 		UsersURI                        = 'https://api-' + $region + '.cloud.com/monitorodata\Users'
+		FailureLogSummariesURI          = 'https://api-' + $region + '.cloud.com/monitorodata\FailureLogSummaries?$filter=(ModifiedDate ge ' + $past + ' )'
 	}
 
 	$mon = @()
-	$mon = [PSCustomObject]@{
-		ApplicationActivitySummaries = @(Export-Odata -URI $tmpuri.ApplicationActivitySummariesURI -headers $headers)
-		Applications                 = @(Export-Odata -URI $tmpuri.ApplicationsURI -headers $headers)
-		Catalogs                     = @(Export-Odata -URI $tmpuri.CatalogsURI -headers $headers)
-		ConnectionFailureLogs        = @(Export-Odata -URI $tmpuri.ConnectionFailureLogsURI -headers $headers)
-		Connections                  = @(Export-Odata -URI $tmpuri.ConnectionsURI -headers $headers)
-		DesktopGroups                = @(Export-Odata -URI $tmpuri.DesktopGroupsURI -headers $headers)
-		DesktopOSDesktopSummaries    = @(Export-Odata -URI $tmpuri.DesktopOSDesktopSummariesURI -headers $headers)
-		Hypervisors                  = @(Export-Odata -URI $tmpuri.HypervisorsURI -headers $headers)
-		MachineMetric                = @(Export-Odata -URI $tmpuri.MachineMetricURI -headers $headers)
-		MachineFailureLogs           = @(Export-Odata -URI $tmpuri.MachineFailureLogsURI -headers $headers)
-		Machines                     = @(Export-Odata -URI $tmpuri.MachinesURI -headers $headers)
-		ResourceUtilization          = @(Export-Odata -URI $tmpuri.ResourceUtilizationURI -headers $headers)
-		ServerOSDesktopSummaries     = @(Export-Odata -URI $tmpuri.ServerOSDesktopSummariesURI -headers $headers)
-		SessionActivitySummaries     = @(Export-Odata -URI $tmpuri.SessionActivitySummariesURI -headers $headers)
-		SessionMetrics               = @(Export-Odata -URI $tmpuri.SessionMetricsURI -headers $headers)
-		Session                      = @(Export-Odata -URI $tmpuri.SessionURI -headers $headers)
-		Users                        = @(Export-Odata -URI $tmpuri.UsersURI -headers $headers)
-	}
+	Write-Color -Text "Fetching:","ApplicationActivitySummaries" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{ApplicationActivitySummaries = @(Export-Odata -URI $tmpuri.ApplicationActivitySummariesURI -headers $headers)}
+Write-Color -Text "Fetching:","Applications" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Applications = @(Export-Odata -URI $tmpuri.ApplicationsURI -headers $headers)}
+Write-Color -Text "Fetching:","Catalogs" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Catalogs = @(Export-Odata -URI $tmpuri.CatalogsURI -headers $headers)}
+Write-Color -Text "Fetching:","ConnectionFailureLogs" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{ConnectionFailureLogs = @(Export-Odata -URI $tmpuri.ConnectionFailureLogsURI -headers $headers)}
+Write-Color -Text "Fetching:","FailureLogSummaries" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{FailureLogSummaries = @(Export-Odata -URI $tmpuri.FailureLogSummariesURI -headers $headers)}
+Write-Color -Text "Fetching:","Connections" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Connections = @(Export-Odata -URI $tmpuri.ConnectionsURI -headers $headers)}
+Write-Color -Text "Fetching:","DesktopGroups" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{DesktopGroups = @(Export-Odata -URI $tmpuri.DesktopGroupsURI -headers $headers)}
+Write-Color -Text "Fetching:","DesktopOSDesktopSummaries" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{DesktopOSDesktopSummaries = @(Export-Odata -URI $tmpuri.DesktopOSDesktopSummariesURI -headers $headers)}
+Write-Color -Text "Fetching:","Hypervisors" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Hypervisors = @(Export-Odata -URI $tmpuri.HypervisorsURI -headers $headers)}
+Write-Color -Text "Fetching:","MachineMetric" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{MachineMetric = @(Export-Odata -URI $tmpuri.MachineMetricURI -headers $headers)}
+Write-Color -Text "Fetching:","MachineFailureLogs" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{MachineFailureLogs = @(Export-Odata -URI $tmpuri.MachineFailureLogsURI -headers $headers)}
+Write-Color -Text "Fetching:","Machines" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Machines = @(Export-Odata -URI $tmpuri.MachinesURI -headers $headers)}
+Write-Color -Text "Fetching:","ResourceUtilization" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{ResourceUtilization = @(Export-Odata -URI $tmpuri.ResourceUtilizationURI -headers $headers)}
+Write-Color -Text "Fetching:","ServerOSDesktopSummaries" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{ServerOSDesktopSummaries = @(Export-Odata -URI $tmpuri.ServerOSDesktopSummariesURI -headers $headers)}
+Write-Color -Text "Fetching:","SessionActivitySummaries" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{SessionActivitySummaries = @(Export-Odata -URI $tmpuri.SessionActivitySummariesURI -headers $headers)}
+Write-Color -Text "Fetching:","SessionMetrics" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{SessionMetrics = @(Export-Odata -URI $tmpuri.SessionMetricsURI -headers $headers)}
+Write-Color -Text "Fetching:","Session" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Session = @(Export-Odata -URI $tmpuri.SessionURI -headers $headers)}
+Write-Color -Text "Fetching:","Users" -Color Yellow,Cyan 
+	$mon += [PSCustomObject]@{Users = @(Export-Odata -URI $tmpuri.UsersURI -headers $headers)}
 	$mon
 
 

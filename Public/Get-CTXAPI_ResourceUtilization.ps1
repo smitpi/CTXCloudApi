@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID f2cc4273-d5ac-49b1-b12c-a8e2d1b8cf06
 
@@ -9,31 +9,38 @@
 
 .COMPANYNAME iOCO Tech
 
-.COPYRIGHT 
+.COPYRIGHT
 
 .TAGS Citrix
 
-.LICENSEURI 
+.LICENSEURI
 
-.PROJECTURI 
+.PROJECTURI
 
-.ICONURI 
+.ICONURI
 
 .EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS 
+.REQUIREDSCRIPTS
 
-.EXTERNALSCRIPTDEPENDENCIES 
+.EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
 Created [21/04/2021_11:32] Initital Script Creating
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
-#>
+.PRIVATEDATA
+
+#> 
+
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 <# 
 
 .DESCRIPTION 
- Resource utilization in the last x hours 
+Resource utilization in the last x hours
 
 #> 
 
@@ -78,7 +85,6 @@ Created [21/04/2021_11:04] Initital Script Creating
  Resource Utilization of x hours 
 
 #> 
-#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 
 Function Get-CTXAPI_ResourceUtilization {
 	PARAM(
@@ -96,57 +102,58 @@ Function Get-CTXAPI_ResourceUtilization {
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 4)]
+		[Parameter(Mandatory = $true, Position = 4)]
 		[int]$hours,
 		[Parameter(Mandatory = $false, Position = 5)]
 		[ValidateSet('Excel', 'HTML')]
-		[string]$Export,
+		[string]$Export = 'Host',
 		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
+
 	$monitor = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours
 
+	$RegistrationState = [PSCustomObject]@{
+		0 = 'Unknown'
+		1 = 'Registered'
+		2 = 'Unregistered'
+	}
 	$data = @()
-	foreach ($Machines in $monitor.Machines) {
+	foreach ($Machines in ($monitor.Machines | Where-Object {$_.MachineRole -ne 1})) {
 
 		$ResourceUtilization = $monitor.ResourceUtilization | Where-Object { $_.MachineId -eq $Machines.Id }
 		$catalog = $monitor.Catalogs | Where-Object { $_.id -eq $Machines.CatalogId } | ForEach-Object { $_.name }
 		$desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $Machines.DesktopGroupId } | ForEach-Object { $_.name }
 
 		try { 
-			$PercentCpu = $UsedMemory = $TotalMemory = $SessionCount = 0 
+			$PercentCpu = $UsedMemory = $SessionCount = 0 
 			foreach ($Resource in $ResourceUtilization) {
 				$PercentCpu = $PercentCpu + $Resource.PercentCpu
 				$UsedMemory = $UsedMemory + $Resource.UsedMemory
-				$TotalMemory = $TotalMemory + $Resource.TotalMemory
 				$SessionCount = $SessionCount + $Resource.SessionCount
 			}
 			$AVGPercentCpu = [math]::Round($PercentCpu / $ResourceUtilization.Count)
 			$AVGUsedMemory = [math]::Ceiling(($UsedMemory / $ResourceUtilization.Count) / 1gb)
-			$AVGTotalMemory = [math]::Ceiling(($TotalMemory / $ResourceUtilization.Count) / 1gb)
+			$AVGTotalMemory = [math]::Round($ResourceUtilization[0].TotalMemory / 1gb)
 			$AVGSessionCount = [math]::Round($SessionCount / $ResourceUtilization.Count)
-		} catch { Write-Warning 'devide by 0 atempted' }
+		} catch { Write-Warning 'divide by 0 attempted' }
 		$data += [PSCustomObject]@{
 			DnsName                  = $Machines.DnsName
 			IsInMaintenanceMode      = $Machines.IsInMaintenanceMode
 			AgentVersion             = $Machines.AgentVersion
-			CurrentRegistrationState = $RegistrationState[$Machines.CurrentRegistrationState]
+			CurrentRegistrationState = $RegistrationState.($Machines.CurrentRegistrationState)
 			OSType                   = $Machines.OSType
 			Catalog                  = $catalog
 			DesktopGroup             = $desktopgroup
-			MachineRole              = $MachineRole[$Machines.MachineRole]
 			AVGPercentCpu            = $AVGPercentCpu
 			AVGUsedMemory            = $AVGUsedMemory
 			AVGTotalMemory           = $AVGTotalMemory
 			AVGSessionCount          = $AVGSessionCount
 		}
 	}
-	if ($Export -eq 'Excel') {
-		[string]$ExcelReportname = $ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-		$data | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
-	} elseif ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
-	else { 
-		$data
-	}
+	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show } 
+	if ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
+	if ($Export -eq 'Host') { $data }
+
 } #end Function

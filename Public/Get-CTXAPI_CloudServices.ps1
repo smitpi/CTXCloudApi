@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.2
+.VERSION 1.0.3
 
 .GUID d169133e-621a-46b4-9782-0ab323ced022
 
@@ -29,6 +29,7 @@
 Created [03/04/2021_01:33] Initital Script Creating
 Updated [06/04/2021_09:03] Script Fle Info was updated
 Updated [20/04/2021_10:42] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
 .PRIVATEDATA
 
@@ -38,10 +39,13 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 
 
 
+
+
 <# 
 
 .DESCRIPTION 
 Get details on the cloud services.
+
 #> 
 
 Param()

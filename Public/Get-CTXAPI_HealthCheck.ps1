@@ -138,3 +138,5 @@ Function Get-CTXAPI_HealthCheck {
 	}
 	#endregion
 } #end Function
+
+Export-ModuleMember -Variable 'ReportPath'

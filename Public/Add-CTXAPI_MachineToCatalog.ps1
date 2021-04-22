@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.2
 
 .GUID c910816d-788d-4e5f-b405-cb9f898bb106
 
@@ -28,10 +28,13 @@
 .RELEASENOTES
 Created [17/04/2021_09=58] Initital Script Creating
 Updated [20/04/2021_10:42] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
 .PRIVATEDATA
 
 #> 
+
+
 
 
 

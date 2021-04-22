@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.2
+.VERSION 1.0.3
 
 .GUID 5d786907-3d5c-431d-a8ad-eadbacf8bd5f
 
@@ -29,10 +29,15 @@
 Created [03/04/2021_10:50] Initital Script Creating
 Updated [06/04/2021_09:03] Script Fle Info was updated
 Updated [20/04/2021_10:42] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
 .PRIVATEDATA
 
 #> 
+
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 
 
@@ -42,11 +47,9 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 .DESCRIPTION 
 Report on Citrix Configuration.
 
-
 #> 
 Param()
 
-#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 Function Get-CTXAPI_ConfigAudit {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]

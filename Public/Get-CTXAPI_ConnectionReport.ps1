@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID ccc3348a-02f0-4e82-91bf-d65549ca3533
 
@@ -27,20 +27,24 @@
 
 .RELEASENOTES
 Created [20/04/2021_10:46] Initital Script Creating
+Updated [22/04/2021_11:42] Script Fle Info was updated
 
 .PRIVATEDATA
 
-#>
+#> 
+
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 <# 
 .DESCRIPTION 
- Report on connections in the last x hours
+Report on connections in the last x hours
 
 #> 
 
 Param()
 
-#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
 
 Function Get-CTXAPI_ConnectionReport {
 	PARAM(
@@ -58,11 +62,11 @@ Function Get-CTXAPI_ConnectionReport {
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 4)]
+		[Parameter(Mandatory = $true, Position = 4)]
 		[int]$hours,
 		[Parameter(Mandatory = $false, Position = 5)]
 		[ValidateSet('Excel', 'HTML')]
-		[string]$Export,
+		[string]$Export = 'Host',
 		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
@@ -168,16 +172,8 @@ Function Get-CTXAPI_ConnectionReport {
 		}
 	}
 
-	if ($Export -eq 'Excel') {
-		[string]$ExcelReportname = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-		$data | Export-Excel -Path $ExcelReportname -AutoSize -AutoFilter -Show
-	} elseif ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
-	else { 
-		$data
-	}
-
-
-
-
+	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show } 
+	if ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
+	if ($Export -eq 'Host') { $data }
 
 } #end Function
