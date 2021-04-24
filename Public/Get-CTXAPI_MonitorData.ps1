@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.3
 
 .GUID ce76995e-894d-40ee-ac4a-f700cd9abd01
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS PowerShell Citrix PowerShell
 
 .LICENSEURI
 
@@ -28,10 +28,15 @@
 .RELEASENOTES
 Created [20/04/2021_12:17] Initital Script Creating
 Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [23/04/2021_19:03] Reports on progress
+Updated [24/04/2021_07:21] added more api calls
 
 .PRIVATEDATA
 
 #> 
+
+#Requires -Module PSWriteColor
+
 
 
 
@@ -64,6 +69,8 @@ Function Get-CTXAPI_MonitorData {
 		[Parameter(Mandatory = $true, Position = 4)]
 		[int]$hours)
 
+	$timer = [Diagnostics.Stopwatch]::StartNew();
+$APItimer = [Diagnostics.Stopwatch]::StartNew();
 	$headers = [System.Collections.Hashtable]@{
 		Authorization       = "CwsAuth Bearer=$($ApiToken)"
 		'Citrix-CustomerId' = $customerId
@@ -74,80 +81,67 @@ Function Get-CTXAPI_MonitorData {
 		param(
 			[string]$URI,
 			[System.Collections.Hashtable]$headers)
+
 		$data = @()
 		$NextLink = $URI
+
+		Write-Color -Text 'Fetching :',$URI.split('?')[0].split('\')[1] -Color Yellow,Cyan -ShowTime -DateTimeFormat HH:mm:ss -NoNewLine
+		$APItimer.Restart()
 		While ($Null -ne $NextLink) {
-			$tmp = Invoke-WebRequest -Uri $NextLink -Headers $headers | ConvertFrom-Json
+			$tmp = Invoke-WebRequest -Uri  $NextLink -Headers $headers | ConvertFrom-Json
 			$tmp.Value | ForEach-Object { $data += $_ }
 			$NextLink = $tmp.'@odata.NextLink' 
 		}
+		[String]$seconds = "[" + ($APItimer.elapsed.seconds).ToString() + "sec]"
+		Write-Color $seconds -Color Red
 		return $data
+
 	}
 
 	$now = Get-Date -Format yyyy-MM-ddTHH:mm:ss.ffffZ
 	$past = ((Get-Date).AddHours(-$hours)).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
 
-	$tmpuri = [PSCustomObject]@{
-		ApplicationActivitySummariesURI = 'https://api-' + $region + '.cloud.com/monitorodata\ApplicationActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		#ApplicationErrorsURI            = 'https://api-' + $region + '.cloud.com/monitorodata\ApplicationErrors?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		#ApplicationFaultsURI            = 'https://api-' + $region + '.cloud.com/monitorodata\ApplicationFaults?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ApplicationsURI                 = 'https://api-' + $region + '.cloud.com/monitorodata\Applications'
-		CatalogsURI                     = 'https://api-' + $region + '.cloud.com/monitorodata\Catalogs'
-		ConnectionFailureLogsURI        = 'https://api-' + $region + '.cloud.com/monitorodata\ConnectionFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ConnectionsURI                  = 'https://api-' + $region + '.cloud.com/monitorodata\Connections?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		DesktopGroupsURI                = 'https://api-' + $region + '.cloud.com/monitorodata\DesktopGroups'
-		DesktopOSDesktopSummariesURI    = 'https://api-' + $region + '.cloud.com/monitorodata\DesktopOSDesktopSummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		HypervisorsURI                  = 'https://api-' + $region + '.cloud.com/monitorodata\Hypervisors'
-		MachineMetricURI                = 'https://api-' + $region + '.cloud.com/monitorodata\MachineMetric?$filter=(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )'
-		MachineFailureLogsURI           = 'https://api-' + $region + '.cloud.com/monitorodata\MachineFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		MachinesURI                     = 'https://api-' + $region + '.cloud.com/monitorodata\Machines'
-		ResourceUtilizationURI          = 'https://api-' + $region + '.cloud.com/monitorodata\ResourceUtilization?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		ServerOSDesktopSummariesURI     = 'https://api-' + $region + '.cloud.com/monitorodata\ServerOSDesktopSummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		SessionActivitySummariesURI     = 'https://api-' + $region + '.cloud.com/monitorodata\SessionActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		SessionMetricsURI               = 'https://api-' + $region + '.cloud.com/monitorodata\SessionMetrics?$apply=filter(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )'
-		SessionURI                      = 'https://api-' + $region + '.cloud.com/monitorodata\Sessions?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )'
-		UsersURI                        = 'https://api-' + $region + '.cloud.com/monitorodata\Users'
-		FailureLogSummariesURI          = 'https://api-' + $region + '.cloud.com/monitorodata\FailureLogSummaries?$filter=(ModifiedDate ge ' + $past + ' )'
+	$datereport = (Get-Date) - (get-date).AddHours(-$hours)
+
+	Write-Color -Text "Getting data for:" -Color Yellow -LinesBefore 1 -ShowTime
+	Write-Color -Text 'Days: ',([math]::Round($datereport.Totaldays)) -Color Yellow,Cyan -StartTab 4
+	Write-Color -Text 'Hours: ',([math]::Round($datereport.Totalhours)) -Color Yellow,Cyan -StartTab 4 -LinesAfter 2
+
+
+	$data = [PSCustomObject]@{
+		ApplicationActivitySummaries = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ApplicationActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		ApplicationInstances         = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ApplicationInstances?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		Applications                 = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Applications') -headers $headers
+		Catalogs                     = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Catalogs') -headers $headers
+		ConnectionFailureLogs        = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ConnectionFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		Connections                  = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Connections?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		DesktopGroups                = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\DesktopGroups') -headers $headers
+		DesktopOSDesktopSummaries    = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\DesktopOSDesktopSummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		FailureLogSummaries          = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\FailureLogSummaries?$filter=(ModifiedDate ge ' + $past + ' )') -headers $headers
+		Hypervisors                  = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Hypervisors') -headers $headers
+		#LoadIndexes                  = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\LoadIndexes?$filter=(ModifiedDate ge ' + $past + ' )') -headers $headers
+		LoadIndexSummaries           = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\LoadIndexSummaries?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		#LogOnMetrics                 = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\LogOnMetrics?$filter=(UserInitStartDate ge ' + $past + ' and UserInitStartDate le ' + $now + ' )') -headers $headers
+		LogOnSummaries               = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\LogOnSummaries?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		MachineFailureLogs           = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\MachineFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		MachineMetric                = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\MachineMetric?$filter=(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )') -headers $headers
+		Machines                     = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Machines') -headers $headers
+		Processes                    = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Processes?$filter=(ProcessCreationDate ge ' + $past + ' and ProcessCreationDate le ' + $now + ' )') -headers $headers
+		ProcessUtilization           = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ProcessUtilization?$filter=(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )') -headers $headers
+		ResourceUtilizationSummary   = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ResourceUtilizationSummary?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		ResourceUtilization          = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ResourceUtilization?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		ServerOSDesktopSummaries     = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ServerOSDesktopSummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		SessionActivitySummaries     = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\SessionActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		SessionAutoReconnects        = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\SessionAutoReconnects?$filter=(CreatedDate ge ' + $past + ' and CreatedDate le ' + $now + ' )') -headers $headers
+		SessionMetrics               = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\SessionMetrics?$apply=filter(CollectedDate ge ' + $past + ' and CollectedDate le ' + $now + ' )') -headers $headers
+		Session                      = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Sessions?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
+		Users                        = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Users') -headers $headers
 	}
 
-	$mon = @()
-	Write-Color -Text "Fetching:","ApplicationActivitySummaries" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{ApplicationActivitySummaries = @(Export-Odata -URI $tmpuri.ApplicationActivitySummariesURI -headers $headers)}
-Write-Color -Text "Fetching:","Applications" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Applications = @(Export-Odata -URI $tmpuri.ApplicationsURI -headers $headers)}
-Write-Color -Text "Fetching:","Catalogs" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Catalogs = @(Export-Odata -URI $tmpuri.CatalogsURI -headers $headers)}
-Write-Color -Text "Fetching:","ConnectionFailureLogs" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{ConnectionFailureLogs = @(Export-Odata -URI $tmpuri.ConnectionFailureLogsURI -headers $headers)}
-Write-Color -Text "Fetching:","FailureLogSummaries" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{FailureLogSummaries = @(Export-Odata -URI $tmpuri.FailureLogSummariesURI -headers $headers)}
-Write-Color -Text "Fetching:","Connections" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Connections = @(Export-Odata -URI $tmpuri.ConnectionsURI -headers $headers)}
-Write-Color -Text "Fetching:","DesktopGroups" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{DesktopGroups = @(Export-Odata -URI $tmpuri.DesktopGroupsURI -headers $headers)}
-Write-Color -Text "Fetching:","DesktopOSDesktopSummaries" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{DesktopOSDesktopSummaries = @(Export-Odata -URI $tmpuri.DesktopOSDesktopSummariesURI -headers $headers)}
-Write-Color -Text "Fetching:","Hypervisors" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Hypervisors = @(Export-Odata -URI $tmpuri.HypervisorsURI -headers $headers)}
-Write-Color -Text "Fetching:","MachineMetric" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{MachineMetric = @(Export-Odata -URI $tmpuri.MachineMetricURI -headers $headers)}
-Write-Color -Text "Fetching:","MachineFailureLogs" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{MachineFailureLogs = @(Export-Odata -URI $tmpuri.MachineFailureLogsURI -headers $headers)}
-Write-Color -Text "Fetching:","Machines" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Machines = @(Export-Odata -URI $tmpuri.MachinesURI -headers $headers)}
-Write-Color -Text "Fetching:","ResourceUtilization" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{ResourceUtilization = @(Export-Odata -URI $tmpuri.ResourceUtilizationURI -headers $headers)}
-Write-Color -Text "Fetching:","ServerOSDesktopSummaries" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{ServerOSDesktopSummaries = @(Export-Odata -URI $tmpuri.ServerOSDesktopSummariesURI -headers $headers)}
-Write-Color -Text "Fetching:","SessionActivitySummaries" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{SessionActivitySummaries = @(Export-Odata -URI $tmpuri.SessionActivitySummariesURI -headers $headers)}
-Write-Color -Text "Fetching:","SessionMetrics" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{SessionMetrics = @(Export-Odata -URI $tmpuri.SessionMetricsURI -headers $headers)}
-Write-Color -Text "Fetching:","Session" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Session = @(Export-Odata -URI $tmpuri.SessionURI -headers $headers)}
-Write-Color -Text "Fetching:","Users" -Color Yellow,Cyan 
-	$mon += [PSCustomObject]@{Users = @(Export-Odata -URI $tmpuri.UsersURI -headers $headers)}
-	$mon
-
-
+	
+	$timer.Stop()
+	$APItimer.Stop()
+	#Write-Color 'Data collection took:' -LinesBefore 2 -ShowTime -Color DarkYellow
+	$timer.Elapsed | Select-Object Days, Hours, Minutes, Seconds   | Format-List
+	$data
 } #end Function

@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.2
 
 .GUID bcce614e-ed5b-4f57-b35d-526154d152a9
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS PowerShell Citrix
 
 .LICENSEURI
 
@@ -28,6 +28,7 @@
 .RELEASENOTES
 Created [22/04/2021_10:08] Initital Script Creating
 Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [24/04/2021_07:21] Added details from machines api to extract more data
 
 .PRIVATEDATA
 
@@ -36,6 +37,7 @@ Updated [22/04/2021_11:42] Script Fle Info was updated
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
+
 
 <# 
 
@@ -122,19 +124,26 @@ Function Get-CTXAPI_FailureReport {
 	}
 
 	$mondata = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours
+
 	$data = @()
 
 	if ($FailureType -eq 'Machine') {
+		$machines = Get-CTXAPI_machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
 		foreach ($log in $mondata.MachineFailureLogs) {
-			$Machine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
+			$MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
+			$APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }
 			$data += [PSCustomObject]@{
-				Name                 = $Machine.DnsName
-				IP                   = $Machine.IPAddress
-				OSType               = $Machine.OSType
-				FailureStartDate     = $log.FailureStartDate
-				FailureEndDate       = $log.FailureEndDate
-				FaultState           = $log.FaultState
-				LastDeregisteredCode = $log.LastDeregisteredCode
+				Name                     = $MonDataMachine.DnsName
+				IP                       = $MonDataMachine.IPAddress
+				OSType                   = $MonDataMachine.OSType
+				FailureStartDate         = $log.FailureStartDate
+				FailureEndDate           = $log.FailureEndDate
+				FaultState               = $log.FaultState
+				LastDeregistrationReason = $APIMachine.LastDeregistrationReason
+				LastConnectionFailure    = $APIMachine.LastConnectionFailure
+				LastErrorReason          = $APIMachine.LastErrorReason
+				CurrentFaultState        = $APIMachine.FaultState
+
 			}
 
 		}
@@ -158,8 +167,8 @@ Function Get-CTXAPI_FailureReport {
 
 
 
-		if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show } 
-		if ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
-		if ($Export -eq 'Host') { $data }
+	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show } 
+	if ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
+	if ($Export -eq 'Host') { $data }
 
-	} #end Function
+} #end Function

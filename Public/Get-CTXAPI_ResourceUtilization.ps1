@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.2
 
 .GUID f2cc4273-d5ac-49b1-b12c-a8e2d1b8cf06
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS PowerShell Citrix
 
 .LICENSEURI
 
@@ -28,6 +28,7 @@
 .RELEASENOTES
 Created [21/04/2021_11:32] Initital Script Creating
 Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [24/04/2021_07:22] Changes the report options
 
 .PRIVATEDATA
 
@@ -37,6 +38,7 @@ Updated [22/04/2021_11:42] Script Fle Info was updated
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
+
 <# 
 
 .DESCRIPTION 
@@ -45,46 +47,6 @@ Resource utilization in the last x hours
 #> 
 
 Param()
-
-
-
-<#PSScriptInfo
-
-.VERSION 1.0.0
-
-.GUID 37e74ed2-1a4e-4fc2-a43c-fdd58f14950a
-
-.AUTHOR Pierre Smit
-
-.COMPANYNAME iOCO Tech
-
-.COPYRIGHT 
-
-.TAGS Citrix
-
-.LICENSEURI 
-
-.PROJECTURI 
-
-.ICONURI 
-
-.EXTERNALMODULEDEPENDENCIES 
-
-.REQUIREDSCRIPTS 
-
-.EXTERNALSCRIPTDEPENDENCIES 
-
-.RELEASENOTES
-Created [21/04/2021_11:04] Initital Script Creating
-
-#>
-
-<# 
-
-.DESCRIPTION 
- Resource Utilization of x hours 
-
-#> 
 
 Function Get-CTXAPI_ResourceUtilization {
 	PARAM(
