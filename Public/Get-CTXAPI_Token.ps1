@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.3
+.VERSION 1.0.4
 
 .GUID 4ad090f6-2553-4c76-8eac-4484dccafb7e
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS PowerShell Citrix
 
 .LICENSEURI
 
@@ -30,10 +30,13 @@ Created [03/04/2021_00:59] Initital Script Creating
 Updated [06/04/2021_09:03] Script Fle Info was updated
 Updated [20/04/2021_10:43] Script Fle Info was updated
 Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [05/05/2021_00:05] added error reporting
 
 .PRIVATEDATA
 
 #> 
+
+
 
 
 
