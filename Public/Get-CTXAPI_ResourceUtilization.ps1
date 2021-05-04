@@ -59,22 +59,25 @@ Function Get-CTXAPI_ResourceUtilization {
 		[Parameter(Mandatory = $true, Position = 2)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-		[Parameter(Mandatory = $true, Position = 3)]
+        [Parameter(Mandatory = $false, Position = 3)]
+		[pscustomobject]$MonitorData = $null,
+		[Parameter(Mandatory = $false, Position = 4)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $true, Position = 4)]
-		[int]$hours,
 		[Parameter(Mandatory = $false, Position = 5)]
+		[int]$hours = 24,
+		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
-		[Parameter(Mandatory = $false, Position = 6)]
+		[Parameter(Mandatory = $false, Position = 7)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
 
-	$monitor = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours
+    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours }
+    else {$monitor = $MonitorData }
 
 	$RegistrationState = [PSCustomObject]@{
 		0 = 'Unknown'

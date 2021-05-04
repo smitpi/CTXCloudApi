@@ -68,11 +68,28 @@ Function Get-CTXAPI_HealthCheck {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Delivery Groups"
 		$DeliveryGroups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken | Select-Object Name,DeliveryType,DesktopsAvailable,DesktopsDisconnected,DesktopsFaulted,DesktopsNeverRegistered,DesktopsUnregistered,InMaintenanceMode,IsBroken,RegisteredMachines,SessionCount
 
+        $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region eu -hours 24
+
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Connection Report"
+		$ConnectionReport = Get-CTXAPI_ConnectionReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData
+        $connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique| Select-Object -First 5  FullName,ClientVersion,ClientAddress,AVG_ICA_RTT
+        $connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique| Select-Object -First 5 FullName,ClientVersion,ClientAddress,LogOnDuration
+    
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Resource Utilization"
+		$ResourceUtilization = Get-CTXAPI_ResourceUtilization -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData
+
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Failure Report"
+        $ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
+        $MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
+
+
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Sessions"
 		$sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
 		$sessioncount = [PSCustomObject]@{
 			Connected    = ($sessions | Where-Object { $_.state -like 'active' }).count
 			Disconnected = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
+            ConnectionFailure = $ConnectionFailureReport.count
+            MachineFailure = $MachineFailureReport.count
 		}
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Machines"
@@ -127,14 +144,22 @@ Function Get-CTXAPI_HealthCheck {
 				New-HTMLSection -HeaderText 'Citrix Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }
 			}
 			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }
+				New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }
+			}
+			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
 				New-HTMLSection -HeaderText 'Machine Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable ($machinecount.psobject.Properties | Select-Object name,value) }
 			}
+
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $DeliveryGroups }
 			}
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Machines' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $vdauptime }
+			}
+			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'Resource Utilization' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ResourceUtilization }
 			}
 		}
 		#endregion
