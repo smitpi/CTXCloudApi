@@ -66,18 +66,18 @@ Function Add-CTXAPI_MachineToCatalog {
 		[ValidateNotNullOrEmpty()]
 		[string]$MachineName
 	)
+	try {
+		if ($MachineName.split('\')[1] -like $null) { Write-Error 'MachineName needs to be in the format DOMAIN\Hostname'; halt }
 
-	if ($MachineName.split('\')[1] -like $null) { Write-Error 'MachineName needs to be in the format DOMAIN\Hostname'; halt }
-
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
-	}
+		$headers = [System.Collections.Hashtable]@{
+			Authorization       = "CwsAuth Bearer=$($ApiToken)"
+			'Citrix-CustomerId' = $customerId
+			Accept              = 'application/json'
+		}
 
 
-	$body = @{MachineName = $MachineName } 
-	Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$CatalogNameORID/machines" -Headers $headers -Method Post -Body ($body | ConvertTo-Json) -ContentType 'application/json' | Select-Object StatusCode,StatusDescription
-
+		$body = @{MachineName = $MachineName } 
+		Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$CatalogNameORID/machines" -Headers $headers -Method Post -Body ($body | ConvertTo-Json) -ContentType 'application/json' | Select-Object StatusCode,StatusDescription
+	} catch { Write-Error "Failed to connect to api:$($_)" }
 
 } #end Function

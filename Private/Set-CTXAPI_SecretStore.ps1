@@ -42,9 +42,9 @@ Created [24/04/2021_07:26] Initital Script Creating
 Param()
 
 Function Set-CTXAPI_SecretStore {
-	PARAM(
+PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
-		[ValidateScript( { (Test-Path $_) })]
+		[ValidateScript( { (Test-Path $_)})]
 		[string]$PasswordFilePath)
 
 	$module = Get-Module -Name Microsoft.PowerShell.SecretManagement -ListAvailable | Select-Object -First 1
@@ -62,23 +62,23 @@ Function Set-CTXAPI_SecretStore {
 		Write-Color -Text 'Using installed module path: ',$module.ModuleBase -Color yellow,green
 	}
 
-	$vault = Get-SecretVault -Name CTXAPIStore -ErrorAction SilentlyContinue
-	if ([bool]$vault -eq $false) {
-		Register-SecretVault -Name CTXAPIStore -ModuleName Microsoft.PowerShell.SecretStore
-		$Password = Read-Host 'Password ' -AsSecureString
-		$Password | Export-Clixml -Path "$PasswordFilePath\CTXAPI.xml" -Depth 3 -Force	
-		Write-Host "Password file $PasswordFilePath\CTXAPI.xml created "
-		try {
-			Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Password $Password -Interaction None -Confirm:$false
-		} catch { Write-Warning 'SecretStoreConfiguration already set' }
-	}
+$vault = Get-SecretVault -Name CTXAPIStore -ErrorAction SilentlyContinue
+if ([bool]$vault -eq $false){
+	Register-SecretVault -Name CTXAPIStore -ModuleName Microsoft.PowerShell.SecretStore
+    $Password = Read-Host 'Password ' -AsSecureString
+	$Password | Export-Clixml -Path "$PasswordFilePath\CTXAPI.xml" -Depth 3 -Force	
+    write-host "Password file $PasswordFilePath\CTXAPI.xml created "
+    try {
+	    Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Password $Password -Interaction None -Confirm:$false
+    }catch {Write-Warning "SecretStoreConfiguration already set"}
+}
 	$password = Import-Clixml -Path "$PasswordFilePath\CTXAPI.xml"
 	Unlock-SecretStore -Password $password
 
 	$CustomerId = Read-Host 'CustomerId '	 
-	$clientid = Read-Host 'clientid '
+    $clientid = Read-Host 'clientid '
 	$clientsecret = Read-Host 'clientsecret '
 	
-	Set-Secret -Name $CustomerId -Secret $clientsecret -Metadata @{clientid = $clientid.ToString() } -Vault CTXAPIStore
+	Set-Secret -Name $CustomerId -Secret $clientsecret -Metadata @{clientid = $clientid.ToString()} -Vault CTXAPIStore
 
 } #end Function

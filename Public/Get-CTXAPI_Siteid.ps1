@@ -51,7 +51,7 @@ Get cloud site id
 Param()
 
 
-Function Get-CTXAPI_Siteid {
+Function Get-CTXAPI_SiteID {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -66,8 +66,8 @@ Function Get-CTXAPI_Siteid {
 		Accept              = 'application/json'
 	}
 
-
-	$me = Invoke-WebRequest 'https://api-us.cloud.com/cvadapis/me' -Headers $headers
-	($me.Content | ConvertFrom-Json).customers.sites.id
-
+	try {
+		$me = Invoke-WebRequest 'https://api-us.cloud.com/cvadapis/me' -Headers $headers
+		($me.Content | ConvertFrom-Json).customers.sites.id
+	} catch { Write-Error "Failed to connect to api:$($_)" }
 } #end Function

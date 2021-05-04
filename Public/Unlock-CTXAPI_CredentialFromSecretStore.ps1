@@ -45,7 +45,7 @@ Param()
 Function Unlock-CTXAPI_CredentialFromSecretStore {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
-		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).Extension -eq '.xml') })]
+		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).name -eq 'CTXAPI.xml') })]
 		[string]$PasswordFilePath,
 		[Parameter(Mandatory = $true, Position = 1)]
 		[ValidateNotNull()]
