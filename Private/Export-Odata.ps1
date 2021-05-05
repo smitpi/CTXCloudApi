@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID f8a1aed0-09c4-4853-b310-9c6e87818f26
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [05/05/2021_09:09] Initital Script Creating
+Updated [05/05/2021_14:32] Manifest
 
 .PRIVATEDATA
 
-#>
+#> 
+
+#Requires -Module PSWriteColor
 
 <# 
 
 .DESCRIPTION 
- Export multiple pages from odata 
+Export multiple pages from odata
 
 #> 
 

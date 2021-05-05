@@ -3,7 +3,7 @@
 
 .VERSION 1.0.1
 
-.GUID 537fc472-0d06-40de-b672-9a507443cf44
+.GUID c7bf330c-de8a-4741-8af7-f8858a0109d4
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS citrix
 
 .LICENSEURI
 
@@ -26,23 +26,29 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [10/04/2021_14:59] Initital Script Creating
-Updated [20/04/2021_10:42] Script Fle Info was updated
+Created [05/05/2021_14:43] Initital Script Creating
+Updated [05/05/2021_14:45] manifest file
 
 .PRIVATEDATA
 
 #> 
 
-
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 <# 
 
 .DESCRIPTION 
-Quick Health Check to show whats online and offline 
+Run report to show usefull information
 
 #> 
 
-#requires -Modules ImportExcel,PSWriteHTML,PSWriteColor
+Param()
+
+
+
+
 Function Get-CTXAPI_HealthCheck {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
@@ -66,33 +72,33 @@ Function Get-CTXAPI_HealthCheck {
 	#region Get data
 	#######################
 	try {
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Config Log"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
 		$configlog = Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteId -Days 7 -ApiToken $ApiToken | Group-Object -Property text | Select-Object count,name | Sort-Object -Property count -Descending | Select-Object -First 5
 
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Delivery Groups"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Delivery Groups"
 		$DeliveryGroups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken | Select-Object Name,DeliveryType,DesktopsAvailable,DesktopsDisconnected,DesktopsFaulted,DesktopsNeverRegistered,DesktopsUnregistered,InMaintenanceMode,IsBroken,RegisteredMachines,SessionCount
 
-        $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -hours 24
+		$MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -hours 24
 
-        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Connection Report"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Connection Report"
 		$ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
-        $connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique| Select-Object -First 5  FullName,ClientVersion,ClientAddress,AVG_ICA_RTT
-        $connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique| Select-Object -First 5 FullName,ClientVersion,ClientAddress,LogOnDuration
+		$connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique | Select-Object -First 5 FullName,ClientVersion,ClientAddress,AVG_ICA_RTT
+		$connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique | Select-Object -First 5 FullName,ClientVersion,ClientAddress,LogOnDuration
     
-        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Resource Utilization"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Resource Utilization"
 		$ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
-        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Failure Report"
-        $ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
-        $MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
+		$ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
+		$MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
 
-		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Sessions"
+		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
 		$sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
 		$sessioncount = [PSCustomObject]@{
-			Connected    = ($sessions | Where-Object { $_.state -like 'active' }).count
-			Disconnected = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
-            ConnectionFailure = $ConnectionFailureReport.count
-            MachineFailure = $MachineFailureReport.count
+			Connected         = ($sessions | Where-Object { $_.state -like 'active' }).count
+			Disconnected      = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
+			ConnectionFailure = $ConnectionFailureReport.count
+			MachineFailure    = $MachineFailureReport.count
 		}
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Machines"

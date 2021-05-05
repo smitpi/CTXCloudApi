@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.0.5
 
 .GUID 7b30365c-2695-4a40-b701-4d25be3cbaa5
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS PowerShell Citrix
+.TAGS Citrix PowerShell
 
 .LICENSEURI
 
@@ -31,10 +31,13 @@ Updated [06/04/2021_09:03] Script Fle Info was updated
 Updated [20/04/2021_10:43] Script Fle Info was updated
 Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/05/2021_00:04] renamed script
+Updated [05/05/2021_14:33] 'Update Manifest'
 
 .PRIVATEDATA
 
 #> 
+
+
 
 
 
