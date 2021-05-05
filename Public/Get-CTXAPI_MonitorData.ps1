@@ -71,27 +71,6 @@ Function Get-CTXAPI_MonitorData {
 )
 
 
-	function Export-Odata {
-		[CmdletBinding()]
-		param(
-			[string]$URI,
-			[System.Collections.Hashtable]$headers)
-
-		$data = @()
-		$NextLink = $URI
-
-		Write-Color -Text 'Fetching :',$URI.split('?')[0].split('\')[1] -Color Yellow,Cyan -ShowTime -DateTimeFormat HH:mm:ss -NoNewLine
-		$APItimer.Restart()
-		While ($Null -ne $NextLink) {
-			$tmp = Invoke-WebRequest -Uri $NextLink -Headers $headers | ConvertFrom-Json
-			$tmp.Value | ForEach-Object { $data += $_ }
-			$NextLink = $tmp.'@odata.NextLink' 
-		}
-		[String]$seconds = '[' + ($APItimer.elapsed.seconds).ToString() + 'sec]'
-		Write-Color $seconds -Color Red
-		return $data
-
-	}
 
 	$timer = [Diagnostics.Stopwatch]::StartNew();
 	$APItimer = [Diagnostics.Stopwatch]::StartNew();
@@ -109,12 +88,11 @@ Function Get-CTXAPI_MonitorData {
 		Write-Color -Text 'Days: ',([math]::Round($datereport.Totaldays)) -Color Yellow,Cyan -StartTab 4
 		Write-Color -Text 'Hours: ',([math]::Round($datereport.Totalhours)) -Color Yellow,Cyan -StartTab 4 -LinesAfter 2
 
-$data = @()
-		$data = [PSCustomObject]@{
+		[pscustomobject]@{
 			ApplicationActivitySummaries = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ApplicationActivitySummaries?$filter=(Granularity eq 60 and ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
 			ApplicationInstances         = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ApplicationInstances?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
-			Applications                 = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Applications') -headers $headers
-			Catalogs                     = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Catalogs') -headers $headers
+			Applications                 = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Applications') -headers $headers			
+            Catalogs                     = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Catalogs') -headers $headers
 			ConnectionFailureLogs        = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\ConnectionFailureLogs?$filter=(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
 			Connections                  = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\Connections?$apply=filter(ModifiedDate ge ' + $past + ' and ModifiedDate le ' + $now + ' )') -headers $headers
 			DesktopGroups                = Export-Odata -URI ('https://api-' + $region + '.cloud.com/monitorodata\DesktopGroups') -headers $headers
@@ -142,6 +120,4 @@ $data = @()
 
 		$timer.Stop()
 		$APItimer.Stop()
-		$timer.Elapsed | Select-Object Days, Hours, Minutes, Seconds | Format-List
-		$data
 } #end Function

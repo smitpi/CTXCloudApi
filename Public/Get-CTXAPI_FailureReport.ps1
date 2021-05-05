@@ -52,7 +52,7 @@ Param()
 
 
 Function Get-CTXAPI_FailureReport {
-	PARAM(
+    PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
@@ -62,70 +62,26 @@ Function Get-CTXAPI_FailureReport {
 		[Parameter(Mandatory = $true, Position = 2)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-        [Parameter(Mandatory = $false, Position = 3)]
+        [Parameter(Mandatory = $false,ParameterSetName='Got odata')]
 		[pscustomobject]$MonitorData = $null,
-		[Parameter(Mandatory = $false, Position = 4)]
+		[Parameter(Mandatory = $false, Position = 3,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 5)]
+		[Parameter(Mandatory = $false, Position = 4,ParameterSetName='Fetch odata')]
 		[int]$hours = 24,
-		[Parameter(Mandatory = $true, Position = 6)]
+		[Parameter(Mandatory = $true, Position = 5)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('Connection', 'Machine')]
 		[string]$FailureType,
-		[Parameter(Mandatory = $false, Position = 7)]
+		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
-		[Parameter(Mandatory = $false, Position = 8)]
+		[Parameter(Mandatory = $false, Position = 7)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
-
-	$SessionFailureCode = [PSCustomObject]@{
-		0   = 'Unknown'
-		1   = 'None'
-		2   = 'SessionPreparation'
-		3   = 'RegistrationTimeout'
-		4   = 'ConnectionTimeout'
-		5   = 'Licensing'
-		6   = 'Ticketing'
-		7   = 'Other'
-		8   = 'GeneralFail'
-		9   = 'MaintenanceMode'
-		10  = 'ApplicationDisabled'
-		11  = 'LicenseFeatureRefused'
-		12  = 'NoDesktopAvailable'
-		13  = 'SessionLimitReached'
-		14  = 'DisallowedProtocol'
-		15  = 'ResourceUnavailable'
-		16  = 'ActiveSessionReconnectDisabled'
-		17  = 'NoSessionToReconnect'
-		18  = 'SpinUpFailed'
-		19  = 'Refused'
-		20  = 'ConfigurationSetFailure'
-		21  = 'MaxTotalInstancesExceeded'
-		22  = 'MaxPerUserInstancesExceeded'
-		23  = 'CommunicationError'
-		24  = 'MaxPerMachineInstancesExceeded'
-		25  = 'MaxPerEntitlementInstancesExceeded'
-		100 = 'NoMachineAvailable'
-		101 = 'MachineNotFunctional'
-	}
-	$ConnectionFailureType = [PSCustomObject]@{
-		0 = 'None'
-		1 = 'ClientConnectionFailure'
-		2 = 'MachineFailure'
-		3 = 'NoCapacityAvailable'
-		4 = 'NoLicensesAvailable'
-		5 = 'Configuration'
-	}
-	$RegistrationState = [PSCustomObject]@{
-		0 = 'Unknown'
-		1 = 'Registered'
-		2 = 'Unregistered'
-	}
 
     if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours }
     else {$mondata = $MonitorData }

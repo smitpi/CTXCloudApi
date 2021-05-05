@@ -51,24 +51,24 @@ Resource utilization in the last x hours
 Param()
 
 Function Get-CTXAPI_ResourceUtilization {
-	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		PARAM(
+		[Parameter(Mandatory = $true, Position = 0,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true, Position = 1,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true, Position = 2,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-        [Parameter(Mandatory = $false, Position = 3)]
+        [Parameter(Mandatory = $false,ParameterSetName='Got odata')]
 		[pscustomobject]$MonitorData = $null,
-		[Parameter(Mandatory = $false, Position = 4)]
+		[Parameter(Mandatory = $false, Position = 4,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 5)]
+		[Parameter(Mandatory = $false, Position = 5,ParameterSetName='Fetch odata')]
 		[int]$hours = 24,
 		[Parameter(Mandatory = $false, Position = 6)]
 		[ValidateSet('Excel', 'HTML')]
@@ -81,11 +81,7 @@ Function Get-CTXAPI_ResourceUtilization {
     if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours }
     else {$monitor = $MonitorData }
 
-	$RegistrationState = [PSCustomObject]@{
-		0 = 'Unknown'
-		1 = 'Registered'
-		2 = 'Unregistered'
-	}
+
 	$data = @()
 	foreach ($Machines in ($monitor.Machines | Where-Object {$_.MachineRole -ne 1})) {
 

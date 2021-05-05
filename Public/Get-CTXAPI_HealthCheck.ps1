@@ -71,16 +71,16 @@ Function Get-CTXAPI_HealthCheck {
         $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region eu -hours 24
 
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Connection Report"
-		$ConnectionReport = Get-CTXAPI_ConnectionReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData
+		$ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
         $connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique| Select-Object -First 5  FullName,ClientVersion,ClientAddress,AVG_ICA_RTT
         $connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique| Select-Object -First 5 FullName,ClientVersion,ClientAddress,LogOnDuration
     
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Resource Utilization"
-		$ResourceUtilization = Get-CTXAPI_ResourceUtilization -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData
+		$ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Failure Report"
-        $ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
-        $MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
+        $ConnectionFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
+        $MachineFailureReport = Get-CTXAPI_FailureReport $MonitorData -FailureType Machine
 
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Sessions"
@@ -119,12 +119,12 @@ Function Get-CTXAPI_HealthCheck {
 			CanCollapse           = $true
 			HeaderBackGroundColor = 'white'
 			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'grey'
+			HeaderTextColor       = 'orange'
 		}
 
 		$TableSectionSettings = @{
 			BackgroundColor       = 'white'
-			HeaderBackGroundColor = 'grey'
+			HeaderBackGroundColor = 'orange'
 			HeaderTextAlignment   = 'center'
 			HeaderTextColor       = 'white'
 		}
