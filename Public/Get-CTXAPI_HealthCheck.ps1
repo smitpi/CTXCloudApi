@@ -55,6 +55,10 @@ Function Get-CTXAPI_HealthCheck {
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
 		[Parameter(Mandatory = $true, Position = 3)]
+		[ValidateNotNullOrEmpty()]
+		[ValidateSet('us', 'eu', 'ap-s')]
+		[string]$region,
+		[Parameter(Mandatory = $false, Position = 4)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
@@ -68,7 +72,7 @@ Function Get-CTXAPI_HealthCheck {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Delivery Groups"
 		$DeliveryGroups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken | Select-Object Name,DeliveryType,DesktopsAvailable,DesktopsDisconnected,DesktopsFaulted,DesktopsNeverRegistered,DesktopsUnregistered,InMaintenanceMode,IsBroken,RegisteredMachines,SessionCount
 
-        $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region eu -hours 24
+        $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -hours 24
 
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Connection Report"
 		$ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
@@ -79,9 +83,8 @@ Function Get-CTXAPI_HealthCheck {
 		$ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Failure Report"
-        $ConnectionFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
-        $MachineFailureReport = Get-CTXAPI_FailureReport $MonitorData -FailureType Machine
-
+        $ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
+        $MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Sessions"
 		$sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken

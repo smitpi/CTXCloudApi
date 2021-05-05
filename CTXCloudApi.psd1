@@ -12,7 +12,7 @@
 RootModule = 'CTXCloudApi.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.0.10'
+ModuleVersion = '0.0.11'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -120,7 +120,7 @@ PrivateData = @{
         IconUri = 'https://ioco.tech/wp-content/uploads/2020/10/ioco-logo-2020.png'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Updated [05/05/2021_10:31] Changed OData reports to create reports from existing odata object'
+        ReleaseNotes = 'Updated [05/05/2021_11:14] Fixed Health Check report'
 
         # Prerelease string of this module
         # Prerelease = ''
@@ -129,7 +129,7 @@ PrivateData = @{
         # RequireLicenseAcceptance = $false
 
         # External dependent modules of this module
-        ExternalModuleDependencies = @('ImportExcel','PSWriteHTML','PSWriteColor')
+        # ExternalModuleDependencies = @('ImportExcel','PSWriteHTML','PSWriteColor')
 
     } # End of PSData hashtable
 

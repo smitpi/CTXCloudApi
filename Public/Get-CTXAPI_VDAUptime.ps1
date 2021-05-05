@@ -67,7 +67,7 @@ Function Get-CTXAPI_VDAUptime {
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp)
 
-
+try{
 	$Complist = @()
 	Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken | ForEach-Object {
 		$lastBootTime = [Datetime]::ParseExact($_.LastDeregistrationTime, 'M/d/yyyy h:mm:ss tt', $null)
@@ -107,7 +107,7 @@ Function Get-CTXAPI_VDAUptime {
 			DayOfWeek         = $CompUptime.DayOfWeek
 		}
 	}
-
+}catch{Write-Warning "Date calculation failed"}
 	if ($Export -eq 'Excel') { $complist | Export-Excel -Path ($ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
 	if ($Export -eq 'HTML') { $complist | Out-GridHtml -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
 	if ($Export -eq 'Host') { $complist }
