@@ -71,8 +71,11 @@ Function Get-CTXAPI_VDAUptime {
 
 try{
 	$Complist = @()
-	Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken | ForEach-Object {
-		$lastBootTime = [Datetime]::ParseExact($_.LastDeregistrationTime, 'M/d/yyyy h:mm:ss tt', $null)
+	$machines = Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken 
+	
+	foreach ($machine in $machines){
+		if ($null -eq $machine.LastDeregistrationTime) {$lastBootTime = Get-Date -Format 'M/d/yyyy h:mm:ss tt'}
+		else {$lastBootTime = [Datetime]::ParseExact($machine.LastDeregistrationTime, 'M/d/yyyy h:mm:ss tt', $null)}
 
 		$Uptime = (New-TimeSpan -Start $lastBootTime -End (Get-Date))
 		$SelectProps =
@@ -93,16 +96,16 @@ try{
 		}
 		$CompUptime = $Uptime | Select-Object $SelectProps
 		$Complist += [PSCustomObject]@{
-			DnsName           = $_.DnsName
-			AgentVersion      = $_.AgentVersion
-			MachineCatalog    = $_.MachineCatalog.Name
-			DeliveryGroup     = $_.DeliveryGroup.Name
-			InMaintenanceMode = $_.InMaintenanceMode
-			IPAddress         = $_.IPAddress
-			OSType            = $_.OSType
-			ProvisioningType  = $_.ProvisioningType
-			SummaryState      = $_.SummaryState
-			FaultState        = $_.FaultState
+			DnsName           = $machine.DnsName
+			AgentVersion      = $machine.AgentVersion
+			MachineCatalog    = $machine.MachineCatalog.Name
+			DeliveryGroup     = $machine.DeliveryGroup.Name
+			InMaintenanceMode = $machine.InMaintenanceMode
+			IPAddress         = $machine.IPAddress
+			OSType            = $machine.OSType
+			ProvisioningType  = $machine.ProvisioningType
+			SummaryState      = $machine.SummaryState
+			FaultState        = $machine.FaultState
 			Days              = $CompUptime.Days
 			TotalHours        = $CompUptime.TotalHours
 			OnlineSince       = $CompUptime.OnlineSince

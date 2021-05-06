@@ -54,7 +54,8 @@ Get details about VDA Machines
 Param()
 
 
-Function Get-CTXAPI_Machines {
+Function Get-CTXAPI_Machines
+{
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -72,11 +73,14 @@ Function Get-CTXAPI_Machines {
 		Accept              = 'application/json'
 	}
 
+	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines" -Headers $headers).Content | ConvertFrom-Json).items
+
+	<#
 	$machines = @()
 	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines" -Headers $headers).Content | ConvertFrom-Json).items).Dnsname | ForEach-Object {
 		$machines += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines/$_" -Headers $headers).Content | ConvertFrom-Json)
 	}
 	$machines
-
+#>
 
 } #end Function
