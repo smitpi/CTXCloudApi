@@ -40,7 +40,6 @@ Created [24/04/2021_07:26] Initital Script Creating
 #> 
 
 Param()
-#Requires -RunAsAdministrator
 
 Function Set-CTXAPI_SecretStore
 {

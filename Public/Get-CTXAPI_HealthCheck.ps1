@@ -49,7 +49,8 @@ Param()
 
 
 
-Function Get-CTXAPI_HealthCheck {
+Function Get-CTXAPI_HealthCheck
+{
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -71,7 +72,8 @@ Function Get-CTXAPI_HealthCheck {
 	#######################
 	#region Get data
 	#######################
-	try {
+	try
+	{
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
 		$configlog = Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteId -Days 7 -ApiToken $ApiToken | Group-Object -Property text | Select-Object count,name | Sort-Object -Property count -Descending | Select-Object -First 5
 
@@ -90,7 +92,8 @@ Function Get-CTXAPI_HealthCheck {
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
 		$ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
-		$MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
+		$MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine | Select-Object Name,IP,OSType,FailureStartDate,FailureEndDate,FaultState
+
 
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
 		$sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
@@ -150,11 +153,15 @@ Function Get-CTXAPI_HealthCheck {
 		New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
 			New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
 			New-HTMLSection @SectionSettings -Content {
-				New-HTMLSection -HeaderText 'Citrix Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }
+				New-HTMLSection -HeaderText 'Session States' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }
 			}
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }
 				New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }
+			}
+			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'Connection Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ConnectionFailureReport }
+				New-HTMLSection -HeaderText 'Machine Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $MachineFailureReport }
 			}
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
@@ -165,13 +172,15 @@ Function Get-CTXAPI_HealthCheck {
 				New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $DeliveryGroups }
 			}
 			New-HTMLSection @SectionSettings -Content {
-				New-HTMLSection -HeaderText 'Machines' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $vdauptime }
+				New-HTMLSection -HeaderText 'VDI Uptimes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $vdauptime }
 			}
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Resource Utilization' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ResourceUtilization }
 			}
 		}
 		#endregion
-	} catch { Write-Error "Failed to generate report:$($_)" }
+	} catch
+	{ Write-Error "Failed to generate report:$($_)" 
+ }
 
 } #end Function
