@@ -61,11 +61,13 @@ Function Get-CTXAPI_ConfigAudit {
 		[Parameter(Mandatory = $true, Position = 2)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-		[Parameter(Mandatory = $false, Position = 3)]
+		[Parameter(Mandatory = $true, Position = 6)]
+		[ValidateSet('Excel', 'HTML', 'Host')]
+		[string]$Export,
+		[Parameter(Mandatory = $false, Position = 7)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
-
 
 	$catalogs = @()
 	Get-CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken | ForEach-Object {
@@ -90,40 +92,48 @@ Function Get-CTXAPI_ConfigAudit {
 		}
 	}
 	$deliverygroups = @()
-	Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken | ForEach-Object {
-		$SimpleAccessPolicy = $_.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
-  $deliverygroups += [pscustomobject]@{
-			Name                      = $_.Name
-			MachinesInMaintenanceMode = $_.MachinesInMaintenanceMode
-			RegisteredMachines        = $_.RegisteredMachines
-			TotalMachines             = $_.TotalMachines
-			UnassignedMachines        = $_.UnassignedMachines
-			UserManagement            = $_.UserManagement
-			DeliveryType              = $_.DeliveryType
-			DesktopsAvailable         = $_.DesktopsAvailable
-			DesktopsUnregistered      = $_.DesktopsUnregistered
-			DesktopsFaulted           = $_.DesktopsFaulted
-			InMaintenanceMode         = $_.InMaintenanceMode
-			IsBroken                  = $_.IsBroken
-			MinimumFunctionalLevel    = $_.MinimumFunctionalLevel
-			SessionSupport            = $_.SessionSupport
-			TotalApplications         = $_.TotalApplications
-			TotalDesktops             = $_.TotalDesktops
+	$groups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken 
+	
+	foreach ($grp in $groups) {
+		$SimpleAccessPolicy = $grp.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
+		$deliverygroups += [pscustomobject]@{
+			Name                      = $grp.Name
+			MachinesInMaintenanceMode = $grp.MachinesInMaintenanceMode
+			RegisteredMachines        = $grp.RegisteredMachines
+			TotalMachines             = $grp.TotalMachines
+			UnassignedMachines        = $grp.UnassignedMachines
+			UserManagement            = $grp.UserManagement
+			DeliveryType              = $grp.DeliveryType
+			DesktopsAvailable         = $grp.DesktopsAvailable
+			DesktopsUnregistered      = $grp.DesktopsUnregistered
+			DesktopsFaulted           = $grp.DesktopsFaulted
+			InMaintenanceMode         = $grp.InMaintenanceMode
+			IsBroken                  = $grp.IsBroken
+			MinimumFunctionalLevel    = $grp.MinimumFunctionalLevel
+			SessionSupport            = $grp.SessionSupport
+			TotalApplications         = $grp.TotalApplications
+			TotalDesktops             = $grp.TotalDesktops
 			IncludedUsers             = @(($SimpleAccessPolicy) | Out-String).Trim()
   }
 	}
 
 	$apps = @()
-	Get-CTXAPI_Applications -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken | ForEach-Object {
-		$IncludedUsers = $_.IncludedUsers | ForEach-Object { $_.samname }
+	$assgroups = @()
+	$applications = Get-CTXAPI_Applications -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken
+	
+	foreach ($application in $applications) { 
+		$IncludedUsers = $application.IncludedUsers | ForEach-Object { $_.samname }
+		$application.AssociatedDeliveryGroupUuids | ForEach-Object {
+			$tmp = $_
+			$assgroups += $groups | Where-Object { $_.id -like $tmp } | ForEach-Object { $_.name } }
   $apps += [pscustomobject]@{
-			Name                         = $_.Name
-			Visible                      = $_.Visible
-			CommandLineExecutable        = $_.InstalledAppProperties.CommandLineExecutable
-			CommandLineArguments         = $_.InstalledAppProperties.CommandLineArguments
-			Enabled                      = $_.Enabled
-			NumAssociatedDeliveryGroups  = $_.NumAssociatedDeliveryGroups
-			AssociatedDeliveryGroupUuids = @(($_.AssociatedDeliveryGroupUuids) | Out-String).Trim()
+			Name                         = $application.Name
+			Visible                      = $application.Visible
+			CommandLineExecutable        = $application.InstalledAppProperties.CommandLineExecutable
+			CommandLineArguments         = $application.InstalledAppProperties.CommandLineArguments
+			Enabled                      = $application.Enabled
+			NumAssociatedDeliveryGroups  = $application.NumAssociatedDeliveryGroups
+			AssociatedDeliveryGroupUuids = @(($assgroups) | Out-String).Trim()
 			IncludedUsers                = @(($IncludedUsers) | Out-String).Trim()
   }
 	}
@@ -152,10 +162,69 @@ Function Get-CTXAPI_ConfigAudit {
   }
 	}
 
+	if ($Export -eq 'Excel') { 
+		[string]$ExcelReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+		$catalogs | Export-Excel -Path $ExcelReportname -WorksheetName Catalogs -AutoSize -AutoFilter
+		$deliverygroups | Export-Excel -Path $ExcelReportname -WorksheetName DeliveryGroups -AutoSize -AutoFilter
+		$apps | Export-Excel -Path $ExcelReportname -WorksheetName apps -AutoSize -AutoFilter
+		$machines | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter -Show 
+	} 
+	if ($Export -eq 'HTML') { 
+		
+		$TableSettings = @{
+			#Style          = 'stripe'
+			Style          = 'cell-border'
+			HideFooter     = $true
+			OrderMulti     = $true
+			TextWhenNoData = 'No Data to display here'
+		}
 
-	[string]$ExcelReportname = $ReportPath + '\XD_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-	$catalogs | Export-Excel -Path $ExcelReportname -WorksheetName Catalogs -AutoSize -AutoFilter
-	$deliverygroups | Export-Excel -Path $ExcelReportname -WorksheetName DeliveryGroups -AutoSize -AutoFilter
-	$apps | Export-Excel -Path $ExcelReportname -WorksheetName apps -AutoSize -AutoFilter
-	$machines | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter -Show
+		$SectionSettings = @{
+			BackgroundColor       = 'white'
+			CanCollapse           = $true
+			HeaderBackGroundColor = 'white'
+			HeaderTextAlignment   = 'center'
+			HeaderTextColor       = 'darkgrey'
+		}
+
+		$TableSectionSettings = @{
+			BackgroundColor       = 'white'
+			HeaderBackGroundColor = 'darkgrey'
+			HeaderTextAlignment   = 'center'
+			HeaderTextColor       = 'white'
+		}
+		[string]$HTMLReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+
+		New-HTML -TitleText "$CustomerId Config Audit" -FilePath $HTMLReportname -ShowHTML {
+			New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
+			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }
+			}
+			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $deliverygroups }
+			}
+			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'Published Applications' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $apps }
+			}
+			New-HTMLSection @SectionSettings -Content {
+				New-HTMLSection -HeaderText 'VDI Devices' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $machines }
+			}
+		}
+		
+
+	}
+	if ($Export -eq 'Host') { 
+		Write-Color 'Machine Catalogs' -Color Cyan -LinesAfter 2 -StartTab 2
+		$catalogs | Format-Table -AutoSize
+		Write-Color 'Delivery Groups' -Color Cyan -LinesAfter 2 -StartTab 2
+		$deliverygroups | Format-Table -AutoSize
+		Write-Color 'Published Applications' -Color Cyan -LinesAfter 2 -StartTab 2
+		$apps | Format-Table -AutoSize
+		Write-Color 'VDI Devices' -Color Cyan -LinesAfter 2 -StartTab 2
+		$machines | Format-Table -AutoSize
+
+
+	}
+
+	
 } #end Function

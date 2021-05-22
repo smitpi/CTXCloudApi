@@ -49,8 +49,7 @@ Param()
 
 
 
-Function Get-CTXAPI_HealthCheck
-{
+Function Get-CTXAPI_HealthCheck {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -72,8 +71,7 @@ Function Get-CTXAPI_HealthCheck
 	#######################
 	#region Get data
 	#######################
-	try
-	{
+	try {
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
 		$configlog = Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteId -Days 7 -ApiToken $ApiToken | Group-Object -Property text | Select-Object count,name | Sort-Object -Property count -Descending | Select-Object -First 5
 
@@ -131,12 +129,12 @@ Function Get-CTXAPI_HealthCheck
 			CanCollapse           = $true
 			HeaderBackGroundColor = 'white'
 			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'orange'
+			HeaderTextColor       = 'grey'
 		}
 
 		$TableSectionSettings = @{
 			BackgroundColor       = 'white'
-			HeaderBackGroundColor = 'orange'
+			HeaderBackGroundColor = 'grey'
 			HeaderTextAlignment   = 'center'
 			HeaderTextColor       = 'white'
 		}
@@ -146,7 +144,7 @@ Function Get-CTXAPI_HealthCheck
 		#region Building HTML the report
 		#######################
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Building HTML Page"
-		[string]$HTMLReportname = $ReportPath + '\XD_Healthcheck-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+		[string]$HTMLReportname = $ReportPath + "\XD_HealthChecks-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
 		$HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
 
@@ -179,8 +177,8 @@ Function Get-CTXAPI_HealthCheck
 			}
 		}
 		#endregion
-	} catch
-	{ Write-Error "Failed to generate report:$($_)" 
+	} catch {
+		Write-Error "Failed to generate report:$($_)" 
  }
 
 } #end Function
