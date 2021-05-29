@@ -41,53 +41,46 @@ Created [24/04/2021_07:26] Initital Script Creating
 
 Param()
 
-Function Set-CTXAPI_SecretStore
-{
+Function Set-CTXAPI_SecretStore {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateScript( { (Test-Path $_) })]
-		[string]$PasswordFilePath)
+		[string]$FilePath)
 
 	$module = Get-Module -Name Microsoft.PowerShell.SecretManagement -ListAvailable | Select-Object -First 1
-	if ([bool]$module -eq $false)
-	{
+	if ([bool]$module -eq $false) {
 		Write-Color -Text 'Installing module: ','SecretManagement' -Color yellow,green
-		Install-Module Microsoft.PowerShell.SecretManagement, -AllowClobber -Scope AllUsers
-	} else
-	{
+		Install-Module Microsoft.PowerShell.SecretManagement, Microsoft.PowerShell.SecretStore -AllowClobber -Scope CurrentUser
+	} else {
 		Write-Color -Text 'Using installed module path: ',$module.ModuleBase -Color yellow,green
 	}
-	$module = Get-Module -Name Microsoft.PowerShell.SecretStore -ListAvailable | Select-Object -First 1
-	if ([bool]$module -eq $false)
-	{
-		Write-Color -Text 'Installing module: ','SecretStore' -Color yellow,green
-		Install-Module Microsoft.PowerShell.SecretStore -AllowClobber -Scope AllUsers
-	} else
-	{
-		Write-Color -Text 'Using installed module path: ',$module.ModuleBase -Color yellow,green
-	}
-	import-module Microsoft.PowerShell.SecretManagement,Microsoft.PowerShell.SecretManagement -force
+
 	$vault = Get-SecretVault -Name CTXAPIStore -ErrorAction SilentlyContinue
-	if ([bool]$vault -eq $false)
-	{
+	if ([bool]$vault -eq $false) {
 		Register-SecretVault -Name CTXAPIStore -ModuleName Microsoft.PowerShell.SecretStore
 		$Password = Read-Host 'Password ' -AsSecureString
-		$Password | Export-Clixml -Path "$PasswordFilePath\CTXAPI.xml" -Depth 3 -Force	
-		Write-Host "Password file $PasswordFilePath\CTXAPI.xml created "
-		try
-		{
-			Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Password $Password -Interaction None -Confirm:$false
-		} catch
-		{ Write-Warning 'SecretStoreConfiguration already set' 
-  }
+		$Password | Export-Clixml -Path "$FilePath\CTXAPI.xml" -Depth 3 -Force	
+		Write-Host "Password file $FilePath\CTXAPI.xml created "
+		try {
+			Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Interaction None -Confirm:$false
+		} catch { Set-SecretStorePassword -Password $Password -NewPassword $Password
+			Write-Warning 'SecretStoreConfiguration already set' }
 	}
-	$password = Import-Clixml -Path "$PasswordFilePath\CTXAPI.xml"
+	$password = Import-Clixml -Path "$FilePath\CTXAPI.xml"
 	Unlock-SecretStore -Password $password
 
+	$ClientName = Read-Host 'Client Name '
 	$CustomerId = Read-Host 'CustomerId '	 
 	$clientid = Read-Host 'clientid '
 	$clientsecret = Read-Host 'clientsecret '
+
+	$data = @{
+		ClientName = $ClientName.ToString()
+		CustomerId = $CustomerId.ToString()
+		clientid   = $clientid.ToString()	
+	}
+
 	
-	Set-Secret -Name $CustomerId -Secret $clientsecret -Metadata @{clientid = $clientid.ToString() } -Vault CTXAPIStore
+	Set-Secret -Name $ClientName -Secret $clientsecret -Metadata $data -Vault CTXAPIStore
 
 } #end Function

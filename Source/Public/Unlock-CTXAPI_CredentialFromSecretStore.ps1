@@ -3,9 +3,9 @@
 
 .VERSION 1.0.0
 
-.GUID d2e6e808-e5fc-45d6-942d-3df754591008
+.GUID e68d19a3-3991-42f3-9d86-01f4abe16d65
 
-.AUTHOR Pierre Smit
+.AUTHOR  Pierre Smit
 
 .COMPANYNAME iOCO Tech
 
@@ -26,16 +26,18 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [24/04/2021_08:30] Initital Script Creating
+Created [28/05/2021_15:43] Initital Script Creating
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Get api logon details from ms secret store 
+Get api logon details from ms secret store
 
 #> 
 
@@ -46,23 +48,25 @@ Function Unlock-CTXAPI_CredentialFromSecretStore {
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateScript( { (Test-Path $_) -and ((Get-Item $_).name -eq 'CTXAPI.xml') })]
-		[string]$PasswordFilePath,
+		[string]$FilePath,
 		[Parameter(Mandatory = $true, Position = 1)]
 		[ValidateNotNull()]
 		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId)
+		[string]$ClientName)
 
-	$password = Import-Clixml -Path $PasswordFilePath
+	$password = Import-Clixml -Path $FilePath
 	Unlock-SecretStore -Password $password
 
-	$Global:CustomerId = $CustomerId
-	$Global:clientid = ((Get-SecretInfo -Name $CustomerId -Vault CTXAPIStore).Metadata).clientid
-	$Global:clientsecret = Get-Secret -Name $CustomerId -Vault CTXAPIStore -AsPlainText
+	$Global:CustomerId = ((Get-SecretInfo -Name $ClientName -Vault CTXAPIStore).Metadata).CustomerId
+	$Global:clientid = ((Get-SecretInfo -Name $ClientName -Vault CTXAPIStore).Metadata).clientid
+	$Global:ClientName = ((Get-SecretInfo -Name $ClientName -Vault CTXAPIStore).Metadata).ClientName
+	$Global:clientsecret = Get-Secret -Name $ClientName -Vault CTXAPIStore -AsPlainText
 
-	Write-Color -Text "Using the following details" -Color DarkYellow -LinesAfter 1
-    Write-Color -Text "CustomerID :", $CustomerId -Color Yellow,Cyan
-    Write-Color -Text "clientid :", $clientid -Color Yellow,Cyan
-    Write-Color -Text "clientsecret :", $clientsecret -Color Yellow,Cyan
+	Write-Color -Text 'Using the following details' -Color DarkYellow -LinesAfter 1
+	Write-Color -Text 'Client Name :', $ClientName -Color Yellow,red
+	Write-Color -Text 'CustomerID :', $CustomerId -Color Yellow,Cyan
+	Write-Color -Text 'clientid :', $clientid -Color Yellow,Cyan
+	Write-Color -Text 'clientsecret :', $clientsecret -Color Yellow,Cyan
 
 
 } #end Function

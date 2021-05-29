@@ -1,9 +1,9 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.0
 
-.GUID c7bf330c-de8a-4741-8af7-f8858a0109d4
+.GUID 9d297a8a-96ab-467a-ba68-f162937cc868
 
 .AUTHOR Pierre Smit
 
@@ -26,8 +26,7 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [05/05/2021_14:43] Initital Script Creating
-Updated [05/05/2021_14:45] manifest file
+Created [28/05/2021_15:41] Initital Script Creating
 
 .PRIVATEDATA
 
@@ -36,6 +35,7 @@ Updated [05/05/2021_14:45] manifest file
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
+
 
 <# 
 
