@@ -43,9 +43,18 @@ Param()
 
 Function Set-CTXAPI_SecretStore {
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Position = 0,ParameterSetName = 'default')]
+		[switch]$DefaultSettings = $false, 
+		[Parameter(Position = 1,ParameterSetName = 'user')]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$FilePath)
+
+
+	if ($DefaultSettings -eq $true) {
+		if ((Test-Path -Path $profile) -eq $false) { New-Item -Path $profile -ItemType file -Force -ErrorAction SilentlyContinue }
+		if ((Test-Path -Path ((Get-Item $profile).DirectoryName + '\Config')) -eq $false) { New-Item -Path ((Get-Item $profile).DirectoryName + '\Config') -ItemType Directory -Force -ErrorAction SilentlyContinue }
+		$FilePath = ((Get-Item $profile).DirectoryName + '\Config')
+	}
 
 	$module = Get-Module -Name Microsoft.PowerShell.SecretManagement -ListAvailable | Select-Object -First 1
 	if ([bool]$module -eq $false) {
@@ -63,8 +72,10 @@ Function Set-CTXAPI_SecretStore {
 		Write-Host "Password file $FilePath\CTXAPI.xml created "
 		try {
 			Set-SecretStoreConfiguration -Scope CurrentUser -Authentication Password -PasswordTimeout 3600 -Interaction None -Confirm:$false
-		} catch { Set-SecretStorePassword -Password $Password -NewPassword $Password
-			Write-Warning 'SecretStoreConfiguration already set' }
+		} catch {
+			Set-SecretStorePassword -Password $Password -NewPassword $Password
+			Write-Warning 'SecretStoreConfiguration already set' 
+  }
 	}
 	$password = Import-Clixml -Path "$FilePath\CTXAPI.xml"
 	Unlock-SecretStore -Password $password
