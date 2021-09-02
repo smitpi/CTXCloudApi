@@ -76,7 +76,6 @@ $headers = @{
 $data = @()
 
 if ($SiteTest){
-$body = @{'Citrix-CustomerId' = $customerId}
 Invoke-WebRequest ([string]::Format("https://api-us.cloud.com/cvadapis/sites/{0}/`$test", $siteid)) -Verbose  -Method Post -Headers $headers -ContentType "application/json"
 $data += (Invoke-RestMethod "https://api-us.cloud.com/cvadapis/sites/$siteid/TestReport" -Headers $headers).TestResults 
 }
