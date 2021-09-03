@@ -170,31 +170,10 @@ Function Get-CTXAPI_ConfigAudit {
 	} 
 	if ($Export -eq 'HTML') { 
 		
-		$TableSettings = @{
-			#Style          = 'stripe'
-			Style          = 'cell-border'
-			HideFooter     = $true
-			OrderMulti     = $true
-			TextWhenNoData = 'No Data to display here'
-		}
-
-		$SectionSettings = @{
-			BackgroundColor       = 'white'
-			CanCollapse           = $true
-			HeaderBackGroundColor = 'white'
-			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'darkgrey'
-		}
-
-		$TableSectionSettings = @{
-			BackgroundColor       = 'white'
-			HeaderBackGroundColor = 'darkgrey'
-			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'white'
-		}
 		[string]$HTMLReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
 		New-HTML -TitleText "$CustomerId Config Audit" -FilePath $HTMLReportname -ShowHTML {
+			New-HTMLLogo -RightLogoName $logourl
 			New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }

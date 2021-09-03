@@ -112,34 +112,7 @@ Function Get-CTXAPI_HealthCheck {
 			NeedsReboot   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
 		}
 		#endregion
-		#######################
-		#region Table settings
-		#######################
-
-		$TableSettings = @{
-			#Style          = 'stripe'
-			Style          = 'cell-border'
-			HideFooter     = $true
-			OrderMulti     = $true
-			TextWhenNoData = 'No Data to display here'
-		}
-
-		$SectionSettings = @{
-			BackgroundColor       = 'white'
-			CanCollapse           = $true
-			HeaderBackGroundColor = 'white'
-			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'grey'
-		}
-
-		$TableSectionSettings = @{
-			BackgroundColor       = 'white'
-			HeaderBackGroundColor = 'grey'
-			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'white'
-		}
-		#endregion
-
+		
 		#######################
 		#region Building HTML the report
 		#######################
@@ -149,6 +122,7 @@ Function Get-CTXAPI_HealthCheck {
 		$HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
 
 		New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
+			New-HTMLLogo -RightLogoString $Logourl
 			New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Session States' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }

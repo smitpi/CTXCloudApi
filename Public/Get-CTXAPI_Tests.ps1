@@ -76,7 +76,7 @@ $headers = @{
 $data = @()
 
 if ($SiteTest){
-Invoke-WebRequest ([string]::Format("https://api-us.cloud.com/cvadapis/sites/{0}/`$test", $siteid)) -Verbose  -Method Post -Headers $headers -ContentType "application/json"
+Invoke-WebRequest ([string]::Format("https://api-us.cloud.com/cvadapis/sites/{0}/`$test", $siteid))  -Method Post -Headers $headers -ContentType "application/json"
 $data += (Invoke-RestMethod "https://api-us.cloud.com/cvadapis/sites/$siteid/TestReport" -Headers $headers).TestResults 
 }
 
@@ -126,34 +126,10 @@ if ($Export -eq 'Excel') {
     $Alldata.Alldata | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName Alldata -Show 
 } 
 if ($Export -eq 'HTML')  {
-
-		$TableSettings = @{
-			#Style          = 'stripe'
-			Style          = 'cell-border'
-			HideFooter     = $true
-			OrderMulti     = $true
-			TextWhenNoData = 'No Data to display here'
-		}
-
-		$SectionSettings = @{
-			BackgroundColor       = 'white'
-			CanCollapse           = $true
-			HeaderBackGroundColor = 'white'
-			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'grey'
-		}
-
-		$TableSectionSettings = @{
-			BackgroundColor       = 'white'
-			HeaderBackGroundColor = 'grey'
-			HeaderTextAlignment   = 'center'
-			HeaderTextColor       = 'white'
-		}
-		#endregion 
-[string]$HTMLReportname = $ReportPath + "\SiteTests" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+		[string]$HTMLReportname = $ReportPath + "\SiteTests" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 		$HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
-
 		New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
+			New-HTMLLogo -RightLogoString $logourl
 			New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
 			New-HTMLSection @SectionSettings -Content {
 				New-HTMLSection -HeaderText 'Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $Alldata.FatalError }
