@@ -71,7 +71,7 @@ Function Get-CTXAPI_HealthCheck {
 	#######################
 	#region Get data
 	#######################
-	try {
+
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
 		$configlog = Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteId -Days 7 -ApiToken $ApiToken | Group-Object -Property text | Select-Object count,name | Sort-Object -Property count -Descending | Select-Object -First 5
 
@@ -151,8 +151,9 @@ Function Get-CTXAPI_HealthCheck {
 			}
 		}
 		#endregion
-	} catch {
-		Write-Error "Failed to generate report:$($_)" 
- }
+trap {
+	Write-Warning "Failed to generate report:$($_)" 
+	continue
+}	
 
 } #end Function
