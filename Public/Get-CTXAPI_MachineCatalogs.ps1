@@ -52,6 +52,7 @@ Param()
 
 
 Function Get-CTXAPI_MachineCatalogs {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

@@ -55,6 +55,7 @@ Param()
 
 
 Function Add-CTXAPI_MachineToCatalog {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

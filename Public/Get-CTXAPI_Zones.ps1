@@ -49,6 +49,7 @@ Param()
 
 
 Function Get-CTXAPI_Zones {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

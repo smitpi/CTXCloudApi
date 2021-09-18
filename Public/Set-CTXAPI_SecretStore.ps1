@@ -42,6 +42,7 @@ Created [24/04/2021_07:26] Initital Script Creating
 Param()
 
 Function Set-CTXAPI_SecretStore {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Position = 0,ParameterSetName = 'default')]
 		[switch]$DefaultSettings = $false, 

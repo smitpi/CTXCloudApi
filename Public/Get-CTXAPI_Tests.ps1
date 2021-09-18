@@ -44,6 +44,7 @@ Param()
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 Function Get-CTXAPI_Tests {
+    [Cmdletbinding()]
     PARAM(
         [Parameter(Mandatory = $true, Position = 0)]
         [ValidateNotNullOrEmpty()]
@@ -146,7 +147,7 @@ Function Get-CTXAPI_Tests {
         $Alldata.Alldata | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName Alldata -Show 
     } 
     if ($Export -eq 'HTML') {
-        [string]$HTMLReportname = $ReportPath + '\SiteTests' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+        [string]$HTMLReportname = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
         $HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
         New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
             New-HTMLLogo -RightLogoString $logourl
@@ -159,9 +160,6 @@ Function Get-CTXAPI_Tests {
                 New-HTMLSection -HeaderText 'Alldata' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $alldata.Alldata }
             }
         }
-
-
-        $Alldata | Out-GridHtml -DisablePaging -Title 'Citrix Tests' -HideFooter -SearchHighlight -FixedHeader 
     }
     if ($Export -eq 'Host') { $Alldata }
 

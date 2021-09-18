@@ -51,6 +51,7 @@ Param()
 
 
 Function Get-CTXAPI_ConnectionReport {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]

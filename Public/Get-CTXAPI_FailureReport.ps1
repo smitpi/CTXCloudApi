@@ -54,6 +54,7 @@ Param()
 
 
 Function Get-CTXAPI_FailureReport {
+	[Cmdletbinding()]
     PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

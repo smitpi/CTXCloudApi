@@ -50,6 +50,7 @@ Report on Citrix Configuration.
 Param()
 
 Function Get-CTXAPI_ConfigAudit {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

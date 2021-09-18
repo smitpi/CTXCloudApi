@@ -54,8 +54,8 @@ Get details about VDA Machines
 Param()
 
 
-Function Get-CTXAPI_Machines
-{
+Function Get-CTXAPI_Machines {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

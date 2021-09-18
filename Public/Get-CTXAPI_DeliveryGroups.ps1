@@ -52,6 +52,8 @@ Param()
 
 
 Function Get-CTXAPI_DeliveryGroups {
+	[Cmdletbinding()]
+
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

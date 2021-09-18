@@ -52,6 +52,7 @@ Uses Registration date to calculate uptime
 Param()
 
 Function Get-CTXAPI_VDAUptime {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

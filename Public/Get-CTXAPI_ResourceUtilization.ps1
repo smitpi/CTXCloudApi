@@ -53,6 +53,7 @@ Resource utilization in the last x hours
 Param()
 
 Function Get-CTXAPI_ResourceUtilization {
+	[Cmdletbinding()]
 		PARAM(
 		[Parameter(Mandatory = $true, Position = 0,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]

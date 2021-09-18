@@ -52,6 +52,7 @@ Param()
 
 
 Function Get-CTXAPI_Applications {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

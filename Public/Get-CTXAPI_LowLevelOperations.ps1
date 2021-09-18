@@ -49,7 +49,8 @@ Param()
 
 
 Function Get-CTXAPI_LowLevelOperations {
-PARAM(
+	[Cmdletbinding()]
+	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
