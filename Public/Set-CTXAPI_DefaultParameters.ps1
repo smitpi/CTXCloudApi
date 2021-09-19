@@ -48,21 +48,29 @@ Function Set-CTXAPI_DefaultParameters {
 		        [string]$CustomerId,
 		        [Parameter()]
 		        [ValidateNotNullOrEmpty()]
-		        [string]$Client_Id,
+		        [string]$ClientId,
 		        [Parameter()]
 		        [ValidateNotNullOrEmpty()]
-		        [string]$Client_Secret
+		        [string]$ClientSecret
 	            )
-$ApiToken = Get-CTXAPI_Token -client_id $Client_Id -client_secret $Client_Secret
-$SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
+$global:ApiToken = Get-CTXAPI_Token -client_id $ClientId -client_secret $ClientSecret
+$global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
 
-$script:CTX_APIDefaultParm = @{
-CustomerId = $CustomerId
-SiteId = $SiteID
-ApiToken = $ApiToken
+[hashtable]$global:CTX_APIDefaultParm = @{
+    CustomerId   = $CustomerId
+    SiteId       = $SiteID
+    ApiToken     = $ApiToken
 }
 
-$CTX_APIDefaultParm
-Write-Color -Text 'Use ','@CTX_APIDefaultParm ','in the other commands.' -Color Cyan,Yellow,Cyan -LinesBefore 2 
+[hashtable]$global:CTX_APIAllParm = @{
+    CustomerId     = $CustomerId
+    ClientId       = $ClientId
+    ClientSecret   = $ClientSecret
+    SiteId         = $SiteID
+    ApiToken       = $ApiToken
+    ReportPath     = $env:TEMP
+}
+
+Write-Color -Text 'Use ','@CTX_APIDefaultParm',' and ','@CTX_APIAllParm ','in the other commands.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2 
 
 } #end Function
