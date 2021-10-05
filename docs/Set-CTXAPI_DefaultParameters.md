@@ -5,21 +5,16 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CTXAPI_SecretStore
+# Set-CTXAPI_DefaultParameters
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
-### default
 ```
-Set-CTXAPI_SecretStore [-DefaultSettings] [<CommonParameters>]
-```
-
-### user
-```
-Set-CTXAPI_SecretStore [[-FilePath] <String>] [<CommonParameters>]
+Set-CTXAPI_DefaultParameters [[-CustomerId] <String>] [[-ClientId] <String>] [[-ClientSecret] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -36,31 +31,46 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -DefaultSettings
-{{ Fill DefaultSettings Description }}
+### -ClientId
+{{ Fill ClientId Description }}
 
 ```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: default
+Type: String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FilePath
-{{ Fill FilePath Description }}
+### -ClientSecret
+{{ Fill ClientSecret Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: user
+Type: String
+Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 1
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomerId
+{{ Fill CustomerId Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

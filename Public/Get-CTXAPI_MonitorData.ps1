@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.0.5
 
 .GUID ce76995e-894d-40ee-ac4a-f700cd9abd01
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -31,12 +31,14 @@ Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [23/04/2021_19:03] Reports on progress
 Updated [24/04/2021_07:21] added more api calls
 Updated [05/05/2021_14:33] 'Update Manifest'
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #> 
 
 #Requires -Module PSWriteColor
+
 
 
 

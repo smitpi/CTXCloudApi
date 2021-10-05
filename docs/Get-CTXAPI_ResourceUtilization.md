@@ -5,24 +5,23 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_FailureReport
+# Get-CTXAPI_ResourceUtilization
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
-### Got odata
-```
-Get-CTXAPI_FailureReport [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
- [-MonitorData <PSObject>] [-FailureType] <String> [[-Export] <String>] [[-ReportPath] <String>]
- [<CommonParameters>]
-```
-
 ### Fetch odata
 ```
-Get-CTXAPI_FailureReport [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [[-region] <String>]
- [[-hours] <Int32>] [-FailureType] <String> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_ResourceUtilization [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
+ [[-region] <String>] [[-hours] <Int32>] [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+```
+
+### Got odata
+```
+Get-CTXAPI_ResourceUtilization [-MonitorData <PSObject>] [[-Export] <String>] [[-ReportPath] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -43,8 +42,8 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
@@ -58,8 +57,8 @@ Accept wildcard characters: False
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
@@ -73,7 +72,7 @@ Accept wildcard characters: False
 {{ Fill Export Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 Accepted values: Excel, HTML
@@ -85,42 +84,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FailureType
-{{ Fill FailureType Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Connection, Machine
-
-Required: True
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hours
-{{ Fill hours Description }}
-
-```yaml
-Type: System.Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MonitorData
 {{ Fill MonitorData Description }}
 
 ```yaml
-Type: System.Management.Automation.PSObject
+Type: PSObject
 Parameter Sets: Got odata
 Aliases:
 
@@ -131,27 +99,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-{{ Fill region Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: Fetch odata
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -ReportPath
 {{ Fill ReportPath Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -166,12 +118,43 @@ Accept wildcard characters: False
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hours
+{{ Fill hours Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -region
+{{ Fill region Description }}
+
+```yaml
+Type: String
+Parameter Sets: Fetch odata
+Aliases:
+Accepted values: us, eu, ap-s
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_MachineCatalogs
+# Get-CTXAPI_ConfigAudit
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CTXAPI_MachineCatalogs [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_ConfigAudit [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-Export] <String>
+ [[-ReportPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +35,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -49,7 +50,7 @@ Accept wildcard characters: False
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -60,11 +61,42 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Export
+{{ Fill Export Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Excel, HTML, Host
+
+Required: True
+Position: 6
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+{{ Fill ReportPath Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 7
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SiteId
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 

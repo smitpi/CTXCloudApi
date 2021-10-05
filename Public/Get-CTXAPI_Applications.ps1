@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.3
+.VERSION 1.0.5
 
 .GUID be2a50c0-7921-4bcb-a556-606bdf5f4ca7
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -30,10 +30,16 @@ Created [03/04/2021_01:17] Initital Script Creating
 Updated [06/04/2021_09:03] Script Fle Info was updated
 Updated [20/04/2021_10:42] Script Fle Info was updated
 Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [05/10/2021_21:11] Module Info Updated
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #> 
+
+
+
+
 
 
 

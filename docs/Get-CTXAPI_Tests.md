@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_HealthCheck
+# Get-CTXAPI_Tests
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,9 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CTXAPI_HealthCheck [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-region] <String>
- [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_Tests [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-SiteTest] [-HypervisorsTest]
+ [-DeliveryGroupsTest] [-MachineCatalogsTest] [[-Export] <String>] [[-ReportPath] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,7 +36,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -50,7 +51,7 @@ Accept wildcard characters: False
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -61,17 +62,62 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-{{ Fill region Description }}
+### -DeliveryGroupsTest
+{{ Fill DeliveryGroupsTest Description }}
 
 ```yaml
-Type: System.String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
-Accepted values: us, eu, ap-s
 
-Required: True
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Export
+{{ Fill Export Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Excel, HTML
+
+Required: False
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HypervisorsTest
+{{ Fill HypervisorsTest Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MachineCatalogsTest
+{{ Fill MachineCatalogsTest Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -81,7 +127,7 @@ Accept wildcard characters: False
 {{ Fill ReportPath Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -96,12 +142,27 @@ Accept wildcard characters: False
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteTest
+{{ Fill SiteTest Description }}
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

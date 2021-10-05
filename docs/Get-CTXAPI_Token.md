@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_Zones
+# Get-CTXAPI_Token
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CTXAPI_Zones [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_Token [[-client_id] <String>] [[-client_secret] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,45 +30,30 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ApiToken
-{{ Fill ApiToken Description }}
+### -client_id
+{{ Fill client_id Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
-{{ Fill CustomerId Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteId
-{{ Fill SiteId Description }}
+### -client_secret
+{{ Fill client_secret Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False

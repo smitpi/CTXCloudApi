@@ -5,16 +5,23 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_MonitorData
+# Get-CTXAPI_ConnectionReport
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
+### Fetch odata
 ```
-Get-CTXAPI_MonitorData [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-region] <String>
- [-hours] <Int32> [<CommonParameters>]
+Get-CTXAPI_ConnectionReport [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [[-region] <String>]
+ [[-hours] <Int32>] [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+```
+
+### Got odata
+```
+Get-CTXAPI_ConnectionReport [-MonitorData <PSObject>] [[-Export] <String>] [[-ReportPath] <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,8 +42,8 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
@@ -50,8 +57,8 @@ Accept wildcard characters: False
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
@@ -61,32 +68,47 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-{{ Fill hours Description }}
+### -Export
+{{ Fill Export Description }}
 
 ```yaml
-Type: System.Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
+Accepted values: Excel, HTML
 
-Required: True
-Position: 4
+Required: False
+Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-{{ Fill region Description }}
+### -MonitorData
+{{ Fill MonitorData Description }}
 
 ```yaml
-Type: System.String
+Type: PSObject
+Parameter Sets: Got odata
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+{{ Fill ReportPath Description }}
+
+```yaml
+Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: us, eu, ap-s
 
-Required: True
-Position: 3
+Required: False
+Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -96,12 +118,43 @@ Accept wildcard characters: False
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
+Type: String
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
 Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hours
+{{ Fill hours Description }}
+
+```yaml
+Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
+
+Required: False
+Position: 5
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -region
+{{ Fill region Description }}
+
+```yaml
+Type: String
+Parameter Sets: Fetch odata
+Aliases:
+Accepted values: us, eu, ap-s
+
+Required: False
+Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

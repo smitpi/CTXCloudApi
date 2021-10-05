@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID b19486c7-7f81-4e31-82d4-4a4d81e80574
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS citrix
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [28/05/2021_20:38] Initital Script Creating
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Get cloud site details 
+Get cloud site details
 
 #> 
 

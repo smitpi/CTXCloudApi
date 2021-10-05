@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.2
 
 .GUID 15a2bb20-bf6f-4eca-ad8f-96d878b5db89
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS citrix
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -27,15 +27,21 @@
 
 .RELEASENOTES
 Created [18/09/2021_08:03] Initital Script Creating
+Updated [05/10/2021_21:18] Module Info Updated
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
+
+
 
 <# 
 
 .DESCRIPTION 
- Creates Hashtable with settings 
+Get details on published applications
 
 #> 
 

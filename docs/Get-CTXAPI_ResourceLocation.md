@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_CloudServices
+# Get-CTXAPI_ResourceLocation
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CTXAPI_CloudServices [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_ResourceLocation [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +34,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -49,7 +49,7 @@ Accept wildcard characters: False
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -64,7 +64,7 @@ Accept wildcard characters: False
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 

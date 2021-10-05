@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-CTXAPI_MachineToCatalog
+# Get-CTXAPI_MonitorData
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,8 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Add-CTXAPI_MachineToCatalog [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
- [-CatalogNameORID] <String> [-MachineName] <String> [<CommonParameters>]
+Get-CTXAPI_MonitorData [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-region] <String>
+ [-hours] <Int32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,7 +35,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -46,26 +46,11 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CatalogNameORID
-{{ Fill CatalogNameORID Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -CustomerId
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -76,11 +61,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MachineName
-{{ Fill MachineName Description }}
+### -SiteId
+{{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hours
+{{ Fill hours Description }}
+
+```yaml
+Type: Int32
 Parameter Sets: (All)
 Aliases:
 
@@ -91,16 +91,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteId
-{{ Fill SiteId Description }}
+### -region
+{{ Fill region Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
+Accepted values: us, eu, ap-s
 
 Required: True
-Position: 1
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

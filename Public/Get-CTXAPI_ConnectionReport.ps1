@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.3
+.VERSION 1.0.4
 
 .GUID ccc3348a-02f0-4e82-91bf-d65549ca3533
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS Citrix PowerShell
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -30,6 +30,7 @@ Created [20/04/2021_10:46] Initital Script Creating
 Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/05/2021_00:03] added monitor data
 Updated [05/05/2021_14:33] 'Update Manifest'
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
@@ -38,6 +39,7 @@ Updated [05/05/2021_14:33] 'Update Manifest'
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
+
 
 
 

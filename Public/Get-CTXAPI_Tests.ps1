@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
 .GUID 2771087e-b214-426e-aa65-95c2960ea6f6
 
@@ -9,40 +9,44 @@
 
 .COMPANYNAME iOCO Tech
 
-.COPYRIGHT 
+.COPYRIGHT
 
-.TAGS citrix
+.TAGS api citrix ctx cvad
 
-.LICENSEURI 
+.LICENSEURI
 
-.PROJECTURI 
+.PROJECTURI
 
-.ICONURI 
+.ICONURI
 
 .EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS 
+.REQUIREDSCRIPTS
 
-.EXTERNALSCRIPTDEPENDENCIES 
+.EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
 Created [24/08/2021_10:02] Initital Script Creating
+Updated [05/10/2021_21:22] Module Info Updated
 
-#>
+.PRIVATEDATA
+
+#> 
+
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 <# 
 
 .DESCRIPTION 
- Run CVAD Tests and results 
+Run CVAD Tests and results
 
 #> 
 
 Param()
 
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
 Function Get-CTXAPI_Tests {
     [Cmdletbinding()]
     PARAM(

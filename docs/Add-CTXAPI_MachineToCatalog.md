@@ -5,15 +5,16 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_Applications
+# Add-CTXAPI_MachineToCatalog
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+ge
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Applications [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Add-CTXAPI_MachineToCatalog [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
+ [-CatalogNameORID] <String> [-MachineName] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -34,7 +35,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -45,11 +46,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -CatalogNameORID
+{{ Fill CatalogNameORID Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -CustomerId
 {{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -60,11 +76,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -MachineName
+{{ Fill MachineName Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SiteId
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 

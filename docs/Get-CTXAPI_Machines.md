@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_ConfigLog
+# Get-CTXAPI_Machines
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,8 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CTXAPI_ConfigLog [-CustomerId] <String> [-SiteId] <String> [-Days] <String> [-ApiToken] <String>
- [<CommonParameters>]
+Get-CTXAPI_Machines [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -35,37 +34,7 @@ PS C:\> {{ Add example code here }}
 {{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
-{{ Fill CustomerId Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Days
-{{ Fill Days Description }}
-
-```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -76,11 +45,26 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -CustomerId
+{{ Fill CustomerId Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -SiteId
 {{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 

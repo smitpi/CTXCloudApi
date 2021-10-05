@@ -5,7 +5,7 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_Token
+# Get-CTXAPI_SiteDetails
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
@@ -13,7 +13,7 @@ schema: 2.0.0
 ## SYNTAX
 
 ```
-Get-CTXAPI_Token [[-client_id] <String>] [[-client_secret] <String>] [<CommonParameters>]
+Get-CTXAPI_SiteDetails [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,30 +30,45 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -client_id
-{{ Fill client_id Description }}
+### -ApiToken
+{{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomerId
+{{ Fill CustomerId Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -client_secret
-{{ Fill client_secret Description }}
+### -SiteId
+{{ Fill SiteId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False

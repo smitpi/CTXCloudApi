@@ -5,22 +5,16 @@ online version:
 schema: 2.0.0
 ---
 
-# Unlock-CTXAPI_CredentialFromSecretStore
+# Get-CTXAPI_LowLevelOperations
 
 ## SYNOPSIS
 {{ Fill in the Synopsis }}
 
 ## SYNTAX
 
-### client
 ```
-Unlock-CTXAPI_CredentialFromSecretStore [[-FilePath] <String>] [-ClientName] <String> [<CommonParameters>]
-```
-
-### export
-```
-Unlock-CTXAPI_CredentialFromSecretStore [[-FilePath] <String>] [-Export] [[-ExportPath] <String>]
- [<CommonParameters>]
+Get-CTXAPI_LowLevelOperations [-CustomerId] <String> [-SiteId] <String> [-HighLevelID] <String>
+ [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -37,61 +31,61 @@ PS C:\> {{ Add example code here }}
 
 ## PARAMETERS
 
-### -ClientName
-{{ Fill ClientName Description }}
+### -ApiToken
+{{ Fill ApiToken Description }}
 
 ```yaml
-Type: System.String
-Parameter Sets: client
+Type: String
+Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Export
-{{ Fill Export Description }}
-
-```yaml
-Type: System.Management.Automation.SwitchParameter
-Parameter Sets: export
-Aliases:
-
-Required: False
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ExportPath
-{{ Fill ExportPath Description }}
-
-```yaml
-Type: System.String
-Parameter Sets: export
-Aliases:
-
-Required: False
 Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -FilePath
-{{ Fill FilePath Description }}
+### -CustomerId
+{{ Fill CustomerId Description }}
 
 ```yaml
-Type: System.String
+Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
+Required: True
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HighLevelID
+{{ Fill HighLevelID Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteId
+{{ Fill SiteId Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
