@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,23 +31,23 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Run CVAD Tests and results
 
-#> 
+#>
 
 Param()
 
 
-Function Get-CTXAPI_Tests {
+Function Get-CTXAPI_Test {
     [Cmdletbinding()]
     PARAM(
         [Parameter(Mandatory = $true, Position = 0)]
@@ -60,7 +60,7 @@ Function Get-CTXAPI_Tests {
         [ValidateNotNullOrEmpty()]
         [string]$ApiToken,
         [switch]$SiteTest = $false,
-        [switch]$HypervisorsTest = $false,	
+        [switch]$HypervisorsTest = $false,
         [switch]$DeliveryGroupsTest = $false,
         [switch]$MachineCatalogsTest = $false,
         [Parameter(Mandatory = $false, Position = 3)]
@@ -86,7 +86,7 @@ Function Get-CTXAPI_Tests {
         Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
         Start-Sleep 60
         Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $data += (Invoke-RestMethod "https://api-us.cloud.com/cvadapis/sites/$siteid/TestReport" -Headers $headers).TestResults 
+        $data += (Invoke-RestMethod "https://api-us.cloud.com/cvadapis/sites/$siteid/TestReport" -Headers $headers).TestResults
         Write-Color 'Complete' -Color Green -ShowTime
     }
 
@@ -145,11 +145,11 @@ Function Get-CTXAPI_Tests {
     }
 
 
-    if ($Export -eq 'Excel') { 
-        $Alldata.FatalError | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName FatalError 
-        $Alldata.Error | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName error 
-        $Alldata.Alldata | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName Alldata -Show 
-    } 
+    if ($Export -eq 'Excel') {
+        $Alldata.FatalError | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName FatalError
+        $Alldata.Error | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName error
+        $Alldata.Alldata | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName Alldata -Show
+    }
     if ($Export -eq 'HTML') {
         [string]$HTMLReportname = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
         $HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)

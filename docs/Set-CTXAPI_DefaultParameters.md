@@ -19,6 +19,7 @@ Set-CTXAPI_DefaultParameters [[-CustomerId] <String>] [[-ClientId] <String>] [[-
 
 ## DESCRIPTION
 Adds the variables in a persistent hash table
+
 ## EXAMPLES
 
 ### Example 1
@@ -47,6 +48,7 @@ SiteId                         8fbd6487-3077-472a-a39c-56bcae3bf172
 ClientSecret                   dEXtv9YWeZWV0BKUCJWx9w==
 ReportPath                     C:\Users\ps\AppData\Local\Temp
 ```
+
 Creates these hashtables to use in other commands
 
 ## PARAMETERS

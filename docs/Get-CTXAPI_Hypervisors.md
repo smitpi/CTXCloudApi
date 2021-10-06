@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Hypervisors
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Returns details about the hosting connection
 ## SYNTAX
 
 ```
@@ -17,21 +16,19 @@ Get-CTXAPI_Hypervisors [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <St
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns details about the hosting connection
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_Hypervisors -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
-
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +43,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,7 +58,8 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
+
 
 ```yaml
 Type: String

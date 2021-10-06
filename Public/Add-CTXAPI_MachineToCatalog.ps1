@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.5
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,7 +35,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -47,12 +47,12 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Add manually installed machine to a catalog
 
-#> 
+#>
 
 Param()
 
@@ -86,7 +86,7 @@ Function Add-CTXAPI_MachineToCatalog {
 		}
 
 
-		$body = @{MachineName = $MachineName } 
+		$body = @{MachineName = $MachineName }
 		Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$CatalogNameORID/machines" -Headers $headers -Method Post -Body ($body | ConvertTo-Json) -ContentType 'application/json' | Select-Object StatusCode,StatusDescription
 	} catch { Write-Error "Failed to connect to api:$($_)" }
 

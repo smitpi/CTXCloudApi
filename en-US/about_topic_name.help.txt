@@ -4,11 +4,11 @@
     ABOUT TOPIC NOTE:
     The first header of the about topic should be the topic name.
     The second header contains the lookup name used by the help system.
-    
+
     IE:
     # Some Help Topic Name
     ## SomeHelpTopicFileName
-    
+
     This will be transformed into the text file
     as `about_SomeHelpTopicFileName`.
     Do not include file extensions.

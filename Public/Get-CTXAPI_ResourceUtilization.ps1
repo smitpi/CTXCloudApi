@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.5
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,7 +35,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -45,12 +45,12 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Resource utilization in the last x hours
 
-#> 
+#>
 
 Param()
 
@@ -94,8 +94,8 @@ Function Get-CTXAPI_ResourceUtilization {
 		$catalog = $monitor.Catalogs | Where-Object { $_.id -eq $Machines.CatalogId } | ForEach-Object { $_.name }
 		$desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $Machines.DesktopGroupId } | ForEach-Object { $_.name }
 
-		try { 
-			$PercentCpu = $UsedMemory = $SessionCount = 0 
+		try {
+			$PercentCpu = $UsedMemory = $SessionCount = 0
 			foreach ($Resource in $ResourceUtilization) {
 				$PercentCpu = $PercentCpu + $Resource.PercentCpu
 				$UsedMemory = $UsedMemory + $Resource.UsedMemory
@@ -120,8 +120,8 @@ Function Get-CTXAPI_ResourceUtilization {
 			AVGSessionCount          = $AVGSessionCount
 		}
 	}
-	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show } 
-	if ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
+	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+	if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
 	if ($Export -eq 'Host') { $data }
 
 } #end Function

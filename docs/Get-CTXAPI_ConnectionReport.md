@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConnectionReport
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Generate a report on connections
 
 ## SYNTAX
 
@@ -25,21 +25,38 @@ Get-CTXAPI_ConnectionReport [-MonitorData <PSObject>] [[-Export] <String>] [[-Re
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Generate a report on connections
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\>  Get-CTXAPI_ConnectionReport -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region ap-s -hours 24 -Export Excel -ReportPath C:\Temp
+
+
+[2021-10-06 11:27:44] Getting data for:
+				Days: 1
+				Hours: 24
+
+
+[11:27:44] Fetching :ApplicationActivitySummaries[9sec]
+[11:27:53] Fetching :ApplicationInstances[4sec]
+[11:27:58] Fetching :Applications[1sec]
+[11:28:00] Fetching :Catalogs[0sec]
+[11:28:00] Fetching :ConnectionFailureLogs[0sec]
+[11:28:01] Fetching :Connections[4sec]
+[11:28:06] Fetching :DesktopGroups[0sec]
+[11:28:07] Fetching :DesktopOSDesktopSummaries[0sec]
+[11:28:08] Fetching :FailureLogSummaries[1sec]
+[11:28:09
 ```
 
-{{ Add example description here }}
+Details in the excel / html file
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -54,7 +71,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -69,7 +86,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-{{ Fill Export Description }}
+ what type of report
 
 ```yaml
 Type: String
@@ -85,7 +102,8 @@ Accept wildcard characters: False
 ```
 
 ### -MonitorData
-{{ Fill MonitorData Description }}
+a cutom psobject with monitoring data, if it is not present. Then the script fetch the odata
+
 
 ```yaml
 Type: PSObject
@@ -100,7 +118,8 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+ where the report will be saved
+
 
 ```yaml
 Type: String
@@ -115,7 +134,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String
@@ -130,7 +149,8 @@ Accept wildcard characters: False
 ```
 
 ### -hours
-{{ Fill hours Description }}
+a moun of hours it will report on
+
 
 ```yaml
 Type: Int32
@@ -145,7 +165,8 @@ Accept wildcard characters: False
 ```
 
 ### -region
-{{ Fill region Description }}
+where the clients' cloud instance is hosted
+
 
 ```yaml
 Type: String

@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Sessions
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Reports on user sessions
 ## SYNTAX
 
 ```
@@ -17,13 +16,13 @@ Get-CTXAPI_Sessions [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <Strin
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Reports on user sessions
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $Sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
 ```
 
 {{ Add example description here }}
@@ -31,7 +30,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

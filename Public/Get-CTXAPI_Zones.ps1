@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.3
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,7 +33,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -41,17 +41,17 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get zones details from api
 
-#> 
+#>
 
 Param()
 
 
-Function Get-CTXAPI_Zones {
+Function Get-CTXAPI_Zone {
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]

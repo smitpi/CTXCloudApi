@@ -1,4 +1,4 @@
-<#PSScriptInfo
+﻿<#PSScriptInfo
 
 .VERSION 1.0.4
 
@@ -18,7 +18,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -33,7 +33,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -43,12 +43,12 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Report on Citrix Configuration.
 
-#> 
+#>
 Param()
 
 Function Get-CTXAPI_ConfigAudit {
@@ -75,7 +75,7 @@ Function Get-CTXAPI_ConfigAudit {
 	Get-CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken | ForEach-Object {
 		$catalogs += [pscustomobject]@{
 			Name                     = $_.Name
-			OSType                   = $_.OSType 
+			OSType                   = $_.OSType
 			AllocationType           = $_.AllocationType
 			AssignedCount            = $_.AssignedCount
 			AvailableAssignedCount   = $_.AvailableAssignedCount
@@ -94,8 +94,8 @@ Function Get-CTXAPI_ConfigAudit {
 		}
 	}
 	$deliverygroups = @()
-	$groups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken 
-	
+	$groups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken
+
 	foreach ($grp in $groups) {
 		$SimpleAccessPolicy = $grp.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
 		$deliverygroups += [pscustomobject]@{
@@ -122,8 +122,8 @@ Function Get-CTXAPI_ConfigAudit {
 	$apps = @()
 	$assgroups = @()
 	$applications = Get-CTXAPI_Applications -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken
-	
-	foreach ($application in $applications) { 
+
+	foreach ($application in $applications) {
 		$IncludedUsers = $application.IncludedUsers | ForEach-Object { $_.samname }
 		$application.AssociatedDeliveryGroupUuids | ForEach-Object {
 			$tmp = $_
@@ -164,15 +164,15 @@ Function Get-CTXAPI_ConfigAudit {
   }
 	}
 
-	if ($Export -eq 'Excel') { 
+	if ($Export -eq 'Excel') {
 		[string]$ExcelReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
 		$catalogs | Export-Excel -Path $ExcelReportname -WorksheetName Catalogs -AutoSize -AutoFilter
 		$deliverygroups | Export-Excel -Path $ExcelReportname -WorksheetName DeliveryGroups -AutoSize -AutoFilter
 		$apps | Export-Excel -Path $ExcelReportname -WorksheetName apps -AutoSize -AutoFilter
-		$machines | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter -Show 
-	} 
-	if ($Export -eq 'HTML') { 
-		
+		$machines | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter -Show
+	}
+	if ($Export -eq 'HTML') {
+
 		[string]$HTMLReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
 		New-HTML -TitleText "$CustomerId Config Audit" -FilePath $HTMLReportname -ShowHTML {
@@ -191,10 +191,10 @@ Function Get-CTXAPI_ConfigAudit {
 				New-HTMLSection -HeaderText 'VDI Devices' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $machines }
 			}
 		}
-		
+
 
 	}
-	if ($Export -eq 'Host') { 
+	if ($Export -eq 'Host') {
 		Write-Color 'Machine Catalogs' -Color Cyan -LinesAfter 2 -StartTab 2
 		$catalogs | Format-Table -AutoSize
 		Write-Color 'Delivery Groups' -Color Cyan -LinesAfter 2 -StartTab 2
@@ -207,5 +207,5 @@ Function Get-CTXAPI_ConfigAudit {
 
 	}
 
-	
+
 } #end Function

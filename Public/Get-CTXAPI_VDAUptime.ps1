@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.4
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -34,7 +34,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -44,12 +44,12 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Uses Registration date to calculate uptime
 
-#> 
+#>
 
 Param()
 
@@ -74,8 +74,8 @@ Function Get-CTXAPI_VDAUptime {
 
 try{
 	$Complist = @()
-	$machines = Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken 
-	
+	$machines = Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $apitoken
+
 	foreach ($machine in $machines){
 		if ($null -eq $machine.LastDeregistrationTime) {$lastBootTime = Get-Date -Format 'M/d/yyyy h:mm:ss tt'}
 		else {$lastBootTime = [Datetime]::ParseExact($machine.LastDeregistrationTime, 'M/d/yyyy h:mm:ss tt', $null)}
@@ -117,7 +117,7 @@ try{
 	}
 }catch{Write-Warning "Date calculation failed"}
 	if ($Export -eq 'Excel') { $complist | Export-Excel -Path ($ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
-	if ($Export -eq 'HTML') { $complist | Out-GridHtml -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
+	if ($Export -eq 'HTML') { $complist | Out-HtmlView -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
 	if ($Export -eq 'Host') { $complist }
 
 } #end Function

@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 add machine to a machine catalog
+
 ## SYNTAX
 
 ```
@@ -25,7 +26,6 @@ add machine to a machine catalog
 ```powershell
 PS C:\> Add-CTXAPI_MachineToCatalog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -CatalogNameORID 1 -MachineName win10
 ```
-
 
 ## PARAMETERS
 

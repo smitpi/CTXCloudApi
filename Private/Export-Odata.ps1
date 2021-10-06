@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,16 +31,16 @@ Updated [05/05/2021_14:32] Manifest
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module PSWriteColor
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Export multiple pages from odata
 
-#> 
+#>
 
 Param()
 
@@ -58,7 +58,7 @@ Function Export-Odata {
 		While ($Null -ne $NextLink) {
 			$tmp = Invoke-WebRequest -Uri $NextLink -Headers $headers | ConvertFrom-Json
 			$tmp.Value | ForEach-Object { $data += $_ }
-			$NextLink = $tmp.'@odata.NextLink' 
+			$NextLink = $tmp.'@odata.NextLink'
 		}
 		[String]$seconds = '[' + ($APItimer.elapsed.seconds).ToString() + 'sec]'
 		Write-Color $seconds -Color Red

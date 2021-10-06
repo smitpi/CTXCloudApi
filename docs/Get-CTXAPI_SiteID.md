@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_SiteID
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Get the SiteID
 ## SYNTAX
 
 ```
@@ -17,21 +16,19 @@ Get-CTXAPI_SiteID [-CustomerId] <String> [-ApiToken] <String> [<CommonParameters
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get the SiteID
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $siteid = Get-CTXAPI_Siteid -CustomerId $CustomerId -ApiToken $apitoken
 ```
 
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
 
 ```yaml
 Type: String
@@ -46,7 +43,6 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
 
 ```yaml
 Type: String

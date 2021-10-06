@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_StoreFrontServers
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Get StoreFront Details
 ## SYNTAX
 
 ```
@@ -18,21 +17,20 @@ Get-CTXAPI_StoreFrontServers [-CustomerId] <String> [-SiteId] <String> [-ApiToke
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Get StoreFront  Details
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_StoreFrontServers @CTX_APIDefaultParm
 ```
 
-{{ Add example description here }}
+Get StoreFront  Details
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
 
 ```yaml
 Type: String
@@ -47,7 +45,6 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
 
 ```yaml
 Type: String
@@ -62,7 +59,6 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
 
 ```yaml
 Type: String

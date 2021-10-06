@@ -24,7 +24,25 @@ Get-CTXAPI_VDAUptime [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <Stri
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_VDAUptime -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Export Excel -ReportPath c:\
+
+
+DnsName           : AZ1.murza.co.za
+AgentVersion      : 1912.0.3000.3293
+MachineCatalog    : MC-AZEUW-UPDATES-2016
+DeliveryGroup     : DG-AZEUW-UPDATES-2016
+InMaintenanceMode : True
+IPAddress         : 
+OSType            : Windows 2016
+ProvisioningType  : MCS
+SummaryState      : Off
+FaultState        : None
+Days              : 6
+TotalHours        : 146
+OnlineSince       : 2021/09/30 13:13:19
+DayOfWeek         : Thursday
+
+
 ```
 
 {{ Add example description here }}
@@ -32,7 +50,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -47,7 +65,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,8 +79,24 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SiteId
+ Generate id with Get-CTXAPI_SiteID
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+
 ### -Export
-{{ Fill Export Description }}
+ what type of report
 
 ```yaml
 Type: String
@@ -78,7 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+ where the report will be saved
 
 ```yaml
 Type: String
@@ -87,21 +121,6 @@ Aliases:
 
 Required: False
 Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
-{{ Fill SiteId Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -1,42 +1,42 @@
 ---
 Module Name: CTXCloudApi
-Module Guid: 00000000-0000-0000-0000-000000000000
-Download Help Link: {{ Update Download Link }}
-Help Version: {{ Please enter version of help manually (X.X.X.X) format }}
+Module Guid: 8eb35bf0-e1d3-4b42-9285-d8010a1c13a7
+Download Help Link: https://github.com/smitpi/CTXCloudApi
+Help Version: (0.1.16.0)
 Locale: en-US
 ---
 
 # CTXCloudApi Module
 ## Description
-{{ Fill in the Description }}
+A Wrapper functions to connect and interact with the Citrix XVAD Api, affectively removing the need for installed SDKs.
 
 ## CTXCloudApi Cmdlets
 ### [Add-CTXAPI_MachineToCatalog](Add-CTXAPI_MachineToCatalog.md)
-{{ Fill in the Synopsis }}
+add machine to a machine catalog
 
 ### [Get-CTXAPI_Applications](Get-CTXAPI_Applications.md)
-{{ Fill in the Synopsis }}
+Returns a list of published Apps
 
 ### [Get-CTXAPI_CloudServices](Get-CTXAPI_CloudServices.md)
-{{ Fill in the Synopsis }}
+Client's Subscription details, and wjat features are enabled
 
 ### [Get-CTXAPI_ConfigAudit](Get-CTXAPI_ConfigAudit.md)
-{{ Fill in the Synopsis }}
+Generate detailed report on machine catlog,delivery group and published apps
 
 ### [Get-CTXAPI_ConfigLog](Get-CTXAPI_ConfigLog.md)
-{{ Fill in the Synopsis }}
+reports on changes in the environment
 
 ### [Get-CTXAPI_ConnectionReport](Get-CTXAPI_ConnectionReport.md)
-{{ Fill in the Synopsis }}
+Generate a report on connections
 
 ### [Get-CTXAPI_DeliveryGroups](Get-CTXAPI_DeliveryGroups.md)
-{{ Fill in the Synopsis }}
+Return details of all delivery groups
 
 ### [Get-CTXAPI_FailureReport](Get-CTXAPI_FailureReport.md)
-{{ Fill in the Synopsis }}
+Reports on connection faiures
 
 ### [Get-CTXAPI_HealthCheck](Get-CTXAPI_HealthCheck.md)
-{{ Fill in the Synopsis }}
+Creates a morning healthcheck report for admins. Looking at some key data points
 
 ### [Get-CTXAPI_Hypervisors](Get-CTXAPI_Hypervisors.md)
 {{ Fill in the Synopsis }}
@@ -84,5 +84,5 @@ Locale: en-US
 {{ Fill in the Synopsis }}
 
 ### [Set-CTXAPI_DefaultParameters](Set-CTXAPI_DefaultParameters.md)
-{{ Fill in the Synopsis }}
+Adds the variables in a persistent hash table
 

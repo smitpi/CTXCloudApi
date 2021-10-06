@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,7 +31,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -39,17 +39,17 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Run report to show usefull information
 
-#> 
+#>
 
 Param()
 
 
-
+#.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_HealthCheck {
 	[Cmdletbinding()]
@@ -87,7 +87,7 @@ Function Get-CTXAPI_HealthCheck {
 		$ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
 		$connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique | Select-Object -First 5 FullName,ClientVersion,ClientAddress,AVG_ICA_RTT
 		$connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique | Select-Object -First 5 FullName,ClientVersion,ClientAddress,LogOnDuration
-    
+
 		Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Resource Utilization"
 		$ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
@@ -115,7 +115,7 @@ Function Get-CTXAPI_HealthCheck {
 			NeedsReboot   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
 		}
 		#endregion
-		
+
 		#######################
 		#region Building HTML the report
 		#######################
@@ -155,8 +155,8 @@ Function Get-CTXAPI_HealthCheck {
 		}
 		#endregion
 trap {
-	Write-Warning "Failed to generate report:$($_)" 
+	Write-Warning "Failed to generate report:$($_)"
 	continue
-}	
+
 
 } #end Function

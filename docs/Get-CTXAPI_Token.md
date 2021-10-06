@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Token
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Retrives the token for authentication 
 ## SYNTAX
 
 ```
@@ -17,13 +16,13 @@ Get-CTXAPI_Token [[-client_id] <String>] [[-client_secret] <String>] [<CommonPar
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrives the token for authentication 
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> $apitoken = Get-CTXAPI_Token -client_id $clientid -client_secret $clientsecret
 ```
 
 {{ Add example description here }}
@@ -31,7 +30,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -client_id
-{{ Fill client_id Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -46,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -client_secret
-{{ Fill client_secret Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String

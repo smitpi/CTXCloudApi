@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.2
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,22 +32,22 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get details on published applications
 
-#> 
+#>
 
 Param()
 
-Function Set-CTXAPI_DefaultParameters {
+Function Set-CTXAPI_DefaultParameter {
             [Cmdletbinding()]
             	param(
                 [ValidateNotNullOrEmpty()]
@@ -77,6 +77,6 @@ $global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
     ReportPath     = $env:TEMP
 }
 
-Write-Color -Text 'Use ','@CTX_APIDefaultParm',' and ','@CTX_APIAllParm ','in the other commands.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2 
+Write-Color -Text 'Use ','@CTX_APIDefaultParm',' and ','@CTX_APIAllParm ','in the other commands.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
 
 } #end Function

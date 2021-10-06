@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_LowLevelOperations
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
 ## SYNTAX
 
 ```
@@ -24,15 +23,14 @@ Get-CTXAPI_LowLevelOperations [-CustomerId] <String> [-SiteId] <String> [-HighLe
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_LowLevelOperations -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -HighLevelID $id
 ```
 
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -47,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -62,8 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -HighLevelID
-{{ Fill HighLevelID Description }}
-
+ Get-CTXAPI_ConfigLog function
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -77,8 +74,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
-
+Generate id with Get-CTXAPI_SiteID
 ```yaml
 Type: String
 Parameter Sets: (All)

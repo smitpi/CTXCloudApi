@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Zones
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+show zone details
 
 ## SYNTAX
 
@@ -17,13 +17,35 @@ Get-CTXAPI_Zones [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+show zone details
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\>  Get-CTXAPI_Zones -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+
+
+Id               : d94fe0d6-742e-4535-a562-61afrth (DR)
+Description      : 
+IsPrimary        : False
+Metadata         : {}
+ResourceLocation : @{Id=3452790fa; Uid=; Name=}
+
+Id               : 0bce0a9-8920-855ddd9b6772
+Name             : Azure EU West (Production)
+Description      : 
+IsPrimary        : False
+Metadata         : {}
+ResourceLocation : @{Id=60-f69971c570ee; Uid=; Name=}
+
+Id               : 4e4948e295-8f9636886d05
+Name             : Dubai
+Description      : 
+IsPrimary        : False
+Metadata         : {}
+ResourceLocation : @{Id=9960d8af43c; Uid=; Name=}
+
 ```
 
 {{ Add example description here }}
@@ -31,7 +53,7 @@ PS C:\> {{ Add example code here }}
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

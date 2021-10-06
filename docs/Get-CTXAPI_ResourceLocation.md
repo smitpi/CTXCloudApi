@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ResourceLocation
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Details about the resource locations 
 
 ## SYNTAX
 
@@ -17,21 +17,43 @@ Get-CTXAPI_ResourceLocation [-CustomerId] <String> [-SiteId] <String> [-ApiToken
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Details about the resource locations 
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_ResourceLocation -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+
+
+
+id           : 3452204b0fa
+name         : Azure EU North (DR)
+internalOnly : False
+timeZone     : GMT Standard Time
+readOnly     : False
+
+id           : 6037c58f
+name         : Azure EU West (Production)
+internalOnly : False
+timeZone     : South Africa Standard Time
+readOnly     : False
+
+id           : 9960d851
+name         : Dubai
+internalOnly : False
+timeZone     : Arabian Standard Time
+readOnly     : False
+
 ```
 
 {{ Add example description here }}
 
 ## PARAMETERS
 
+### -ApiTok
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +68,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,7 +83,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

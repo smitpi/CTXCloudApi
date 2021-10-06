@@ -40,11 +40,8 @@ type                       : Default
 quantity                   : 0
 daysToExpiration           : 
 notificationsDisabled      : False
-futureEntitlementStartDate : 
-
+futureEntitlementStartDate :
 ```
-
-
 
 ## PARAMETERS
 
@@ -65,6 +62,8 @@ Accept wildcard characters: False
 
 ### -CustomerId
  From Citrix Cloud Portal
+
+
 ```yaml
 Type: String
 Parameter Sets: (All)

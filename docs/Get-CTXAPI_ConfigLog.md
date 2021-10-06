@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigLog
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+reports on changes in the environment
 
 ## SYNTAX
 
@@ -18,21 +18,28 @@ Get-CTXAPI_ConfigLog [-CustomerId] <String> [-SiteId] <String> [-Days] <String> 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+reports on changes in the environment
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
-```
+PS C:\> Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Days 7
 
-{{ Add example description here }}
+
+Id                 : 6a657368-873b-4379-ab9e-6a1f8aa73b03
+AdminMachineIP     : 
+EndTime            : 9/29/2021 2:01:44 PM
+FormattedEndTime   : 2021-09-29T14:01:44Z
+IsSuccessful       : True
+OperationType      : AdminActivity
+Parameters
+```
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -47,7 +54,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -62,7 +69,8 @@ Accept wildcard characters: False
 ```
 
 ### -Days
-{{ Fill Days Description }}
+The amount of days of changes to report
+
 
 ```yaml
 Type: String
@@ -77,7 +85,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ResourceUtilization
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Reports on the vda performance and utilization for the amount of hours
 ## SYNTAX
 
 ### Fetch odata
@@ -25,21 +24,50 @@ Get-CTXAPI_ResourceUtilization [-MonitorData <PSObject>] [[-Export] <String>] [[
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Reports on the vda performance and utilization for the amount of hours
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\>  Get-CTXAPI_ResourceUtilization -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region eu -hours 5
+
+
+DnsName                  : AZEUW-CVA
+IsInMaintenanceMode      : 
+AgentVersion             : 2103.0.0.29045
+CurrentRegistrationState : Unregistered
+OSType                   : Windows 2016
+Catalog                  : 
+DesktopGroup             : 
+AVGPercentCpu            : 12
+AVGUsedMemory            : 13
+AVGTotalMemory           : 14
+AVGSessionCount          : 11
+
+DnsName                  : AZEUW-X
+IsInMaintenanceMode      : 
+AgentVersion             : 1912.0.3000.3293
+CurrentRegistrationState : Unregistered
+OSType                   : Windows 2016
+Catalog                  : 
+DesktopGroup             : 
+AVGPercentCpu            : 12
+AVGUsedMemory            : 13
+AVGTotalMemory           : 14
+AVGSessionCount          : 11
 ```
 
-{{ Add example description here }}
+### Example 2
+```powershell
+Get-CTXAPI_ResourceUtilization -MonitorData $mondata -Export Excel
+```
+if you have the monitoring data from Get-CTXAPI_MonitorData, then you can run it like this,
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -54,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -69,8 +97,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-{{ Fill Export Description }}
-
+** what type of report**
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -85,8 +112,7 @@ Accept wildcard characters: False
 ```
 
 ### -MonitorData
-{{ Fill MonitorData Description }}
-
+Custom object from Get-CTXAPI_MonitorData
 ```yaml
 Type: PSObject
 Parameter Sets: Got odata
@@ -100,7 +126,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+ where the report will be saved
 
 ```yaml
 Type: String
@@ -115,7 +141,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String
@@ -130,7 +156,7 @@ Accept wildcard characters: False
 ```
 
 ### -hours
-{{ Fill hours Description }}
+ amount of hours to report on
 
 ```yaml
 Type: Int32
@@ -145,7 +171,7 @@ Accept wildcard characters: False
 ```
 
 ### -region
-{{ Fill region Description }}
+Where the cloud instance is hosted
 
 ```yaml
 Type: String

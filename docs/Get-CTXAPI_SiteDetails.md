@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_SiteDetails
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Retrieve Site / Farm details
 ## SYNTAX
 
 ```
@@ -17,21 +16,34 @@ Get-CTXAPI_SiteDetails [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <St
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieve Site / Farm details
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
+
+
+
+LicenseServerName                           : 
+LicenseServerPort                           : 
+LicenseServerUri                            : 
+LicensingModel                              : UserDevice
+SiteConfigurationComplete                   : True
+PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
+ProductCode                                 : Unknown
+ProductEdition                              : Unknown
+ProductVersion                              : 7.29
+SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config; 
+     
 ```
 
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

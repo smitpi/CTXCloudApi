@@ -47,8 +47,7 @@ NumAssociatedDeliveryGroups     : 1
 NumAssociatedApplicationGroups  : 0
 AssociatedDeliveryGroupUuids    : {6fcefefb-1ade-455d-8553-9b916af11579}
 AssociatedApplicationGroupUuids : {}
-ZoneId                          : 
-
+ZoneId                          :
 ```
 
 {{ Add example description here }}
@@ -57,6 +56,8 @@ ZoneId                          :
 
 ### -ApiToken
  Generate token with Get-CTXAPI_Token
+
+
 ```yaml
 Type: String
 Parameter Sets: (All)

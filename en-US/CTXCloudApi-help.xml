@@ -6,11 +6,11 @@
       <command:verb>Add</command:verb>
       <command:noun>CTXAPI_MachineToCatalog</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>add machine to a machine catalog</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>add machine to a machine catalog</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -18,7 +18,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -30,7 +30,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -42,7 +42,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -54,7 +54,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>CatalogNameORID</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CatalogNameORID Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -66,7 +66,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>MachineName</maml:name>
           <maml:description>
-            <maml:para>{{ Fill MachineName Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -81,7 +81,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -93,7 +93,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>CatalogNameORID</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CatalogNameORID Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -105,7 +105,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -117,7 +117,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>MachineName</maml:name>
         <maml:description>
-          <maml:para>{{ Fill MachineName Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -129,7 +129,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -167,9 +167,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Add-CTXAPI_MachineToCatalog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -CatalogNameORID 1 -MachineName win10</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -181,7 +181,7 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_Applications</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Returns a list of published Apps</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -193,7 +193,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -205,7 +205,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -217,7 +217,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -232,7 +232,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -244,7 +244,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -256,7 +256,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -294,7 +294,31 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt;  Get-CTXAPI_Applications -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+
+Details about each app
+@{Id=0; Uid=0; Name=}
+ApplicationType                 : HostedOnDesktop
+ClientFolder                    : 
+ContainerScopes                 : {@{Scopes=System.Object[]; ScopeType=ApplicationGroup}, @{Scopes=System.Object[]; ScopeType=DeliveryGroup}}
+Description                     : KEYWORDS:AUTO
+Enabled                         : True
+IconId                          : 49
+InstalledAppProperties          : @{CommandLineArguments=; CommandLineExecutable=C:\Program Files\Microsoft Office\root\Office16\WINWORD.EXE; WorkingDirectory=}
+AppVAppProperties               : 
+ContentLocation                 : 
+Name                            : Word PROD 2016 -
+PublishedName                   : Word
+Visible                         : True
+SharingKind                     : Unknown
+Tags                            : {}
+Tenants                         : 
+CloudWorkspaceManaged           : False
+NumAssociatedDeliveryGroups     : 1
+NumAssociatedApplicationGroups  : 0
+AssociatedDeliveryGroupUuids    : {6fcefefb-1ade-455d-8553-9b916af11579}
+AssociatedApplicationGroupUuids : {}
+ZoneId                          :</dev:code>
         <dev:remarks>
           <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
@@ -308,11 +332,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_CloudServices</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Client's Subscription details, and wjat features are enabled</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Client's Subscription details, and wjat features are enabled</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -320,7 +344,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -332,7 +356,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -344,7 +368,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -359,7 +383,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -371,7 +395,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -383,7 +407,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -421,9 +445,26 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_CloudServices -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+
+
+serviceName                : adc
+state                      : NotOnboarded
+type                       : Default
+quantity                   : 0
+daysToExpiration           : 
+notificationsDisabled      : False
+futureEntitlementStartDate : 
+
+serviceName                : podio
+state                      : NotOnboarded
+type                       : Default
+quantity                   : 0
+daysToExpiration           : 
+notificationsDisabled      : False
+futureEntitlementStartDate :</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -435,11 +476,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_ConfigAudit</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Generate detailed report on machine catlog,delivery group and published apps</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Generate detailed report on machine catlog,delivery group and published apps</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -447,7 +488,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -459,7 +500,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -471,7 +512,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -483,7 +524,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>what type of report</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -500,7 +541,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -515,7 +556,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -527,7 +568,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -539,7 +580,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Export Description }}</maml:para>
+          <maml:para>what type of report</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -551,7 +592,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>ReportPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReportPath Description }}</maml:para>
+          <maml:para>where the report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -563,7 +604,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -601,9 +642,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_ConfigAudit -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Export Excel</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Details in excel or html file</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -615,11 +656,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_ConfigLog</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>reports on changes in the environment</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>reports on changes in the environment</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -627,7 +668,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -639,7 +680,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -651,7 +692,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>Days</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Days Description }}</maml:para>
+            <maml:para>The amount of days of changes to report</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -663,7 +704,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -678,7 +719,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -690,7 +731,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -702,7 +743,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>Days</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Days Description }}</maml:para>
+          <maml:para>The amount of days of changes to report</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -714,7 +755,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -752,9 +793,18 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Days 7
+
+
+Id                 : 6a657368-873b-4379-ab9e-6a1f8aa73b03
+AdminMachineIP     : 
+EndTime            : 9/29/2021 2:01:44 PM
+FormattedEndTime   : 2021-09-29T14:01:44Z
+IsSuccessful       : True
+OperationType      : AdminActivity
+Parameters</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -766,11 +816,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_ConnectionReport</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Generate a report on connections</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Generate a report on connections</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -778,7 +828,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -790,7 +840,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -802,7 +852,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -814,7 +864,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>region</maml:name>
           <maml:description>
-            <maml:para>{{ Fill region Description }}</maml:para>
+            <maml:para>where the clients' cloud instance is hosted</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
@@ -831,7 +881,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>hours</maml:name>
           <maml:description>
-            <maml:para>{{ Fill hours Description }}</maml:para>
+            <maml:para>a moun of hours it will report on</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -843,7 +893,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>what type of report</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -859,7 +909,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -874,7 +924,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>what type of report</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -890,7 +940,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -902,7 +952,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>MonitorData</maml:name>
           <maml:description>
-            <maml:para>{{ Fill MonitorData Description }}</maml:para>
+            <maml:para>a cutom psobject with monitoring data, if it is not present. Then the script fetch the odata</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
           <dev:type>
@@ -917,7 +967,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -929,7 +979,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -941,7 +991,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Export Description }}</maml:para>
+          <maml:para>what type of report</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -953,7 +1003,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MonitorData</maml:name>
         <maml:description>
-          <maml:para>{{ Fill MonitorData Description }}</maml:para>
+          <maml:para>a cutom psobject with monitoring data, if it is not present. Then the script fetch the odata</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
         <dev:type>
@@ -965,7 +1015,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>ReportPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReportPath Description }}</maml:para>
+          <maml:para>where the report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -977,7 +1027,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -989,7 +1039,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>hours</maml:name>
         <maml:description>
-          <maml:para>{{ Fill hours Description }}</maml:para>
+          <maml:para>a moun of hours it will report on</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -1001,7 +1051,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>region</maml:name>
         <maml:description>
-          <maml:para>{{ Fill region Description }}</maml:para>
+          <maml:para>where the clients' cloud instance is hosted</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1039,9 +1089,26 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt;  Get-CTXAPI_ConnectionReport -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region ap-s -hours 24 -Export Excel -ReportPath C:\Temp
+
+
+[2021-10-06 11:27:44] Getting data for:
+				Days: 1
+				Hours: 24
+
+
+[11:27:44] Fetching :ApplicationActivitySummaries[9sec]
+[11:27:53] Fetching :ApplicationInstances[4sec]
+[11:27:58] Fetching :Applications[1sec]
+[11:28:00] Fetching :Catalogs[0sec]
+[11:28:00] Fetching :ConnectionFailureLogs[0sec]
+[11:28:01] Fetching :Connections[4sec]
+[11:28:06] Fetching :DesktopGroups[0sec]
+[11:28:07] Fetching :DesktopOSDesktopSummaries[0sec]
+[11:28:08] Fetching :FailureLogSummaries[1sec]
+[11:28:09</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Details in the excel / html file</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1053,11 +1120,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_DeliveryGroups</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Return details of all delivery groups</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Return details of all delivery groups</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1065,7 +1132,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1077,7 +1144,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1089,7 +1156,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1104,7 +1171,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1116,7 +1183,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1128,7 +1195,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1166,9 +1233,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>delivery group settings</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1180,7 +1247,7 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_FailureReport</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Reports on connection faiures</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
@@ -1192,7 +1259,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1204,7 +1271,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1216,7 +1283,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1228,7 +1295,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>FailureType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill FailureType Description }}</maml:para>
+            <maml:para>Type of failures to report on</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Connection</command:parameterValue>
@@ -1244,7 +1311,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>what type of report</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -1260,7 +1327,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1272,7 +1339,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>MonitorData</maml:name>
           <maml:description>
-            <maml:para>{{ Fill MonitorData Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
           <dev:type>
@@ -1287,7 +1354,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1299,7 +1366,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1311,7 +1378,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1323,7 +1390,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>region</maml:name>
           <maml:description>
-            <maml:para>{{ Fill region Description }}</maml:para>
+            <maml:para>Where the cloud instance is hosted</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
@@ -1340,7 +1407,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>hours</maml:name>
           <maml:description>
-            <maml:para>{{ Fill hours Description }}</maml:para>
+            <maml:para>amount of hours to report on</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -1352,7 +1419,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
           <maml:name>FailureType</maml:name>
           <maml:description>
-            <maml:para>{{ Fill FailureType Description }}</maml:para>
+            <maml:para>Type of failures to report on</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Connection</command:parameterValue>
@@ -1368,7 +1435,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para>{{ Fill Export Description }}</maml:para>
+            <maml:para>what type of report</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -1384,7 +1451,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1399,7 +1466,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1411,7 +1478,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1423,7 +1490,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
-          <maml:para>{{ Fill Export Description }}</maml:para>
+          <maml:para>what type of report</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1435,7 +1502,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
         <maml:name>FailureType</maml:name>
         <maml:description>
-          <maml:para>{{ Fill FailureType Description }}</maml:para>
+          <maml:para>Type of failures to report on</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1447,7 +1514,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>MonitorData</maml:name>
         <maml:description>
-          <maml:para>{{ Fill MonitorData Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
         <dev:type>
@@ -1459,7 +1526,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
         <maml:name>ReportPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReportPath Description }}</maml:para>
+          <maml:para>where the report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1471,7 +1538,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1483,7 +1550,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>hours</maml:name>
         <maml:description>
-          <maml:para>{{ Fill hours Description }}</maml:para>
+          <maml:para>amount of hours to report on</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -1495,7 +1562,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>region</maml:name>
         <maml:description>
-          <maml:para>{{ Fill region Description }}</maml:para>
+          <maml:para>Where the cloud instance is hosted</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1533,9 +1600,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1547,11 +1614,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_HealthCheck</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Creates a morning healthcheck report for admins. Looking at some key data points</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Creates a morning healthcheck report for admins. Looking at some key data points</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -1559,7 +1626,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para>From Citrix Cloud Portal</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1571,7 +1638,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>SiteId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill SiteId Description }}</maml:para>
+            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1583,7 +1650,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ApiToken Description }}</maml:para>
+            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1595,7 +1662,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>region</maml:name>
           <maml:description>
-            <maml:para>{{ Fill region Description }}</maml:para>
+            <maml:para>Where the cloud instance is hosted</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
@@ -1612,7 +1679,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>ReportPath</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ReportPath Description }}</maml:para>
+            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1627,7 +1694,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ApiToken Description }}</maml:para>
+          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1639,7 +1706,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para>From Citrix Cloud Portal</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1651,7 +1718,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>ReportPath</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ReportPath Description }}</maml:para>
+          <maml:para>where the report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1663,7 +1730,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>SiteId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill SiteId Description }}</maml:para>
+          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1675,7 +1742,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>region</maml:name>
         <maml:description>
-          <maml:para>{{ Fill region Description }}</maml:para>
+          <maml:para>Where the cloud instance is hosted</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1713,9 +1780,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_HealthCheck -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -ReportPath C:\Temp\</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>details in the html file</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -4017,11 +4084,11 @@
       <command:verb>Set</command:verb>
       <command:noun>CTXAPI_DefaultParameters</command:noun>
       <maml:description>
-        <maml:para>{{ Fill in the Synopsis }}</maml:para>
+        <maml:para>Adds the variables in a persistent hash table</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Adds the variables in a persistent hash table</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -4029,7 +4096,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill CustomerId Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4041,7 +4108,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>ClientId</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ClientId Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4053,7 +4120,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ClientSecret</maml:name>
           <maml:description>
-            <maml:para>{{ Fill ClientSecret Description }}</maml:para>
+            <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -4068,7 +4135,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>ClientId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ClientId Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4080,7 +4147,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ClientSecret</maml:name>
         <maml:description>
-          <maml:para>{{ Fill ClientSecret Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4092,7 +4159,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
         <maml:description>
-          <maml:para>{{ Fill CustomerId Description }}</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -4130,9 +4197,31 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; {{ Add example code here }}</dev:code>
+        <dev:code>PS C:\&gt;  Set-CTXAPI_DefaultParameters -CustomerId vvv -ClientId yyy -ClientSecret uuu
+Get-CTXAPI_Token
+
+    PS V:\CloudStorage\Dropbox\#Profile\Documents\PowerShell\Github\CTXCloudApi&gt; $CTX_APIDefaultParm
+
+Name                           Value
+----                           -----
+CustomerId                     vouiv8idvkid
+SiteId                         8fbd6487-30
+ApiToken                       eyJhbGciOiJ
+
+
+
+PS V:\CloudStorage\Dropbox\#Profile\Documents\PowerShell\Github\CTXCloudApi&gt; $CTX_APIAllParm
+
+Name                           Value
+----                           -----
+ClientId                       2d73361c-477b-43da-b301-d30ef4ee22db
+CustomerId                     vouiv8idvkid
+ApiToken                       eyJhbGciOiJSUzI1NiIsInR5cCI6IkpX
+SiteId                         8fbd6487-3077-472a-a39c-56bcae3bf172
+ClientSecret                   dEXtv9YWeZWV0BKUCJWx9w==
+ReportPath                     C:\Users\ps\AppData\Local\Temp</dev:code>
         <dev:remarks>
-          <maml:para>{{ Add example description here }}</maml:para>
+          <maml:para>Creates these hashtables to use in other commands</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigAudit
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Generate detailed report on machine catlog,delivery group and published apps
 
 ## SYNTAX
 
@@ -18,21 +18,21 @@ Get-CTXAPI_ConfigAudit [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <St
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Generate detailed report on machine catlog,delivery group and published apps
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_ConfigAudit -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Export Excel
 ```
 
-{{ Add example description here }}
+Details in excel or html file
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -47,7 +47,8 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
+
 
 ```yaml
 Type: String
@@ -62,7 +63,8 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-{{ Fill Export Description }}
+what type of report
+
 
 ```yaml
 Type: String
@@ -78,7 +80,8 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+where the report will be saved
+
 
 ```yaml
 Type: String
@@ -93,7 +96,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

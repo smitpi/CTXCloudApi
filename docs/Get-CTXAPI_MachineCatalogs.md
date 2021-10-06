@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_MachineCatalogs
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Retrieves details about machine catalogs
 ## SYNTAX
 
 ```
@@ -17,21 +16,20 @@ Get-CTXAPI_MachineCatalogs [-CustomerId] <String> [-SiteId] <String> [-ApiToken]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
+Retrieves details about machine catalogs
+****
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
 
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -61,7 +59,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

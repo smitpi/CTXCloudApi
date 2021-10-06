@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.0.5
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,7 +35,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -45,12 +45,12 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Creates a report on connection and machine failures in the last x hours
 
-#> 
+#>
 
 Param()
 
@@ -118,7 +118,7 @@ Function Get-CTXAPI_FailureReport {
 		foreach ($log in $mondata.ConnectionFailureLogs) {
 			$session = $mondata.Session | Where-Object { $_.SessionKey -eq $log.SessionKey }
 			$user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
-			$mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }	
+			$mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
 			$data += [PSCustomObject]@{
 				UserName                   = $user.UserName
 				FullName                   = $user.FullName
@@ -133,8 +133,8 @@ Function Get-CTXAPI_FailureReport {
 
 
 
-	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show } 
-	if ($Export -eq 'HTML') { $data | Out-GridHtml -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
+	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+	if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
 	if ($Export -eq 'Host') { $data }
 
 } #end Function

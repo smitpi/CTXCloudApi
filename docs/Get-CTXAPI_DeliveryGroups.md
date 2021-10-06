@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_DeliveryGroups
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Return details of all delivery groups
 
 ## SYNTAX
 
@@ -17,21 +17,21 @@ Get-CTXAPI_DeliveryGroups [-CustomerId] <String> [-SiteId] <String> [-ApiToken] 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Return details of all delivery groups
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
 
-{{ Add example description here }}
+delivery group settings
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,7 +46,8 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
+
 
 ```yaml
 Type: String
@@ -61,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String

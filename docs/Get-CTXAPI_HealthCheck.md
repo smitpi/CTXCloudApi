@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_HealthCheck
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Creates a morning healthcheck report for admins. Looking at some key data points
 
 ## SYNTAX
 
@@ -18,21 +18,21 @@ Get-CTXAPI_HealthCheck [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <St
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Creates a morning healthcheck report for admins. Looking at some key data points
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_HealthCheck -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -ReportPath C:\Temp\
 ```
 
-{{ Add example description here }}
+details in the html file
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -47,7 +47,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
@@ -62,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
+ where the report will be saved
 
 ```yaml
 Type: String
@@ -77,7 +77,7 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String
@@ -92,7 +92,7 @@ Accept wildcard characters: False
 ```
 
 ### -region
-{{ Fill region Description }}
+Where the cloud instance is hosted
 
 ```yaml
 Type: String

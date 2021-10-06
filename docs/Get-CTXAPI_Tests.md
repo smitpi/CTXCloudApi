@@ -8,8 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Tests
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
-
+Runs test and then retrieves the results of different infrastructure
 ## SYNTAX
 
 ```
@@ -19,21 +18,19 @@ Get-CTXAPI_Tests [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> 
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
+Runs test and then retrieves the results of different infrastructure
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\>Get-CTXAPI_Tests @CTX_APIDefaultParm -SiteTest -HypervisorsTest -Export HTML -ReportPath C:\Temp}
 ```
 
-{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -48,7 +45,6 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
 
 ```yaml
 Type: String
@@ -63,7 +59,6 @@ Accept wildcard characters: False
 ```
 
 ### -DeliveryGroupsTest
-{{ Fill DeliveryGroupsTest Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -78,7 +73,6 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-{{ Fill Export Description }}
 
 ```yaml
 Type: String
@@ -94,7 +88,6 @@ Accept wildcard characters: False
 ```
 
 ### -HypervisorsTest
-{{ Fill HypervisorsTest Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -109,7 +102,6 @@ Accept wildcard characters: False
 ```
 
 ### -MachineCatalogsTest
-{{ Fill MachineCatalogsTest Description }}
 
 ```yaml
 Type: SwitchParameter
@@ -124,7 +116,6 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-{{ Fill ReportPath Description }}
 
 ```yaml
 Type: String
@@ -139,7 +130,6 @@ Accept wildcard characters: False
 ```
 
 ### -SiteId
-{{ Fill SiteId Description }}
 
 ```yaml
 Type: String
@@ -154,7 +144,6 @@ Accept wildcard characters: False
 ```
 
 ### -SiteTest
-{{ Fill SiteTest Description }}
 
 ```yaml
 Type: SwitchParameter
