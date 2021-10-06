@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.3
+.VERSION 1.0.0
 
-.GUID 5b996933-e86d-4a29-b665-d8315c40e89b
+.GUID 5db9e527-5742-4082-826a-e35bca4b4747
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,38 +19,31 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [11/04/2021_09:17] Initital Script Creating
-Updated [20/04/2021_10:43] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_21:23] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about published apps 
+
+#> 
+
+Param()
 
 
-
-
-
-
-<#
-
-.DESCRIPTION
-Get storefront servers from api
-
-#>
-
-# .ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_StoreFrontServer {
-	[Cmdletbinding()]
+Function Get-CTXAPI_StoreFrontServers {
+[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -70,6 +63,7 @@ Function Get-CTXAPI_StoreFrontServer {
 
 
 	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/storefrontservers" -Headers $headers).Content | ConvertFrom-Json).items
+
 
 
 } #end Function

@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.0.0
 
-.GUID d8e1762b-129a-47c8-bec8-04d8c74701e7
+.GUID 7e2cc53d-2308-4c7f-96f0-6f7472a3f0b1
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,41 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/04/2021_01:07] Initital Script Creating
-Updated [06/04/2021_09:03] Script Fle Info was updated
-Updated [20/04/2021_10:43] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_21:23] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about published apps 
+
+#> 
+
+Param()
 
 
-
-
-
-
-
-
-<#
-
-.DESCRIPTION
-Get details about Cloud MachineCatalogs
-
-#>
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_MachineCatalog {
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
+Function Get-CTXAPI_MachineCatalogs {
 	[Cmdletbinding()]
+    [OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -76,4 +70,6 @@ Function Get-CTXAPI_MachineCatalog {
 		$MachineCat += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$_" -Headers $headers).Content | ConvertFrom-Json)
 	}
 	$MachineCat
+
+
 } #end Function

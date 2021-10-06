@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.0.0
 
-.GUID b19486c7-7f81-4e31-82d4-4a4d81e80574
+.GUID 5b8588ac-59f0-49c5-8631-8fd2c83f0c19
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,32 +19,31 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [28/05/2021_20:38] Initital Script Creating
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_21:23] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about published apps 
+
+#> 
+
+Param()
 
 
-<#
 
-.DESCRIPTION
-Get cloud site details
-
-#>
-
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_SiteDetail {
+Function Get-CTXAPI_SiteDetails {
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]

@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.0.0
 
-.GUID 49c09b99-1918-4fc5-b536-26162b1f0cff
+.GUID 47f78f99-0059-4a79-96bc-8af1cae12259
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,40 +19,33 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/04/2021_12:08] Initital Script Creating
-Updated [06/04/2021_09:03] Script Fle Info was updated
-Updated [20/04/2021_10:42] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_21:23] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about published apps 
+
+#> 
+
+Param()
 
 
-
-
-
-
-
-
-<#
-
-.DESCRIPTION
-Details about Citrix Hypervisors (Hosts)
-
-#>
-
-# .ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Hypervisor {
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
+Function Get-CTXAPI_Hypervisors {
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]

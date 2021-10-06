@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.5
+.VERSION 1.1.1
 
-.GUID ce76995e-894d-40ee-ac4a-f700cd9abd01
+.GUID 3e0321fa-75f4-4cb4-b4d4-cb806bc52a5a
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx vda
 
 .LICENSEURI
 
@@ -19,37 +19,33 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [20/04/2021_12:17] Initital Script Creating
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [23/04/2021_19:03] Reports on progress
-Updated [24/04/2021_07:21] added more api calls
-Updated [05/05/2021_14:33] 'Update Manifest'
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_18:17] Initital Script Creating
+Updated [06/10/2021_20:09] "Help Files Added"
 
 .PRIVATEDATA
 
-#>
-
-#Requires -Module PSWriteColor
-
-
-
+#> 
 
 
 
 <#
 
-.DESCRIPTION
-Get monitoring data
+.DESCRIPTION 
+"Get the data from odata"
 
 #>
+
+Param()
+
+
+
 # .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_MonitorData {
 	[Cmdletbinding()]
@@ -57,7 +53,7 @@ Function Get-CTXAPI_MonitorData {
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+        [Parameter(Mandatory = $true, Position = 1)]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
 		[Parameter(Mandatory = $true, Position = 2)]

@@ -3,7 +3,7 @@
 
 .VERSION 1.0.4
 
-.GUID 3b47fbca-6d13-4688-9161-5043088b967c
+.GUID d169133e-621a-46b4-9782-0ab323ced022
 
 .AUTHOR Pierre Smit
 
@@ -26,9 +26,9 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/04/2021_01:32] Initital Script Creating
+Created [03/04/2021_01:33] Initital Script Creating
 Updated [06/04/2021_09:03] Script Fle Info was updated
-Updated [20/04/2021_10:43] Script Fle Info was updated
+Updated [20/04/2021_10:42] Script Fle Info was updated
 Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/10/2021_21:22] Module Info Updated
 
@@ -36,23 +36,19 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 #>
 
-
-
-
-
-
-
-
-
 <#
 
 .DESCRIPTION
-Get cloud Resource Locations
+Get details on the cloud services.
 
 #>
 
+
+Param()
+
 # .ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_ResourceLocation {
+
+Function Get-CTXAPI_CloudService {
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
@@ -68,6 +64,7 @@ Function Get-CTXAPI_ResourceLocation {
 		Accept              = 'application/json'
 	}
 
-	((Invoke-WebRequest "https://registry.citrixworkspacesapi.net/$customerId/resourcelocations" -Headers $headers).Content | ConvertFrom-Json).items
+	((Invoke-WebRequest "https://core.citrixworkspacesapi.net/$customerId/serviceStates" -Headers $headers).Content | ConvertFrom-Json).items
+
 
 } #end Function

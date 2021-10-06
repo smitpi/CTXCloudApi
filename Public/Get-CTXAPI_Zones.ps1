@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.3
+.VERSION 1.0.0
 
-.GUID 8474c4cc-e529-4c1f-8820-9b299fe9fa19
+.GUID e1a502c7-0dec-45cd-afed-d1041a24b1cf
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,37 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [11/04/2021_09:19] Initital Script Creating
-Updated [20/04/2021_10:43] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_19:58] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Get zone details from api 
+
+#> 
+
+Param()
 
 
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
 
-
-
-<#
-
-.DESCRIPTION
-Get zones details from api
-
-#>
-
-# .ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Zone {
+Function Get-CTXAPI_Zones {
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
@@ -70,6 +68,5 @@ Function Get-CTXAPI_Zone {
 
 
 	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/zones" -Headers $headers).Content | ConvertFrom-Json).items
-
 
 } #end Function

@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.1
 
-.GUID 8e117b47-e4b9-423e-9ee6-a82e45efd9b1
+.GUID d68cb688-a371-4f63-95d9-396acff79fad
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx vda
 
 .LICENSEURI
 
@@ -19,32 +19,36 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [06/10/2021_18:15] Initital Script Creating
+Updated [06/10/2021_19:00] "Help Files Added"
 
 .PRIVATEDATA
 
 #>
 
-<# 
 
-.DESCRIPTION 
- Return details about published apps 
 
-#> 
+<#
+
+.DESCRIPTION
+"Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function"
+
+#>
 
 Param()
 
 
 
-Function Get-CTXAPI_LowLevelOperations {
-[Cmdletbinding()]
+# .ExternalHelp CTXCloudApi-help.xml
+Function Get-CTXAPI_LowLevelOperation {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -69,6 +73,4 @@ Function Get-CTXAPI_LowLevelOperations {
 
 	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/ConfigLog/Operations/$HighLevelID/LowLevelOperations" -Headers $headers).Content | ConvertFrom-Json).items
 
-}
-
-
+} #end Function

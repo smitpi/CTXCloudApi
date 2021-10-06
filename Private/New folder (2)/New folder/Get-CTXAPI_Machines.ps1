@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.5
 
-.GUID c33c8458-e6e0-4035-9b18-9e606a12fff4
+.GUID a89d5b14-84f0-4461-ae32-fecbc349aa80
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -19,32 +19,45 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [03/04/2021_01:49] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
+Updated [20/04/2021_10:43] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [05/05/2021_14:33] 'Update Manifest'
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #>
 
-<# 
-
-.DESCRIPTION 
- Return details about published apps 
-
-#> 
-
-Param()
 
 
 
-Function Get-CTXAPI_Machines {
-		[Cmdletbinding()]
+
+
+
+
+
+
+
+<#
+
+.DESCRIPTION
+Get details about VDA Machines
+
+#>
+
+# .ExternalHelp CTXCloudApi-help.xml
+
+Function Get-CTXAPI_Machine {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -71,4 +84,5 @@ Function Get-CTXAPI_Machines {
 	}
 	$machines
 #>
+
 } #end Function

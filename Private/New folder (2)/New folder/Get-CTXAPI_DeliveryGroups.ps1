@@ -3,7 +3,7 @@
 
 .VERSION 1.0.0
 
-.GUID c33c8458-e6e0-4035-9b18-9e606a12fff4
+.GUID e397808a-0085-4ccb-9ed4-06fff40baf80
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ("ctx","vda","api","cloud")
 
 .LICENSEURI
 
@@ -19,32 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [06/10/2021_18:13] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about published apps 
+.DESCRIPTION
+ "Return details of all delivery groups"
 
-#> 
+#>
 
 Param()
 
 
 
-Function Get-CTXAPI_Machines {
-		[Cmdletbinding()]
+# .ExternalHelp CTXCloudApi-help.xml
+
+Function Get-CTXAPI_DeliveryGroup {
+	[Cmdletbinding()]
+    [OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -62,13 +65,10 @@ Function Get-CTXAPI_Machines {
 		Accept              = 'application/json'
 	}
 
-	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines" -Headers $headers).Content | ConvertFrom-Json).items
-
-	<#
-	$machines = @()
-	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines" -Headers $headers).Content | ConvertFrom-Json).items).Dnsname | ForEach-Object {
-		$machines += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/machines/$_" -Headers $headers).Content | ConvertFrom-Json)
+	$Delgroups = @()
+	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
+		$DelGroups += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups/$_" -Headers $headers).Content | ConvertFrom-Json)
 	}
-	$machines
-#>
+	$DelGroups
+
 } #end Function

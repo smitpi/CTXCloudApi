@@ -1,9 +1,9 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.3
 
-.GUID 1d5077f2-38c0-4abc-9404-c209338557cb
+.GUID 15a2bb20-bf6f-4eca-ad8f-96d878b5db89
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -19,31 +19,39 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [18/09/2021_08:03] Initital Script Creating
+Updated [05/10/2021_21:18] Module Info Updated
+Updated [05/10/2021_21:22] Module Info Updated
+Updated [06/10/2021_17:51] Added help file
 
 .PRIVATEDATA
 
 #>
 
-<# 
 
-.DESCRIPTION 
- Return details about published apps 
 
-#> 
 
+
+
+
+<#
+
+.DESCRIPTION
+Get details on published applications
+
+#>
 Param()
 
-
-Function Set-CTXAPI_DefaultParameters {
-           [Cmdletbinding(SupportsShouldProcess=$true)]
+# .ExternalHelp CTXCloudApi-help.xml
+Function Set-CTXAPI_DefaultParameter {
+            [Cmdletbinding(SupportsShouldProcess=$true)]
             	param(
                 [ValidateNotNullOrEmpty()]
 		        [string]$CustomerId,
@@ -57,24 +65,16 @@ Function Set-CTXAPI_DefaultParameters {
 
         if ($pscmdlet.ShouldProcess("Target", "Operation")) {
 
+$script:ApiToken = Get-CTXAPI_Token -client_id $ClientId -client_secret $ClientSecret
+$script:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
 
-$global:CustomerId = $CustomerId
-$global:ClientId = $ClientId
-$global:ClientSecret = $ClientSecret
-$global:ApiToken = Get-CTXAPI_Token -client_id $ClientId -client_secret $ClientSecret
-$global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
-
-$CTX_APIDefaultParm = @()
-$CTX_APIAllParm = @()
-$ClientDefault = @()
-
-$CTX_APIDefaultParm = [psobject]@{
+[hashtable]$script:CTX_APIDefaultParm = @{
     CustomerId   = $CustomerId
     SiteId       = $SiteID
     ApiToken     = $ApiToken
 }
 
-$global:CTX_APIAllParm = [psobject]@{
+[hashtable]$script:CTX_APIAllParm = @{
     CustomerId     = $CustomerId
     ClientId       = $ClientId
     ClientSecret   = $ClientSecret
@@ -82,16 +82,9 @@ $global:CTX_APIAllParm = [psobject]@{
     ApiToken       = $ApiToken
     ReportPath     = $env:TEMP
 }
-$out = Get-Variable CTX_APIDefaultParm
-$out2 = Get-Variable CTX_APIAllParm
-
-Write-Color -Text $out.Name -Color Green
-$global:CTX_APIDefaultParm
-
-Write-Color -Text $out2.Name -Color Green
-$global:CTX_APIAllParm
+$CTX_APIDefaultParm
+$CTX_APIAllParm
 
 Write-Color -Text 'Use ','@CTX_APIDefaultParm',' and ','@CTX_APIAllParm ','in the other commands.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
 }
-
 } #end Function

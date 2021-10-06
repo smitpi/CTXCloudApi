@@ -37,22 +37,16 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 #>
 
-
-
-
-
-
-
-
-
-
-
 <#
 
 .DESCRIPTION
 Add manually installed machine to a catalog
 
 #>
+
+Param()
+
+
 # .ExternalHelp CTXCloudApi-help.xml
 Function Add-CTXAPI_MachineToCatalog {
 	[Cmdletbinding()]

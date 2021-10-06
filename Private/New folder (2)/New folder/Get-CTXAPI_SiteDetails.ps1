@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.1
 
-.GUID 5f6ad0a4-e034-47e5-b957-b70399c4e4eb
+.GUID b19486c7-7f81-4e31-82d4-4a4d81e80574
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -19,32 +19,33 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:04] Initital Script Creating
+Created [28/05/2021_20:38] Initital Script Creating
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #>
 
-<# 
-
-.DESCRIPTION 
- Return details about published apps 
-
-#> 
-
-Param()
 
 
-Function Get-CTXAPI_Applications {
-[Cmdletbinding()]
-    [OutputType([System.Object[]])]
+<#
+
+.DESCRIPTION
+Get cloud site details
+
+#>
+
+# .ExternalHelp CTXCloudApi-help.xml
+
+Function Get-CTXAPI_SiteDetail {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -56,17 +57,15 @@ Function Get-CTXAPI_Applications {
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
 
+
 	$headers = [System.Collections.Hashtable]@{
 		Authorization       = "CwsAuth Bearer=$($ApiToken)"
 		'Citrix-CustomerId' = $customerId
 		Accept              = 'application/json'
 	}
-	$apps = @()
-	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-		$apps += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications/$_" -Headers $headers).Content | ConvertFrom-Json)
-	}
-	$apps
 
+	((Invoke-WebRequest "https://api-us.cloud.com/cvadapis/Sites/$siteid" -Headers $headers).Content | ConvertFrom-Json)
+	#((Invoke-WebRequest "https://api-us.cloud.com/cvadapis/$siteid/tenants" -Headers $headers).Content | ConvertFrom-Json)
 
 
 } #end Function

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_FailureReport
 
 ## SYNOPSIS
-Reports on connection failures
+Reports on connection faiures
 
 ## SYNTAX
 

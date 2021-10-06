@@ -1,9 +1,8 @@
+﻿<#PSScriptInfo
 
-<#PSScriptInfo
+.VERSION 1.0.4
 
-.VERSION 1.0.0
-
-.GUID 38c65711-1b10-4f0e-aa2a-c69d6fb4f8e4
+.GUID 5d786907-3d5c-431d-a8ad-eadbacf8bd5f
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +10,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -19,31 +18,42 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [03/04/2021_10:50] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
+Updated [20/04/2021_10:42] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #>
 
-<# 
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
 
-.DESCRIPTION 
- Return details about published apps 
+<#
 
-#> 
+.DESCRIPTION
+Report on Citrix Configuration.
+
+#>
+
 
 Param()
 
 
+
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigAudit {
-[Cmdletbinding()]
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -197,8 +207,6 @@ Function Get-CTXAPI_ConfigAudit {
 
 
 	}
-
-
 
 
 } #end Function

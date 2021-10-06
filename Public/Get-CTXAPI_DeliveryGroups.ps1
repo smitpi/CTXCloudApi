@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.0.0
 
-.GUID 1c10d8b3-8ca1-4658-8e1b-fa1a99eaa3db
+.GUID 411c19ab-8d64-4620-b1e6-5494eedd9a08
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,42 +19,32 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/04/2021_01:17] Initital Script Creating
-Updated [06/04/2021_09:03] Script Fle Info was updated
-Updated [20/04/2021_10:42] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_21:23] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about published apps 
+
+#> 
+
+Param()
 
 
-
-
-
-
-
-
-<#
-
-.DESCRIPTION
-Get details about Cloud Delivery Groups
-
-#>
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_DeliveryGroup {
+Function Get-CTXAPI_DeliveryGroups {
 	[Cmdletbinding()]
-
+    [OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -77,5 +67,6 @@ Function Get-CTXAPI_DeliveryGroup {
 		$DelGroups += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups/$_" -Headers $headers).Content | ConvertFrom-Json)
 	}
 	$DelGroups
+
 
 } #end Function

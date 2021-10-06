@@ -46,6 +46,10 @@ Run report to show usefull information
 
 #>
 
+
+
+Param()
+
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_HealthCheck {

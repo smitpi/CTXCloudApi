@@ -40,16 +40,16 @@ Updated [05/10/2021_21:22] Module Info Updated
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
-
-
-
-
 <#
 
 .DESCRIPTION
 Uses Registration date to calculate uptime
 
 #>
+
+
+Param()
+
 
 # .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_VDAUptime {

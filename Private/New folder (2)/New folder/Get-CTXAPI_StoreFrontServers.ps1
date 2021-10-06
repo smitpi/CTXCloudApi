@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.3
 
-.GUID 5f6ad0a4-e034-47e5-b957-b70399c4e4eb
+.GUID 5b996933-e86d-4a29-b665-d8315c40e89b
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -19,32 +19,38 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:04] Initital Script Creating
+Created [11/04/2021_09:17] Initital Script Creating
+Updated [20/04/2021_10:43] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #>
 
-<# 
-
-.DESCRIPTION 
- Return details about published apps 
-
-#> 
-
-Param()
 
 
-Function Get-CTXAPI_Applications {
-[Cmdletbinding()]
-    [OutputType([System.Object[]])]
+
+
+
+
+<#
+
+.DESCRIPTION
+Get storefront servers from api
+
+#>
+
+# .ExternalHelp CTXCloudApi-help.xml
+Function Get-CTXAPI_StoreFrontServer {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -61,12 +67,9 @@ Function Get-CTXAPI_Applications {
 		'Citrix-CustomerId' = $customerId
 		Accept              = 'application/json'
 	}
-	$apps = @()
-	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-		$apps += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications/$_" -Headers $headers).Content | ConvertFrom-Json)
-	}
-	$apps
 
+
+	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/storefrontservers" -Headers $headers).Content | ConvertFrom-Json).items
 
 
 } #end Function

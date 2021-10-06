@@ -1,9 +1,9 @@
 ﻿
 <#PSScriptInfo
 
-.VERSION 1.0.5
+.VERSION 1.1.1
 
-.GUID bcce614e-ed5b-4f57-b35d-526154d152a9
+.GUID 73cfd5d4-233b-4c97-bfad-0f280a0188dc
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad PowerShell
+.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx vda
 
 .LICENSEURI
 
@@ -26,12 +26,8 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [22/04/2021_10:08] Initital Script Creating
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [24/04/2021_07:21] Added details from machines api to extract more data
-Updated [05/05/2021_00:03] added monitor data
-Updated [05/05/2021_14:33] 'Update Manifest'
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_18:14] Initital Script Creating
+Updated [06/10/2021_19:01] "Help Files Added"
 
 .PRIVATEDATA
 
@@ -41,20 +37,23 @@ Updated [05/10/2021_21:22] Module Info Updated
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
-
-
-
-
 <#
 
 .DESCRIPTION
-Creates a report on connection and machine failures in the last x hours
+"Reports on connection failures"
 
 #>
+
+Param()
+
+
+
+
 # .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_FailureReport {
 	[Cmdletbinding()]
+    [OutputType([System.Object[]])]
     PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]

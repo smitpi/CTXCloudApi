@@ -3,7 +3,7 @@
 
 .VERSION 1.0.0
 
-.GUID 46687284-ec4b-4a37-baa8-a18178864af8
+.GUID af94e409-8e45-4256-9bec-a143f874cd66
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ps
 
 .LICENSEURI
 
@@ -19,29 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [06/10/2021_18:00] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about published apps 
+.DESCRIPTION
+ "Runs test and then retrieves the results of different infrastructure"
 
-#> 
+#>
 
 Param()
 
-Function Get-CTXAPI_Tests {
+
+
+#Requires -Module ImportExcel
+#Requires -Module PSWriteHTML
+#Requires -Module PSWriteColor
+# .ExternalHelp CTXCloudApi-help.xml
+Function Get-CTXAPI_Test {
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]
     PARAM(

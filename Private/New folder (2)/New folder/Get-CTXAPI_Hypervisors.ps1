@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.0.4
 
-.GUID 5f6ad0a4-e034-47e5-b957-b70399c4e4eb
+.GUID 49c09b99-1918-4fc5-b536-26162b1f0cff
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api citrix ctx cvad
 
 .LICENSEURI
 
@@ -19,32 +19,41 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:04] Initital Script Creating
+Created [03/04/2021_12:08] Initital Script Creating
+Updated [06/04/2021_09:03] Script Fle Info was updated
+Updated [20/04/2021_10:42] Script Fle Info was updated
+Updated [22/04/2021_11:42] Script Fle Info was updated
+Updated [05/10/2021_21:22] Module Info Updated
 
 .PRIVATEDATA
 
 #>
 
-<# 
-
-.DESCRIPTION 
- Return details about published apps 
-
-#> 
-
-Param()
 
 
-Function Get-CTXAPI_Applications {
-[Cmdletbinding()]
-    [OutputType([System.Object[]])]
+
+
+
+
+
+
+<#
+
+.DESCRIPTION
+Details about Citrix Hypervisors (Hosts)
+
+#>
+
+# .ExternalHelp CTXCloudApi-help.xml
+Function Get-CTXAPI_Hypervisor {
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
@@ -61,12 +70,9 @@ Function Get-CTXAPI_Applications {
 		'Citrix-CustomerId' = $customerId
 		Accept              = 'application/json'
 	}
-	$apps = @()
-	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-		$apps += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/applications/$_" -Headers $headers).Content | ConvertFrom-Json)
-	}
-	$apps
 
+
+	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/hypervisors" -Headers $headers).Content | ConvertFrom-Json).items
 
 
 } #end Function

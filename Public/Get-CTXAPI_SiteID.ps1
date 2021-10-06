@@ -57,6 +57,10 @@ Get cloud site id
 
 #>
 
+
+Param()
+
+
 # .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_SiteID {
 	[Cmdletbinding()]

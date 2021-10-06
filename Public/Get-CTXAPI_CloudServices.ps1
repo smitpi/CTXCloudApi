@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.0.0
 
-.GUID d169133e-621a-46b4-9782-0ab323ced022
+.GUID 409ebf3e-e88c-4a89-8dcc-e7bdb1ea6d0b
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,48 +19,34 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/04/2021_01:33] Initital Script Creating
-Updated [06/04/2021_09:03] Script Fle Info was updated
-Updated [20/04/2021_10:42] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
-Updated [05/10/2021_21:22] Module Info Updated
+Created [06/10/2021_21:07] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Return details about published apps 
 
+#> 
 
+Param()
 
-
-
-
-
-<#
-
-.DESCRIPTION
-Get details on the cloud services.
-
-#>
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_CloudService {
-	[Cmdletbinding()]
+Function Get-CTXAPI_CloudServices {
+[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true, Position = 0)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
 		[Parameter(Mandatory = $true, Position = 2)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
