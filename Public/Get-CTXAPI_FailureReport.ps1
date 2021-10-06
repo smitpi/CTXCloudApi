@@ -51,9 +51,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Creates a report on connection and machine failures in the last x hours
 
 #>
-
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_FailureReport {
 	[Cmdletbinding()]

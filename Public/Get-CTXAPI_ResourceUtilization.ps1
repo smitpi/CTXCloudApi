@@ -52,8 +52,7 @@ Resource utilization in the last x hours
 
 #>
 
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ResourceUtilization {
 	[Cmdletbinding()]
 		PARAM(

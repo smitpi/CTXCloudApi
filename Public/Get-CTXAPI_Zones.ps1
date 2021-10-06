@@ -48,9 +48,7 @@ Get zones details from api
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Zone {
 	[Cmdletbinding()]
 	PARAM(

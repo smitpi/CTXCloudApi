@@ -53,9 +53,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get details on published applications
 
 #>
-
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_Application {
 	[Cmdletbinding()]

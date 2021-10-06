@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Details about VDA devices
+
 ## SYNTAX
 
 ```
@@ -24,7 +25,6 @@ Details about VDA devices
 ```powershell
 PS C:\>  Get-CTXAPI_Machines -CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
-
 
 ## PARAMETERS
 
@@ -79,7 +79,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

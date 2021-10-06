@@ -47,10 +47,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get the detailed steps for an High Level Operation
 
 #>
-
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_LowLevelOperation {
 	[Cmdletbinding()]
 	PARAM(

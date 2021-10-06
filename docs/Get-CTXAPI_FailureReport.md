@@ -100,6 +100,22 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -hours
+amount of hours to report on
+
+
+```yaml
+Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
+
+Required: False
+Position: 4
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MonitorData
 
 ```yaml
@@ -109,6 +125,23 @@ Aliases:
 
 Required: False
 Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -region
+Where the cloud instance is hosted
+
+
+```yaml
+Type: String
+Parameter Sets: Fetch odata
+Aliases:
+Accepted values: us, eu, ap-s
+
+Required: False
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -145,46 +178,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-amount of hours to report on
-
-
-```yaml
-Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -region
-Where the cloud instance is hosted
-
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

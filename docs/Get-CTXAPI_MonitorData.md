@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Get the data from odata
+
 ## SYNTAX
 
 ```
@@ -34,7 +35,6 @@ PS C:\> $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $S
 [15:58:20] Fetching :ApplicationActivitySummaries[1sec]
 [15:58:21] Fetching :ApplicationInstances[1sec]
 [15:58:22] Fetching :Applications
-
 ```
 
 {{ Add example description here }}
@@ -71,21 +71,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -hours
  amount of hours to report on
 
@@ -117,13 +102,27 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -SiteId
+ Generate id with Get-CTXAPI_SiteID
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

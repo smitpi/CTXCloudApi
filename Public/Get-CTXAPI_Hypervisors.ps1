@@ -51,9 +51,7 @@ Details about Citrix Hypervisors (Hosts)
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Hypervisor {
 	[Cmdletbinding()]
 	PARAM(

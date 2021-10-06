@@ -45,7 +45,6 @@ Description      :
 IsPrimary        : False
 Metadata         : {}
 ResourceLocation : @{Id=9960d8af43c; Uid=; Name=}
-
 ```
 
 {{ Add example description here }}
@@ -103,7 +102,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

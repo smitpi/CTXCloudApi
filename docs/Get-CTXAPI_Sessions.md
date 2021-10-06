@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Reports on user sessions
+
 ## SYNTAX
 
 ```
@@ -80,7 +81,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

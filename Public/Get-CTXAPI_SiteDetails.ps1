@@ -42,9 +42,7 @@ Get cloud site details
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_SiteDetail {
 	[Cmdletbinding()]

@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Retrieves details about machine catalogs
+
 ## SYNTAX
 
 ```
@@ -18,13 +19,13 @@ Get-CTXAPI_MachineCatalogs [-CustomerId] <String> [-SiteId] <String> [-ApiToken]
 ## DESCRIPTION
 Retrieves details about machine catalogs
 ****
+
 ## EXAMPLES
 
 ### Example 1
 ```powershell
 PS C:\> Get-CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
-
 
 ## PARAMETERS
 
@@ -79,7 +80,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

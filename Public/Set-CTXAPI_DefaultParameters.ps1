@@ -44,9 +44,9 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get details on published applications
 
 #>
-
 Param()
 
+# .ExternalHelp CTXCloudApi-help.xml
 Function Set-CTXAPI_DefaultParameter {
             [Cmdletbinding()]
             	param(
@@ -76,6 +76,8 @@ $global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
     ApiToken       = $ApiToken
     ReportPath     = $env:TEMP
 }
+$CTX_APIDefaultParm
+$CTX_APIAllParm
 
 Write-Color -Text 'Use ','@CTX_APIDefaultParm',' and ','@CTX_APIAllParm ','in the other commands.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
 

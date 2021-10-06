@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Runs test and then retrieves the results of different infrastructure
+
 ## SYNTAX
 
 ```
@@ -19,13 +20,13 @@ Get-CTXAPI_Tests [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> 
 
 ## DESCRIPTION
 Runs test and then retrieves the results of different infrastructure
+
 ## EXAMPLES
 
 ### Example 1
 ```powershell
 PS C:\>Get-CTXAPI_Tests @CTX_APIDefaultParm -SiteTest -HypervisorsTest -Export HTML -ReportPath C:\Temp}
 ```
-
 
 ## PARAMETERS
 
@@ -163,7 +164,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

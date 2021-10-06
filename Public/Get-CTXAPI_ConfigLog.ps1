@@ -50,10 +50,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get high level configuration changes in the last x days
 
 #>
-
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigLog {
 	[Cmdletbinding()]
 	PARAM(

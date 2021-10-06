@@ -50,10 +50,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get monitoring data
 
 #>
-
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_MonitorData {
 	[Cmdletbinding()]
 	PARAM(

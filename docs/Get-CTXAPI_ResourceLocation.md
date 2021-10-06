@@ -44,14 +44,12 @@ name         : Dubai
 internalOnly : False
 timeZone     : Arabian Standard Time
 readOnly     : False
-
 ```
 
 {{ Add example description here }}
 
 ## PARAMETERS
 
-### -ApiTok
 ### -ApiToken
  Generate token with Get-CTXAPI_Token
 
@@ -103,7 +101,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

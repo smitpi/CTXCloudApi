@@ -57,9 +57,7 @@ Get cloud api token bearer
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Token {
 	[CmdletBinding()]
 	param(

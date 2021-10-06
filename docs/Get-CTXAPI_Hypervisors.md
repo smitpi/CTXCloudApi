@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Returns details about the hosting connection
+
 ## SYNTAX
 
 ```
@@ -79,7 +80,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

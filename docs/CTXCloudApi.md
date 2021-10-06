@@ -39,49 +39,49 @@ Reports on connection faiures
 Creates a morning healthcheck report for admins. Looking at some key data points
 
 ### [Get-CTXAPI_Hypervisors](Get-CTXAPI_Hypervisors.md)
-{{ Fill in the Synopsis }}
+Returns details about the hosting connection
 
 ### [Get-CTXAPI_LowLevelOperations](Get-CTXAPI_LowLevelOperations.md)
-{{ Fill in the Synopsis }}
+Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
 
 ### [Get-CTXAPI_MachineCatalogs](Get-CTXAPI_MachineCatalogs.md)
-{{ Fill in the Synopsis }}
+Retrieves details about machine catalogs
 
 ### [Get-CTXAPI_Machines](Get-CTXAPI_Machines.md)
-{{ Fill in the Synopsis }}
+Details about VDA devices
 
 ### [Get-CTXAPI_MonitorData](Get-CTXAPI_MonitorData.md)
-{{ Fill in the Synopsis }}
+Get the data from odata
 
 ### [Get-CTXAPI_ResourceLocation](Get-CTXAPI_ResourceLocation.md)
-{{ Fill in the Synopsis }}
+Details about the resource locations 
 
 ### [Get-CTXAPI_ResourceUtilization](Get-CTXAPI_ResourceUtilization.md)
-{{ Fill in the Synopsis }}
+Reports on the vda performance and utilization for the amount of hours
 
 ### [Get-CTXAPI_Sessions](Get-CTXAPI_Sessions.md)
-{{ Fill in the Synopsis }}
+Reports on user sessions
 
 ### [Get-CTXAPI_SiteDetails](Get-CTXAPI_SiteDetails.md)
-{{ Fill in the Synopsis }}
+Retrieve Site / Farm details
 
 ### [Get-CTXAPI_SiteID](Get-CTXAPI_SiteID.md)
-{{ Fill in the Synopsis }}
+Get the SiteID
 
 ### [Get-CTXAPI_StoreFrontServers](Get-CTXAPI_StoreFrontServers.md)
-{{ Fill in the Synopsis }}
+Get StoreFront Details
 
 ### [Get-CTXAPI_Tests](Get-CTXAPI_Tests.md)
-{{ Fill in the Synopsis }}
+Runs test and then retrieves the results of different infrastructure
 
 ### [Get-CTXAPI_Token](Get-CTXAPI_Token.md)
-{{ Fill in the Synopsis }}
+Retrives the token for authentication 
 
-### [Get-CTXAPI_VDAUptime](Get-CTXAPI_VDAUptime.md)
-{{ Fill in the Synopsis }}
+### [Get-CTXAPI_Token](Get-CTXAPI_Token.md)
+Retrives the token for authentication 
 
 ### [Get-CTXAPI_Zones](Get-CTXAPI_Zones.md)
-{{ Fill in the Synopsis }}
+show zone details
 
 ### [Set-CTXAPI_DefaultParameters](Set-CTXAPI_DefaultParameters.md)
 Adds the variables in a persistent hash table

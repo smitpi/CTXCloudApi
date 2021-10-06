@@ -51,8 +51,7 @@ Uses Registration date to calculate uptime
 
 #>
 
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_VDAUptime {
 	[Cmdletbinding()]
 	PARAM(

@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Get the SiteID
+
 ## SYNTAX
 
 ```
@@ -24,7 +25,6 @@ Get the SiteID
 ```powershell
 PS C:\> $siteid = Get-CTXAPI_Siteid -CustomerId $CustomerId -ApiToken $apitoken
 ```
-
 
 ## PARAMETERS
 
@@ -62,7 +62,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

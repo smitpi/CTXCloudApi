@@ -49,8 +49,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Report on Citrix Configuration.
 
 #>
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigAudit {
 	[Cmdletbinding()]
 	PARAM(

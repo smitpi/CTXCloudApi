@@ -46,9 +46,6 @@ Run report to show usefull information
 
 #>
 
-Param()
-
-
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_HealthCheck {
@@ -157,6 +154,6 @@ Function Get-CTXAPI_HealthCheck {
 trap {
 	Write-Warning "Failed to generate report:$($_)"
 	continue
-
+}
 
 } #end Function

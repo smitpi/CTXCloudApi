@@ -43,10 +43,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Run CVAD Tests and results
 
 #>
-
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Test {
     [Cmdletbinding()]
     PARAM(

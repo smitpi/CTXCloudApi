@@ -54,8 +54,7 @@ Get details about VDA Machines
 
 #>
 
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_Machine {
 	[Cmdletbinding()]

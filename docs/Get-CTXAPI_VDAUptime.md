@@ -5,66 +5,32 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_VDAUptime
+# Get-CTXAPI_Token
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Retrives the token for authentication 
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_VDAUptime [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [[-Export] <String>]
- [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_Token [[-client_id] <String>] [[-client_secret] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrives the token for authentication 
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Get-CTXAPI_VDAUptime -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Export Excel -ReportPath c:\
-
-
-DnsName           : AZ1.murza.co.za
-AgentVersion      : 1912.0.3000.3293
-MachineCatalog    : MC-AZEUW-UPDATES-2016
-DeliveryGroup     : DG-AZEUW-UPDATES-2016
-InMaintenanceMode : True
-IPAddress         : 
-OSType            : Windows 2016
-ProvisioningType  : MCS
-SummaryState      : Off
-FaultState        : None
-Days              : 6
-TotalHours        : 146
-OnlineSince       : 2021/09/30 13:13:19
-DayOfWeek         : Thursday
-
-
+PS C:\> $apitoken = Get-CTXAPI_Token -client_id $clientid -client_secret $clientsecret
 ```
 
 {{ Add example description here }}
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
+### -client_id
  From Citrix Cloud Portal
 
 ```yaml
@@ -72,55 +38,23 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
+### -client_secret
+ From Citrix Cloud Portal
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: True
+Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-
-### -Export
- what type of report
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Excel, HTML
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReportPath
- where the report will be saved
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 6
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -132,7 +66,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

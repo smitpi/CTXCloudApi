@@ -51,9 +51,7 @@ Get details about cloud sessions
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Session {
 	[Cmdletbinding()]
 	PARAM(

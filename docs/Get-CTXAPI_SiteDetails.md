@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Retrieve Site / Farm details
+
 ## SYNTAX
 
 ```
@@ -35,10 +36,8 @@ PrimaryZone                                 : @{Id=00000000-0000-0000-0000-00000
 ProductCode                                 : Unknown
 ProductEdition                              : Unknown
 ProductVersion                              : 7.29
-SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config; 
-     
+SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;
 ```
-
 
 ## PARAMETERS
 
@@ -93,7 +92,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

@@ -48,9 +48,7 @@ Get storefront servers from api
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_StoreFrontServer {
 	[Cmdletbinding()]
 	PARAM(

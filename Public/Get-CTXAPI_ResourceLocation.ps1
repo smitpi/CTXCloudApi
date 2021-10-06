@@ -51,9 +51,7 @@ Get cloud Resource Locations
 
 #>
 
-Param()
-
-
+# .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ResourceLocation {
 	[Cmdletbinding()]
 	PARAM(

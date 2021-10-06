@@ -9,6 +9,7 @@ schema: 2.0.0
 
 ## SYNOPSIS
 Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
+
 ## SYNTAX
 
 ```
@@ -25,7 +26,6 @@ Get-CTXAPI_LowLevelOperations [-CustomerId] <String> [-SiteId] <String> [-HighLe
 ```powershell
 PS C:\> Get-CTXAPI_LowLevelOperations -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -HighLevelID $id
 ```
-
 
 ## PARAMETERS
 
@@ -61,6 +61,8 @@ Accept wildcard characters: False
 
 ### -HighLevelID
  Get-CTXAPI_ConfigLog function
+
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -75,6 +77,8 @@ Accept wildcard characters: False
 
 ### -SiteId
 Generate id with Get-CTXAPI_SiteID
+
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -93,7 +97,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

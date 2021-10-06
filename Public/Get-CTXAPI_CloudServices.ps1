@@ -50,9 +50,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get details on the cloud services.
 
 #>
-
-Param()
-
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_CloudService {
 	[Cmdletbinding()]
