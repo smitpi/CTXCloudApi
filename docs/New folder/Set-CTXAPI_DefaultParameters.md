@@ -8,7 +8,7 @@ schema: 2.0.0
 # Set-CTXAPI_DefaultParameters
 
 ## SYNOPSIS
-{{ Fill in the Synopsis }}
+Adds the variables in a persistent hash table
 
 ## SYNTAX
 
@@ -18,21 +18,40 @@ Set-CTXAPI_DefaultParameters [[-CustomerId] <String>] [[-ClientId] <String>] [[-
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
-
+Adds the variables in a persistent hash table
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
-```
+PS C:\>  Set-CTXAPI_DefaultParameters -CustomerId vvv -ClientId yyy -ClientSecret uuu
+Get-CTXAPI_Token
 
-{{ Add example description here }}
+    PS V:\CloudStorage\Dropbox\#Profile\Documents\PowerShell\Github\CTXCloudApi> $CTX_APIDefaultParm
+
+Name                           Value
+----                           -----
+CustomerId                     vouiv8idvkid
+SiteId                         8fbd6487-30
+ApiToken                       eyJhbGciOiJ
+
+
+
+PS V:\CloudStorage\Dropbox\#Profile\Documents\PowerShell\Github\CTXCloudApi> $CTX_APIAllParm
+
+Name                           Value
+----                           -----
+ClientId                       2d73361c-477b-43da-b301-d30ef4ee22db
+CustomerId                     vouiv8idvkid
+ApiToken                       eyJhbGciOiJSUzI1NiIsInR5cCI6IkpX
+SiteId                         8fbd6487-3077-472a-a39c-56bcae3bf172
+ClientSecret                   dEXtv9YWeZWV0BKUCJWx9w==
+ReportPath                     C:\Users\ps\AppData\Local\Temp
+```
+Creates these hashtables to use in other commands
 
 ## PARAMETERS
 
 ### -ClientId
-{{ Fill ClientId Description }}
 
 ```yaml
 Type: String
@@ -47,7 +66,6 @@ Accept wildcard characters: False
 ```
 
 ### -ClientSecret
-{{ Fill ClientSecret Description }}
 
 ```yaml
 Type: String
@@ -62,7 +80,6 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerId
-{{ Fill CustomerId Description }}
 
 ```yaml
 Type: String

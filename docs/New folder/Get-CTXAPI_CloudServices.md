@@ -5,34 +5,51 @@ online version:
 schema: 2.0.0
 ---
 
-# Add-CTXAPI_MachineToCatalog
+# Get-CTXAPI_CloudServices
 
 ## SYNOPSIS
-ge
+Client's Subscription details, and wjat features are enabled
 
 ## SYNTAX
 
 ```
-Add-CTXAPI_MachineToCatalog [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
- [-CatalogNameORID] <String> [-MachineName] <String> [<CommonParameters>]
+Get-CTXAPI_CloudServices [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Client's Subscription details, and wjat features are enabled
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> {{ Add example code here }}
+PS C:\> Get-CTXAPI_CloudServices -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+
+
+serviceName                : adc
+state                      : NotOnboarded
+type                       : Default
+quantity                   : 0
+daysToExpiration           : 
+notificationsDisabled      : False
+futureEntitlementStartDate : 
+
+serviceName                : podio
+state                      : NotOnboarded
+type                       : Default
+quantity                   : 0
+daysToExpiration           : 
+notificationsDisabled      : False
+futureEntitlementStartDate : 
+
 ```
 
-{{ Add example description here }}
+
 
 ## PARAMETERS
 
 ### -ApiToken
-{{ Fill ApiToken Description }}
+ Generate token with Get-CTXAPI_Token
 
 ```yaml
 Type: String
@@ -46,24 +63,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CatalogNameORID
-{{ Fill CatalogNameORID Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -CustomerId
-{{ Fill CustomerId Description }}
-
+ From Citrix Cloud Portal
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -76,23 +77,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -MachineName
-{{ Fill MachineName Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -SiteId
-{{ Fill SiteId Description }}
+ Generate id with Get-CTXAPI_SiteID
 
 ```yaml
 Type: String
