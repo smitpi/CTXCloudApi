@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 1.2.2
 
 .GUID 3e0321fa-75f4-4cb4-b4d4-cb806bc52a5a
 
@@ -28,10 +28,13 @@
 .RELEASENOTES
 Created [06/10/2021_18:17] Initital Script Creating
 Updated [06/10/2021_20:09] "Help Files Added"
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
 #> 
+
+
 
 
 

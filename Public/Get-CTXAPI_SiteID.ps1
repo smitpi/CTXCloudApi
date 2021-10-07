@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.6
+.VERSION 1.1.7
 
 .GUID 7b30365c-2695-4a40-b701-4d25be3cbaa5
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -33,10 +33,13 @@ Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/05/2021_00:04] renamed script
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -52,7 +55,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Get cloud site id
 
 #>

@@ -185,7 +185,7 @@
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Returns a list of published Apps</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -332,11 +332,11 @@ ZoneId                          :</dev:code>
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_CloudServices</command:noun>
       <maml:description>
-        <maml:para>Client's Subscription details, and wjat features are enabled</maml:para>
+        <maml:para>Client's Subscription details, and what features are enabled</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Client's Subscription details, and wjat features are enabled</maml:para>
+      <maml:para>Client's Subscription details, and what features are enabled</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -448,19 +448,19 @@ futureEntitlementStartDate :</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_ConfigAudit</command:name>
+      <command:name>Get-CTXAPI_CloudServices</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_ConfigAudit</command:noun>
+      <command:noun>CTXAPI_CloudServices</command:noun>
       <maml:description>
-        <maml:para>Generate detailed report on machine catlog,delivery group and published apps</maml:para>
+        <maml:para>Client's Subscription details, and what features are enabled</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Generate detailed report on machine catlog,delivery group and published apps</maml:para>
+      <maml:para>Client's Subscription details, and what features are enabled - HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- &lt;Module base&gt;\Private\Reports-Variables.ps1</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_ConfigAudit</maml:name>
+        <maml:name>Get-CTXAPI_CloudServices</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
@@ -473,51 +473,10 @@ futureEntitlementStartDate :</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>SiteId</maml:name>
-          <maml:description>
-            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
             <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Host</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -545,42 +504,6 @@ futureEntitlementStartDate :</dev:code>
         <maml:name>CustomerId</maml:name>
         <maml:description>
           <maml:para>From Citrix Cloud Portal</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>Export</maml:name>
-        <maml:description>
-          <maml:para>what type of report</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>ReportPath</maml:name>
-        <maml:description>
-          <maml:para>where the report will be saved</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>SiteId</maml:name>
-        <maml:description>
-          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -618,9 +541,26 @@ futureEntitlementStartDate :</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-CTXAPI_ConfigAudit -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Export Excel</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_CloudServices -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+
+
+serviceName                : adc
+state                      : NotOnboarded
+type                       : Default
+quantity                   : 0
+daysToExpiration           : 
+notificationsDisabled      : False
+futureEntitlementStartDate : 
+
+serviceName                : podio
+state                      : NotOnboarded
+type                       : Default
+quantity                   : 0
+daysToExpiration           : 
+notificationsDisabled      : False
+futureEntitlementStartDate :</dev:code>
         <dev:remarks>
-          <maml:para>Details in excel or html file</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -788,19 +728,19 @@ Parameters</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_ConnectionReport</command:name>
+      <command:name>Get-CTXAPI_ConfigLog</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_ConnectionReport</command:noun>
+      <command:noun>CTXAPI_ConfigLog</command:noun>
       <maml:description>
-        <maml:para>Generate a report on connections</maml:para>
+        <maml:para>reports on changes in the environment</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Generate a report on connections</maml:para>
+      <maml:para>reports on changes in the environment - HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- &lt;Module base&gt;\Private\Reports-Variables.ps1</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_ConnectionReport</maml:name>
+        <maml:name>Get-CTXAPI_ConfigLog</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
@@ -826,6 +766,18 @@ Parameters</dev:code>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>Days</maml:name>
+          <maml:description>
+            <maml:para>The amount of days of changes to report</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
             <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
@@ -837,110 +789,10 @@ Parameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>region</maml:name>
-          <maml:description>
-            <maml:para>where the clients' cloud instance is hosted</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">eu</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">ap-s</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>hours</maml:name>
-          <maml:description>
-            <maml:para>a moun of hours it will report on</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-CTXAPI_ConnectionReport</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MonitorData</maml:name>
-          <maml:description>
-            <maml:para>a cutom psobject with monitoring data, if it is not present. Then the script fetch the odata</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
-          <dev:type>
-            <maml:name>PSObject</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
           <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
@@ -964,58 +816,10 @@ Parameters</dev:code>
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>Export</maml:name>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>Days</maml:name>
         <maml:description>
-          <maml:para>what type of report</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>hours</maml:name>
-        <maml:description>
-          <maml:para>a moun of hours it will report on</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>MonitorData</maml:name>
-        <maml:description>
-          <maml:para>a cutom psobject with monitoring data, if it is not present. Then the script fetch the odata</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
-        <dev:type>
-          <maml:name>PSObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>region</maml:name>
-        <maml:description>
-          <maml:para>where the clients' cloud instance is hosted</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>ReportPath</maml:name>
-        <maml:description>
-          <maml:para>where the report will be saved</maml:para>
+          <maml:para>The amount of days of changes to report</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1065,26 +869,18 @@ Parameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt;  Get-CTXAPI_ConnectionReport -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region ap-s -hours 24 -Export Excel -ReportPath C:\Temp
+        <dev:code>PS C:\&gt; Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Days 7
 
 
-[2021-10-06 11:27:44] Getting data for:
-				Days: 1
-				Hours: 24
-
-
-[11:27:44] Fetching :ApplicationActivitySummaries[9sec]
-[11:27:53] Fetching :ApplicationInstances[4sec]
-[11:27:58] Fetching :Applications[1sec]
-[11:28:00] Fetching :Catalogs[0sec]
-[11:28:00] Fetching :ConnectionFailureLogs[0sec]
-[11:28:01] Fetching :Connections[4sec]
-[11:28:06] Fetching :DesktopGroups[0sec]
-[11:28:07] Fetching :DesktopOSDesktopSummaries[0sec]
-[11:28:08] Fetching :FailureLogSummaries[1sec]
-[11:28:09</dev:code>
+Id                 : 6a657368-873b-4379-ab9e-6a1f8aa73b03
+AdminMachineIP     : 
+EndTime            : 9/29/2021 2:01:44 PM
+FormattedEndTime   : 2021-09-29T14:01:44Z
+IsSuccessful       : True
+OperationType      : AdminActivity
+Parameters</dev:code>
         <dev:remarks>
-          <maml:para>Details in the excel / html file</maml:para>
+          <maml:para></maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1219,19 +1015,20 @@ Parameters</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_FailureReport</command:name>
+      <command:name>Get-CTXAPI_DeliveryGroups</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_FailureReport</command:noun>
+      <command:noun>CTXAPI_DeliveryGroups</command:noun>
       <maml:description>
-        <maml:para>Reports on connection failures</maml:para>
+        <maml:para>Return details of all delivery groups</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>{{ Fill in the Description }}</maml:para>
+      <maml:para>Return details of all delivery groups</maml:para>
+      <maml:para>- HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- &lt;Module base&gt;\Private\Reports-Variables.ps1</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_FailureReport</maml:name>
+        <maml:name>Get-CTXAPI_DeliveryGroups</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
@@ -1264,174 +1061,6 @@ Parameters</dev:code>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>region</maml:name>
-          <maml:description>
-            <maml:para>Where the cloud instance is hosted</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">eu</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">ap-s</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>hours</maml:name>
-          <maml:description>
-            <maml:para>amount of hours to report on</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>FailureType</maml:name>
-          <maml:description>
-            <maml:para>Type of failures to report on</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Connection</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Machine</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-CTXAPI_FailureReport</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>CustomerId</maml:name>
-          <maml:description>
-            <maml:para>From Citrix Cloud Portal</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>SiteId</maml:name>
-          <maml:description>
-            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>ApiToken</maml:name>
-          <maml:description>
-            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>FailureType</maml:name>
-          <maml:description>
-            <maml:para>Type of failures to report on</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Connection</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">Machine</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MonitorData</maml:name>
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
-          <dev:type>
-            <maml:name>PSObject</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -1455,78 +1084,6 @@ Parameters</dev:code>
         <maml:name>CustomerId</maml:name>
         <maml:description>
           <maml:para>From Citrix Cloud Portal</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>Export</maml:name>
-        <maml:description>
-          <maml:para>what type of report</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>FailureType</maml:name>
-        <maml:description>
-          <maml:para>Type of failures to report on</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>hours</maml:name>
-        <maml:description>
-          <maml:para>amount of hours to report on</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>MonitorData</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
-        <dev:type>
-          <maml:name>PSObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>region</maml:name>
-        <maml:description>
-          <maml:para>Where the cloud instance is hosted</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>ReportPath</maml:name>
-        <maml:description>
-          <maml:para>where the report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1576,9 +1133,9 @@ Parameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>delivery group settings</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1586,19 +1143,20 @@ Parameters</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_HealthCheck</command:name>
+      <command:name>Get-CTXAPI_DeliveryGroups</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_HealthCheck</command:noun>
+      <command:noun>CTXAPI_DeliveryGroups</command:noun>
       <maml:description>
-        <maml:para>Creates a morning healthcheck report for admins. Looking at some key data points</maml:para>
+        <maml:para>Return details of all delivery groups</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Creates a morning healthcheck report for admins. Looking at some key data points</maml:para>
+      <maml:para>Return details of all delivery groups</maml:para>
+      <maml:para>- HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- &lt;Module base&gt;\Private\Reports-Variables.ps1</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_HealthCheck</maml:name>
+        <maml:name>Get-CTXAPI_DeliveryGroups</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
@@ -1635,35 +1193,6 @@ Parameters</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>region</maml:name>
-          <maml:description>
-            <maml:para>Where the cloud instance is hosted</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">eu</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">ap-s</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1683,30 +1212,6 @@ Parameters</dev:code>
         <maml:name>CustomerId</maml:name>
         <maml:description>
           <maml:para>From Citrix Cloud Portal</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>region</maml:name>
-        <maml:description>
-          <maml:para>Where the cloud instance is hosted</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>ReportPath</maml:name>
-        <maml:description>
-          <maml:para>where the report will be saved</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -1756,9 +1261,9 @@ Parameters</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt; Get-CTXAPI_HealthCheck -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -ReportPath C:\Temp\</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken</dev:code>
         <dev:remarks>
-          <maml:para>details in the html file</maml:para>
+          <maml:para>delivery group settings</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2611,35 +2116,23 @@ readOnly     : False</dev:code>
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_ResourceUtilization</command:name>
+      <command:name>Get-CTXAPI_ResourceLocation</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_ResourceUtilization</command:noun>
+      <command:noun>CTXAPI_ResourceLocation</command:noun>
       <maml:description>
-        <maml:para>Reports on the vda performance and utilization for the amount of hours</maml:para>
+        <maml:para>Details about the resource locations</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Reports on the vda performance and utilization for the amount of hours</maml:para>
+      <maml:para>Details about the resource locations  - HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- &lt;Module base&gt;\Private\Reports-Variables.ps1</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_ResourceUtilization</maml:name>
+        <maml:name>Get-CTXAPI_ResourceLocation</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
             <maml:para>From Citrix Cloud Portal</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>SiteId</maml:name>
-          <maml:description>
-            <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -2656,106 +2149,6 @@ readOnly     : False</dev:code>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
             <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>region</maml:name>
-          <maml:description>
-            <maml:para>Where the cloud instance is hosted</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">us</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">eu</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">ap-s</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-          <maml:name>hours</maml:name>
-          <maml:description>
-            <maml:para>amount of hours to report on</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-          <dev:type>
-            <maml:name>Int32</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-      <command:syntaxItem>
-        <maml:name>Get-CTXAPI_ResourceUtilization</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>what type of report</maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>where the report will be saved</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MonitorData</maml:name>
-          <maml:description>
-            <maml:para>Custom object from Get-CTXAPI_MonitorData</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
-          <dev:type>
-            <maml:name>PSObject</maml:name>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
@@ -2779,78 +2172,6 @@ readOnly     : False</dev:code>
         <maml:name>CustomerId</maml:name>
         <maml:description>
           <maml:para>From Citrix Cloud Portal</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="6" aliases="none">
-        <maml:name>Export</maml:name>
-        <maml:description>
-          <maml:para>what type of report</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="5" aliases="none">
-        <maml:name>hours</maml:name>
-        <maml:description>
-          <maml:para>amount of hours to report on</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
-        <dev:type>
-          <maml:name>Int32</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>MonitorData</maml:name>
-        <maml:description>
-          <maml:para>Custom object from Get-CTXAPI_MonitorData</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">PSObject</command:parameterValue>
-        <dev:type>
-          <maml:name>PSObject</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>region</maml:name>
-        <maml:description>
-          <maml:para>Where the cloud instance is hosted</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="7" aliases="none">
-        <maml:name>ReportPath</maml:name>
-        <maml:description>
-          <maml:para>where the report will be saved</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>SiteId</maml:name>
-        <maml:description>
-          <maml:para>Generate id with Get-CTXAPI_SiteID</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -2888,41 +2209,29 @@ readOnly     : False</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt;  Get-CTXAPI_ResourceUtilization -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region eu -hours 5
+        <dev:code>PS C:\&gt; Get-CTXAPI_ResourceLocation -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 
 
-DnsName                  : AZEUW-CVA
-IsInMaintenanceMode      : 
-AgentVersion             : 2103.0.0.29045
-CurrentRegistrationState : Unregistered
-OSType                   : Windows 2016
-Catalog                  : 
-DesktopGroup             : 
-AVGPercentCpu            : 12
-AVGUsedMemory            : 13
-AVGTotalMemory           : 14
-AVGSessionCount          : 11
 
-DnsName                  : AZEUW-X
-IsInMaintenanceMode      : 
-AgentVersion             : 1912.0.3000.3293
-CurrentRegistrationState : Unregistered
-OSType                   : Windows 2016
-Catalog                  : 
-DesktopGroup             : 
-AVGPercentCpu            : 12
-AVGUsedMemory            : 13
-AVGTotalMemory           : 14
-AVGSessionCount          : 11</dev:code>
+id           : 3452204b0fa
+name         : Azure EU North (DR)
+internalOnly : False
+timeZone     : GMT Standard Time
+readOnly     : False
+
+id           : 6037c58f
+name         : Azure EU West (Production)
+internalOnly : False
+timeZone     : South Africa Standard Time
+readOnly     : False
+
+id           : 9960d851
+name         : Dubai
+internalOnly : False
+timeZone     : Arabian Standard Time
+readOnly     : False</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-      <command:example>
-        <maml:title>-------------------------- Example 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceUtilization -MonitorData $mondata -Export Excel</dev:code>
-        <dev:remarks>
-          <maml:para>if you have the monitoring data from Get-CTXAPI_MonitorData, then you can run it like this,</maml:para>
+          <maml:para>{{ Add example description here }}</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3427,19 +2736,19 @@ SiteServices                                : {@{ServiceName=Delegated Administr
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_Tests</command:name>
+      <command:name>Get-CTXAPI_StoreFrontServers</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_Tests</command:noun>
+      <command:noun>CTXAPI_StoreFrontServers</command:noun>
       <maml:description>
-        <maml:para>Runs test and then retrieves the results of different infrastructure</maml:para>
+        <maml:para>Get StoreFront Details</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Runs test and then retrieves the results of different infrastructure</maml:para>
+      <maml:para>Get StoreFront  Details</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_Tests</maml:name>
+        <maml:name>Get-CTXAPI_StoreFrontServers</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>CustomerId</maml:name>
           <maml:description>
@@ -3467,34 +2776,6 @@ SiteServices                                : {@{ServiceName=Delegated Administr
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>ApiToken</maml:name>
           <maml:description>
-            <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-          <command:parameterValueGroup>
-            <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
-            <command:parameterValue required="false" command:variableLength="false">HTML</command:parameterValue>
-          </command:parameterValueGroup>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
             <maml:para></maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
@@ -3503,50 +2784,6 @@ SiteServices                                : {@{ServiceName=Delegated Administr
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>DeliveryGroupsTest</maml:name>
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>HypervisorsTest</maml:name>
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MachineCatalogsTest</maml:name>
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>SiteTest</maml:name>
-          <maml:description>
-            <maml:para></maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -3554,7 +2791,7 @@ SiteServices                                : {@{ServiceName=Delegated Administr
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>ApiToken</maml:name>
         <maml:description>
-          <maml:para>Generate token with Get-CTXAPI_Token</maml:para>
+          <maml:para></maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3565,66 +2802,6 @@ SiteServices                                : {@{ServiceName=Delegated Administr
       </command:parameter>
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
         <maml:name>CustomerId</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>DeliveryGroupsTest</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>Export</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>HypervisorsTest</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>MachineCatalogsTest</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
-        <maml:name>ReportPath</maml:name>
         <maml:description>
           <maml:para></maml:para>
         </maml:description>
@@ -3646,18 +2823,6 @@ SiteServices                                : {@{ServiceName=Delegated Administr
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>SiteTest</maml:name>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes>
@@ -3688,9 +2853,9 @@ SiteServices                                : {@{ServiceName=Delegated Administr
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>PS C:\&gt;Get-CTXAPI_Tests @CTX_APIDefaultParm -SiteTest -HypervisorsTest -Export HTML -ReportPath C:\Temp}</dev:code>
+        <dev:code>PS C:\&gt; Get-CTXAPI_StoreFrontServers @CTX_APIDefaultParm</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Get StoreFront  Details</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3711,10 +2876,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_Token</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>client_id</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>clientid</maml:name>
           <maml:description>
-            <maml:para>From Citrix Cloud Portal</maml:para>
+            <maml:para>{{ Fill clientid Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3723,10 +2888,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>client_secret</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>clientsecret</maml:name>
           <maml:description>
-            <maml:para>From Citrix Cloud Portal</maml:para>
+            <maml:para>{{ Fill clientsecret Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3738,10 +2903,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>client_id</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>clientid</maml:name>
         <maml:description>
-          <maml:para>From Citrix Cloud Portal</maml:para>
+          <maml:para>{{ Fill clientid Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3750,10 +2915,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>client_secret</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>clientsecret</maml:name>
         <maml:description>
-          <maml:para>From Citrix Cloud Portal</maml:para>
+          <maml:para>{{ Fill clientsecret Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3763,26 +2928,8 @@ SiteServices                                : {@{ServiceName=Delegated Administr
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -3814,10 +2961,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
     <command:syntax>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_Token</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-          <maml:name>client_id</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>clientid</maml:name>
           <maml:description>
-            <maml:para>From Citrix Cloud Portal</maml:para>
+            <maml:para>{{ Fill clientid Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3826,10 +2973,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>client_secret</maml:name>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+          <maml:name>clientsecret</maml:name>
           <maml:description>
-            <maml:para>From Citrix Cloud Portal</maml:para>
+            <maml:para>{{ Fill clientsecret Description }}</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -3841,10 +2988,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
-        <maml:name>client_id</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>clientid</maml:name>
         <maml:description>
-          <maml:para>From Citrix Cloud Portal</maml:para>
+          <maml:para>{{ Fill clientid Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3853,10 +3000,10 @@ SiteServices                                : {@{ServiceName=Delegated Administr
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>client_secret</maml:name>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>clientsecret</maml:name>
         <maml:description>
-          <maml:para>From Citrix Cloud Portal</maml:para>
+          <maml:para>{{ Fill clientsecret Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -3866,26 +3013,8 @@ SiteServices                                : {@{ServiceName=Delegated Administr
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
         <maml:para></maml:para>
@@ -4101,6 +3230,18 @@ ResourceLocation : @{Id=9960d8af43c; Uid=; Name=}</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>CustomerName</maml:name>
+          <maml:description>
+            <maml:para>{{ Fill CustomerName Description }}</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+          <dev:type>
+            <maml:name>String</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="cf">
           <maml:name>Confirm</maml:name>
           <maml:description>
@@ -4154,6 +3295,18 @@ ResourceLocation : @{Id=9960d8af43c; Uid=; Name=}</dev:code>
         <maml:name>CustomerId</maml:name>
         <maml:description>
           <maml:para></maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+        <maml:name>CustomerName</maml:name>
+        <maml:description>
+          <maml:para>{{ Fill CustomerName Description }}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>

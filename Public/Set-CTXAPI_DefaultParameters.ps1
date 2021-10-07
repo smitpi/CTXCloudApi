@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.1
 
 .GUID 1d5077f2-38c0-4abc-9404-c209338557cb
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [06/10/2021_21:23] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Return details about published apps 
+Return details about published apps
 
 #> 
 
@@ -53,31 +56,30 @@ Function Set-CTXAPI_DefaultParameters {
 		[string]$ClientId,
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$ClientSecret
+		[string]$ClientSecret,
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerName
 	)
 
 	if ($pscmdlet.ShouldProcess('Target', 'Operation')) {
 
-
-		$global:CustomerId = $CustomerId
-		$global:ClientId = $ClientId
-		$global:ClientSecret = $ClientSecret
 		$global:ApiToken = Get-CTXAPI_Token -clientid $ClientId -clientsecret $ClientSecret
 		$global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
 
-		$CTX_API = @()
-		$CTX_API = [psobject]@{
+        $tmp = @()
+		$tmp = [psobject]@{
 			CustomerId = $CustomerId
 			SiteId     = $SiteID
 			ApiToken   = $ApiToken
 		}
 		
-		$out = Get-Variable CTX_API
+		$ou = New-Variable -Name CTX_API_$($CustomerName) -Value $tmp -Scope global -Force -PassThru
 
-		Write-Color -Text $out.Name -Color Green
-		$CTX_API
+		Write-Color -Text $ou.Name -Color Green
+		$ou.Value
 
-		Write-Color -Text 'Use ','@CTX_API',' to splat other commamds.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
+		Write-Color -Text 'Use ',"`@$($ou.Name)",' to splat other commamds.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
 	}
 
 } #end Function

@@ -1,4 +1,51 @@
-﻿
+
+<#PSScriptInfo
+
+.VERSION 1.1.1
+
+.GUID 3d5cf7c5-6a67-40c9-9ad6-f21a4bd27ffd
+
+.AUTHOR Pierre Smit
+
+.COMPANYNAME iOCO Tech
+
+.COPYRIGHT
+
+.TAGS api ctx
+
+.LICENSEURI
+
+.PROJECTURI
+
+.ICONURI
+
+.EXTERNALMODULEDEPENDENCIES 
+
+.REQUIREDSCRIPTS
+
+.EXTERNALSCRIPTDEPENDENCIES
+
+.RELEASENOTES
+Created [07/10/2021_13:18] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
+
+.PRIVATEDATA
+
+#> 
+
+
+
+<# 
+
+.DESCRIPTION 
+"Retrieves the token for authentication"
+
+#> 
+
+Param()
+
+
+
 <#PSScriptInfo
 
 .VERSION 1.0.6

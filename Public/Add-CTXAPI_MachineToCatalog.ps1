@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.5
+.VERSION 1.1.6
 
 .GUID c910816d-788d-4e5f-b405-cb9f898bb106
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -32,14 +32,17 @@ Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/05/2021_00:03] error reporting
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Add manually installed machine to a catalog
 
 #>

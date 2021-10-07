@@ -46,6 +46,7 @@ Param()
 
 Function Export-Odata {
 		[CmdletBinding()]
+        [OutputType([System.Object[]])]
 		param(
 			[string]$URI,
 			[Hashtable]$headers)

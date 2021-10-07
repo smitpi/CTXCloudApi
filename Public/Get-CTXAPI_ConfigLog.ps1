@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.4
+.VERSION 1.1.5
 
 .GUID 8e3eaddb-c8e2-4cd6-8a70-0fbea6245f4d
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -31,10 +31,13 @@ Updated [06/04/2021_09:03] Script Fle Info was updated
 Updated [20/04/2021_10:42] Script Fle Info was updated
 Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/10/2021_21:22] Module Info Updated
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -46,7 +49,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Get high level configuration changes in the last x days
 
 #>

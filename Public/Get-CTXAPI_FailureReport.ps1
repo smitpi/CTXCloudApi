@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 1.2.2
 
 .GUID 73cfd5d4-233b-4c97-bfad-0f280a0188dc
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -28,14 +28,17 @@
 .RELEASENOTES
 Created [06/10/2021_18:14] Initital Script Creating
 Updated [06/10/2021_19:01] "Help Files Added"
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 "Reports on connection failures"
 
 #>
@@ -48,7 +51,7 @@ Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_FailureReport {
-	[Cmdletbinding()]
+	[Cmdletbinding(DefaultParameterSetName='Fetch odat')]
     [OutputType([System.Object[]])]
     PARAM(
 		[Parameter(Mandatory = $true)]

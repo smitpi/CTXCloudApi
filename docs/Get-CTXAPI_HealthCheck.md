@@ -5,29 +5,38 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_HealthCheck
+# Get-CTXAPI_DeliveryGroups
 
 ## SYNOPSIS
-Creates a morning healthcheck report for admins. Looking at some key data points
+Return details of all delivery groups
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_HealthCheck [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-region] <String>
- [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_DeliveryGroups [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Creates a morning healthcheck report for admins. Looking at some key data points
+Return details of all delivery groups
+
+- HTML Reports
+	- When creating a HTML report:
+	- The logo can be changed by replacing the variable 
+		- $Global:Logourl =''
+	- The colors of the report can be changed, by replacing:
+		- $global:colour1 = '#061820'
+		- $global:colour2 = '#FFD400'
+	- Or permanently replace it by editing the following file
+	- <Module base>\Private\Reports-Variables.ps1
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Get-CTXAPI_HealthCheck -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -ReportPath C:\Temp\
+PS C:\> Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
 
-details in the html file
+delivery group settings
 
 ## PARAMETERS
 
@@ -49,6 +58,7 @@ Accept wildcard characters: False
 ### -CustomerId
  From Citrix Cloud Portal
 
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -56,37 +66,6 @@ Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -region
-Where the cloud instance is hosted
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReportPath
- where the report will be saved
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 4
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

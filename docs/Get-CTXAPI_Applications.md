@@ -17,7 +17,7 @@ Get-CTXAPI_Applications [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <S
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Returns a list of published Apps
 
 ## EXAMPLES
 

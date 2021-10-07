@@ -5,66 +5,59 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_ResourceUtilization
+# Get-CTXAPI_ResourceLocation
 
 ## SYNOPSIS
-Reports on the vda performance and utilization for the amount of hours
+Details about the resource locations 
 
 ## SYNTAX
 
-### Fetch odata
 ```
-Get-CTXAPI_ResourceUtilization [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
- [[-region] <String>] [[-hours] <Int32>] [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
-```
-
-### Got odata
-```
-Get-CTXAPI_ResourceUtilization [-MonitorData <PSObject>] [[-Export] <String>] [[-ReportPath] <String>]
- [<CommonParameters>]
+Get-CTXAPI_ResourceLocation [-CustomerId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Reports on the vda performance and utilization for the amount of hours
+Details about the resource locations 
+- HTML Reports
+	- When creating a HTML report:
+	- The logo can be changed by replacing the variable 
+		- $Global:Logourl =''
+	- The colors of the report can be changed, by replacing:
+		- $global:colour1 = '#061820'
+		- $global:colour2 = '#FFD400'
+	- Or permanently replace it by editing the following file
+	- <Module base>\Private\Reports-Variables.ps1
+
+
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\>  Get-CTXAPI_ResourceUtilization -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region eu -hours 5
+PS C:\> Get-CTXAPI_ResourceLocation -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 
 
-DnsName                  : AZEUW-CVA
-IsInMaintenanceMode      : 
-AgentVersion             : 2103.0.0.29045
-CurrentRegistrationState : Unregistered
-OSType                   : Windows 2016
-Catalog                  : 
-DesktopGroup             : 
-AVGPercentCpu            : 12
-AVGUsedMemory            : 13
-AVGTotalMemory           : 14
-AVGSessionCount          : 11
 
-DnsName                  : AZEUW-X
-IsInMaintenanceMode      : 
-AgentVersion             : 1912.0.3000.3293
-CurrentRegistrationState : Unregistered
-OSType                   : Windows 2016
-Catalog                  : 
-DesktopGroup             : 
-AVGPercentCpu            : 12
-AVGUsedMemory            : 13
-AVGTotalMemory           : 14
-AVGSessionCount          : 11
+id           : 3452204b0fa
+name         : Azure EU North (DR)
+internalOnly : False
+timeZone     : GMT Standard Time
+readOnly     : False
+
+id           : 6037c58f
+name         : Azure EU West (Production)
+internalOnly : False
+timeZone     : South Africa Standard Time
+readOnly     : False
+
+id           : 9960d851
+name         : Dubai
+internalOnly : False
+timeZone     : Arabian Standard Time
+readOnly     : False
 ```
 
-### Example 2
-```powershell
-Get-CTXAPI_ResourceUtilization -MonitorData $mondata -Export Excel
-```
-
-if you have the monitoring data from Get-CTXAPI_MonitorData, then you can run it like this,
+{{ Add example description here }}
 
 ## PARAMETERS
 
@@ -73,7 +66,7 @@ if you have the monitoring data from Get-CTXAPI_MonitorData, then you can run it
 
 ```yaml
 Type: String
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -88,105 +81,11 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Export
-** what type of report**
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Excel, HTML
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hours
- amount of hours to report on
-
-```yaml
-Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MonitorData
-Custom object from Get-CTXAPI_MonitorData
-
-
-```yaml
-Type: PSObject
-Parameter Sets: Got odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -region
-Where the cloud instance is hosted
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReportPath
- where the report will be saved
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: True
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

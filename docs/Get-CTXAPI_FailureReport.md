@@ -5,35 +5,39 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_FailureReport
+# Get-CTXAPI_DeliveryGroups
 
 ## SYNOPSIS
-Reports on connection failures
+Return details of all delivery groups
 
 ## SYNTAX
 
-### Got odata
 ```
-Get-CTXAPI_FailureReport [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
- [-MonitorData <PSObject>] [-FailureType] <String> [[-Export] <String>] [[-ReportPath] <String>]
- [<CommonParameters>]
-```
-
-### Fetch odata
-```
-Get-CTXAPI_FailureReport [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [[-region] <String>]
- [[-hours] <Int32>] [-FailureType] <String> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_DeliveryGroups [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Return details of all delivery groups
+
+- HTML Reports
+	- When creating a HTML report:
+	- The logo can be changed by replacing the variable 
+		- $Global:Logourl =''
+	- The colors of the report can be changed, by replacing:
+		- $global:colour1 = '#061820'
+		- $global:colour2 = '#FFD400'
+	- Or permanently replace it by editing the following file
+	- <Module base>\Private\Reports-Variables.ps1
+
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\> Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine
+PS C:\> Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
+
+delivery group settings
 
 ## PARAMETERS
 
@@ -55,6 +59,7 @@ Accept wildcard characters: False
 ### -CustomerId
  From Citrix Cloud Portal
 
+
 ```yaml
 Type: String
 Parameter Sets: (All)
@@ -62,102 +67,6 @@ Aliases:
 
 Required: True
 Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Export
- what type of report
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Excel, HTML
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FailureType
-Type of failures to report on
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Connection, Machine
-
-Required: True
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hours
-amount of hours to report on
-
-
-```yaml
-Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MonitorData
-
-```yaml
-Type: PSObject
-Parameter Sets: Got odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -region
-Where the cloud instance is hosted
-
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: False
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReportPath
- where the report will be saved
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 7
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

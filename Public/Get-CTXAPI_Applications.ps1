@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.1
 
 .GUID 5f6ad0a4-e034-47e5-b957-b70399c4e4eb
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [06/10/2021_21:04] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Return details about published apps 
+Return details about published apps
 
 #> 
 

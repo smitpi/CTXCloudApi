@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.1
+.VERSION 1.1.2
 
 .GUID 9d297a8a-96ab-467a-ba68-f162937cc868
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -28,10 +28,11 @@
 .RELEASENOTES
 Created [28/05/2021_15:41] Initital Script Creating
 Updated [05/10/2021_21:22] Module Info Updated
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -39,9 +40,10 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 
 
+
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Run report to show usefull information
 
 #>

@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.0.5
+.VERSION 1.1.6
 
 .GUID f2cc4273-d5ac-49b1-b12c-a8e2d1b8cf06
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -32,16 +32,19 @@ Updated [24/04/2021_07:22] Changes the report options
 Updated [05/05/2021_00:04] added monitor data
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Resource utilization in the last x hours
 
 #>
@@ -49,7 +52,7 @@ Resource utilization in the last x hours
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_ResourceUtilization {
-	[Cmdletbinding()]
+	[Cmdletbinding(DefaultParameterSetName='Fetch odat')]
 		PARAM(
 		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]

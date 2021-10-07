@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_CloudServices
 
 ## SYNOPSIS
-Client's Subscription details, and wjat features are enabled
+Client's Subscription details, and what features are enabled
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_CloudServices [-CustomerId] <String> [-ApiToken] <String> [<CommonPar
 ```
 
 ## DESCRIPTION
-Client's Subscription details, and wjat features are enabled
+Client's Subscription details, and what features are enabled
 
 ## EXAMPLES
 

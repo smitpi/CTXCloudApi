@@ -13,7 +13,7 @@ Retrives the token for authentication
 ## SYNTAX
 
 ```
-Get-CTXAPI_Token [[-client_id] <String>] [[-client_secret] <String>] [<CommonParameters>]
+Get-CTXAPI_Token [[-clientid] <String>] [[-clientsecret] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -30,23 +30,8 @@ PS C:\> $apitoken = Get-CTXAPI_Token -client_id $clientid -client_secret $client
 
 ## PARAMETERS
 
-### -client_id
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -client_secret
- From Citrix Cloud Portal
+### -clientid
+{{ Fill clientid Description }}
 
 ```yaml
 Type: String
@@ -60,15 +45,28 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -clientsecret
+{{ Fill clientsecret Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.0.0
+.VERSION 1.1.1
 
 .GUID e1a502c7-0dec-45cd-afed-d1041a24b1cf
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [06/10/2021_19:58] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <# 
 
 .DESCRIPTION 
- Get zone details from api 
+Get zone details from api
 
 #> 
 

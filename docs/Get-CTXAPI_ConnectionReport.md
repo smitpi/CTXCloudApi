@@ -5,53 +5,46 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_ConnectionReport
+# Get-CTXAPI_ConfigLog
 
 ## SYNOPSIS
-Generate a report on connections
+reports on changes in the environment
 
 ## SYNTAX
 
-### Fetch odata
 ```
-Get-CTXAPI_ConnectionReport [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [[-region] <String>]
- [[-hours] <Int32>] [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
-```
-
-### Got odata
-```
-Get-CTXAPI_ConnectionReport [-MonitorData <PSObject>] [[-Export] <String>] [[-ReportPath] <String>]
+Get-CTXAPI_ConfigLog [-CustomerId] <String> [-SiteId] <String> [-Days] <String> [-ApiToken] <String>
  [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Generate a report on connections
+reports on changes in the environment
+- HTML Reports
+	- When creating a HTML report:
+	- The logo can be changed by replacing the variable 
+		- $Global:Logourl =''
+	- The colors of the report can be changed, by replacing:
+		- $global:colour1 = '#061820'
+		- $global:colour2 = '#FFD400'
+	- Or permanently replace it by editing the following file
+	- <Module base>\Private\Reports-Variables.ps1
+
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\>  Get-CTXAPI_ConnectionReport -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -region ap-s -hours 24 -Export Excel -ReportPath C:\Temp
+PS C:\> Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Days 7
 
 
-[2021-10-06 11:27:44] Getting data for:
-				Days: 1
-				Hours: 24
-
-
-[11:27:44] Fetching :ApplicationActivitySummaries[9sec]
-[11:27:53] Fetching :ApplicationInstances[4sec]
-[11:27:58] Fetching :Applications[1sec]
-[11:28:00] Fetching :Catalogs[0sec]
-[11:28:00] Fetching :ConnectionFailureLogs[0sec]
-[11:28:01] Fetching :Connections[4sec]
-[11:28:06] Fetching :DesktopGroups[0sec]
-[11:28:07] Fetching :DesktopOSDesktopSummaries[0sec]
-[11:28:08] Fetching :FailureLogSummaries[1sec]
-[11:28:09
+Id                 : 6a657368-873b-4379-ab9e-6a1f8aa73b03
+AdminMachineIP     : 
+EndTime            : 9/29/2021 2:01:44 PM
+FormattedEndTime   : 2021-09-29T14:01:44Z
+IsSuccessful       : True
+OperationType      : AdminActivity
+Parameters
 ```
-
-Details in the excel / html file
 
 ## PARAMETERS
 
@@ -60,11 +53,11 @@ Details in the excel / html file
 
 ```yaml
 Type: String
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
+Position: 3
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -75,7 +68,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -85,73 +78,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Export
- what type of report
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Excel, HTML
-
-Required: False
-Position: 6
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hours
-a moun of hours it will report on
-
-
-```yaml
-Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: 5
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MonitorData
-a cutom psobject with monitoring data, if it is not present. Then the script fetch the odata
-
-
-```yaml
-Type: PSObject
-Parameter Sets: Got odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -region
-where the clients' cloud instance is hosted
-
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: False
-Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ReportPath
- where the report will be saved
+### -Days
+The amount of days of changes to report
 
 
 ```yaml
@@ -159,8 +87,8 @@ Type: String
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 7
+Required: True
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -171,7 +99,7 @@ Accept wildcard characters: False
 
 ```yaml
 Type: String
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True

@@ -14,7 +14,7 @@ Adds the variables in a persistent hash table
 
 ```
 Set-CTXAPI_DefaultParameters [[-CustomerId] <String>] [[-ClientId] <String>] [[-ClientSecret] <String>]
- [-WhatIf] [-Confirm] [<CommonParameters>]
+ [-CustomerName <String>] [-WhatIf] [-Confirm] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -90,6 +90,21 @@ Aliases:
 
 Required: False
 Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -CustomerName
+{{ Fill CustomerName Description }}
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

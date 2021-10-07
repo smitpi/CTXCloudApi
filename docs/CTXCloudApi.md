@@ -18,25 +18,25 @@ add machine to a machine catalog
 Returns a list of published Apps
 
 ### [Get-CTXAPI_CloudServices](Get-CTXAPI_CloudServices.md)
-Client's Subscription details, and wjat features are enabled
+Client's Subscription details, and what features are enabled
 
-### [Get-CTXAPI_ConfigAudit](Get-CTXAPI_ConfigAudit.md)
-Generate detailed report on machine catlog,delivery group and published apps
+### [Get-CTXAPI_CloudServices](Get-CTXAPI_CloudServices.md)
+Client's Subscription details, and what features are enabled
 
 ### [Get-CTXAPI_ConfigLog](Get-CTXAPI_ConfigLog.md)
 reports on changes in the environment
 
-### [Get-CTXAPI_ConnectionReport](Get-CTXAPI_ConnectionReport.md)
-Generate a report on connections
+### [Get-CTXAPI_ConfigLog](Get-CTXAPI_ConfigLog.md)
+reports on changes in the environment
 
 ### [Get-CTXAPI_DeliveryGroups](Get-CTXAPI_DeliveryGroups.md)
 Return details of all delivery groups
 
-### [Get-CTXAPI_FailureReport](Get-CTXAPI_FailureReport.md)
-Reports on connection failures
+### [Get-CTXAPI_DeliveryGroups](Get-CTXAPI_DeliveryGroups.md)
+Return details of all delivery groups
 
-### [Get-CTXAPI_HealthCheck](Get-CTXAPI_HealthCheck.md)
-Creates a morning healthcheck report for admins. Looking at some key data points
+### [Get-CTXAPI_DeliveryGroups](Get-CTXAPI_DeliveryGroups.md)
+Return details of all delivery groups
 
 ### [Get-CTXAPI_Hypervisors](Get-CTXAPI_Hypervisors.md)
 Returns details about the hosting connection
@@ -56,8 +56,8 @@ Get the data from odata
 ### [Get-CTXAPI_ResourceLocation](Get-CTXAPI_ResourceLocation.md)
 Details about the resource locations 
 
-### [Get-CTXAPI_ResourceUtilization](Get-CTXAPI_ResourceUtilization.md)
-Reports on the vda performance and utilization for the amount of hours
+### [Get-CTXAPI_ResourceLocation](Get-CTXAPI_ResourceLocation.md)
+Details about the resource locations 
 
 ### [Get-CTXAPI_Sessions](Get-CTXAPI_Sessions.md)
 Reports on user sessions
@@ -71,8 +71,8 @@ Get the SiteID
 ### [Get-CTXAPI_StoreFrontServers](Get-CTXAPI_StoreFrontServers.md)
 Get StoreFront Details
 
-### [Get-CTXAPI_Tests](Get-CTXAPI_Tests.md)
-Runs test and then retrieves the results of different infrastructure
+### [Get-CTXAPI_StoreFrontServers](Get-CTXAPI_StoreFrontServers.md)
+Get StoreFront Details
 
 ### [Get-CTXAPI_Token](Get-CTXAPI_Token.md)
 Retrives the token for authentication 
