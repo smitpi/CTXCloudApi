@@ -65,12 +65,12 @@ Function Set-CTXAPI_DefaultParameters {
 	if ($pscmdlet.ShouldProcess('Target', 'Operation')) {
 
 		$global:ApiToken = Get-CTXAPI_Token -clientid $ClientId -clientsecret $ClientSecret
-		$global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
+		$global:Siteid = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
 
         $tmp = @()
 		$tmp = [psobject]@{
 			CustomerId = $CustomerId
-			SiteId     = $SiteID
+			SiteId     = $Siteid
 			ApiToken   = $ApiToken
 		}
 		
