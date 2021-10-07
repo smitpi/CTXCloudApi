@@ -51,23 +51,24 @@ Uses Registration date to calculate uptime
 Param()
 
 
-# .ExternalHelp CTXCloudApi-help.xml
+#.ExternalHelp CTXCloudApi-help.xml
+
 Function Get-CTXAPI_VDAUptime {
 	[Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-		[Parameter(Mandatory = $false, Position = 5)]
+		[Parameter(Mandatory = $false)]
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
-		[Parameter(Mandatory = $false, Position = 6)]
+		[Parameter(Mandatory = $false)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp)
 

@@ -36,11 +36,6 @@ Updated [05/10/2021_21:22] Module Info Updated
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
-
-
 
 
 <#
@@ -49,32 +44,33 @@ Report on connections in the last x hours
 
 #>
 
-# .ExternalHelp CTXCloudApi-help.xml
+#.ExternalHelp CTXCloudApi-help.xml
+
 Function Get-CTXAPI_ConnectionReport {
 	[Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
         [Parameter(Mandatory = $false,ParameterSetName='Got odata')]
 		[pscustomobject]$MonitorData = $null,
-		[Parameter(Mandatory = $false, Position = 4,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 5,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
 		[int]$hours = 24,
-		[Parameter(Mandatory = $false, Position = 6)]
+		[Parameter(Mandatory = $false)]
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
-		[Parameter(Mandatory = $false, Position = 7)]
+		[Parameter(Mandatory = $false)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)

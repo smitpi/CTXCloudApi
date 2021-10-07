@@ -41,18 +41,18 @@ Created [06/10/2021_21:23] Initital Script Creating
 
 Param()
 
-
+#.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_SiteDetails {
 	[Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
 

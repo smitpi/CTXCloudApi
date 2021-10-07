@@ -40,28 +40,28 @@ Created [06/10/2021_21:23] Initital Script Creating
 #> 
 
 Param()
-
+#.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Tests {
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]
     PARAM(
-        [Parameter(Mandatory = $true, Position = 0)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$CustomerId,
-        [Parameter(Mandatory = $true, Position = 1)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$SiteId,
-        [Parameter(Mandatory = $true, Position = 2)]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [string]$ApiToken,
         [switch]$SiteTest = $false,
         [switch]$HypervisorsTest = $false,
         [switch]$DeliveryGroupsTest = $false,
         [switch]$MachineCatalogsTest = $false,
-        [Parameter(Mandatory = $false, Position = 3)]
+        [Parameter(Mandatory = $false)]
         [ValidateSet('Excel', 'HTML')]
         [string]$Export = 'Host',
-        [Parameter(Mandatory = $false, Position = 4)]
+        [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]
         [string]$ReportPath = $env:temp
 				)

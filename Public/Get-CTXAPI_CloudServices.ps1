@@ -40,14 +40,15 @@ Created [06/10/2021_21:07] Initital Script Creating
 #> 
 
 Param()
+#.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_CloudServices {
 [Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
 

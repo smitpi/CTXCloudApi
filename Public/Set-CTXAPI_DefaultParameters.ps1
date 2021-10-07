@@ -41,57 +41,43 @@ Created [06/10/2021_21:23] Initital Script Creating
 
 Param()
 
+#.ExternalHelp CTXCloudApi-help.xml
 
 Function Set-CTXAPI_DefaultParameters {
-           [Cmdletbinding(SupportsShouldProcess=$true)]
-            	param(
-                [ValidateNotNullOrEmpty()]
-		        [string]$CustomerId,
-		        [Parameter()]
-		        [ValidateNotNullOrEmpty()]
-		        [string]$ClientId,
-		        [Parameter()]
-		        [ValidateNotNullOrEmpty()]
-		        [string]$ClientSecret
-	            )
+	[Cmdletbinding(SupportsShouldProcess = $true)]
+	param(
+		[ValidateNotNullOrEmpty()]
+		[string]$CustomerId,
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$ClientId,
+		[Parameter()]
+		[ValidateNotNullOrEmpty()]
+		[string]$ClientSecret
+	)
 
-        if ($pscmdlet.ShouldProcess("Target", "Operation")) {
+	if ($pscmdlet.ShouldProcess('Target', 'Operation')) {
 
 
-$global:CustomerId = $CustomerId
-$global:ClientId = $ClientId
-$global:ClientSecret = $ClientSecret
-$global:ApiToken = Get-CTXAPI_Token -client_id $ClientId -client_secret $ClientSecret
-$global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
+		$global:CustomerId = $CustomerId
+		$global:ClientId = $ClientId
+		$global:ClientSecret = $ClientSecret
+		$global:ApiToken = Get-CTXAPI_Token -clientid $ClientId -clientsecret $ClientSecret
+		$global:SiteID = Get-CTXAPI_SiteID -CustomerId $CustomerId -ApiToken $ApiToken
 
-$CTX_APIDefaultParm = @()
-$CTX_APIAllParm = @()
-$ClientDefault = @()
+		$CTX_API = @()
+		$CTX_API = [psobject]@{
+			CustomerId = $CustomerId
+			SiteId     = $SiteID
+			ApiToken   = $ApiToken
+		}
+		
+		$out = Get-Variable CTX_API
 
-$CTX_APIDefaultParm = [psobject]@{
-    CustomerId   = $CustomerId
-    SiteId       = $SiteID
-    ApiToken     = $ApiToken
-}
+		Write-Color -Text $out.Name -Color Green
+		$CTX_API
 
-$global:CTX_APIAllParm = [psobject]@{
-    CustomerId     = $CustomerId
-    ClientId       = $ClientId
-    ClientSecret   = $ClientSecret
-    SiteId         = $SiteID
-    ApiToken       = $ApiToken
-    ReportPath     = $env:TEMP
-}
-$out = Get-Variable CTX_APIDefaultParm
-$out2 = Get-Variable CTX_APIAllParm
-
-Write-Color -Text $out.Name -Color Green
-$global:CTX_APIDefaultParm
-
-Write-Color -Text $out2.Name -Color Green
-$global:CTX_APIAllParm
-
-Write-Color -Text 'Use ','@CTX_APIDefaultParm',' and ','@CTX_APIAllParm ','in the other commands.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
-}
+		Write-Color -Text 'Use ','@CTX_API',' to splat other commamds.' -Color Cyan,Yellow,Cyan,Yellow,Cyan -LinesBefore 2
+	}
 
 } #end Function

@@ -47,23 +47,23 @@ Add manually installed machine to a catalog
 Param()
 
 
-# .ExternalHelp CTXCloudApi-help.xml
+#.ExternalHelp CTXCloudApi-help.xml
 Function Add-CTXAPI_MachineToCatalog {
 	[Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-		[Parameter(Mandatory = $true, Position = 3)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CatalogNameORID,
-		[Parameter(Mandatory = $true, Position = 4)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$MachineName
 	)

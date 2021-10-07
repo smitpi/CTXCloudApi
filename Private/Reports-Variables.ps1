@@ -1,4 +1,6 @@
-﻿$global:RegistrationState = [PSCustomObject]@{
+﻿
+
+$global:RegistrationState = [PSCustomObject]@{
 	0 = 'Unknown'
 	1 = 'Registered'
 	2 = 'Unregistered'
@@ -125,23 +127,4 @@ $global:TableSectionSettings = @{
 #$Global:Logourl = 'https://ioco.tech/wp-content/uploads/2020/03/ioco-logo.png'
 $Global:Logourl = 'https://c.na65.content.force.com/servlet/servlet.ImageServer?id=0150h000003yYnkAAE&oid=00DE0000000c48tMAA'
 #endregion
-
-<#
-# Dot source public/private functions
-$publicFunctionsPath = Join-Path -Path $PSScriptRoot -ChildPath 'Public/*.ps1'
-$privateFunctionsPath = Join-Path -Path $PSScriptRoot -ChildPath 'Private/*.ps1'
-$public = @(Get-ChildItem -Path $publicFunctionsPath -Recurse -ErrorAction Stop)
-$private = @(Get-ChildItem -Path $privateFunctionsPath -Recurse -ErrorAction Stop)
-foreach ($file in @($public + $private)) {
-	try {
-		. $file.FullName
-	} catch {
-		throw "Unable to dot source [$($file.FullName)]"
-	}
-}
-Export-ModuleMember -Function $public.BaseName
-
-#>
-
-
 

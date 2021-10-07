@@ -61,14 +61,14 @@ Get cloud site id
 Param()
 
 
-# .ExternalHelp CTXCloudApi-help.xml
+#.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_SiteID {
 	[Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken)
 

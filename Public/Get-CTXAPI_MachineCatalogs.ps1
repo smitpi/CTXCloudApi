@@ -42,9 +42,8 @@ Created [06/10/2021_21:23] Initital Script Creating
 Param()
 
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
+
+
 Function Get-CTXAPI_MachineCatalogs {
 	[Cmdletbinding()]
     [OutputType([System.Object[]])]

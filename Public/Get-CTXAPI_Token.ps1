@@ -56,22 +56,21 @@ Updated [05/10/2021_21:22] Module Info Updated
 Get cloud api token bearer
 
 #>
-
-# .ExternalHelp CTXCloudApi-help.xml
+#.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Token {
 	[CmdletBinding()]
 	param(
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$client_id,
+		[string]$clientid,
 		[Parameter()]
 		[ValidateNotNullOrEmpty()]
-		[string]$client_secret
+		[string]$clientsecret
 	)
 	$body = [hashtable]@{
 		grant_type    = 'client_credentials'
-		client_id     = $client_id
-		client_secret = $client_secret
+		client_id     = $clientid
+		client_secret = $clientsecret
 	}
 	$tokenUrl = 'https://api-us.cloud.com/cctrustoauth2/root/tokens/clients'
 	try { ((Invoke-WebRequest -Uri $tokenUrl -Method POST -Body $body).Content | ConvertFrom-Json).access_token }

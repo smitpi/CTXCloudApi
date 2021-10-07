@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx vda
+.TAGS ctx
 
 .LICENSEURI
 
@@ -33,10 +33,6 @@ Updated [06/10/2021_19:01] "Help Files Added"
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
-
 <#
 
 .DESCRIPTION
@@ -49,38 +45,38 @@ Param()
 
 
 
-# .ExternalHelp CTXCloudApi-help.xml
 
+#.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_FailureReport {
 	[Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
         [Parameter(Mandatory = $false,ParameterSetName='Got odata')]
 		[pscustomobject]$MonitorData = $null,
-		[Parameter(Mandatory = $false, Position = 3,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, Position = 4,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
 		[int]$hours = 24,
-		[Parameter(Mandatory = $true, Position = 5)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('Connection', 'Machine')]
 		[string]$FailureType,
-		[Parameter(Mandatory = $false, Position = 6)]
+		[Parameter(Mandatory = $false)]
 		[ValidateSet('Excel', 'HTML')]
 		[string]$Export = 'Host',
-		[Parameter(Mandatory = $false, Position = 7)]
+		[Parameter(Mandatory = $false)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)

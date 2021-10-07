@@ -41,23 +41,23 @@ Created [06/10/2021_21:23] Initital Script Creating
 
 Param()
 
-
+#.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigAudit {
 [Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$ApiToken,
-		[Parameter(Mandatory = $true, Position = 6)]
+		[Parameter(Mandatory = $true)]
 		[ValidateSet('Excel', 'HTML', 'Host')]
 		[string]$Export,
-		[Parameter(Mandatory = $false, Position = 7)]
+		[Parameter(Mandatory = $false)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)

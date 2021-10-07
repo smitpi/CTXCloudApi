@@ -33,7 +33,7 @@ Generate a report on connections
 Return details of all delivery groups
 
 ### [Get-CTXAPI_FailureReport](Get-CTXAPI_FailureReport.md)
-Reports on connection faiures
+Reports on connection failures
 
 ### [Get-CTXAPI_HealthCheck](Get-CTXAPI_HealthCheck.md)
 Creates a morning healthcheck report for admins. Looking at some key data points
