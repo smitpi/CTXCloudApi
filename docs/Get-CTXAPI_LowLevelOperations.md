@@ -18,7 +18,7 @@ Get-CTXAPI_LowLevelOperations [-CustomerId] <String> [-SiteId] <String> [-HighLe
 ```
 
 ## DESCRIPTION
-{{ Fill in the Description }}
+Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
 
 ## EXAMPLES
 

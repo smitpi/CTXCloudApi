@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigLog
 
 ## SYNOPSIS
-reports on changes in the environment
+Reports on changes in the environment
 
 ## SYNTAX
 
@@ -18,7 +18,7 @@ Get-CTXAPI_ConfigLog [-CustomerId] <String> [-SiteId] <String> [-Days] <String> 
 ```
 
 ## DESCRIPTION
-reports on changes in the environment
+Reports on changes in the environment
 - HTML Reports
 	- When creating a HTML report:
 	- The logo can be changed by replacing the variable 

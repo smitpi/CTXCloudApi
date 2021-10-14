@@ -75,10 +75,10 @@ Get StoreFront Details
 Get StoreFront Details
 
 ### [Get-CTXAPI_Token](Get-CTXAPI_Token.md)
-Retrives the token for authentication 
+Retrieves the token for authentication 
 
 ### [Get-CTXAPI_Token](Get-CTXAPI_Token.md)
-Retrives the token for authentication 
+Retrieves the token for authentication 
 
 ### [Get-CTXAPI_Zones](Get-CTXAPI_Zones.md)
 show zone details

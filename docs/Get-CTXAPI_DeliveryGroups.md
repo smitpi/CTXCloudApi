@@ -26,7 +26,7 @@ Return details of all delivery groups
 PS C:\> Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
 
-delivery group settings
+Delivery group settings
 
 ## PARAMETERS
 

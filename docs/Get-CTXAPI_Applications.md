@@ -50,11 +50,10 @@ AssociatedApplicationGroupUuids : {}
 ZoneId                          :
 ```
 
-{{ Add example description here }}
-
 ## PARAMETERS
 
 ### -ApiToken
+
  Generate token with Get-CTXAPI_Token
 
 
