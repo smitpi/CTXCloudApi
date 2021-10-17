@@ -29,7 +29,6 @@ Reports on changes in the environment
 	- Or permanently replace it by editing the following file
 	- <Module base>\Private\Reports-Variables.ps1
 
-
 ## EXAMPLES
 
 ### Example 1
