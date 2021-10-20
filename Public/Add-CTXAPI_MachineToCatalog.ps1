@@ -26,9 +26,9 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [17/04/2021_09=58] Initital Script Creating
-Updated [20/04/2021_10:42] Script Fle Info was updated
-Updated [22/04/2021_11:42] Script Fle Info was updated
+Created [17/04/2021_09=58]  Script Creating
+Updated [20/04/2021_10:42] Script File Info was updated
+Updated [22/04/2021_11:42] Script File Info was updated
 Updated [05/05/2021_00:03] error reporting
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
@@ -52,6 +52,7 @@ Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Add-CTXAPI_MachineToCatalog {
+	
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true)]
