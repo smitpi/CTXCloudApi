@@ -59,32 +59,31 @@ Param()
 
 # .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigLog {
+<#
+.SYNOPSIS
+Get high level configuration changes in the last x days
+
+.DESCRIPTION
+Get high level configuration changes in the last x days
+
+.PARAMETER Days
+Number of days to report on
+
+.PARAMETER APIHeader
+Custom object from Get-CTXAPI_Headers
+
+.EXAMPLE
+Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
+
+#>
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
+		[PSTypeName(CTXAPIHeaderObject)]$APIHeader,
 		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$Days,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
-
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
-	}
+		[string]$Days)
 
 
-	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/ConfigLog/Operations?days=$days" -Headers $headers).Content | ConvertFrom-Json).items
-
-
-
-
+(Invoke-RestMethod -uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations?days=$days" -Headers $APIHeader.headers).items 
 
 } #end Function

@@ -38,7 +38,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 <# 
 
 .DESCRIPTION 
-Return details about published apps
+Return details about cloud services and subscription
 
 #> 
 
@@ -46,22 +46,27 @@ Param()
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_CloudServices {
-[Cmdletbinding()]
+	<#
+.SYNOPSIS
+Return details about cloud services and subscription
+
+.DESCRIPTION
+Return details about cloud services and subscription
+
+.PARAMETER APIHeader
+Custom object from Get-CTXAPI_Headers
+
+.EXAMPLE
+Get-CTXAPI_CloudServices -APIHeader $APIHeader
+
+#>
+	[Cmdletbinding()]
+	[OutputType([System.Object[]])]
 	PARAM(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
+		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
+	)
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
-	}
 
-	((Invoke-WebRequest "https://core.citrixworkspacesapi.net/$customerId/serviceStates" -Headers $headers).Content | ConvertFrom-Json).items
-
+	(Invoke-RestMethod -Uri "https://core.citrixworkspacesapi.net/$($ApiHeader.headers.'Citrix-CustomerId')/serviceStates" -Headers $ApiHeader.headers).items
 
 } #end Function

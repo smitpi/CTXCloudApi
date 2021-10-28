@@ -38,7 +38,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 <# 
 
 .DESCRIPTION 
-Return details about published apps
+Return details about hosting (hypervizor)
 
 #> 
 
@@ -46,26 +46,29 @@ Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_Hypervisors {
+	<#
+.SYNOPSIS
+Return details about hosting (hypervizor)
+
+.DESCRIPTION
+Return details about hosting (hypervizor)
+
+.PARAMETER APIHeader
+Custom object from Get-CTXAPI_Headers
+
+.EXAMPLE
+Get-CTXAPI_Hypervisors -APIHeader $APIHeader
+
+#>
 	[Cmdletbinding()]
+	[OutputType([System.Object[]])]
 	PARAM(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
+		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
+	)
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
+	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/hypervisors/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)" -Method Get -Headers $APIHeader.headers
 	}
-
-
-	((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/hypervisors" -Headers $headers).Content | ConvertFrom-Json).items
 
 
 } #end Function

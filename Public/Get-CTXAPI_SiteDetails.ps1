@@ -38,7 +38,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 <# 
 
 .DESCRIPTION 
-Return details about published apps
+Return details about your farm / site
 
 #> 
 
@@ -47,27 +47,28 @@ Param()
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_SiteDetails {
+<#
+.SYNOPSIS
+Return details about your farm / site
+
+.DESCRIPTION
+Return details about your farm / site
+
+.PARAMETER APIHeader
+Custom object from Get-CTXAPI_Headers
+
+.EXAMPLE
+Get-CTXAPI_SiteDetails -APIHeader $APIHeader
+
+#>
 	[Cmdletbinding()]
+	[OutputType([System.Object[]])]
 	PARAM(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
+		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
+	)
+
+	Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')" -Method get -Headers $APIHeader.headers
 
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
-	}
-
-	((Invoke-WebRequest "https://api-us.cloud.com/cvadapis/Sites/$siteid" -Headers $headers).Content | ConvertFrom-Json)
-	#((Invoke-WebRequest "https://api-us.cloud.com/cvadapis/$siteid/tenants" -Headers $headers).Content | ConvertFrom-Json)
-
-
+	
 } #end Function

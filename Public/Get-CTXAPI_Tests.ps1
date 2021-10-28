@@ -48,15 +48,7 @@ Function Get-CTXAPI_Tests {
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]
     PARAM(
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]$CustomerId,
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]$SiteId,
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [string]$ApiToken,
+        [PSTypeName(CTXAPIHeaderObject)]$APIHeader
         [switch]$SiteTest = $false,
         [switch]$HypervisorsTest = $false,
         [switch]$DeliveryGroupsTest = $false,
@@ -69,28 +61,27 @@ Function Get-CTXAPI_Tests {
         [string]$ReportPath = $env:temp
 				)
 
-
-    $headers = @{
-        Authorization       = "CwsAuth Bearer=$($ApiToken)"
-        'Citrix-CustomerId' = $customerId
-        Accept              = 'application/json'
-    }
-
     $data = @()
 
     if ($SiteTest) {
+
         Write-Color 'Requesting Site Tests' -Color DarkYellow -ShowTime
-        Invoke-WebRequest ([string]::Format("https://api-us.cloud.com/cvadapis/sites/{0}/`$test", $siteid)) -Method Post -Headers $headers -ContentType 'application/json' -ErrorAction SilentlyContinue
+        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/`$test" -Method Post -Headers $APIHeader.headers -ContentType application/json
         Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
         Start-Sleep 60
         Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $data += (Invoke-RestMethod "https://api-us.cloud.com/cvadapis/sites/$siteid/TestReport" -Headers $headers).TestResults
+        $data += (Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/TestReport" -Method get -Headers $APIHeader.headers).TestResults
+
+
         Write-Color 'Complete' -Color Green -ShowTime
     }
 
+    ## TODO I need to fix these urls.
+    
     if ($HypervisorsTest) {
         Write-Color 'Requesting hypervisors Tests' -Color DarkYellow -ShowTime
         (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/hypervisors" -Headers $headers).items.id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/hypervisors/$_/`$test" -Method Post -Headers $headers -ContentType 'application/json' }
+        (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/hypervisors/' -Method get -Headers $APIHeader.headers).items | ForEach-Object { Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/hypervisors/38750ad8-66cb-4438-9c14-17fc64a1e71c/`$test" -Method post -Headers $APIHeader.headers -ContentType 'application/json' }
         Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
         Start-Sleep 60
         Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine

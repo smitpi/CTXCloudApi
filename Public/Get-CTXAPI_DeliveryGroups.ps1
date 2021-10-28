@@ -38,7 +38,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 <# 
 
 .DESCRIPTION 
-Return details about published apps
+Return details about Delivery Groups
 
 #> 
 
@@ -46,30 +46,28 @@ Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_DeliveryGroups {
+	<#
+.SYNOPSIS
+Return details about Delivery Groups
+
+.DESCRIPTION
+Return details about Delivery Groups
+
+.PARAMETER APIHeader
+Custom object from Get-CTXAPI_Headers
+
+.EXAMPLE
+Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader
+
+#>
 	[Cmdletbinding()]
-    [OutputType([System.Object[]])]
+	[OutputType([System.Object[]])]
 	PARAM(
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
+		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
+	)
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
+	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/DeliveryGroups/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)" -Method Get -Headers $APIHeader.headers
 	}
-
-	$Delgroups = @()
-	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-		$DelGroups += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/deliverygroups/$_" -Headers $headers).Content | ConvertFrom-Json)
-	}
-	$DelGroups
-
 
 } #end Function

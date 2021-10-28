@@ -38,7 +38,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 <# 
 
 .DESCRIPTION 
-Return details about published apps
+Return details about machine catalogs
 
 #> 
 
@@ -48,30 +48,28 @@ Param()
 
 
 Function Get-CTXAPI_MachineCatalogs {
+<#
+.SYNOPSIS
+Return details about machine catalogs
+
+.DESCRIPTION
+Return details about machine catalogs
+
+.PARAMETER APIHeader
+Custom object from Get-CTXAPI_Headers
+
+.EXAMPLE
+Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
+
+#>
 	[Cmdletbinding()]
-    [OutputType([System.Object[]])]
+	[OutputType([System.Object[]])]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
+		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
+	)
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
+	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/MachineCatalogs/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)" -Method Get -Headers $APIHeader.headers
 	}
-
-	$MachineCat = @()
-	(((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs" -Headers $headers).Content | ConvertFrom-Json).items).name | ForEach-Object {
-		$MachineCat += ((Invoke-WebRequest "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$_" -Headers $headers).Content | ConvertFrom-Json)
-	}
-	$MachineCat
-
 
 } #end Function
