@@ -8,39 +8,22 @@ schema: 2.0.0
 # Get-CTXAPI_CloudServices
 
 ## SYNOPSIS
-Client's Subscription details, and what features are enabled
+Return details about cloud services and subscription
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_CloudServices -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_CloudServices [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Client's Subscription details, and what features are enabled
+Return details about cloud services and subscription
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> Get-CTXAPI_CloudServices -APIHeader $APIHeader
-
-
-serviceName                : adc
-state                      : NotOnboarded
-type                       : Default
-quantity                   : 0
-daysToExpiration           : 
-notificationsDisabled      : False
-futureEntitlementStartDate : 
-
-serviceName                : podio
-state                      : NotOnboarded
-type                       : Default
-quantity                   : 0
-daysToExpiration           : 
-notificationsDisabled      : False
-futureEntitlementStartDate :
+Get-CTXAPI_CloudServices
 ```
 
 ## PARAMETERS
@@ -54,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -65,10 +48,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
+Detail on what the script does, if this is needed.
 
 ## RELATED LINKS

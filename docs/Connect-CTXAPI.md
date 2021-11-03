@@ -30,8 +30,7 @@ Connect-CTXAPI
 ## PARAMETERS
 
 ### -Customer_Id
-get it from Citrix cloud 
-
+From CTX Cloud
 
 ```yaml
 Type: String
@@ -46,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -client_id
-get it from Citrix cloud 
+From CTX Cloud
 
 ```yaml
 Type: String
@@ -61,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -client_secret
-get it from Citrix cloud 
+From CTX Cloud
 
 ```yaml
 Type: String
@@ -76,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerName
-get it from Citrix cloud 
+From CTX Cloud
 
 ```yaml
 Type: String

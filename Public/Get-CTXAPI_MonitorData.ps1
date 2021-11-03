@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.2.2
+.VERSION 1.2.3
 
 .GUID 3e0321fa-75f4-4cb4-b4d4-cb806bc52a5a
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx vda
+.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx ps vda
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -29,10 +29,13 @@
 Created [06/10/2021_18:17] Initital Script Creating
 Updated [06/10/2021_20:09] "Help Files Added"
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -40,12 +43,11 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 "Get the data from odata"
 
 #>
 
-Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_MonitorData {
@@ -68,8 +70,6 @@ Duration of the report
 .EXAMPLE
 Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding()]
 	PARAM(

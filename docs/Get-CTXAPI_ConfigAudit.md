@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigAudit
 
 ## SYNOPSIS
-Reports on machine catalog, delivery groups and published desktops
+Config Audit
 
 ## SYNTAX
 
@@ -17,14 +17,16 @@ Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [-Export] <String> [[-ReportPath] <
 ```
 
 ## DESCRIPTION
-Reports on machine catalog, delivery groups and published desktops
+Config Audit
 
 ## EXAMPLES
 
 ### Example 1
 ```powershell
-PS C:\>  Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+Config Audit
 ```
+
+Config Audit
 
 ## PARAMETERS
 
@@ -44,7 +46,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-Export format
+Config Audit
 
 ```yaml
 Type: String
@@ -60,7 +62,7 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-Report path
+Config Audit
 
 ```yaml
 Type: String

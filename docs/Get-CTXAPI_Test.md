@@ -5,36 +5,27 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_ResourceUtilization
+# Get-CTXAPI_Test
 
 ## SYNOPSIS
-Resource usage
+Run Built in Citrix cloud tests
 
 ## SYNTAX
 
-### Fetch odata (Default)
 ```
-Get-CTXAPI_ResourceUtilization -APIHeader <Object> [-region <String>] [-hours <Int32>] [-Export <String>]
- [-ReportPath <String>] [<CommonParameters>]
-```
-
-### Got odata
-```
-Get-CTXAPI_ResourceUtilization [-MonitorData <Object>] [-Export <String>] [-ReportPath <String>]
- [<CommonParameters>]
+Get-CTXAPI_Test [[-APIHeader] <Object>] [-SiteTest] [-HypervisorsTest] [-DeliveryGroupsTest]
+ [-MachineCatalogsTest] [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Config Audit
+Run Built in Citrix cloud tests
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-Config Audit
+### EXAMPLE 1
 ```
-
-Config Audit
+Get-CTXAPI_Test
+```
 
 ## PARAMETERS
 
@@ -43,12 +34,72 @@ Use Connect-CTXAPI to create headers
 
 ```yaml
 Type: Object
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: Named
+Required: False
+Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteTest
+Config Audit
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HypervisorsTest
+Config Audit
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeliveryGroupsTest
+Config Audit
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MachineCatalogsTest
+Config Audit
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -60,26 +111,10 @@ Config Audit
 Type: String
 Parameter Sets: (All)
 Aliases:
-Accepted values: Excel, HTML
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MonitorData
-Config Audit
-
-```yaml
-Type: Object
-Parameter Sets: Got odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
+Position: 2
+Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -93,39 +128,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hours
-Config Audit
-
-```yaml
-Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -region
-Config Audit
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-Accepted values: us, eu, ap-s
-
-Required: False
-Position: Named
-Default value: None
+Position: 3
+Default value: $env:temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -135,11 +139,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
+### System.Collections.Hashtable
 ## NOTES
+Detail on what the script does, if this is needed.
 
 ## RELATED LINKS

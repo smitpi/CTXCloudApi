@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.6
+.VERSION 1.1.7
 
 .GUID f2cc4273-d5ac-49b1-b12c-a8e2d1b8cf06
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad PowerShell
+.TAGS api citrix ctx cvad PowerShell ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -33,10 +33,13 @@ Updated [05/05/2021_00:04] added monitor data
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -44,7 +47,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Resource utilization in the last x hours
 
 #>
@@ -80,8 +83,6 @@ Report path
 .EXAMPLE
 Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
 	PARAM(

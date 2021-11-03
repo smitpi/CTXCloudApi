@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.5
+.VERSION 1.1.6
 
 .GUID ccc3348a-02f0-4e82-91bf-d65549ca3533
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS api citrix ctx cvad ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -32,17 +32,20 @@ Updated [05/05/2021_00:03] added monitor data
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 
 
 <#
-.DESCRIPTION
+.DESCRIPTION 
 Report on connections in the last x hours
 
 #>
@@ -78,8 +81,6 @@ Export path
 .EXAMPLE
 Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
 	PARAM(

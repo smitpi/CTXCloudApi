@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.5
+.VERSION 1.1.6
 
 .GUID bc970a9f-0566-4048-8332-0bceda215135
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS api citrix ctx cvad ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -32,25 +32,25 @@ Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
 
+
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Uses Registration date to calculate uptime
 
 #>
 
-
-Param()
 
 
 #.ExternalHelp CTXCloudApi-help.xml
@@ -75,8 +75,6 @@ Report path
 .EXAMPLE
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding()]
 	PARAM(

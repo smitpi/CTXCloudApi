@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID f17c5fba-37fb-4230-a529-812470428a3a
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,33 +27,44 @@
 
 .RELEASENOTES
 Created [27/10/2021_12:52] Initial Script Creating
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 
-.DESCRIPTION
- Connect to the cloud and create needed api headers
+.DESCRIPTION 
+Connect to the cloud and create needed api headers
 
 #>
 
 
 Function Connect-CTXAPI {
-	<#
+<#
 .SYNOPSIS
 Connect to the cloud and create needed api headers
 
 .DESCRIPTION
 Connect to the cloud and create needed api headers
 
+.PARAMETER Customer_Id
+From Citrix Cloud
+
+.PARAMETER client_id
+From Citrix Cloud
+
+.PARAMETER client_secret
+From Citrix Cloud
+
+.PARAMETER CustomerName
+From Citrix Cloud
+
 .EXAMPLE
 Connect-CTXAPI
-
-.NOTES
-Detail on what the script does, if this is needed.
-
 #>
 	[Cmdletbinding()]
 	PARAM(

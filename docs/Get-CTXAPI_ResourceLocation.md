@@ -8,49 +8,30 @@ schema: 2.0.0
 # Get-CTXAPI_ResourceLocation
 
 ## SYNOPSIS
-Details about the resource locations
+Resources
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_ResourceLocation -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_ResourceLocation [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Details about the resource locations  - HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- \<Module base\>\Private\Reports-Variables.ps1
+Config Audit
 
 ## EXAMPLES
 
 ### Example 1
+```powershell
+Config Audit
 ```
-PS C:\> Get-CTXAPI_ResourceLocation -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 
-
-
-id           : 3452204b0fa
-name         : Azure EU North (DR)
-internalOnly : False
-timeZone     : GMT Standard Time
-readOnly     : False
-
-id           : 6037c58f
-name         : Azure EU West (Production)
-internalOnly : False
-timeZone     : South Africa Standard Time
-readOnly     : False
-
-id           : 9960d851
-name         : Dubai
-internalOnly : False
-timeZone     : Arabian Standard Time
-readOnly     : False
-```
+Config Audit
 
 ## PARAMETERS
 
 ### -APIHeader
 Use Connect-CTXAPI to create headers
-
 
 ```yaml
 Type: Object
@@ -58,7 +39,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -70,6 +51,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

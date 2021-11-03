@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 1.1.2
 
 .GUID 38c65711-1b10-4f0e-aa2a-c69d6fb4f8e4
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS api ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -28,16 +28,19 @@
 .RELEASENOTES
 Created [06/10/2021_21:23] Initial Script Creating
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Reports on machine catalog, delivery groups and published desktops
 
 #>
@@ -62,10 +65,8 @@ In what format to export
 Report destination
 
 .EXAMPLE
- Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding()]
 	PARAM(

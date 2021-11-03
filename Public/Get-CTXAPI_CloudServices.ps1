@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 0.1.0
 
-.GUID 409ebf3e-e88c-4a89-8dcc-e7bdb1ea6d0b
+.GUID a7feac60-f442-4370-b96d-56e0613376ab
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,34 +19,30 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:07] Initital Script Creating
-Updated [07/10/2021_13:28] Script info updated for module
+Created [03/11/2021_19:28] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about cloud services and subscription 
+
+#> 
 
 
+
+Function Get-CTXAPI_CloudServices {
 <#
-
-.DESCRIPTION
-Return details about cloud services and subscription
-
-#>
-
-Param()
-#.ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_CloudService {
-	<#
 .SYNOPSIS
 Return details about cloud services and subscription
 
@@ -57,7 +53,7 @@ Return details about cloud services and subscription
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_CloudServices -APIHeader $APIHeader
+Get-CTXAPI_CloudServices
 
 #>
 	[Cmdletbinding()]

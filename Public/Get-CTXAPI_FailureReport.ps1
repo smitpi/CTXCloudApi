@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.2.2
+.VERSION 1.2.3
 
 .GUID 73cfd5d4-233b-4c97-bfad-0f280a0188dc
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS api ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -29,21 +29,23 @@
 Created [06/10/2021_18:14] Initital Script Creating
 Updated [06/10/2021_19:01] "Help Files Added"
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 "Reports on connection failures"
 
 #>
 
-Param()
 
 
 
@@ -82,8 +84,6 @@ Export path
 .EXAMPLE
 Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
 	[OutputType([System.Object[]])]

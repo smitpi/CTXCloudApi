@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 0.1.0
 
-.GUID 5f6ad0a4-e034-47e5-b957-b70399c4e4eb
+.GUID 9dfebdd1-fcf2-4cf3-949e-a7be9a46537d
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,32 +19,30 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:04] Initial Script Creating
-Updated [07/10/2021_13:28] Script info updated for module
+Created [03/11/2021_19:26] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about published apps 
+
+#> 
 
 
+
+Function Get-CTXAPI_Applications {
 <#
-
-.DESCRIPTION
-Return details about published apps
-
-#>
-
-#.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Application {
-	<#
 .SYNOPSIS
 Return details about published apps
 
@@ -55,7 +53,7 @@ Return details about published apps
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_Applications -APIHeader $APIHeader
+Get-CTXAPI_Applications
 
 #>
 	[Cmdletbinding()]

@@ -5,71 +5,124 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_ConfigLog
+# Get-CTXAPI_ConnectionReport
 
 ## SYNOPSIS
-reports on changes in the environment
+Connecion Report
 
 ## SYNTAX
 
+### Fetch odata (Default)
 ```
-Get-CTXAPI_ConfigLog -APIHeader <Object> [-Days] <String> [<CommonParameters>]
+Get-CTXAPI_ConnectionReport -APIHeader <Object> [-region <String>] [-hours <Int32>] [-Export <String>]
+ [-ReportPath <String>] [<CommonParameters>]
+```
+
+### Got odata
+```
+Get-CTXAPI_ConnectionReport [-MonitorData <Object>] [-Export <String>] [-ReportPath <String>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-reports on changes in the environment 
-	- HTML Reports 	
-	- When creating a HTML report: 	
-	- The logo can be changed by replacing the variable  		
-	- $Global:Logourl ='' 	
-	- The colors of the report can be changed, by replacing: 		
-	- $global:colour1 = '#061820' 		
-	- $global:colour2 = '#FFD400' 	
-	- Or permanently replace it by editing the following file 	
-	- \<Module base\>\Private\Reports-Variables.ps1
+Config Audit
 
 ## EXAMPLES
 
 ### Example 1
+```powershell
+Config Audit
 ```
-PS C:\> Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Days 7
 
-
-Id                 : 6a657368-873b-4379-ab9e-6a1f8aa73b03
-AdminMachineIP     : 
-EndTime            : 9/29/2021 2:01:44 PM
-FormattedEndTime   : 2021-09-29T14:01:44Z
-IsSuccessful       : True
-OperationType      : AdminActivity
-Parameters
-```
+Config Audit
 
 ## PARAMETERS
-
-### -Days
-The amount of days of changes to report
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
 
 ### -APIHeader
 Use Connect-CTXAPI to create headers
 
 ```yaml
 Type: Object
-Parameter Sets: (All)
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Export
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: Excel, HTML
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MonitorData
+Config Audit
+
+```yaml
+Type: Object
+Parameter Sets: Got odata
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Config Audit
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hours
+Config Audit
+
+```yaml
+Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -region
+Config Audit
+
+```yaml
+Type: String
+Parameter Sets: Fetch odata
+Aliases:
+Accepted values: us, eu, ap-s
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False
@@ -82,6 +135,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

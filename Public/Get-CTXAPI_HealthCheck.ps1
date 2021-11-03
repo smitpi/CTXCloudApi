@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.2
+.VERSION 1.1.3
 
 .GUID 9d297a8a-96ab-467a-ba68-f162937cc868
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api CItrix ctx cvad
+.TAGS api CItrix ctx cvad ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -29,10 +29,11 @@
 Created [28/05/2021_15:41] Initial Script Creating
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -41,16 +42,16 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 
 
+
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Run report to show useful information
 
 #>
 
 
 
-Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 
@@ -74,8 +75,6 @@ Report path
 .EXAMPLE
 Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
 
-.NOTES
-General notes
 #>
 	[Cmdletbinding()]
 	PARAM(

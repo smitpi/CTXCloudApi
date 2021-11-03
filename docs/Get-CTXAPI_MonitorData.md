@@ -8,38 +8,45 @@ schema: 2.0.0
 # Get-CTXAPI_MonitorData
 
 ## SYNOPSIS
-Get the data from odata
+Monitor odata
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_MonitorData -APIHeader <Object> [-region] <String> [-hours] <Int32> [<CommonParameters>]
+Get-CTXAPI_MonitorData [-APIHeader] <Object> [-region] <String> [-hours] <Int32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get the data from odata
+Get odata
 
 ## EXAMPLES
 
 ### Example 1
+```powershell
+Config Audit
 ```
-PS C:\> $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -hours $hours
 
-
-[2021-10-06 15:58:20] Getting data for:
-				Days: 0
-				Hours: 1
-
-
-[15:58:20] Fetching :ApplicationActivitySummaries[1sec]
-[15:58:21] Fetching :ApplicationInstances[1sec]
-[15:58:22] Fetching :Applications
-```
+Config Audit
 
 ## PARAMETERS
 
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -hours
-amount of hours to report on
+Config Audit
 
 ```yaml
 Type: Int32
@@ -47,14 +54,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 4
+Position: 2
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -region
-Where the cloud instance is hosted
+Config Audit
 
 ```yaml
 Type: String
@@ -63,23 +70,7 @@ Aliases:
 Accepted values: us, eu, ap-s
 
 Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -APIHeader
-Use Connect-CTXAPI to create headers
-
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -91,6 +82,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

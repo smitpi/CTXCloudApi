@@ -5,44 +5,33 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_DeliveryGroups
+# Get-CTXAPI_HealthCheck
 
 ## SYNOPSIS
-Return details of all delivery groups
+Health check report
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_DeliveryGroups -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_HealthCheck [-APIHeader] <Object> [-region] <String> [[-ReportPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details of all delivery groups
-
-- HTML Reports 	
-- When creating a HTML report: 
-- The logo can be changed by replacing the variable  	
-  $Global:Logourl ='' 
-  - The colors of the report can be changed, by replacing: 		
-  - $global:colour1 = '#061820' 		
-  - $global:colour2 = '#FFD400' 	
-  - Or permanently replace it by editing the following file 	
-  - \<Module base\>\Private\Reports-Variables.ps1
+Config Audit
 
 ## EXAMPLES
 
 ### Example 1
-```
-PS C:\> Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+```powershell
+Config Audit
 ```
 
-delivery group settings
+Config Audit
 
 ## PARAMETERS
 
 ### -APIHeader
 Use Connect-CTXAPI to create headers
-
 
 ```yaml
 Type: Object
@@ -50,7 +39,38 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 0
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Config Audit
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -region
+Config Audit
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+Accepted values: us, eu, ap-s
+
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -62,6 +82,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
+
 ## OUTPUTS
 
 ### System.Object

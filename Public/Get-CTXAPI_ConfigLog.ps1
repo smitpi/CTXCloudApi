@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.5
+.VERSION 1.1.6
 
 .GUID 8e3eaddb-c8e2-4cd6-8a70-0fbea6245f4d
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS api citrix ctx cvad ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -32,10 +32,13 @@ Updated [20/04/2021_10:42] Script Fle Info was updated
 Updated [22/04/2021_11:42] Script Fle Info was updated
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
+Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -49,13 +52,12 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Get high level configuration changes in the last x days
 
 #>
 
 
-Param()
 
 # .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigLog {
