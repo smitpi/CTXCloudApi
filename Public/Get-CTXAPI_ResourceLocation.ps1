@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.5
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,7 +35,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -49,7 +49,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get cloud Resource Locations
 
 #>
@@ -57,21 +57,28 @@ Get cloud Resource Locations
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_ResourceLocation {
+	<#
+.SYNOPSIS
+Get cloud Resource Locations
+
+.DESCRIPTION
+Get cloud Resource Locations
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers
+
+.EXAMPLE
+Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+
+.NOTES
+General notes
+#>
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken)
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
-	$headers = [System.Collections.Hashtable]@{
-		Authorization       = "CwsAuth Bearer=$($ApiToken)"
-		'Citrix-CustomerId' = $customerId
-		Accept              = 'application/json'
-	}
 
-	((Invoke-WebRequest "https://registry.citrixworkspacesapi.net/$customerId/resourcelocations" -Headers $headers).Content | ConvertFrom-Json).items
+	(Invoke-RestMethod -Uri "https://registry.citrixworkspacesapi.net/$($APIHeader.headers.'Citrix-CustomerId')/resourcelocations" -Headers $APIHeader.headers).items
 
 } #end Function

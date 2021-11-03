@@ -13,8 +13,7 @@ Get the data from odata
 ## SYNTAX
 
 ```
-Get-CTXAPI_MonitorData [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [-region] <String>
- [-hours] <Int32> [<CommonParameters>]
+Get-CTXAPI_MonitorData -APIHeader <Object> [-region] <String> [-hours] <Int32> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -23,7 +22,7 @@ Get the data from odata
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -hours $hours
 
 
@@ -37,42 +36,10 @@ PS C:\> $MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $S
 [15:58:22] Fetching :Applications
 ```
 
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -hours
- amount of hours to report on
+amount of hours to report on
 
 ```yaml
 Type: Int32
@@ -102,16 +69,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

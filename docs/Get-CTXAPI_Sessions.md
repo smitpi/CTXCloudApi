@@ -13,7 +13,7 @@ Reports on user sessions
 ## SYNTAX
 
 ```
-Get-CTXAPI_Sessions [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_Sessions -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,54 +22,23 @@ Reports on user sessions
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> $Sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
 ```
 
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

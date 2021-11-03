@@ -8,88 +8,35 @@ schema: 2.0.0
 # Get-CTXAPI_Zones
 
 ## SYNOPSIS
-show zone details
+Get zone details from api
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Zones [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_Zones [[-APIHeader] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-show zone details
+Get zone details from api
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-PS C:\>  Get-CTXAPI_Zones -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
-
-
-Id               : d94fe0d6-742e-4535-a562-61afrth (DR)
-Description      : 
-IsPrimary        : False
-Metadata         : {}
-ResourceLocation : @{Id=3452790fa; Uid=; Name=}
-
-Id               : 0bce0a9-8920-855ddd9b6772
-Name             : Azure EU West (Production)
-Description      : 
-IsPrimary        : False
-Metadata         : {}
-ResourceLocation : @{Id=60-f69971c570ee; Uid=; Name=}
-
-Id               : 4e4948e295-8f9636886d05
-Name             : Dubai
-Description      : 
-IsPrimary        : False
-Metadata         : {}
-ResourceLocation : @{Id=9960d8af43c; Uid=; Name=}
+### EXAMPLE 1
 ```
-
-{{ Add example description here }}
+Get-CTXAPI_Zones -APIHeader $APIHeader
+```
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Custom object from Get-CTXAPI_Headers
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
+Required: False
 Position: 1
 Default value: None
 Accept pipeline input: False
@@ -101,10 +48,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

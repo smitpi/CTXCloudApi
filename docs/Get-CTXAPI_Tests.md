@@ -5,69 +5,53 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_StoreFrontServers
+# Get-CTXAPI_SiteDetails
 
 ## SYNOPSIS
-Get StoreFront Details
+Retrieve Site / Farm details
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_StoreFrontServers [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String>
- [<CommonParameters>]
+Get-CTXAPI_SiteDetails -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get StoreFront  Details
+Retrieve Site / Farm details
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> Get-CTXAPI_StoreFrontServers @CTX_APIDefaultParm
 ```
+PS C:\> Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
 
-Get StoreFront  Details
+
+
+LicenseServerName                           : 
+LicenseServerPort                           : 
+LicenseServerUri                            : 
+LicensingModel                              : UserDevice
+SiteConfigurationComplete                   : True
+PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
+ProductCode                                 : Unknown
+ProductEdition                              : Unknown
+ProductVersion                              : 7.29
+SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;
+```
 
 ## PARAMETERS
 
-### -ApiToken
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

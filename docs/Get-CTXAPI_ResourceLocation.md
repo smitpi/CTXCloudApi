@@ -8,21 +8,21 @@ schema: 2.0.0
 # Get-CTXAPI_ResourceLocation
 
 ## SYNOPSIS
-Details about the resource locations 
+Details about the resource locations
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_ResourceLocation [-CustomerId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_ResourceLocation -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Details about the resource locations 
+Details about the resource locations  - HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- \<Module base\>\Private\Reports-Variables.ps1
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> Get-CTXAPI_ResourceLocation -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 
 
@@ -46,35 +46,19 @@ timeZone     : Arabian Standard Time
 readOnly     : False
 ```
 
-{{ Add example description here }}
-
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,23 +31,23 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get zone details from api
 
-#> 
+#>
 
 Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 
 
-Function Get-CTXAPI_Zones {
+Function Get-CTXAPI_Zone {
 	<#
 .SYNOPSIS
 Get zone details from api
@@ -65,8 +65,8 @@ Get-CTXAPI_Zones -APIHeader $APIHeader
 	[Cmdletbinding()]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
-	)
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader
+		)
 
 	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Zones/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
 		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Zones/$($_.id)" -Method Get -Headers $APIHeader.headers

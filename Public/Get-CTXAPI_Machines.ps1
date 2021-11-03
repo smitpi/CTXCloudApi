@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,22 +31,22 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Return details about vda machines
 
-#> 
+#>
 
 Param()
 
 
 #.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Machines {
+Function Get-CTXAPI_Machine {
 	<#
 .SYNOPSIS
 Return details about vda machines
@@ -55,7 +55,7 @@ Return details about vda machines
 Return details about vda machines
 
 .PARAMETER APIHeader
-Custom object from Get-CTXAPI_Headers
+Use Connect-CTXAPI to create headers
 
 .EXAMPLE
 Get-CTXAPI_Machines -APIHeader $APIHeader
@@ -64,8 +64,9 @@ Get-CTXAPI_Machines -APIHeader $APIHeader
 	[Cmdletbinding()]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[PSTypeName(CTXAPIHeaderObject)]$APIHeader,
-		[switch]$GetPubDesktop =$false
+		[Parameter(Mandatory = $true)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+		[switch]$GetPubDesktop = $false
 	)
 
 	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {

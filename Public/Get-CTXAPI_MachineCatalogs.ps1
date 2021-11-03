@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,24 +31,24 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Return details about machine catalogs
 
-#> 
+#>
 
 Param()
 
 
 
 
-Function Get-CTXAPI_MachineCatalogs {
-<#
+Function Get-CTXAPI_MachineCatalog {
+	<#
 .SYNOPSIS
 Return details about machine catalogs
 
@@ -56,7 +56,7 @@ Return details about machine catalogs
 Return details about machine catalogs
 
 .PARAMETER APIHeader
-Custom object from Get-CTXAPI_Headers
+Use Connect-CTXAPI to create headers
 
 .EXAMPLE
 Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
@@ -65,8 +65,8 @@ Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
 	[Cmdletbinding()]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
-	)
+		[Parameter(Mandatory = $true)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
 
 	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/MachineCatalogs/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
 		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)" -Method Get -Headers $APIHeader.headers

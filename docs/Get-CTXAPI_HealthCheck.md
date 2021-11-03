@@ -13,26 +13,26 @@ Return details of all delivery groups
 ## SYNTAX
 
 ```
-Get-CTXAPI_DeliveryGroups [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_DeliveryGroups -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
 Return details of all delivery groups
 
-- HTML Reports
-	- When creating a HTML report:
-	- The logo can be changed by replacing the variable 
-		- $Global:Logourl =''
-	- The colors of the report can be changed, by replacing:
-		- $global:colour1 = '#061820'
-		- $global:colour2 = '#FFD400'
-	- Or permanently replace it by editing the following file
-	- <Module base>\Private\Reports-Variables.ps1
+- HTML Reports 	
+- When creating a HTML report: 
+- The logo can be changed by replacing the variable  	
+  $Global:Logourl ='' 
+  - The colors of the report can be changed, by replacing: 		
+  - $global:colour1 = '#061820' 		
+  - $global:colour2 = '#FFD400' 	
+  - Or permanently replace it by editing the following file 	
+  - \<Module base\>\Private\Reports-Variables.ps1
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
 
@@ -40,47 +40,17 @@ delivery group settings
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

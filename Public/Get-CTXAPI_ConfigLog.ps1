@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.5
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,7 +35,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -49,7 +49,7 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get high level configuration changes in the last x days
 
 #>
@@ -59,7 +59,7 @@ Param()
 
 # .ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigLog {
-<#
+	<#
 .SYNOPSIS
 Get high level configuration changes in the last x days
 
@@ -70,7 +70,7 @@ Get high level configuration changes in the last x days
 Number of days to report on
 
 .PARAMETER APIHeader
-Custom object from Get-CTXAPI_Headers
+Use Connect-CTXAPI to create headers
 
 .EXAMPLE
 Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
@@ -79,11 +79,11 @@ Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
 	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[PSTypeName(CTXAPIHeaderObject)]$APIHeader,
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
 		[Parameter(Mandatory = $true)]
 		[string]$Days)
 
 
-(Invoke-RestMethod -uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations?days=$days" -Headers $APIHeader.headers).items 
+(Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations?days=$days" -Headers $APIHeader.headers).items
 
 } #end Function

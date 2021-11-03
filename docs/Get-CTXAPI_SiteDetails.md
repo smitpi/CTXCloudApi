@@ -13,7 +13,7 @@ Retrieve Site / Farm details
 ## SYNTAX
 
 ```
-Get-CTXAPI_SiteDetails [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_SiteDetails -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,7 +22,7 @@ Retrieve Site / Farm details
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
 
 
@@ -41,46 +41,17 @@ SiteServices                                : {@{ServiceName=Delegated Administr
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

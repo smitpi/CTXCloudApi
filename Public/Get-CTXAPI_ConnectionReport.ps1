@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.5
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -35,14 +35,14 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 
 
 <#
-.DESCRIPTION 
+.DESCRIPTION
 Report on connections in the last x hours
 
 #>
@@ -50,25 +50,50 @@ Report on connections in the last x hours
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_ConnectionReport {
-	[Cmdletbinding(DefaultParameterSetName='Fetch odat')]
-		PARAM(
-		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
+	<#
+.SYNOPSIS
+Creates Connection report
+
+.DESCRIPTION
+Report on connections in the last x hours
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers
+
+.PARAMETER MonitorData
+Use Get-CTXAPI_MonitorData to create OData
+
+.PARAMETER region
+You Cloud region
+
+.PARAMETER hours
+Duration of the report
+
+.PARAMETER Export
+Export format
+
+.PARAMETER ReportPath
+Export path
+
+.EXAMPLE
+Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
+
+.NOTES
+General notes
+#>
+	[Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+	PARAM(
+		[Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
 		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true,ParameterSetName='Fetch odata')]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken,
-        [Parameter(Mandatory = $false,ParameterSetName='Got odata')]
-		[pscustomobject]$MonitorData = $null,
-		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+		[Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
+		[PSTypeName('CTXMonitorData')]$MonitorData,
+		[Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
 		[int]$hours = 24,
 		[Parameter(Mandatory = $false)]
 		[ValidateSet('Excel', 'HTML')]
@@ -81,8 +106,8 @@ Function Get-CTXAPI_ConnectionReport {
 
 
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours }
-    else {$mondata = $MonitorData }
+	if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
+	else { $mondata = $MonitorData }
 
 	$data = @()
 	foreach ($connection in $mondata.Connections) {
@@ -94,8 +119,10 @@ Function Get-CTXAPI_ConnectionReport {
 				$avgrtt = 0
 				$mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
 				$avgrtt = $avgrtt / ($mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
-			} catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
-		} catch { Write-Warning "Error processing - $_.Exception.Message" }
+			}
+			catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
+		}
+		catch { Write-Warning "Error processing - $_.Exception.Message" }
 		$data += [PSCustomObject]@{
 			Id                       = $connection.id
 			FullName                 = $user.FullName

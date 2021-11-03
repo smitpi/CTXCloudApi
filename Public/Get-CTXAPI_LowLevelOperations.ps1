@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,31 +31,31 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
-Return details about lowe lever config change (More detailed)
+.DESCRIPTION
+Return details about low lever config change (More detailed)
 
-#> 
+#>
 
 Param()
 
 
 #.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_LowLevelOperations {
-<#
+Function Get-CTXAPI_LowLevelOperation {
+	<#
 .SYNOPSIS
-Return details about lowe lever config change (More detailed)
+Return details about low lever config change (More detailed)
 
 .DESCRIPTION
-Return details about lowe lever config change (More detailed)
+Return details about low lever config change (More detailed)
 
 .PARAMETER APIHeader
-Custom object from Get-CTXAPI_Headers
+Use Connect-CTXAPI to create headers
 
 .PARAMETER HighLevelID
 get the id from Get-CTXAPI_ConfigLog
@@ -67,12 +67,13 @@ Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $High.id
 	[Cmdletbinding()]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[PSTypeName(CTXAPIHeaderObject)]$APIHeader,
+		[Parameter(Mandatory = $true)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[string]$HighLevelID)
 
-	(Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations/$($HighLevelID)/LowLevelOperations" -Method get -Headers $APIHeader.headers).items 
+	(Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations/$($HighLevelID)/LowLevelOperations" -Method get -Headers $APIHeader.headers).items
 
 
 }

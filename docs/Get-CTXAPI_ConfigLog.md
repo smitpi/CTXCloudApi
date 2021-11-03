@@ -13,17 +13,25 @@ reports on changes in the environment
 ## SYNTAX
 
 ```
-Get-CTXAPI_ConfigLog [-CustomerId] <String> [-SiteId] <String> [-Days] <String> [-ApiToken] <String>
- [<CommonParameters>]
+Get-CTXAPI_ConfigLog -APIHeader <Object> [-Days] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-reports on changes in the environment
+reports on changes in the environment 
+	- HTML Reports 	
+	- When creating a HTML report: 	
+	- The logo can be changed by replacing the variable  		
+	- $Global:Logourl ='' 	
+	- The colors of the report can be changed, by replacing: 		
+	- $global:colour1 = '#061820' 		
+	- $global:colour2 = '#FFD400' 	
+	- Or permanently replace it by editing the following file 	
+	- \<Module base\>\Private\Reports-Variables.ps1
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -Days 7
 
 
@@ -38,39 +46,8 @@ Parameters
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -Days
 The amount of days of changes to report
-
 
 ```yaml
 Type: String
@@ -84,16 +61,16 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
+### -APIHeader
+Use Connect-CTXAPI to create headers
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

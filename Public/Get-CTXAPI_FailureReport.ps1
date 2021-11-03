@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.2.2
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,13 +32,13 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 "Reports on connection failures"
 
 #>
@@ -51,26 +51,54 @@ Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_FailureReport {
-	[Cmdletbinding(DefaultParameterSetName='Fetch odat')]
-    [OutputType([System.Object[]])]
-    PARAM(
-		[Parameter(Mandatory = $true)]
+<#
+.SYNOPSIS
+Reports on connection failures in the last x hours
+
+.DESCRIPTION
+Reports on connection failures in the last x hours
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers
+
+.PARAMETER MonitorData
+Use Get-CTXAPI_MonitorData to create OData
+
+.PARAMETER region
+You Cloud region
+
+.PARAMETER hours
+Duration of the report
+
+.PARAMETER FailureType
+Type of failure to report on
+
+.PARAMETER Export
+Export format
+
+.PARAMETER ReportPath
+Export path
+
+.EXAMPLE
+Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
+
+.NOTES
+General notes
+#>
+	[Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+	[OutputType([System.Object[]])]
+	PARAM(
+		[Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
 		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken,
-        [Parameter(Mandatory = $false,ParameterSetName='Got odata')]
-		[pscustomobject]$MonitorData = $null,
-		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+		[Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
+		[PSTypeName('CTXMonitorData')]$MonitorData,
+		[Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false,ParameterSetName='Fetch odata')]
+		[Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
 		[int]$hours = 24,
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
@@ -82,15 +110,16 @@ Function Get-CTXAPI_FailureReport {
 		[Parameter(Mandatory = $false)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
+
 	)
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken -region $region -hours $hours }
-    else {$mondata = $MonitorData }
+	if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
+	else { $mondata = $MonitorData }
 
 	$data = @()
 
 	if ($FailureType -eq 'Machine') {
-		$machines = Get-CTXAPI_machines -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
+		$machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 		foreach ($log in $mondata.MachineFailureLogs) {
 			$MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
 			$APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }

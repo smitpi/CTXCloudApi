@@ -13,7 +13,7 @@ Client's Subscription details, and what features are enabled
 ## SYNTAX
 
 ```
-Get-CTXAPI_CloudServices [-CustomerId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_CloudServices -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,8 +22,8 @@ Client's Subscription details, and what features are enabled
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> Get-CTXAPI_CloudServices -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+```
+PS C:\> Get-CTXAPI_CloudServices -APIHeader $APIHeader
 
 
 serviceName                : adc
@@ -45,32 +45,16 @@ futureEntitlementStartDate :
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Use Connect-CTXAPI to create headers
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

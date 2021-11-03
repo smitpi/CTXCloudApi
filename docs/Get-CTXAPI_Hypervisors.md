@@ -13,7 +13,7 @@ Returns details about the hosting connection
 ## SYNTAX
 
 ```
-Get-CTXAPI_Hypervisors [-CustomerId] <String> [-SiteId] <String> [-ApiToken] <String> [<CommonParameters>]
+Get-CTXAPI_Hypervisors -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -22,53 +22,23 @@ Returns details about the hosting connection
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 PS C:\> Get-CTXAPI_Hypervisors -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
 ```
 
 ## PARAMETERS
 
-### -ApiToken
- Generate token with Get-CTXAPI_Token
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -CustomerId
- From Citrix Cloud Portal
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteId
- Generate id with Get-CTXAPI_SiteID
-
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

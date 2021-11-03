@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.2
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad
+.TAGS api CItrix ctx cvad
 
 .LICENSEURI
 
@@ -19,20 +19,20 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [28/05/2021_15:41] Initital Script Creating
+Created [28/05/2021_15:41] Initial Script Creating
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -43,8 +43,8 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 <#
 
-.DESCRIPTION 
-Run report to show usefull information
+.DESCRIPTION
+Run report to show useful information
 
 #>
 
@@ -55,22 +55,36 @@ Param()
 #.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_HealthCheck {
+	<#
+.SYNOPSIS
+Show useful information for daily health check
+
+.DESCRIPTION
+Show useful information for daily health check
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers
+
+.PARAMETER region
+Your Cloud region
+
+.PARAMETER ReportPath
+Report path
+
+.EXAMPLE
+Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
+
+.NOTES
+General notes
+#>
 	[Cmdletbinding()]
 	PARAM(
-		[Parameter(Mandatory = $true, Position = 0)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true, Position = 1)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true, Position = 2)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken,
-		[Parameter(Mandatory = $true, Position = 3)]
+		[Parameter(Mandatory = $true)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
 		[ValidateSet('us', 'eu', 'ap-s')]
 		[string]$region,
-		[Parameter(Mandatory = $false, Position = 4)]
 		[ValidateScript( { (Test-Path $_) })]
 		[string]$ReportPath = $env:temp
 	)
@@ -79,28 +93,28 @@ Function Get-CTXAPI_HealthCheck {
 	#######################
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
-	$configlog = Get-CTXAPI_ConfigLog -CustomerId $CustomerId -SiteId $SiteId -Days 7 -ApiToken $ApiToken | Group-Object -Property text | Select-Object count,name | Sort-Object -Property count -Descending | Select-Object -First 5
+	$configlog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Group-Object -Property text | Select-Object count, name | Sort-Object -Property count -Descending | Select-Object -First 5
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Delivery Groups"
-	$DeliveryGroups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken | Select-Object Name,DeliveryType,DesktopsAvailable,DesktopsDisconnected,DesktopsFaulted,DesktopsNeverRegistered,DesktopsUnregistered,InMaintenanceMode,IsBroken,RegisteredMachines,SessionCount
+	$DeliveryGroups = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
 
-	$MonitorData = Get-CTXAPI_MonitorData -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -region $region -hours 24
+	$MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Connection Report"
 	$ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
-	$connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique | Select-Object -First 5 FullName,ClientVersion,ClientAddress,AVG_ICA_RTT
-	$connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique | Select-Object -First 5 FullName,ClientVersion,ClientAddress,LogOnDuration
+	$connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique | Select-Object -First 5 FullName, ClientVersion, ClientAddress, AVG_ICA_RTT
+	$connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique | Select-Object -First 5 FullName, ClientVersion, ClientAddress, LogOnDuration
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Resource Utilization"
 	$ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
-	$ConnectionFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Connection
-	$MachineFailureReport = Get-CTXAPI_FailureReport -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken -MonitorData $MonitorData -FailureType Machine | Select-Object Name,IP,OSType,FailureStartDate,FailureEndDate,FaultState
+	$ConnectionFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
+	$MachineFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
 
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
-	$sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
+	$sessions = Get-CTXAPI_Sessions -APIHeader $APIHeader
 	$sessioncount = [PSCustomObject]@{
 		Connected         = ($sessions | Where-Object { $_.state -like 'active' }).count
 		Disconnected      = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
@@ -109,7 +123,7 @@ Function Get-CTXAPI_HealthCheck {
 	}
 
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Machines"
-	$vdauptime = Get-CTXAPI_VDAUptime -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
+	$vdauptime = Get-CTXAPI_VDAUptime -APIHeader $APIHeader
 	$machinecount = [PSCustomObject]@{
 		Inmaintenance = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
 		DesktopCount  = ($vdauptime | Where-Object { $_.OSType -like 'Windows 10' }).count
@@ -123,9 +137,9 @@ Function Get-CTXAPI_HealthCheck {
 	#region Building HTML the report
 	#######################
 	Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Building HTML Page"
-	[string]$HTMLReportname = $ReportPath + "\XD_HealthChecks-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+	[string]$HTMLReportname = $ReportPath + "\XD_HealthChecks-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
-	$HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
+	$HeadingText = $($APIHeader.CustomerName) + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
 
 	New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
 		New-HTMLLogo -RightLogoString $Logourl
@@ -143,7 +157,7 @@ Function Get-CTXAPI_HealthCheck {
 		}
 		New-HTMLSection @SectionSettings -Content {
 			New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
-			New-HTMLSection -HeaderText 'Machine Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable ($machinecount.psobject.Properties | Select-Object name,value) }
+			New-HTMLSection -HeaderText 'Machine Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable ($machinecount.psobject.Properties | Select-Object name, value) }
 		}
 
 		New-HTMLSection @SectionSettings -Content {

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,30 +31,30 @@ Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
-Return details about hosting (hypervizor)
+.DESCRIPTION
+Return details about hosting (hypervisor)
 
-#> 
+#>
 
 Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Hypervisors {
+Function Get-CTXAPI_Hypervisor {
 	<#
 .SYNOPSIS
-Return details about hosting (hypervizor)
+Return details about hosting (hypervisor)
 
 .DESCRIPTION
-Return details about hosting (hypervizor)
+Return details about hosting (hypervisor)
 
 .PARAMETER APIHeader
-Custom object from Get-CTXAPI_Headers
+Use Connect-CTXAPI to create headers
 
 .EXAMPLE
 Get-CTXAPI_Hypervisors -APIHeader $APIHeader
@@ -63,7 +63,8 @@ Get-CTXAPI_Hypervisors -APIHeader $APIHeader
 	[Cmdletbinding()]
 	[OutputType([System.Object[]])]
 	PARAM(
-		[PSTypeName(CTXAPIHeaderObject)]$APIHeader
+		[Parameter(Mandatory = $true)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader
 	)
 
 	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/hypervisors/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {

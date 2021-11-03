@@ -5,56 +5,53 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_Token
+# Get-CTXAPI_SiteDetails
 
 ## SYNOPSIS
-Retrives the token for authentication 
+Retrieve Site / Farm details
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Token [[-clientid] <String>] [[-clientsecret] <String>] [<CommonParameters>]
+Get-CTXAPI_SiteDetails -APIHeader <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Retrives the token for authentication 
+Retrieve Site / Farm details
 
 ## EXAMPLES
 
 ### Example 1
-```powershell
-PS C:\> $apitoken = Get-CTXAPI_Token -client_id $clientid -client_secret $clientsecret
 ```
+PS C:\> Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
 
-{{ Add example description here }}
+
+
+LicenseServerName                           : 
+LicenseServerPort                           : 
+LicenseServerUri                            : 
+LicensingModel                              : UserDevice
+SiteConfigurationComplete                   : True
+PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
+ProductCode                                 : Unknown
+ProductEdition                              : Unknown
+ProductVersion                              : 7.29
+SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;
+```
 
 ## PARAMETERS
 
-### -clientid
-{{ Fill clientid Description }}
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
 
 ```yaml
-Type: String
+Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: False
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -clientsecret
-{{ Fill clientsecret Description }}
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: 2
+Required: True
+Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -65,8 +62,10 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
 ## OUTPUTS
 
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

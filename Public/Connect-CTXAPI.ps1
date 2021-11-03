@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,29 +19,29 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [27/10/2021_12:52] Initital Script Creating
+Created [27/10/2021_12:52] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
-
-.DESCRIPTION 
- Connect to the cloud and create needed api headers 
-
-#> 
-
-
-Function Get-CTXAPI_Headers {
 <#
+
+.DESCRIPTION
+ Connect to the cloud and create needed api headers
+
+#>
+
+
+Function Connect-CTXAPI {
+	<#
 .SYNOPSIS
 Connect to the cloud and create needed api headers
 
@@ -49,23 +49,23 @@ Connect to the cloud and create needed api headers
 Connect to the cloud and create needed api headers
 
 .EXAMPLE
-Get-CTXAPI_Headers
+Connect-CTXAPI
 
-.NOTES        
+.NOTES
 Detail on what the script does, if this is needed.
 
 #>
 	[Cmdletbinding()]
-                PARAM(
-				[Parameter(Mandatory = $true)]
-				[string]$Customer_Id,
-				[Parameter(Mandatory = $true)]
-				[string]$client_id,
-				[Parameter(Mandatory = $true)]
-				[string]$client_secret,
-				[Parameter(Mandatory = $true)]
-				[string]$CustomerName
-				)
+	PARAM(
+		[Parameter(Mandatory = $true)]
+		[string]$Customer_Id,
+		[Parameter(Mandatory = $true)]
+		[string]$client_id,
+		[Parameter(Mandatory = $true)]
+		[string]$client_secret,
+		[Parameter(Mandatory = $true)]
+		[string]$CustomerName
+	)
 
 	$body = @{
 		grant_type    = 'client_credentials'
@@ -81,9 +81,9 @@ Detail on what the script does, if this is needed.
 	$headers.Add('Citrix-InstanceId', (Invoke-RestMethod 'https://api-us.cloud.com/cvadapis/me' -Headers $headers).customers.sites.id)
 
 	$myObject = [PSCustomObject]@{
-		PSTypeName = 'CTXAPIHeaderObject'
+		PSTypeName   = 'CTXAPIHeaderObject'
 		CustomerName = $CustomerName
-		headers    = $headers
+		headers      = $headers
 	}
 	$myObject
 } #end Function

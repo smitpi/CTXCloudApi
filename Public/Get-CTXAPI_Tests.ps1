@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,36 +19,70 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [06/10/2021_21:23] Initial Script Creating
 Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Return details about published apps
 
-#> 
+#>
 
 Param()
 #.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Tests {
+Function Get-CTXAPI_Test {
+    <#
+.SYNOPSIS
+Run Built in Citrix cloud tests
+
+.DESCRIPTION
+Run Built in Citrix cloud tests
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers
+
+.PARAMETER SiteTest
+Perform tests on the whole site
+
+.PARAMETER HypervisorsTest
+Perform tests on the host connection
+
+.PARAMETER DeliveryGroupsTest
+Perform tests on the Delivery groups
+
+.PARAMETER MachineCatalogsTest
+Perform tests on the machine catalogs
+
+.PARAMETER Export
+Export format
+
+.PARAMETER ReportPath
+Report path
+
+.EXAMPLE
+Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -Export HTML -ReportPath C:\Temp
+
+.NOTES
+General notes
+#>
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]
     PARAM(
-        [PSTypeName(CTXAPIHeaderObject)]$APIHeader
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [switch]$SiteTest = $false,
         [switch]$HypervisorsTest = $false,
         [switch]$DeliveryGroupsTest = $false,
@@ -61,51 +95,37 @@ Function Get-CTXAPI_Tests {
         [string]$ReportPath = $env:temp
 				)
 
-    $data = @()
+    [System.Collections.ArrayList]$data = @()
 
     if ($SiteTest) {
-
-        Write-Color 'Requesting Site Tests' -Color DarkYellow -ShowTime
-        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/`$test" -Method Post -Headers $APIHeader.headers -ContentType application/json
-        Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
-        Start-Sleep 60
         Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $data += (Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/TestReport" -Method get -Headers $APIHeader.headers).TestResults
-
-
+        $SiteTestSum = Invoke-RestMethod "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/`$test?async=true" -Headers $APIHeader.headers -Method Post -ContentType 'application/json'
+        $SiteTestResult = (Invoke-RestMethod "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/TestReport" -Headers $APIHeader.headers).TestResults
+        $data.AddRange($SiteTestResult)
         Write-Color 'Complete' -Color Green -ShowTime
     }
 
-    ## TODO I need to fix these urls.
-    
     if ($HypervisorsTest) {
-        Write-Color 'Requesting hypervisors Tests' -Color DarkYellow -ShowTime
-        (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/hypervisors" -Headers $headers).items.id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/hypervisors/$_/`$test" -Method Post -Headers $headers -ContentType 'application/json' }
-        (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/hypervisors/' -Method get -Headers $APIHeader.headers).items | ForEach-Object { Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/hypervisors/38750ad8-66cb-4438-9c14-17fc64a1e71c/`$test" -Method post -Headers $APIHeader.headers -ContentType 'application/json' }
-        Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
-        Start-Sleep 60
-        Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $data += (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/hypervisors" -Headers $headers).items.id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/hypervisors/$_/TestReport" -Headers $headers).TestResults }
+        Write-Color 'Getting hypervisors test results' -Color Cyan -ShowTime -NoNewLine
+        $HypSum = (Get-CTXAPI_Hypervisors -APIHeader $APIHeader).id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$_/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' }
+        $HypResult = (Get-CTXAPI_Hypervisors -APIHeader $APIHeader).id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$_/TestReport" -Headers $APIHeader.headers).TestResults }
+        $data.AddRange($HypResult)
         Write-Color 'Complete' -Color Green -ShowTime
     }
 
     if ($DeliveryGroupsTest) {
-        Write-Color 'Requesting DeliveryGroups Tests' -Color DarkYellow -ShowTime
-        (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/DeliveryGroups" -Headers $headers).items.id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/DeliveryGroups/$_/`$test" -Method Post -Headers $headers -ContentType 'application/json' }
-        Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
-        Start-Sleep 60
-        Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $data += (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/DeliveryGroups" -Headers $headers).items.id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/DeliveryGroups/$_/TestReport" -Headers $headers -Verbose).TestResults }
+        Write-Color 'Getting DeliveryGroups test results' -Color Cyan -ShowTime -NoNewLine
+        $DeliverySum = (Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader).id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$_/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' }
+        $DeliveryResult = (Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader).id | ForEach-Object { (Invoke-RestMethod 'https://api.cloud.com/cvad/manage/DeliveryGroups/b77c0864-609f-4e57-b93e-aeee2ec91323/TestReport' -Headers $APIHeader.headers).TestResults }
+        $data.AddRange($DeliveryResult)
         Write-Color 'Complete' -Color Green -ShowTime
     }
 
     if ($MachineCatalogsTest) {
-        Write-Color 'Requesting MachineCatalogs Tests' -Color DarkYellow -ShowTime
-        (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs" -Headers $headers).items.id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$_/`$test" -Method Post -Headers $headers -ContentType 'application/json' }
-        Write-Color 'Sleeping for',' 60sec' -Color Cyan,Yellow -ShowTime
-        Start-Sleep 60
-        Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $data += (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs" -Headers $headers).items.id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvadapis/$siteid/MachineCatalogs/$_/TestReport" -Headers $headers -Verbose).TestResults }
+        Write-Color 'Getting MachineCatalogs test results' -Color Cyan -ShowTime -NoNewLine
+        $MachineCatalogsSum = (Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader).id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$_/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' }
+        $MachineCatalogsResult = (Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader).id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$_/TestReport" -Headers $APIHeader.headers).TestResults }
+        $data.AddRange($MachineCatalogsResult)
         Write-Color 'Complete' -Color Green -ShowTime
     }
 
@@ -128,8 +148,8 @@ Function Get-CTXAPI_Tests {
     }
 
     $Alldata = @{
-        FatalError = $expandedddata | Where-Object { $_.Serverity -like 'FatalError' } | Group-Object -Property TestServiceTarget | Select-Object Name,Count | Sort-Object count -Descending
-        Error      = $expandedddata | Where-Object { $_.Serverity -like 'Error' } | Group-Object -Property TestServiceTarget | Select-Object Name,Count | Sort-Object count -Descending
+        FatalError = $expandedddata | Where-Object { $_.Serverity -like 'FatalError' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
+        Error      = $expandedddata | Where-Object { $_.Serverity -like 'Error' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
         Alldata    = $expandedddata
     }
 
@@ -154,7 +174,12 @@ Function Get-CTXAPI_Tests {
             }
         }
     }
-    if ($Export -eq 'Host') { $Alldata }
+    if ($Export -eq 'Host') {
+        $SiteTestSum
+        $HypSum
+        $DeliverySum
+        $MachineCatalogsSum
+    }
 
 
 } #end Function

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.1
@@ -19,44 +19,58 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
+Created [06/10/2021_21:23] Initial Script Creating
 Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
-Return details about published apps
+.DESCRIPTION
+Reports on machine catalog, delivery groups and published desktops
 
-#> 
+#>
 
-Param()
 
 #.ExternalHelp CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigAudit {
-[Cmdletbinding()]
+	<#
+.SYNOPSIS
+Reports on system config
+
+.DESCRIPTION
+Reports on machine catalog, delivery groups and published desktops
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers
+
+.PARAMETER Export
+In what format to export
+
+.PARAMETER ReportPath
+Report destination
+
+.EXAMPLE
+ Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+
+.NOTES
+General notes
+#>
+	[Cmdletbinding()]
 	PARAM(
 		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$CustomerId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$SiteId,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$ApiToken,
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
 		[Parameter(Mandatory = $true)]
 		[ValidateSet('Excel', 'HTML', 'Host')]
 		[string]$Export,
@@ -66,7 +80,7 @@ Function Get-CTXAPI_ConfigAudit {
 	)
 
 	$catalogs = @()
-	Get-CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken | ForEach-Object {
+	Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object {
 		$catalogs += [pscustomobject]@{
 			Name                     = $_.Name
 			OSType                   = $_.OSType
@@ -88,7 +102,7 @@ Function Get-CTXAPI_ConfigAudit {
 		}
 	}
 	$deliverygroups = @()
-	$groups = Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken
+	$groups = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader
 
 	foreach ($grp in $groups) {
 		$SimpleAccessPolicy = $grp.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
@@ -115,7 +129,7 @@ Function Get-CTXAPI_ConfigAudit {
 
 	$apps = @()
 	$assgroups = @()
-	$applications = Get-CTXAPI_Applications -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken
+	$applications = Get-CTXAPI_Applications -APIHeader $APIHeader
 
 	foreach ($application in $applications) {
 		$IncludedUsers = $application.IncludedUsers | ForEach-Object { $_.samname }
@@ -135,7 +149,7 @@ Function Get-CTXAPI_ConfigAudit {
 	}
 
 	$machines = @()
-	Get-CTXAPI_Machines -CustomerId $CustomerId -SiteId $siteid -ApiToken $apitoken | ForEach-Object {
+	Get-CTXAPI_Machines -APIHeader $APIHeader | ForEach-Object {
 		$AssociatedUsers = $_.AssociatedUsers | ForEach-Object { $_.samname }
   $machines += [pscustomobject]@{
 			DnsName               = $_.DnsName
@@ -159,7 +173,7 @@ Function Get-CTXAPI_ConfigAudit {
 	}
 
 	if ($Export -eq 'Excel') {
-		[string]$ExcelReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+		[string]$ExcelReportname = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
 		$catalogs | Export-Excel -Path $ExcelReportname -WorksheetName Catalogs -AutoSize -AutoFilter
 		$deliverygroups | Export-Excel -Path $ExcelReportname -WorksheetName DeliveryGroups -AutoSize -AutoFilter
 		$apps | Export-Excel -Path $ExcelReportname -WorksheetName apps -AutoSize -AutoFilter
@@ -167,9 +181,9 @@ Function Get-CTXAPI_ConfigAudit {
 	}
 	if ($Export -eq 'HTML') {
 
-		[string]$HTMLReportname = $ReportPath + "\XD_Audit-$CustomerId-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+		[string]$HTMLReportname = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
-		New-HTML -TitleText "$CustomerId Config Audit" -FilePath $HTMLReportname -ShowHTML {
+		New-HTML -TitleText "$($APIHeader.CustomerName) Config Audit" -FilePath $HTMLReportname -ShowHTML {
 			New-HTMLLogo -RightLogoString $Logourl
 			New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
 			New-HTMLSection @SectionSettings -Content {
