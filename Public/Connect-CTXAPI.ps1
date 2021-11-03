@@ -42,6 +42,7 @@ Connect to the cloud and create needed api headers
 
 #>
 
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Connect-CTXAPI {
 <#

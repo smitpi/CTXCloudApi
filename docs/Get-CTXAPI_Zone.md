@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Zone
 
 ## SYNOPSIS
-Get zone details
+Get zone details from api
 
 ## SYNTAX
 
@@ -17,19 +17,19 @@ Get-CTXAPI_Zone [[-APIHeader] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get zone details
+Get zone details from api
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_Zone
+Get-CTXAPI_Zones -APIHeader $APIHeader
 ```
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Custom object from Get-CTXAPI_Headers
 
 ```yaml
 Type: Object
@@ -52,6 +52,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object[]
 ## NOTES
-Detail on what the script does, if this is needed.
 
 ## RELATED LINKS

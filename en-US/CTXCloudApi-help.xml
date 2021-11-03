@@ -18,7 +18,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>Customer_Id</maml:name>
           <maml:description>
-            <maml:para>From CTX Cloud</maml:para>
+            <maml:para>From Citrix Cloud</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -30,7 +30,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>client_id</maml:name>
           <maml:description>
-            <maml:para>From CTX Cloud</maml:para>
+            <maml:para>From Citrix Cloud</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -42,7 +42,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
           <maml:name>client_secret</maml:name>
           <maml:description>
-            <maml:para>From CTX Cloud</maml:para>
+            <maml:para>From Citrix Cloud</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -54,7 +54,7 @@
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
           <maml:name>CustomerName</maml:name>
           <maml:description>
-            <maml:para>From CTX Cloud</maml:para>
+            <maml:para>From Citrix Cloud</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -69,7 +69,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>Customer_Id</maml:name>
         <maml:description>
-          <maml:para>From CTX Cloud</maml:para>
+          <maml:para>From Citrix Cloud</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -81,7 +81,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
         <maml:name>client_id</maml:name>
         <maml:description>
-          <maml:para>From CTX Cloud</maml:para>
+          <maml:para>From Citrix Cloud</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -93,7 +93,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
         <maml:name>client_secret</maml:name>
         <maml:description>
-          <maml:para>From CTX Cloud</maml:para>
+          <maml:para>From Citrix Cloud</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -105,7 +105,7 @@
       <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="4" aliases="none">
         <maml:name>CustomerName</maml:name>
         <maml:description>
-          <maml:para>From CTX Cloud</maml:para>
+          <maml:para>From Citrix Cloud</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -119,7 +119,7 @@
     <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -189,7 +189,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -259,7 +259,7 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -538,7 +538,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para></maml:para>
+            <maml:para>@{Text=}</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -598,7 +598,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
           <maml:description>
-            <maml:para></maml:para>
+            <maml:para>@{Text=}</maml:para>
           </maml:description>
           <command:parameterValueGroup>
             <command:parameterValue required="false" command:variableLength="false">Excel</command:parameterValue>
@@ -653,7 +653,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>Export</maml:name>
         <maml:description>
-          <maml:para></maml:para>
+          <maml:para>@{Text=}</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
@@ -749,20 +749,21 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_DeliveryGroup</command:name>
+      <command:name>Get-CTXAPI_DeliveryGroups</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_DeliveryGroup</command:noun>
+      <command:noun>CTXAPI_DeliveryGroups</command:noun>
       <maml:description>
-        <maml:para>Return details about Delivery Groups</maml:para>
+        <maml:para>Return details of all delivery groups</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about Delivery Groups</maml:para>
+      <maml:para>Return details of all delivery groups</maml:para>
+      <maml:para>- HTML Reports 	- When creating a HTML report: 	- The logo can be changed by replacing the variable  		- $Global:Logourl ='' 	- The colors of the report can be changed, by replacing: 		- $global:colour1 = '#061820' 		- $global:colour2 = '#FFD400' 	- Or permanently replace it by editing the following file 	- &lt;Module base&gt;\Private\Reports-Variables.ps1</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_DeliveryGroup</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Get-CTXAPI_DeliveryGroups</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
             <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -777,7 +778,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -790,11 +791,20 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>System.Object</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -803,15 +813,15 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_DeliveryGroup</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-CTXAPI_DeliveryGroups -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>delivery group settings</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1234,20 +1244,20 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_Hypervisor</command:name>
+      <command:name>Get-CTXAPI_Hypervisors</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_Hypervisor</command:noun>
+      <command:noun>CTXAPI_Hypervisors</command:noun>
       <maml:description>
-        <maml:para>Return details about hosting (hypervisor)</maml:para>
+        <maml:para>Returns details about the hosting connection</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about hosting (hypervisor)</maml:para>
+      <maml:para>Returns details about the hosting connection</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_Hypervisor</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Get-CTXAPI_Hypervisors</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
             <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -1262,7 +1272,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -1275,11 +1285,20 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>System.Object</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1288,13 +1307,13 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Hypervisor</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-CTXAPI_Hypervisors -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -1304,35 +1323,23 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_LowLevelOperation</command:name>
+      <command:name>Get-CTXAPI_LowLevelOperations</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_LowLevelOperation</command:noun>
+      <command:noun>CTXAPI_LowLevelOperations</command:noun>
       <maml:description>
-        <maml:para>Return details about low lever config change (More detailed)</maml:para>
+        <maml:para>Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about low lever config change (More detailed)</maml:para>
+      <maml:para>more details on config changes</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_LowLevelOperation</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>APIHeader</maml:name>
-          <maml:description>
-            <maml:para>Use Connect-CTXAPI to create headers</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-          <dev:type>
-            <maml:name>Object</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
+        <maml:name>Get-CTXAPI_LowLevelOperations</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
           <maml:name>HighLevelID</maml:name>
           <maml:description>
-            <maml:para>Config Audit</maml:para>
+            <maml:para>Get-CTXAPI_ConfigLog function</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
           <dev:type>
@@ -1341,10 +1348,34 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>APIHeader</maml:name>
+          <maml:description>
+            <maml:para>Use Connect-CTXAPI to create headers</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
+        <maml:name>HighLevelID</maml:name>
+        <maml:description>
+          <maml:para>Get-CTXAPI_ConfigLog function</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+        <dev:type>
+          <maml:name>String</maml:name>
+          <maml:uri />
+        </dev:type>
+        <dev:defaultValue>None</dev:defaultValue>
+      </command:parameter>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -1356,14 +1387,81 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>HighLevelID</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
+    </command:parameters>
+    <command:inputTypes>
+      <command:inputType>
         <dev:type>
-          <maml:name>String</maml:name>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
+    <command:returnValues>
+      <command:returnValue>
+        <dev:type>
+          <maml:name>System.Object</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:returnValue>
+    </command:returnValues>
+    <maml:alertSet>
+      <maml:alert>
+        <maml:para></maml:para>
+      </maml:alert>
+    </maml:alertSet>
+    <command:examples>
+      <command:example>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-CTXAPI_LowLevelOperations -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -HighLevelID $id</dev:code>
+        <dev:remarks>
+          <maml:para></maml:para>
+        </dev:remarks>
+      </command:example>
+    </command:examples>
+    <command:relatedLinks />
+  </command:command>
+  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
+    <command:details>
+      <command:name>Get-CTXAPI_MachineCatalogs</command:name>
+      <command:verb>Get</command:verb>
+      <command:noun>CTXAPI_MachineCatalogs</command:noun>
+      <maml:description>
+        <maml:para>Return details about machine catalogs</maml:para>
+      </maml:description>
+    </command:details>
+    <maml:description>
+      <maml:para>Return details about machine catalogs</maml:para>
+    </maml:description>
+    <command:syntax>
+      <command:syntaxItem>
+        <maml:name>Get-CTXAPI_MachineCatalogs</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+          <maml:name>APIHeader</maml:name>
+          <maml:description>
+            <maml:para>Use Connect-CTXAPI to create headers</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+          <dev:type>
+            <maml:name>Object</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+      </command:syntaxItem>
+    </command:syntax>
+    <command:parameters>
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>APIHeader</maml:name>
+        <maml:description>
+          <maml:para>Use Connect-CTXAPI to create headers</maml:para>
+        </maml:description>
+        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
+        <dev:type>
+          <maml:name>Object</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1382,13 +1480,13 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_LowLevelOperation</dev:code>
+        <dev:code>Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -1398,20 +1496,20 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_Machine</command:name>
+      <command:name>Get-CTXAPI_Machines</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_Machine</command:noun>
+      <command:noun>CTXAPI_Machines</command:noun>
       <maml:description>
-        <maml:para>Return details about vda machines</maml:para>
+        <maml:para>Details about VDA devices</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about vda machines</maml:para>
+      <maml:para>Details about VDA devices</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_Machine</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Get-CTXAPI_Machines</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
             <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -1426,7 +1524,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>GetPubDesktop</maml:name>
           <maml:description>
-            <maml:para>Config Audit</maml:para>
+            <maml:para>Get desktop details</maml:para>
           </maml:description>
           <dev:type>
             <maml:name>SwitchParameter</maml:name>
@@ -1437,7 +1535,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -1452,7 +1550,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>GetPubDesktop</maml:name>
         <maml:description>
-          <maml:para>Config Audit</maml:para>
+          <maml:para>Get desktop details</maml:para>
         </maml:description>
         <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
         <dev:type>
@@ -1462,11 +1560,20 @@
         <dev:defaultValue>False</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>System.Object</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1475,83 +1582,13 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Machine</dev:code>
-        <dev:remarks>
-          <maml:para></maml:para>
-        </dev:remarks>
-      </command:example>
-    </command:examples>
-    <command:relatedLinks />
-  </command:command>
-  <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
-    <command:details>
-      <command:name>Get-CTXAPI_MachineCatalog</command:name>
-      <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_MachineCatalog</command:noun>
-      <maml:description>
-        <maml:para>Return details about machine catalogs</maml:para>
-      </maml:description>
-    </command:details>
-    <maml:description>
-      <maml:para>Return details about machine catalogs</maml:para>
-    </maml:description>
-    <command:syntax>
-      <command:syntaxItem>
-        <maml:name>Get-CTXAPI_MachineCatalog</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-          <maml:name>APIHeader</maml:name>
-          <maml:description>
-            <maml:para>Use Connect-CTXAPI to create headers</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-          <dev:type>
-            <maml:name>Object</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
-      </command:syntaxItem>
-    </command:syntax>
-    <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
-        <maml:name>APIHeader</maml:name>
-        <maml:description>
-          <maml:para>Use Connect-CTXAPI to create headers</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
-        <dev:type>
-          <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-    </command:parameters>
-    <command:inputTypes />
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>System.Object[]</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
-    <maml:alertSet>
-      <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
-      </maml:alert>
-    </maml:alertSet>
-    <command:examples>
-      <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_MachineCatalog</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt;  Get-CTXAPI_Machines -CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -1693,19 +1730,19 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_ResourceLocation</command:name>
+      <command:name>Get-CTXAPI_ResourceLocations</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_ResourceLocation</command:noun>
+      <command:noun>CTXAPI_ResourceLocations</command:noun>
       <maml:description>
-        <maml:para>Resources</maml:para>
+        <maml:para>Get cloud Resource Locations</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Config Audit</maml:para>
+      <maml:para>Get cloud Resource Locations</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_ResourceLocation</maml:name>
+        <maml:name>Get-CTXAPI_ResourceLocations</maml:name>
         <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="0" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
@@ -1762,9 +1799,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- Example 1 --------------------------</maml:title>
-        <dev:code>Config Audit</dev:code>
+        <dev:code>C:\&gt; Get-CTXAPI_ResourceLocations</dev:code>
         <dev:remarks>
-          <maml:para>Config Audit</maml:para>
+          <maml:para>Run Built in Citrix cloud tests</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2011,20 +2048,20 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_Session</command:name>
+      <command:name>Get-CTXAPI_Sessions</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_Session</command:noun>
+      <command:noun>CTXAPI_Sessions</command:noun>
       <maml:description>
-        <maml:para>Return details about current sessions</maml:para>
+        <maml:para>Reports on user sessions</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about current sessions</maml:para>
+      <maml:para>Reports on user sessions</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_Session</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Get-CTXAPI_Sessions</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
             <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -2039,7 +2076,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -2052,11 +2089,20 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>System.Object</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2065,13 +2111,13 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Session</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; $Sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -2081,20 +2127,20 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_SiteDetail</command:name>
+      <command:name>Get-CTXAPI_SiteDetails</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_SiteDetail</command:noun>
+      <command:noun>CTXAPI_SiteDetails</command:noun>
       <maml:description>
-        <maml:para>Return details about your farm / site</maml:para>
+        <maml:para>Retrieve Site / Farm details</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about your farm / site</maml:para>
+      <maml:para>Retrieve Site / Farm details</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_SiteDetail</maml:name>
-        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Get-CTXAPI_SiteDetails</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
             <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -2109,7 +2155,7 @@
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -2122,11 +2168,20 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>System.Object</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2135,13 +2190,26 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_SiteDetail</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
+
+
+
+LicenseServerName                           : 
+LicenseServerPort                           : 
+LicenseServerUri                            : 
+LicensingModel                              : UserDevice
+SiteConfigurationComplete                   : True
+PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
+ProductCode                                 : Unknown
+ProductEdition                              : Unknown
+ProductVersion                              : 7.29
+SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -2151,20 +2219,20 @@
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
-      <command:name>Get-CTXAPI_Test</command:name>
+      <command:name>Get-CTXAPI_SiteDetails</command:name>
       <command:verb>Get</command:verb>
-      <command:noun>CTXAPI_Test</command:noun>
+      <command:noun>CTXAPI_SiteDetails</command:noun>
       <maml:description>
-        <maml:para>Run Built in Citrix cloud tests</maml:para>
+        <maml:para>Retrieve Site / Farm details</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Run Built in Citrix cloud tests</maml:para>
+      <maml:para>Retrieve Site / Farm details</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
-        <maml:name>Get-CTXAPI_Test</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+        <maml:name>Get-CTXAPI_SiteDetails</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
             <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -2176,78 +2244,10 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-          <maml:name>Export</maml:name>
-          <maml:description>
-            <maml:para>Config Audit</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>Host</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-          <maml:name>ReportPath</maml:name>
-          <maml:description>
-            <maml:para>Config Audit</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-          <dev:type>
-            <maml:name>String</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>$env:temp</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>SiteTest</maml:name>
-          <maml:description>
-            <maml:para>Config Audit</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>HypervisorsTest</maml:name>
-          <maml:description>
-            <maml:para>Config Audit</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>DeliveryGroupsTest</maml:name>
-          <maml:description>
-            <maml:para>Config Audit</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MachineCatalogsTest</maml:name>
-          <maml:description>
-            <maml:para>Config Audit</maml:para>
-          </maml:description>
-          <dev:type>
-            <maml:name>SwitchParameter</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>False</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
+      <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
           <maml:para>Use Connect-CTXAPI to create headers</maml:para>
@@ -2259,84 +2259,21 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>SiteTest</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>HypervisorsTest</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>DeliveryGroupsTest</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>MachineCatalogsTest</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="false" variableLength="false">SwitchParameter</command:parameterValue>
-        <dev:type>
-          <maml:name>SwitchParameter</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="2" aliases="none">
-        <maml:name>Export</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>Host</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="3" aliases="none">
-        <maml:name>ReportPath</maml:name>
-        <maml:description>
-          <maml:para>Config Audit</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
-        <dev:type>
-          <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>$env:temp</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
-    <command:inputTypes />
+    <command:inputTypes>
+      <command:inputType>
+        <dev:type>
+          <maml:name>None</maml:name>
+        </dev:type>
+        <maml:description>
+          <maml:para></maml:para>
+        </maml:description>
+      </command:inputType>
+    </command:inputTypes>
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Collections.Hashtable</maml:name>
+          <maml:name>System.Object</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2345,13 +2282,26 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
-        <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Test</dev:code>
+        <maml:title>-------------------------- Example 1 --------------------------</maml:title>
+        <dev:code>PS C:\&gt; Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
+
+
+
+LicenseServerName                           : 
+LicenseServerPort                           : 
+LicenseServerUri                            : 
+LicensingModel                              : UserDevice
+SiteConfigurationComplete                   : True
+PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
+ProductCode                                 : Unknown
+ProductEdition                              : Unknown
+ProductVersion                              : 7.29
+SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>
@@ -2496,11 +2446,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_Zone</command:noun>
       <maml:description>
-        <maml:para>Get zone details</maml:para>
+        <maml:para>Get zone details from api</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Get zone details</maml:para>
+      <maml:para>Get zone details from api</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>
@@ -2508,7 +2458,7 @@
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
           <maml:name>APIHeader</maml:name>
           <maml:description>
-            <maml:para>Use Connect-CTXAPI to create headers</maml:para>
+            <maml:para>Custom object from Get-CTXAPI_Headers</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
@@ -2523,7 +2473,7 @@
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="1" aliases="none">
         <maml:name>APIHeader</maml:name>
         <maml:description>
-          <maml:para>Use Connect-CTXAPI to create headers</maml:para>
+          <maml:para>Custom object from Get-CTXAPI_Headers</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
@@ -2546,13 +2496,13 @@
     </command:returnValues>
     <maml:alertSet>
       <maml:alert>
-        <maml:para>Detail on what the script does, if this is needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Zone</dev:code>
+        <dev:code>Get-CTXAPI_Zones -APIHeader $APIHeader</dev:code>
         <dev:remarks>
           <maml:para></maml:para>
         </dev:remarks>

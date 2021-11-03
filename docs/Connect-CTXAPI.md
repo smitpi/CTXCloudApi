@@ -30,7 +30,7 @@ Connect-CTXAPI
 ## PARAMETERS
 
 ### -Customer_Id
-From CTX Cloud
+From Citrix Cloud
 
 ```yaml
 Type: String
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -client_id
-From CTX Cloud
+From Citrix Cloud
 
 ```yaml
 Type: String
@@ -60,7 +60,7 @@ Accept wildcard characters: False
 ```
 
 ### -client_secret
-From CTX Cloud
+From Citrix Cloud
 
 ```yaml
 Type: String
@@ -75,7 +75,7 @@ Accept wildcard characters: False
 ```
 
 ### -CustomerName
-From CTX Cloud
+From Citrix Cloud
 
 ```yaml
 Type: String
@@ -97,6 +97,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ## NOTES
-Detail on what the script does, if this is needed.
 
 ## RELATED LINKS

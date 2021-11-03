@@ -31,7 +31,6 @@ PS C:\>  Get-CTXAPI_Machines -CTXAPI_MachineCatalogs -CustomerId $CustomerId -Si
 ### -APIHeader
 Use Connect-CTXAPI to create headers
 
-
 ```yaml
 Type: Object
 Parameter Sets: (All)
@@ -54,7 +53,7 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

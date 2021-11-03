@@ -59,7 +59,7 @@ Get cloud Resource Locations
 
 #.ExternalHelp CTXCloudApi-help.xml
 
-Function Get-CTXAPI_ResourceLocation {
+Function Get-CTXAPI_ResourceLocations {
 	<#
 .SYNOPSIS
 Get cloud Resource Locations

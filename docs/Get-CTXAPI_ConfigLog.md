@@ -22,7 +22,7 @@ Config Audit
 ## EXAMPLES
 
 ### Example 1
-```powershell
+```
 Config Audit
 ```
 
@@ -66,7 +66,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## INPUTS
 
 ### None
-
 ## OUTPUTS
 
 ### System.Object

@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 1.1.1
 
-.GUID 54693dbd-02ca-4269-96d6-96e30c60fb0b
+.GUID c33c8458-e6e0-4035-9b18-9e606a12fff4
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -19,34 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:33] Initital Script Creating
+Created [06/10/2021_21:23] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
-
-<# 
-
-.DESCRIPTION 
- Return details about vda machines 
-
-#> 
 
 
-
-Function Get-CTXAPI_Machine {
 <#
+
+.DESCRIPTION
+Return details about vda machines
+
+#>
+
+Param()
+
+
+#.ExternalHelp CTXCloudApi-help.xml
+Function Get-CTXAPI_Machine {
+	<#
 .SYNOPSIS
 Return details about vda machines
 
@@ -56,11 +57,8 @@ Return details about vda machines
 .PARAMETER APIHeader
 Use Connect-CTXAPI to create headers
 
-.PARAMETER GetPubDesktop
-Get published desktop details
-
 .EXAMPLE
-Get-CTXAPI_Machine
+Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
 	[Cmdletbinding()]
@@ -75,9 +73,9 @@ Get-CTXAPI_Machine
 		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)" -Method Get -Headers $APIHeader.headers
 	}
 
-	if ($GetPubDesktop) {
-		(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-			Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)/Desktop" -Method Get -Headers $APIHeader.headers
-		}
+	if ($GetPubDesktop){
+	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)/Desktop" -Method Get -Headers $APIHeader.headers
 	}
+}
 } #end Function

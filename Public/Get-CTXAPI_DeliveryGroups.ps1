@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 0.1.0
 
-.GUID 411c19ab-8d64-4620-b1e6-5494eedd9a08
+.GUID 2d5b1922-da2b-48c8-8d33-0686390699a8
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,34 +19,31 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
-Updated [07/10/2021_13:28] Script info updated for module
+Created [03/11/2021_19:29] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Return details about Delivery Groups 
+
+#> 
 
 
+# .ExternalHelp CTXCloudApi-help.xml
+
+Function Get-CTXAPI_DeliveryGroups {
 <#
-
-.DESCRIPTION
-Return details about Delivery Groups
-
-#>
-
-Param()
-
-#.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_DeliveryGroup {
-	<#
 .SYNOPSIS
 Return details about Delivery Groups
 
@@ -57,7 +54,7 @@ Return details about Delivery Groups
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader
+Get-CTXAPI_DeliveryGroup
 
 #>
 	[Cmdletbinding()]

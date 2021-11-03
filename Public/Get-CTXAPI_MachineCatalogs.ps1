@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 0.1.0
 
-.GUID 7e2cc53d-2308-4c7f-96f0-6f7472a3f0b1
+.GUID 36405065-6970-4852-94ce-0cddf2898d29
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,36 +19,32 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
-Updated [07/10/2021_13:28] Script info updated for module
+Created [03/11/2021_19:33] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
 
+<# 
 
+.DESCRIPTION 
+ Return details about machine catalogs 
+
+#> 
+
+
+# .ExternalHelp CTXCloudApi-help.xml
+
+Function Get-CTXAPI_MachineCatalogs {
 <#
-
-.DESCRIPTION
-Return details about machine catalogs
-
-#>
-
-Param()
-
-
-
-
-Function Get-CTXAPI_MachineCatalog {
-	<#
 .SYNOPSIS
 Return details about machine catalogs
 
@@ -59,7 +55,7 @@ Return details about machine catalogs
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
+Get-CTXAPI_MachineCatalog
 
 #>
 	[Cmdletbinding()]

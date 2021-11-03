@@ -5,31 +5,34 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_Machine
+# Get-CTXAPI_ResourceLocations
 
 ## SYNOPSIS
-Return details about vda machines
+Get cloud Resource Locations
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Machine [-APIHeader] <Object> [-GetPubDesktop] [<CommonParameters>]
+Get-CTXAPI_ResourceLocations [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about vda machines
+Get cloud Resource Locations
 
 ## EXAMPLES
 
-### EXAMPLE 1
+### Example 1
+```powershell
+C:\> Get-CTXAPI_ResourceLocations
 ```
-Get-CTXAPI_Machine
-```
+
+Run Built in Citrix cloud tests
 
 ## PARAMETERS
 
 ### -APIHeader
 Use Connect-CTXAPI to create headers
+
 
 ```yaml
 Type: Object
@@ -37,23 +40,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -GetPubDesktop
-Config Audit
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -63,10 +51,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### None
+
 ## OUTPUTS
 
-### System.Object[]
+### System.Object
 ## NOTES
-Detail on what the script does, if this is needed.
 
 ## RELATED LINKS

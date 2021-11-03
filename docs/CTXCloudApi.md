@@ -29,8 +29,8 @@ Config Logs
 ### [Get-CTXAPI_ConnectionReport](Get-CTXAPI_ConnectionReport.md)
 Connecion Report
 
-### [Get-CTXAPI_DeliveryGroup](Get-CTXAPI_DeliveryGroup.md)
-Return details about Delivery Groups
+### [Get-CTXAPI_DeliveryGroups](Get-CTXAPI_DeliveryGroups.md)
+Return details of all delivery groups
 
 ### [Get-CTXAPI_FailureReport](Get-CTXAPI_FailureReport.md)
 Failure Report
@@ -38,39 +38,39 @@ Failure Report
 ### [Get-CTXAPI_HealthCheck](Get-CTXAPI_HealthCheck.md)
 Health check report
 
-### [Get-CTXAPI_Hypervisor](Get-CTXAPI_Hypervisor.md)
-Return details about hosting (hypervisor)
+### [Get-CTXAPI_Hypervisors](Get-CTXAPI_Hypervisors.md)
+Returns details about the hosting connection
 
-### [Get-CTXAPI_LowLevelOperation](Get-CTXAPI_LowLevelOperation.md)
-Return details about low lever config change (More detailed)
+### [Get-CTXAPI_LowLevelOperations](Get-CTXAPI_LowLevelOperations.md)
+Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
 
-### [Get-CTXAPI_Machine](Get-CTXAPI_Machine.md)
-Return details about vda machines
-
-### [Get-CTXAPI_MachineCatalog](Get-CTXAPI_MachineCatalog.md)
+### [Get-CTXAPI_MachineCatalogs](Get-CTXAPI_MachineCatalogs.md)
 Return details about machine catalogs
+
+### [Get-CTXAPI_Machines](Get-CTXAPI_Machines.md)
+Details about VDA devices
 
 ### [Get-CTXAPI_MonitorData](Get-CTXAPI_MonitorData.md)
 Monitor odata
 
-### [Get-CTXAPI_ResourceLocation](Get-CTXAPI_ResourceLocation.md)
-Resources
+### [Get-CTXAPI_ResourceLocations](Get-CTXAPI_ResourceLocations.md)
+Get cloud Resource Locations
 
 ### [Get-CTXAPI_ResourceUtilization](Get-CTXAPI_ResourceUtilization.md)
 Resource usage
 
-### [Get-CTXAPI_Session](Get-CTXAPI_Session.md)
-Return details about current sessions
+### [Get-CTXAPI_Sessions](Get-CTXAPI_Sessions.md)
+Reports on user sessions
 
-### [Get-CTXAPI_SiteDetail](Get-CTXAPI_SiteDetail.md)
-Return details about your farm / site
+### [Get-CTXAPI_SiteDetails](Get-CTXAPI_SiteDetails.md)
+Retrieve Site / Farm details
 
-### [Get-CTXAPI_Test](Get-CTXAPI_Test.md)
-Run Built in Citrix cloud tests
+### [Get-CTXAPI_SiteDetails](Get-CTXAPI_SiteDetails.md)
+Retrieve Site / Farm details
 
 ### [Get-CTXAPI_VDAUptime](Get-CTXAPI_VDAUptime.md)
 VDA uptime
 
 ### [Get-CTXAPI_Zone](Get-CTXAPI_Zone.md)
-Get zone details
+Get zone details from api
 

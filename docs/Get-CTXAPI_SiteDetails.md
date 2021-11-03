@@ -44,7 +44,6 @@ SiteServices                                : {@{ServiceName=Delegated Administr
 ### -APIHeader
 Use Connect-CTXAPI to create headers
 
-
 ```yaml
 Type: Object
 Parameter Sets: (All)

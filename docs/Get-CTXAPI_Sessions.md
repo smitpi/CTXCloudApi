@@ -31,7 +31,6 @@ PS C:\> $Sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId 
 ### -APIHeader
 Use Connect-CTXAPI to create headers
 
-
 ```yaml
 Type: Object
 Parameter Sets: (All)

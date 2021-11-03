@@ -46,7 +46,6 @@ Accept wildcard characters: False
 ### -APIHeader
 Use Connect-CTXAPI to create headers
 
-
 ```yaml
 Type: Object
 Parameter Sets: (All)

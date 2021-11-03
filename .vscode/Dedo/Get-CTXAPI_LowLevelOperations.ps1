@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 1.1.1
 
-.GUID 341638e1-4b02-4f7c-ae55-c4756a21d724
+.GUID 8e117b47-e4b9-423e-9ee6-a82e45efd9b1
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -19,30 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:32] Initital Script Creating
+Created [06/10/2021_21:23] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
 #>
 
-<# 
-
-.DESCRIPTION 
- Return details about low lever config change (More detailed) 
-
-#> 
 
 
-
-Function Get-CTXAPI_LowLevelOperation {
 <#
+
+.DESCRIPTION
+Return details about low lever config change (More detailed)
+
+#>
+
+Param()
+
+
+#.ExternalHelp CTXCloudApi-help.xml
+Function Get-CTXAPI_LowLevelOperation {
+	<#
 .SYNOPSIS
 Return details about low lever config change (More detailed)
 
@@ -53,10 +58,10 @@ Return details about low lever config change (More detailed)
 Use Connect-CTXAPI to create headers
 
 .PARAMETER HighLevelID
-High id
+get the id from Get-CTXAPI_ConfigLog
 
 .EXAMPLE
-Get-CTXAPI_LowLevelOperation
+Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $High.id
 
 #>
 	[Cmdletbinding()]

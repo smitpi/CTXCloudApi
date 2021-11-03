@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.1
+.VERSION 0.1.0
 
-.GUID e94ac0d8-1b25-4adb-9712-7f75a070d83b
+.GUID 02947c49-f670-4398-8fdb-3b522c22b593
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,33 +19,32 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initital Script Creating
-Updated [07/10/2021_13:28] Script info updated for module
+Created [03/11/2021_19:34] Initital Script Creating
 
 .PRIVATEDATA
 
 #>
 
 
+<# 
 
-<#
+.DESCRIPTION 
+ Return details about current sessions 
 
-.DESCRIPTION
-Return details about current sessions
+#> 
 
-#>
 
-Param()
 #.ExternalHelp CTXCloudApi-help.xml
-Function Get-CTXAPI_Session {
-	<#
+
+Function Get-CTXAPI_Sessions {
+<#
 .SYNOPSIS
 Return details about current sessions
 
@@ -56,7 +55,7 @@ Return details about current sessions
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_Sessions -APIHeader $APIHeader
+Get-CTXAPI_Session
 
 #>
 	[Cmdletbinding()]

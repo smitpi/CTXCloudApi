@@ -32,9 +32,7 @@ Created [03/11/2021_19:35] Initital Script Creating
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
+
 
 <# 
 
@@ -44,6 +42,7 @@ Created [03/11/2021_19:35] Initital Script Creating
 #> 
 
 
+#.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_Zone {
 <#

@@ -40,6 +40,7 @@ Created [03/11/2021_19:26] Initital Script Creating
 #> 
 
 
+# .ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_Applications {
 <#

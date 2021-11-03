@@ -1,9 +1,9 @@
-
+﻿
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 1.1.1
 
-.GUID d52798b4-350d-491e-bd04-dea52b1ef49c
+.GUID 5b8588ac-59f0-49c5-8631-8fd2c83f0c19
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS api ctx
 
 .LICENSEURI
 
@@ -19,34 +19,35 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:34] Initital Script Creating
+Created [06/10/2021_21:23] Initital Script Creating
+Updated [07/10/2021_13:28] Script info updated for module
 
 .PRIVATEDATA
 
 #>
 
-#Requires -Module ImportExcel
-#Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
-
-<# 
-
-.DESCRIPTION 
- Return details about your farm / site 
-
-#> 
 
 
+<#
+
+.DESCRIPTION
+Return details about your farm / site
+
+#>
+
+Param()
+
+#.ExternalHelp CTXCloudApi-help.xml
 
 Function Get-CTXAPI_SiteDetail {
-<#
+	<#
 .SYNOPSIS
 Return details about your farm / site
 
@@ -57,7 +58,7 @@ Return details about your farm / site
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_SiteDetail
+Get-CTXAPI_SiteDetails -APIHeader $APIHeader
 
 #>
 	[Cmdletbinding()]

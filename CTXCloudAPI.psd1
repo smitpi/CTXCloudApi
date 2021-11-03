@@ -30,7 +30,7 @@ CompanyName = 'iOCO Tech'
 Copyright = '(c) 2021 Pierre Smit. All rights reserved.'
 
 # Description of the functionality provided by this module
-Description = 'Wrapper for Citrix Cloud API. Start with  Connect-CTXAPI to connect, then run other reports'
+Description = 'Wrapper for Citrix Cloud API. Start with Connect-CTXAPI to connect, then run other reports'
 
 # Minimum version of the Windows PowerShell engine required by this module
 # PowerShellVersion = ''
@@ -74,12 +74,12 @@ RequiredModules = @('ImportExcel',
 FunctionsToExport = 'Connect-CTXAPI', 'Get-CTXAPI_Applications', 
                'Get-CTXAPI_CloudServices', 'Get-CTXAPI_ConfigAudit', 
                'Get-CTXAPI_ConfigLog', 'Get-CTXAPI_ConnectionReport', 
-               'Get-CTXAPI_DeliveryGroup', 'Get-CTXAPI_FailureReport', 
-               'Get-CTXAPI_HealthCheck', 'Get-CTXAPI_Hypervisor', 
-               'Get-CTXAPI_LowLevelOperation', 'Get-CTXAPI_Machine', 
-               'Get-CTXAPI_MachineCatalog', 'Get-CTXAPI_MonitorData', 
-               'Get-CTXAPI_ResourceLocation', 'Get-CTXAPI_ResourceUtilization', 
-               'Get-CTXAPI_Session', 'Get-CTXAPI_SiteDetail', 'Get-CTXAPI_Test', 
+               'Get-CTXAPI_DeliveryGroups', 'Get-CTXAPI_FailureReport', 
+               'Get-CTXAPI_HealthCheck', 'Get-CTXAPI_Hypervisors', 
+               'Get-CTXAPI_LowLevelOperations', 'Get-CTXAPI_MachineCatalogs', 
+               'Get-CTXAPI_Machines', 'Get-CTXAPI_MonitorData', 
+               'Get-CTXAPI_ResourceLocations', 'Get-CTXAPI_ResourceUtilization', 
+               'Get-CTXAPI_Sessions', 'Get-CTXAPI_SiteDetails', 'Get-CTXAPI_Tests', 
                'Get-CTXAPI_VDAUptime', 'Get-CTXAPI_Zone'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
@@ -118,7 +118,7 @@ PrivateData = @{
         IconUri = 'https://ioco.tech/wp-content/uploads/2020/10/ioco-logo-2020.png'
 
         # ReleaseNotes of this module
-        ReleaseNotes = 'Updated [03/11/2021_19:40] Module Info was updated'
+        ReleaseNotes = 'Updated [03/11/2021_21:25] Update help xml file'
 
         # Prerelease string of this module
         # Prerelease = ''

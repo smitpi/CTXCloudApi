@@ -52,6 +52,5 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ### System.Object[]
 ## NOTES
-Detail on what the script does, if this is needed.
 
 ## RELATED LINKS
