@@ -152,7 +152,7 @@ Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 	$machines = @()
 	Get-CTXAPI_Machines -APIHeader $APIHeader | ForEach-Object {
 		$AssociatedUsers = $_.AssociatedUsers | ForEach-Object { $_.samname }
-  $machines += [pscustomobject]@{
+        $machines += [pscustomobject]@{
 			DnsName               = $_.DnsName
 			AgentVersion          = $_.AgentVersion
 			AllocationType        = $_.AllocationType
