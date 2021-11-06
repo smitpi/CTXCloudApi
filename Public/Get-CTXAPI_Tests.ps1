@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID e20e1814-58e5-47c1-a7ae-5a74c364b9b2
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,21 +27,24 @@
 
 .RELEASENOTES
 Created [03/11/2021_19:35] Initial Script Creating
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
 
+
 <#
 
-.DESCRIPTION
- Run Built in Citrix cloud tests
+.DESCRIPTION 
+Run Built in Citrix cloud tests
 
 #>
+
 <#
 .SYNOPSIS
 Run Built in Citrix cloud tests

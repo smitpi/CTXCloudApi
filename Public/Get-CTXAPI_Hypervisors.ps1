@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID 7696386a-1c5f-4f56-81d4-926c33d2bc6e
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [03/11/2021_19:29] Initial Script Creating
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 
-.DESCRIPTION
- Return details about hosting (hypervisor)
+.DESCRIPTION 
+Return details about hosting (hypervisor)
 
 #>
 

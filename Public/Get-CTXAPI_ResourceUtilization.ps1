@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.7
+.VERSION 1.1.8
 
 .GUID f2cc4273-d5ac-49b1-b12c-a8e2d1b8cf06
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -34,10 +34,13 @@ Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
 Updated [03/11/2021_19:17] Info Update
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -47,7 +50,7 @@ Updated [03/11/2021_19:17] Info Update
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Resource utilization in the last x hours
 
 #>

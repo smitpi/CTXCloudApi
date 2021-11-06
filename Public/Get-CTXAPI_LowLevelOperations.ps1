@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID 341638e1-4b02-4f7c-ae55-c4756a21d724
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [03/11/2021_19:32] Initial Script Creating
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 
-.DESCRIPTION
- Return details about low lever config change (More detailed)
+.DESCRIPTION 
+Return details about low lever config change (More detailed)
 
 #>
 

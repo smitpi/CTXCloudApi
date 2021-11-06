@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID 9dfebdd1-fcf2-4cf3-949e-a7be9a46537d
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,15 +27,18 @@
 
 .RELEASENOTES
 Created [03/11/2021_19:26] Initials Script Creating
+Updated [06/11/2021_16:48] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 <#
 
-.DESCRIPTION
- Return details about published apps
+.DESCRIPTION 
+Return details about published apps
 
 #>
 

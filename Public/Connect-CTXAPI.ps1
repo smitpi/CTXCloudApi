@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.1
+.VERSION 0.1.2
 
 .GUID f17c5fba-37fb-4230-a529-812470428a3a
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -28,16 +28,19 @@
 .RELEASENOTES
 Created [27/10/2021_12:52] Initial Script Creating
 Updated [03/11/2021_19:17] Info Update
+Updated [06/11/2021_16:48] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Connect to the cloud and create needed api headers
 
 #>

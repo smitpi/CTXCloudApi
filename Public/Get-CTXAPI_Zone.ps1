@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID dd758abe-6542-401a-a224-6507b6f590c7
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -27,17 +27,20 @@
 
 .RELEASENOTES
 Created [03/11/2021_19:35] Initial Script Creating
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 <#
 
-.DESCRIPTION
- Get zone details
+.DESCRIPTION 
+Get zone details
 
 #>
 

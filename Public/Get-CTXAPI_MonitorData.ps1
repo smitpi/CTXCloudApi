@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.2.3
+.VERSION 1.2.4
 
 .GUID 3e0321fa-75f4-4cb4-b4d4-cb806bc52a5a
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -30,10 +30,13 @@ Created [06/10/2021_18:17] Initial Script Creating
 Updated [06/10/2021_20:09] "Help Files Added"
 Updated [07/10/2021_13:28] Script info updated for module
 Updated [03/11/2021_19:17] Info Update
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
@@ -43,7 +46,7 @@ Updated [03/11/2021_19:17] Info Update
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 "Get the data from odata"
 
 #>

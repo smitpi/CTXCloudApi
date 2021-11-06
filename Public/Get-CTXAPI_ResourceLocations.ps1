@@ -1,7 +1,7 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 1.1.6
+.VERSION 1.1.7
 
 .GUID 3b47fbca-6d13-4688-9161-5043088b967c
 
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
@@ -30,16 +30,19 @@ Created [03/04/2021_01:32] Initial Script Creating
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
 Updated [03/11/2021_19:17] Info Update
+Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 
 <#
 
-.DESCRIPTION
+.DESCRIPTION 
 Get cloud Resource Locations
 
 #>
