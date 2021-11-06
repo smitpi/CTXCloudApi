@@ -254,6 +254,16 @@
 $APIHeader = Connect-CTXAPI @splat
 Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
 </code></pre>
+<h2 id="html-reports">HTML Reports</h2>
+<p>When creating a HTML report:</p>
+<pre><code>The logo can be changed by replacing the variable 
+  - `$Global:Logourl` ='URL to your logo'
+The colors of the report can be changed, by replacing:
+  - `$global:colour1` = '# number of color'
+  - `$global:colour2` = '# number of color'
+Or permanently replace it by editing the following file
+  - `&lt;Module base&gt;\Private\Reports-Variables.ps1`
+</code></pre>
 <h1 id="see-also">SEE ALSO</h1>
 <p>https://github.com/smitpi/CTXCloudApi</p>
               
@@ -314,5 +324,5 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2021-11-06 14:43:34.069422+00:00
+Build Date UTC : 2021-11-06 15:28:19.856803+00:00
 -->
