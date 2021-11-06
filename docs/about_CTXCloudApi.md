@@ -284,13 +284,15 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
 ```
 ## HTML Reports
 When creating a HTML report:
-- The logo can be changed by replacing the variable 
+```
+The logo can be changed by replacing the variable 
   - `$Global:Logourl` ='URL to your logo'
-- The colors of the report can be changed, by replacing:
+The colors of the report can be changed, by replacing:
   - `$global:colour1` = '# number of color'
   - `$global:colour2` = '# number of color'
-- Or permanently replace it by editing the following file
+Or permanently replace it by editing the following file
   - `<Module base>\Private\Reports-Variables.ps1`
+```
 
 
 # SEE ALSO
