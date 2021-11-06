@@ -30,7 +30,9 @@
     Copyright         = '(c) 2021 Pierre Smit. All rights reserved.'
 
     # Description of the functionality provided by this module
-    Description       = 'Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports'
+    Description       = 'Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions'
 
     # Minimum version of the Windows PowerShell engine required by this module
     # PowerShellVersion = ''
@@ -84,13 +86,13 @@
     'Get-CTXAPI_Zone'
 
     # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
-    CmdletsToExport   = @()
+    #CmdletsToExport   = @()
 
     # Variables to export from this module
     # VariablesToExport = @()
 
     # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
-    AliasesToExport   = @()
+    #AliasesToExport   = @()
 
     # DSC resources to export from this module
     # DscResourcesToExport = @()
