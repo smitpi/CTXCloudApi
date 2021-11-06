@@ -25,6 +25,7 @@ Connect to the cloud and create needed api headers
 ### EXAMPLE 1
 ```
 $splat = @{
+```
 Customer_Id = "xxx"
 	Client_Id = "xxx-xxx-xxx-xxx"
 	Client_Secret = "yyyyyy=="
