@@ -23,7 +23,7 @@ Return details about machine catalogs
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
+$MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
 ```
 
 ## PARAMETERS

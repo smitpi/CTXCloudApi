@@ -23,7 +23,7 @@ Return details about published apps
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_Applications
+Get-CTXAPI_Applications -APIHeader $APIHeader
 ```
 
 ## PARAMETERS

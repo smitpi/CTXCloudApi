@@ -8,35 +8,22 @@ schema: 2.0.0
 # Get-CTXAPI_SiteDetails
 
 ## SYNOPSIS
-Retrieve Site / Farm details
+Return details about your farm / site
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_SiteDetails -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_SiteDetails [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Retrieve Site / Farm details
+Return details about your farm / site
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
-
-
-
-LicenseServerName                           : 
-LicenseServerPort                           : 
-LicenseServerUri                            : 
-LicensingModel                              : UserDevice
-SiteConfigurationComplete                   : True
-PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
-ProductCode                                 : Unknown
-ProductEdition                              : Unknown
-ProductVersion                              : 7.29
-SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;
+Get-CTXAPI_SiteDetail -APIHeader $APIHeader
 ```
 
 ## PARAMETERS
@@ -50,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -61,10 +48,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

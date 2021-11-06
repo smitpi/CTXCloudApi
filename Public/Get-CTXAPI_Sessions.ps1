@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,31 +19,28 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:34] Initital Script Creating
+Created [03/11/2021_19:34] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about current sessions 
+.DESCRIPTION
+ Return details about current sessions
 
-#> 
+#>
 
 
-#.ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_Sessions {
 <#
 .SYNOPSIS
 Return details about current sessions
@@ -55,15 +52,16 @@ Return details about current sessions
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_Session
+Get-CTXAPI_Session -APIHeader $APIHeader
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader
-	)
+Function Get-CTXAPI_Sessions {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader
+    )
 
-	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Sessions/' -Method get -Headers $APIHeader.headers).items
+    (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Sessions/' -Method get -Headers $APIHeader.headers).items
 } #end Function

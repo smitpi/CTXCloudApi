@@ -8,7 +8,7 @@ Locale: en-US
 
 # CTXCloudApi Module
 ## Description
-Wrapper for Citrix Cloud API. Start with  Connect-CTXAPI to connect, then run other reports
+Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports
 
 ## CTXCloudApi Cmdlets
 ### [Connect-CTXAPI](Connect-CTXAPI.md)
@@ -17,60 +17,63 @@ Connect to the cloud and create needed api headers
 ### [Get-CTXAPI_Applications](Get-CTXAPI_Applications.md)
 Return details about published apps
 
+### [Get-CTXAPI_CloudConnectors](Get-CTXAPI_CloudConnectors.md)
+Details about current Cloud Connectors
+
 ### [Get-CTXAPI_CloudServices](Get-CTXAPI_CloudServices.md)
 Return details about cloud services and subscription
 
 ### [Get-CTXAPI_ConfigAudit](Get-CTXAPI_ConfigAudit.md)
-Config Audit
+Reports on system config
 
 ### [Get-CTXAPI_ConfigLog](Get-CTXAPI_ConfigLog.md)
-Config Logs
+Get high level configuration changes in the last x days.
 
 ### [Get-CTXAPI_ConnectionReport](Get-CTXAPI_ConnectionReport.md)
-Connecion Report
+Creates Connection report
 
 ### [Get-CTXAPI_DeliveryGroups](Get-CTXAPI_DeliveryGroups.md)
-Return details of all delivery groups
+Return details about Delivery Groups
 
 ### [Get-CTXAPI_FailureReport](Get-CTXAPI_FailureReport.md)
-Failure Report
+Reports on failures in the last x hours.
 
 ### [Get-CTXAPI_HealthCheck](Get-CTXAPI_HealthCheck.md)
-Health check report
+Show useful information for daily health check
 
 ### [Get-CTXAPI_Hypervisors](Get-CTXAPI_Hypervisors.md)
-Returns details about the hosting connection
+Return details about hosting (hypervisor)
 
 ### [Get-CTXAPI_LowLevelOperations](Get-CTXAPI_LowLevelOperations.md)
-Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
+Return details about low lever config change (More detailed)
 
 ### [Get-CTXAPI_MachineCatalogs](Get-CTXAPI_MachineCatalogs.md)
 Return details about machine catalogs
 
 ### [Get-CTXAPI_Machines](Get-CTXAPI_Machines.md)
-Details about VDA devices
+Return details about vda machines
 
 ### [Get-CTXAPI_MonitorData](Get-CTXAPI_MonitorData.md)
-Monitor odata
+Collect Monitoring OData for other reports
 
 ### [Get-CTXAPI_ResourceLocations](Get-CTXAPI_ResourceLocations.md)
 Get cloud Resource Locations
 
 ### [Get-CTXAPI_ResourceUtilization](Get-CTXAPI_ResourceUtilization.md)
-Resource usage
+Resource utilization in the last x hours
 
 ### [Get-CTXAPI_Sessions](Get-CTXAPI_Sessions.md)
-Reports on user sessions
+Return details about current sessions
 
 ### [Get-CTXAPI_SiteDetails](Get-CTXAPI_SiteDetails.md)
-Retrieve Site / Farm details
+Return details about your farm / site
 
-### [Get-CTXAPI_SiteDetails](Get-CTXAPI_SiteDetails.md)
-Retrieve Site / Farm details
+### [Get-CTXAPI_Tests](Get-CTXAPI_Tests.md)
+Run Built in Citrix cloud tests
 
 ### [Get-CTXAPI_VDAUptime](Get-CTXAPI_VDAUptime.md)
-VDA uptime
+Uses Registration date to calculate uptime
 
 ### [Get-CTXAPI_Zone](Get-CTXAPI_Zone.md)
-Get zone details from api
+Get zone details
 

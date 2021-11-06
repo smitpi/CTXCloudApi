@@ -8,28 +8,46 @@ schema: 2.0.0
 # Get-CTXAPI_LowLevelOperations
 
 ## SYNOPSIS
-Retrieves detailed logs  administrator actions, from the Get-CTXAPI_ConfigLog function
+Return details about low lever config change (More detailed)
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_LowLevelOperations -APIHeader <Object> [-HighLevelID] <String> [<CommonParameters>]
+Get-CTXAPI_LowLevelOperations [-APIHeader] <Object> [-HighLevelID] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-more details on config changes
+Return details about low lever config change (More detailed)
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> Get-CTXAPI_LowLevelOperations -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken -HighLevelID $id
+$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
 ```
+
+$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog\[0\].id
 
 ## PARAMETERS
 
+### -APIHeader
+Use Connect-CTXAPI to create headers
+
+```yaml
+Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -HighLevelID
-Get-CTXAPI_ConfigLog function
+Unique id for a config change.
+From the Get-CTXAPI_ConfigLog function.
 
 ```yaml
 Type: String
@@ -43,30 +61,14 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -APIHeader
-Use Connect-CTXAPI to create headers
-
-```yaml
-Type: Object
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

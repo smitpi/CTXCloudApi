@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,14 +19,14 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:35] Initital Script Creating
+Created [03/11/2021_19:35] Initial Script Creating
 
 .PRIVATEDATA
 
@@ -34,17 +34,14 @@ Created [03/11/2021_19:35] Initital Script Creating
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Get zone details 
+.DESCRIPTION
+ Get zone details
 
-#> 
+#>
 
 
-#.ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_Zone {
 <#
 .SYNOPSIS
 Get zone details
@@ -56,16 +53,17 @@ Get zone details
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_Zone
+ Get-CTXAPI_Zone -APIHeader $APIHeader
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader
-	)
+Function Get-CTXAPI_Zone {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader
+    )
 
-	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Zones/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Zones/$($_.id)" -Method Get -Headers $APIHeader.headers
-	}
+    (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Zones/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Zones/$($_.id)" -Method Get -Headers $APIHeader.headers
+    }
 } #end Function

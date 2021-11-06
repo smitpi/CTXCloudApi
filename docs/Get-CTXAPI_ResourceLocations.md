@@ -21,18 +21,15 @@ Get cloud Resource Locations
 
 ## EXAMPLES
 
-### Example 1
-```powershell
-C:\> Get-CTXAPI_ResourceLocations
+### EXAMPLE 1
 ```
-
-Run Built in Citrix cloud tests
+Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+```
 
 ## PARAMETERS
 
 ### -APIHeader
 Use Connect-CTXAPI to create headers
-
 
 ```yaml
 Type: Object
@@ -40,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -51,11 +48,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
-
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

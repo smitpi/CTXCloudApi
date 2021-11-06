@@ -8,22 +8,22 @@ schema: 2.0.0
 # Get-CTXAPI_Sessions
 
 ## SYNOPSIS
-Reports on user sessions
+Return details about current sessions
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Sessions -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_Sessions [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Reports on user sessions
+Return details about current sessions
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> $Sessions = Get-CTXAPI_Sessions -CustomerId $CustomerId -SiteId $SiteId -ApiToken $ApiToken
+Get-CTXAPI_Session -APIHeader $APIHeader
 ```
 
 ## PARAMETERS
@@ -37,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -48,10 +48,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

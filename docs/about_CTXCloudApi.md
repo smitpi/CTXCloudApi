@@ -1,0 +1,57 @@
+# CTXCloudApi
+## about_CTXCloudApi
+
+# SHORT DESCRIPTION
+Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports
+
+# LONG DESCRIPTION
+Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports
+
+# EXAMPLES
+-------------------------- Get-CTXAPI_Applications --------------------------
+Get-CTXAPI_Applications -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_CloudConnectors --------------------------
+Get-CTXAPI_CloudConnectors -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_CloudServices --------------------------
+Get-CTXAPI_CloudServices -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_ConfigAudit --------------------------
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+-------------------------- Get-CTXAPI_ConfigLog --------------------------
+Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
+-------------------------- Get-CTXAPI_ConnectionReport --------------------------
+Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
+-------------------------- Get-CTXAPI_DeliveryGroups --------------------------
+Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_FailureReport --------------------------
+Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
+-------------------------- Get-CTXAPI_HealthCheck --------------------------
+Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
+-------------------------- Get-CTXAPI_Hypervisors --------------------------
+Get-CTXAPI_Hypervisor -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_LowLevelOperations --------------------------
+$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
+-------------------------- Get-CTXAPI_MachineCatalogs --------------------------
+$MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_Machines --------------------------
+$machines = Get-CTXAPI_Machines -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_MonitorData --------------------------
+$MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region eu -hours 24
+-------------------------- Get-CTXAPI_ResourceLocations --------------------------
+Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_ResourceUtilization --------------------------
+Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPath C:\temp\
+-------------------------- Get-CTXAPI_Sessions --------------------------
+Get-CTXAPI_Session -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_SiteDetails --------------------------
+Get-CTXAPI_SiteDetail -APIHeader $APIHeader
+-------------------------- Get-CTXAPI_Tests --------------------------
+Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -Export HTML -ReportPath C:\temp
+-------------------------- Get-CTXAPI_VDAUptime --------------------------
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
+-------------------------- Get-CTXAPI_Zone --------------------------
+Get-CTXAPI_Zone -APIHeader $APIHeader
+
+
+# SEE ALSO
+https://github.com/smitpi/CTXCloudApi
+

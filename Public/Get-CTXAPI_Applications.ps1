@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,30 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:26] Initital Script Creating
+Created [03/11/2021_19:26] Initials Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about published apps 
+.DESCRIPTION
+ Return details about published apps
 
-#> 
+#>
 
 
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_Applications {
 <#
 .SYNOPSIS
 Return details about published apps
@@ -54,17 +51,18 @@ Return details about published apps
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_Applications
+Get-CTXAPI_Applications -APIHeader $APIHeader
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader)
+Function Get-CTXAPI_Applications {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
-	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Applications/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Applications/$($_.id)" -Method Get -Headers $APIHeader.headers
-	}
+    (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Applications/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Applications/$($_.id)" -Method Get -Headers $APIHeader.headers
+    }
 
 } #end Function

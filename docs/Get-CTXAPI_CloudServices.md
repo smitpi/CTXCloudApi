@@ -23,7 +23,7 @@ Return details about cloud services and subscription
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_CloudServices
+Get-CTXAPI_CloudServices -APIHeader $APIHeader
 ```
 
 ## PARAMETERS

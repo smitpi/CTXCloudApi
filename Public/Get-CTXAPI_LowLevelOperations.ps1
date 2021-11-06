@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,30 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:32] Initital Script Creating
+Created [03/11/2021_19:32] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about low lever config change (More detailed) 
+.DESCRIPTION
+ Return details about low lever config change (More detailed)
 
-#> 
+#>
 
 
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_LowLevelOperations {
 <#
 .SYNOPSIS
 Return details about low lever config change (More detailed)
@@ -54,22 +51,24 @@ Return details about low lever config change (More detailed)
 Use Connect-CTXAPI to create headers
 
 .PARAMETER HighLevelID
-High id
+Unique id for a config change. From the Get-CTXAPI_ConfigLog function.
 
 .EXAMPLE
-Get-CTXAPI_LowLevelOperation
+$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
+$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-		[Parameter(Mandatory = $true)]
-		[ValidateNotNullOrEmpty()]
-		[string]$HighLevelID)
+Function Get-CTXAPI_LowLevelOperations {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [string]$HighLevelID)
 
-	(Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations/$($HighLevelID)/LowLevelOperations" -Method get -Headers $APIHeader.headers).items
+    (Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations/$($HighLevelID)/LowLevelOperations" -Method get -Headers $APIHeader.headers).items
 
 
 }

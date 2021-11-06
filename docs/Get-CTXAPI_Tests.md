@@ -5,38 +5,26 @@ online version:
 schema: 2.0.0
 ---
 
-# Get-CTXAPI_SiteDetails
+# Get-CTXAPI_Tests
 
 ## SYNOPSIS
-Retrieve Site / Farm details
+Run Built in Citrix cloud tests
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_SiteDetails -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_Tests [[-APIHeader] <Object>] [-SiteTest] [-HypervisorsTest] [-DeliveryGroupsTest]
+ [-MachineCatalogsTest] [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Retrieve Site / Farm details
+Run Built in Citrix cloud tests
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> Get-CTXAPI_SiteDetails @CTX_APIDefaultParm
-
-
-
-LicenseServerName                           : 
-LicenseServerPort                           : 
-LicenseServerUri                            : 
-LicensingModel                              : UserDevice
-SiteConfigurationComplete                   : True
-PrimaryZone                                 : @{Id=00000000-0000-0000-0000-000000000000; Uid=; Name=Initial Zone}
-ProductCode                                 : Unknown
-ProductEdition                              : Unknown
-ProductVersion                              : 7.29
-SiteServices                                : {@{ServiceName=Delegated Administration; ServiceType=Admin; CurrentSchemaVersion=; DesiredSchemaVersion=; Capabilities=System.Object[]}, @{ServiceName=Configuration; ServiceType=Config;
+Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -Export HTML -ReportPath C:\temp
 ```
 
 ## PARAMETERS
@@ -49,9 +37,99 @@ Type: Object
 Parameter Sets: (All)
 Aliases:
 
-Required: True
-Position: Named
+Required: False
+Position: 1
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteTest
+Perform Site test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -HypervisorsTest
+Perform the Hypervisors Test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -DeliveryGroupsTest
+Perform the Delivery Groups Test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MachineCatalogsTest
+Perform the Machine Catalogs Test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Export
+In what format to export the reports.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Destination folder for the exported report.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 3
+Default value: $env:temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -61,10 +139,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Collections.Hashtable
 ## NOTES
 
 ## RELATED LINKS

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,30 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:34] Initital Script Creating
+Created [03/11/2021_19:34] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about your farm / site 
+.DESCRIPTION
+ Return details about your farm / site
 
-#> 
+#>
 
 
-#.ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_SiteDetails {
 <#
 .SYNOPSIS
 Return details about your farm / site
@@ -54,16 +51,17 @@ Return details about your farm / site
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_SiteDetail
+Get-CTXAPI_SiteDetail -APIHeader $APIHeader
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
+Function Get-CTXAPI_SiteDetails {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
 
-	Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')" -Method get -Headers $APIHeader.headers
+    Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')" -Method get -Headers $APIHeader.headers
 
 
 

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.6
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -36,7 +36,7 @@ Updated [03/11/2021_19:17] Info Upate
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -45,15 +45,12 @@ Updated [03/11/2021_19:17] Info Upate
 
 
 <#
-.DESCRIPTION 
+.DESCRIPTION
 Report on connections in the last x hours
 
 #>
 
-#.ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_ConnectionReport {
-	<#
+<#
 .SYNOPSIS
 Creates Connection report
 
@@ -73,89 +70,90 @@ You Cloud region
 Duration of the report
 
 .PARAMETER Export
-Export format
+In what format to export the reports.
 
 .PARAMETER ReportPath
-Export path
+Destination folder for the exported report.
 
 .EXAMPLE
-Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
+Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
 
 #>
-	[Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
-	PARAM(
-		[Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
-		[ValidateNotNullOrEmpty()]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-		[Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
-		[PSTypeName('CTXMonitorData')]$MonitorData,
-		[Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
-		[ValidateNotNullOrEmpty()]
-		[ValidateSet('us', 'eu', 'ap-s')]
-		[string]$region,
-		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
-		[int]$hours = 24,
-		[Parameter(Mandatory = $false)]
-		[ValidateSet('Excel', 'HTML')]
-		[string]$Export = 'Host',
-		[Parameter(Mandatory = $false)]
-		[ValidateScript( { (Test-Path $_) })]
-		[string]$ReportPath = $env:temp
-	)
+Function Get-CTXAPI_ConnectionReport {
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+    PARAM(
+        [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
+        [ValidateNotNullOrEmpty()]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+        [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
+        [PSTypeName('CTXMonitorData')]$MonitorData,
+        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
+        [ValidateNotNullOrEmpty()]
+        [ValidateSet('us', 'eu', 'ap-s')]
+        [string]$region,
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
+        [int]$hours = 24,
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('Excel', 'HTML')]
+        [string]$Export = 'Host',
+        [Parameter(Mandatory = $false)]
+        [ValidateScript( { (Test-Path $_) })]
+        [string]$ReportPath = $env:temp
+    )
 
 
 
 
-	if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
-	else { $mondata = $MonitorData }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
+    else { $mondata = $MonitorData }
 
-	$data = @()
-	foreach ($connection in $mondata.Connections) {
-		try {
-			$OneSession = $mondata.session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
-			$user = $mondata.users | Where-Object { $_.id -like $OneSession.UserId }
-			$mashine = $mondata.machines | Where-Object { $_.id -like $OneSession.MachineId }
-			try {
-				$avgrtt = 0
-				$mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
-				$avgrtt = $avgrtt / ($mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
-			}
-			catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
-		}
-		catch { Write-Warning "Error processing - $_.Exception.Message" }
-		$data += [PSCustomObject]@{
-			Id                       = $connection.id
-			FullName                 = $user.FullName
-			Upn                      = $user.upn
-			ConnectionState          = $ConnectionState.($OneSession.ConnectionState)
-			DnsName                  = $mashine.DnsName
-			IPAddress                = $mashine.IPAddress
-			IsInMaintenanceMode      = $mashine.IsInMaintenanceMode
-			CurrentRegistrationState = $RegistrationState.($mashine.CurrentRegistrationState)
-			OSType                   = $mashine.OSType
-			ClientName               = $connection.ClientName
-			ClientVersion            = $connection.ClientVersion
-			ClientAddress            = $connection.ClientAddress
-			ClientPlatform           = $connection.ClientPlatform
-			IsReconnect              = $connection.IsReconnect
-			IsSecureIca              = $connection.IsSecureIca
-			Protocol                 = $connection.Protocol
-			EstablishmentDate        = $connection.EstablishmentDate
-			LogOnStartDate           = $connection.LogOnStartDate
-			LogOnEndDate             = $connection.LogOnEndDate
-			AuthenticationDuration   = $connection.AuthenticationDuration
-			LogOnDuration            = $OneSession.LogOnDuration
-			DisconnectDate           = $connection.DisconnectDate
-			EndDate                  = $OneSession.EndDate
-			ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
-			FailureDate              = $OneSession.FailureDate
-			AVG_ICA_RTT              = [math]::Round($avgrtt)
-		}
-	}
+    $data = @()
+    foreach ($connection in $mondata.Connections) {
+        try {
+            $OneSession = $mondata.session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
+            $user = $mondata.users | Where-Object { $_.id -like $OneSession.UserId }
+            $mashine = $mondata.machines | Where-Object { $_.id -like $OneSession.MachineId }
+            try {
+                $avgrtt = 0
+                $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
+                $avgrtt = $avgrtt / ($mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
+            }
+            catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
+        }
+        catch { Write-Warning "Error processing - $_.Exception.Message" }
+        $data += [PSCustomObject]@{
+            Id                       = $connection.id
+            FullName                 = $user.FullName
+            Upn                      = $user.upn
+            ConnectionState          = $ConnectionState.($OneSession.ConnectionState)
+            DnsName                  = $mashine.DnsName
+            IPAddress                = $mashine.IPAddress
+            IsInMaintenanceMode      = $mashine.IsInMaintenanceMode
+            CurrentRegistrationState = $RegistrationState.($mashine.CurrentRegistrationState)
+            OSType                   = $mashine.OSType
+            ClientName               = $connection.ClientName
+            ClientVersion            = $connection.ClientVersion
+            ClientAddress            = $connection.ClientAddress
+            ClientPlatform           = $connection.ClientPlatform
+            IsReconnect              = $connection.IsReconnect
+            IsSecureIca              = $connection.IsSecureIca
+            Protocol                 = $connection.Protocol
+            EstablishmentDate        = $connection.EstablishmentDate
+            LogOnStartDate           = $connection.LogOnStartDate
+            LogOnEndDate             = $connection.LogOnEndDate
+            AuthenticationDuration   = $connection.AuthenticationDuration
+            LogOnDuration            = $OneSession.LogOnDuration
+            DisconnectDate           = $connection.DisconnectDate
+            EndDate                  = $OneSession.EndDate
+            ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
+            FailureDate              = $OneSession.FailureDate
+            AVG_ICA_RTT              = [math]::Round($avgrtt)
+        }
+    }
 
-	if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
-	if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
-	if ($Export -eq 'Host') { $data }
+    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
+    if ($Export -eq 'Host') { $data }
 
 } #end Function

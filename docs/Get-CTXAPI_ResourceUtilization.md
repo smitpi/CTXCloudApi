@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ResourceUtilization
 
 ## SYNOPSIS
-Resource usage
+Resource utilization in the last x hours
 
 ## SYNTAX
 
@@ -25,16 +25,14 @@ Get-CTXAPI_ResourceUtilization [-MonitorData <Object>] [-Export <String>] [-Repo
 ```
 
 ## DESCRIPTION
-Config Audit
+Resource utilization in the last x hours
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-Config Audit
+Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPath C:\temp\
 ```
-
-Config Audit
 
 ## PARAMETERS
 
@@ -53,24 +51,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Export
-Config Audit
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Excel, HTML
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -MonitorData
-Config Audit
+Use Get-CTXAPI_MonitorData to create OData
 
 ```yaml
 Type: Object
@@ -84,12 +66,12 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -ReportPath
-Config Audit
+### -region
+Your Cloud instance hosted region.
 
 ```yaml
 Type: String
-Parameter Sets: (All)
+Parameter Sets: Fetch odata
 Aliases:
 
 Required: False
@@ -100,7 +82,7 @@ Accept wildcard characters: False
 ```
 
 ### -hours
-Config Audit
+Amount of time to report on.
 
 ```yaml
 Type: Int32
@@ -109,23 +91,37 @@ Aliases:
 
 Required: False
 Position: Named
-Default value: None
+Default value: 24
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-Config Audit
+### -Export
+In what format to export the reports.
 
 ```yaml
 Type: String
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
-Accepted values: us, eu, ap-s
 
 Required: False
 Position: Named
-Default value: None
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -ReportPath
+Destination folder for the exported report.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: $env:temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -135,10 +131,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,30 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:28] Initital Script Creating
+Created [03/11/2021_19:28] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about cloud services and subscription 
+.DESCRIPTION
+ Return details about cloud services and subscription
 
-#> 
+#>
 
 
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_CloudServices {
 <#
 .SYNOPSIS
 Return details about cloud services and subscription
@@ -54,15 +51,16 @@ Return details about cloud services and subscription
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_CloudServices
+Get-CTXAPI_CloudServices -APIHeader $APIHeader
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader)
+Function Get-CTXAPI_CloudServices {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
-	(Invoke-RestMethod -Uri "https://core.citrixworkspacesapi.net/$($ApiHeader.headers.'Citrix-CustomerId')/serviceStates" -Headers $ApiHeader.headers).items
+    (Invoke-RestMethod -Uri "https://core.citrixworkspacesapi.net/$($ApiHeader.headers.'Citrix-CustomerId')/serviceStates" -Headers $ApiHeader.headers).items
 
 } #end Function

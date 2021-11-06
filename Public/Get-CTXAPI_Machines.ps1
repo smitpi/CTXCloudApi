@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.0
@@ -19,31 +19,28 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:33] Initital Script Creating
+Created [03/11/2021_19:33] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
 
-<# 
+<#
 
-.DESCRIPTION 
- Return details about vda machines 
+.DESCRIPTION
+ Return details about vda machines
 
-#> 
+#>
 
 
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Get-CTXAPI_Machines {
 <#
 .SYNOPSIS
 Return details about vda machines
@@ -58,24 +55,25 @@ Use Connect-CTXAPI to create headers
 Get published desktop details
 
 .EXAMPLE
-Get-CTXAPI_Machine
+$machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
-	[Cmdletbinding()]
-	[OutputType([System.Object[]])]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-		[switch]$GetPubDesktop = $false
-	)
+Function Get-CTXAPI_Machines {
+    [Cmdletbinding()]
+    [OutputType([System.Object[]])]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+        [switch]$GetPubDesktop = $false
+    )
 
-	(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)" -Method Get -Headers $APIHeader.headers
-	}
+    (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)" -Method Get -Headers $APIHeader.headers
+    }
 
-	if ($GetPubDesktop) {
-		(Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-			Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)/Desktop" -Method Get -Headers $APIHeader.headers
-		}
-	}
+    if ($GetPubDesktop) {
+        (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
+            Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)/Desktop" -Method Get -Headers $APIHeader.headers
+        }
+    }
 } #end Function

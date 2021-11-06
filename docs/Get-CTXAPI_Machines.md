@@ -8,22 +8,22 @@ schema: 2.0.0
 # Get-CTXAPI_Machines
 
 ## SYNOPSIS
-Details about VDA devices
+Return details about vda machines
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Machines -APIHeader <Object> [-GetPubDesktop] [<CommonParameters>]
+Get-CTXAPI_Machines [-APIHeader] <Object> [-GetPubDesktop] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Details about VDA devices
+Return details about vda machines
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\>  Get-CTXAPI_Machines -CTXAPI_MachineCatalogs -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+$machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 ```
 
 ## PARAMETERS
@@ -37,14 +37,14 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -GetPubDesktop
-Get desktop details
+Get published desktop details
 
 ```yaml
 Type: SwitchParameter
@@ -63,10 +63,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

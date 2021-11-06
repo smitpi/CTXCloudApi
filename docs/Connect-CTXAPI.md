@@ -13,8 +13,8 @@ Connect to the cloud and create needed api headers
 ## SYNTAX
 
 ```
-Connect-CTXAPI [-Customer_Id] <String> [-client_id] <String> [-client_secret] <String> [-CustomerName] <String>
- [<CommonParameters>]
+Connect-CTXAPI [-Customer_Id] <String> [-Client_Id] <String> [-Client_Secret] <String>
+ [-Customer_Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,8 +24,15 @@ Connect to the cloud and create needed api headers
 
 ### EXAMPLE 1
 ```
-Connect-CTXAPI
+$splat = @{
 ```
+
+Customer_Id = "xxx"
+	Client_Id = "xxx-xxx-xxx-xxx"
+	Client_Secret = "yyyyyy=="
+	Customer_Name = 'HomeLab'
+}
+$APIHeader = Connect-CTXAPI @splat
 
 ## PARAMETERS
 
@@ -44,7 +51,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -client_id
+### -Client_Id
 From Citrix Cloud
 
 ```yaml
@@ -59,7 +66,7 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -client_secret
+### -Client_Secret
 From Citrix Cloud
 
 ```yaml
@@ -74,8 +81,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -CustomerName
-From Citrix Cloud
+### -Customer_Name
+Name of your Company, or what you want to call your connection
 
 ```yaml
 Type: String

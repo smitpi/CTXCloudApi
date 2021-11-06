@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_MonitorData
 
 ## SYNOPSIS
-Monitor odata
+Collect Monitoring OData for other reports
 
 ## SYNTAX
 
@@ -17,16 +17,14 @@ Get-CTXAPI_MonitorData [-APIHeader] <Object> [-region] <String> [-hours] <Int32>
 ```
 
 ## DESCRIPTION
-Get odata
+Collect Monitoring OData for other reports
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-Config Audit
+$MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region eu -hours 24
 ```
-
-Config Audit
 
 ## PARAMETERS
 
@@ -39,17 +37,17 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-Config Audit
+### -region
+Your Cloud instance hosted region.
 
 ```yaml
-Type: Int32
+Type: String
 Parameter Sets: (All)
 Aliases:
 
@@ -60,18 +58,17 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-Config Audit
+### -hours
+Amount of time to report on.
 
 ```yaml
-Type: String
+Type: Int32
 Parameter Sets: (All)
 Aliases:
-Accepted values: us, eu, ap-s
 
 Required: True
-Position: 1
-Default value: None
+Position: 3
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -81,10 +78,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

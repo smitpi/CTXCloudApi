@@ -8,22 +8,22 @@ schema: 2.0.0
 # Get-CTXAPI_Hypervisors
 
 ## SYNOPSIS
-Returns details about the hosting connection
+Return details about hosting (hypervisor)
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_Hypervisors -APIHeader <Object> [<CommonParameters>]
+Get-CTXAPI_Hypervisors [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns details about the hosting connection
+Return details about hosting (hypervisor)
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-PS C:\> Get-CTXAPI_Hypervisors -CustomerId $CustomerId -SiteId $SiteID -ApiToken $ApiToken
+Get-CTXAPI_Hypervisor -APIHeader $APIHeader
 ```
 
 ## PARAMETERS
@@ -37,7 +37,7 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: Named
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -48,10 +48,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
+### System.Object[]
 ## NOTES
 
 ## RELATED LINKS

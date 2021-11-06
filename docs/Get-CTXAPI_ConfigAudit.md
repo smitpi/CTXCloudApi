@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigAudit
 
 ## SYNOPSIS
-Config Audit
+Reports on system config
 
 ## SYNTAX
 
@@ -17,16 +17,14 @@ Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [-Export] <String> [[-ReportPath] <
 ```
 
 ## DESCRIPTION
-Config Audit
+Reports on machine catalog, delivery groups and published desktops
 
 ## EXAMPLES
 
-### Example 1
+### EXAMPLE 1
 ```
-Config Audit
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 ```
-
-Config Audit
 
 ## PARAMETERS
 
@@ -39,30 +37,29 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 0
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Export
-Config Audit
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-Accepted values: Excel, HTML, Host
-
-Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Export
+In what format to export the reports
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ReportPath
-Config Audit
+Destination folder for the exported report.
 
 ```yaml
 Type: String
@@ -70,8 +67,8 @@ Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: None
+Position: 3
+Default value: $env:temp
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -81,10 +78,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None
 ## OUTPUTS
 
-### System.Object
 ## NOTES
 
 ## RELATED LINKS

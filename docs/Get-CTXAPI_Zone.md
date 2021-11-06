@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Zone
 
 ## SYNOPSIS
-Get zone details from api
+Get zone details
 
 ## SYNTAX
 
@@ -17,19 +17,19 @@ Get-CTXAPI_Zone [[-APIHeader] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get zone details from api
+Get zone details
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_Zones -APIHeader $APIHeader
+Get-CTXAPI_Zone -APIHeader $APIHeader
 ```
 
 ## PARAMETERS
 
 ### -APIHeader
-Custom object from Get-CTXAPI_Headers
+Use Connect-CTXAPI to create headers
 
 ```yaml
 Type: Object

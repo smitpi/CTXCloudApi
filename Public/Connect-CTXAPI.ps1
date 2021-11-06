@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -27,24 +27,21 @@
 
 .RELEASENOTES
 Created [27/10/2021_12:52] Initial Script Creating
-Updated [03/11/2021_19:17] Info Upate
+Updated [03/11/2021_19:17] Info Update
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Connect to the cloud and create needed api headers
 
 #>
 
-# .ExternalHelp CTXCloudApi-help.xml
-
-Function Connect-CTXAPI {
 <#
 .SYNOPSIS
 Connect to the cloud and create needed api headers
@@ -55,47 +52,54 @@ Connect to the cloud and create needed api headers
 .PARAMETER Customer_Id
 From Citrix Cloud
 
-.PARAMETER client_id
+.PARAMETER Client_Id
 From Citrix Cloud
 
-.PARAMETER client_secret
+.PARAMETER Client_Secret
 From Citrix Cloud
 
-.PARAMETER CustomerName
-From Citrix Cloud
+.PARAMETER Customer_Name
+Name of your Company, or what you want to call your connection
 
 .EXAMPLE
-Connect-CTXAPI
+$splat = @{
+	Customer_Id = "xxx"
+	Client_Id = "xxx-xxx-xxx-xxx"
+	Client_Secret = "yyyyyy=="
+	Customer_Name = 'HomeLab'
+}
+$APIHeader = Connect-CTXAPI @splat
 #>
-	[Cmdletbinding()]
-	PARAM(
-		[Parameter(Mandatory = $true)]
-		[string]$Customer_Id,
-		[Parameter(Mandatory = $true)]
-		[string]$client_id,
-		[Parameter(Mandatory = $true)]
-		[string]$client_secret,
-		[Parameter(Mandatory = $true)]
-		[string]$CustomerName
-	)
+Function Connect-CTXAPI {
+    [Cmdletbinding()]
+    PARAM(
+        [Parameter(Mandatory = $true)]
+        [string]$Customer_Id,
+        [Parameter(Mandatory = $true)]
+        [string]$Client_Id,
+        [Parameter(Mandatory = $true)]
+        [string]$Client_Secret,
+        [Parameter(Mandatory = $true)]
+        [string]$Customer_Name
+    )
 
-	$body = @{
-		grant_type    = 'client_credentials'
-		client_id     = $client_id
-		client_secret = $client_secret
-	}
+    $body = @{
+        grant_type    = 'client_credentials'
+        client_id     = $Client_Id
+        client_secret = $Client_Secret
+    }
 
-	$headers = @{
-		Authorization       = "CwsAuth Bearer=$((Invoke-RestMethod -Method Post -Uri 'https://api-us.cloud.com/cctrustoauth2/root/tokens/clients' -Body $body).access_token)"
-		'Citrix-CustomerId' = $Customer_Id
-		Accept              = 'application/json'
-	}
-	$headers.Add('Citrix-InstanceId', (Invoke-RestMethod 'https://api-us.cloud.com/cvadapis/me' -Headers $headers).customers.sites.id)
+    $headers = @{
+        Authorization       = "CwsAuth Bearer=$((Invoke-RestMethod -Method Post -Uri 'https://api-us.cloud.com/cctrustoauth2/root/tokens/clients' -Body $body).access_token)"
+        'Citrix-CustomerId' = $Customer_Id
+        Accept              = 'application/json'
+    }
+    $headers.Add('Citrix-InstanceId', (Invoke-RestMethod 'https://api-us.cloud.com/cvadapis/me' -Headers $headers).customers.sites.id)
 
-	$myObject = [PSCustomObject]@{
-		PSTypeName   = 'CTXAPIHeaderObject'
-		CustomerName = $CustomerName
-		headers      = $headers
-	}
-	$myObject
+    $myObject = [PSCustomObject]@{
+        PSTypeName   = 'CTXAPIHeaderObject'
+        CustomerName = $Customer_Name
+        headers      = $headers
+    }
+    $myObject
 } #end Function
