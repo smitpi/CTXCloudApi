@@ -149,17 +149,17 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#-apiheader">-APIHeader</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-sitetest">-SiteTest</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-hypervisorstest">-HypervisorsTest</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#-deliverygroupstest">-DeliveryGroupsTest</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-machinecatalogstest">-MachineCatalogsTest</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#-export">-Export</a>
     </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-hypervisorstest">-HypervisorsTest</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-machinecatalogstest">-MachineCatalogsTest</a>
+    </li>
     <li class="toctree-l3"><a class="reference internal" href="#-reportpath">-ReportPath</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-sitetest">-SiteTest</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#commonparameters">CommonParameters</a>
     </li>
@@ -262,44 +262,8 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-sitetest">-SiteTest</h3>
-<p>Perform Site test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-hypervisorstest">-HypervisorsTest</h3>
-<p>Perform the Hypervisors Test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
 <h3 id="-deliverygroupstest">-DeliveryGroupsTest</h3>
 <p>Perform the Delivery Groups Test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-machinecatalogstest">-MachineCatalogsTest</h3>
-<p>Perform the Machine Catalogs Test</p>
 <pre><code class="language-yaml">Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
@@ -322,6 +286,30 @@ Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-hypervisorstest">-HypervisorsTest</h3>
+<p>Perform the Hypervisors Test</p>
+<pre><code class="language-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-machinecatalogstest">-MachineCatalogsTest</h3>
+<p>Perform the Machine Catalogs Test</p>
+<pre><code class="language-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h3 id="-reportpath">-ReportPath</h3>
 <p>Destination folder for the exported report.</p>
 <pre><code class="language-yaml">Type: String
@@ -331,6 +319,18 @@ Aliases:
 Required: False
 Position: 3
 Default value: $env:temp
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-sitetest">-SiteTest</h3>
+<p>Perform Site test</p>
+<pre><code class="language-yaml">Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>

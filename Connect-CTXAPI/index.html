@@ -71,11 +71,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#parameters">PARAMETERS</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#-customer_id">-Customer_Id</a>
-    </li>
     <li class="toctree-l3"><a class="reference internal" href="#-client_id">-Client_Id</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#-client_secret">-Client_Secret</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-customer_id">-Customer_Id</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#-customer_name">-Customer_Name</a>
     </li>
@@ -246,18 +246,6 @@ Customer_Id = &quot;xxx&quot;
 $APIHeader = Connect-CTXAPI @splat
 </code></pre>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-customer_id">-Customer_Id</h3>
-<p>From Citrix Cloud</p>
-<pre><code class="language-yaml">Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
 <h3 id="-client_id">-Client_Id</h3>
 <p>From Citrix Cloud</p>
 <pre><code class="language-yaml">Type: String
@@ -278,6 +266,18 @@ Aliases:
 
 Required: True
 Position: 3
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-customer_id">-Customer_Id</h3>
+<p>From Citrix Cloud</p>
+<pre><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
