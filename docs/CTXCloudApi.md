@@ -2,13 +2,15 @@
 Module Name: CTXCloudApi
 Module Guid: 8eb35bf0-e1d3-4b42-9285-d8010a1c13a7
 Download Help Link:
-help Version: 0.1.21
+help Version: 0.1.22
 Locale: en-US
 ---
 
 # CTXCloudApi Module
 ## Description
-Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports
+Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions
 
 ## CTXCloudApi Cmdlets
 ### [Connect-CTXAPI](Connect-CTXAPI.md)
@@ -76,4 +78,10 @@ Uses Registration date to calculate uptime
 
 ### [Get-CTXAPI_Zone](Get-CTXAPI_Zone.md)
 Get zone details
+
+### [Set-CTXAPI_ReportColors](Set-CTXAPI_ReportColors.md)
+Set the color and logo for HTML Reports
+
+### [Test-CTXAPI_Headers](Test-CTXAPI_Headers.md)
+Checks that the connection is still valid, and the token hasnt expired
 
