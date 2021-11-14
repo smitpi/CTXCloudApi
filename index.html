@@ -145,6 +145,14 @@
                     </li>
                 </ul>
                 <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="Set-CTXAPI_ReportColors/">Set-CTXAPI_ReportColors</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="Test-CTXAPI_Headers/">Test-CTXAPI_Headers</a>
+                    </li>
+                </ul>
+                <ul>
                     <li class="toctree-l1"><a class="reference internal" href="about_CTXCloudApi/">CTXCloudApi</a>
                     </li>
                 </ul>
@@ -185,11 +193,15 @@
             <div class="section">
               
                 <h1 id="ctxcloudapi">CTXCloudApi</h1>
-<h1 id="synopsis">SYNOPSIS</h1>
-<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports</p>
-<h1 id="description">DESCRIPTION</h1>
-<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports</p>
-<h1 id="function-synopsis">FUNCTION SYNOPSIS</h1>
+<h1 id="short-description">SHORT DESCRIPTION</h1>
+<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions</p>
+<h1 id="long-description">LONG DESCRIPTION</h1>
+<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions</p>
+<h1 id="notes">NOTES</h1>
 <h2 id="connect-ctxapi">Connect-CTXAPI</h2>
 <p>Connect to the cloud and create needed api headers</p>
 <h2 id="get-ctxapi_applications">Get-CTXAPI_Applications</h2>
@@ -234,36 +246,10 @@
 <p>Uses Registration date to calculate uptime</p>
 <h2 id="get-ctxapi_zone">Get-CTXAPI_Zone</h2>
 <p>Get zone details</p>
-<h1 id="notes">NOTES</h1>
-<h1 id="ctxcloudapi_1">CTXCloudApi</h1>
-<h2 id="getting-started">Getting Started</h2>
-<ul>
-<li>You will need access to the Citrix Cloud API. Follow <a href="https://developer.cloud.com/getting-started/docs/overview">Get API Access</a> to gain access.</li>
-<li><code>Install-Module -Name CTXCloudApi -Verbose</code></li>
-<li><code>Import-Module CTXCloudApi -Verbose -Force</code></li>
-<li><code>Get-Command -Module CTXCloudApi</code></li>
-<li>Run <code>Connect-CTXAPI</code> with the details obtained from above. This connect and create the needed headers for other commands.</li>
-</ul>
-<h2 id="example-1">Example 1:</h2>
-<pre><code class="language-powershell">$splat = @{
-    Customer_Id = &quot;xxx&quot;
-    Client_Id = &quot;xxx-xxx-xxx-xxx&quot;
-    Client_Secret = &quot;yyyyyy==&quot;
-    Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat
-Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
-</code></pre>
-<h2 id="html-reports">HTML Reports</h2>
-<p>When creating a HTML report:</p>
-<pre><code>The logo can be changed by replacing the variable 
-  - `$Global:Logourl` ='URL to your logo'
-The colors of the report can be changed, by replacing:
-  - `$global:colour1` = '# number of color'
-  - `$global:colour2` = '# number of color'
-Or permanently replace it by editing the following file
-  - `&lt;Module base&gt;\Private\Reports-Variables.ps1`
-</code></pre>
+<h2 id="set-ctxapi_reportcolors">Set-CTXAPI_ReportColors</h2>
+<p>Set the color and logo for HTML Reports</p>
+<h2 id="test-ctxapi_headers">Test-CTXAPI_Headers</h2>
+<p>Checks that the connection is still valid, and the token hasnt expired</p>
 <h1 id="see-also">SEE ALSO</h1>
 <p>https://github.com/smitpi/CTXCloudApi</p>
               
@@ -324,5 +310,5 @@ Or permanently replace it by editing the following file
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2021-11-06 15:31:41.801155+00:00
+Build Date UTC : 2021-11-14 05:14:55.766024+00:00
 -->
