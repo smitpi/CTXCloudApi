@@ -145,11 +145,15 @@ Function Get-CTXAPI_Tests {
             }
         }
     }
+    $expandedddata = $expandedddata | Sort-Object -Unique -Property Test,TestComponentTarget
 
     $Alldata = @{
-        FatalError = $expandedddata | Where-Object { $_.Serverity -like 'FatalError' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
-        Error      = $expandedddata | Where-Object { $_.Serverity -like 'Error' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
-        Alldata    = $expandedddata
+        FatalError         = $expandedddata | Where-Object { $_.Serverity -like 'FatalError' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
+        Error              = $expandedddata | Where-Object { $_.Serverity -like 'Error' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
+        Alldata            = $expandedddata
+        HypSum             = $HypSum
+        DeliverySum        = $DeliverySum
+        MachineCatalogsSum = $MachineCatalogsSum
     }
 
 
@@ -162,7 +166,7 @@ Function Get-CTXAPI_Tests {
         [string]$HTMLReportname = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
         $HeadingText = $CustomerId + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
         New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
-            New-HTMLLogo -RightLogoString $logourl
+            New-HTMLLogo -RightLogoString $CTXAPI_LogoURL
             New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
             New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $Alldata.FatalError }
@@ -173,12 +177,7 @@ Function Get-CTXAPI_Tests {
             }
         }
     }
-    if ($Export -eq 'Host') {
-        $SiteTestSum
-        $HypSum
-        $DeliverySum
-        $MachineCatalogsSum
-    }
+    if ($Export -eq 'Host') {$Alldata}
 
 
 } #end Function

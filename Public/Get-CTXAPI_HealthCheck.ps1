@@ -127,6 +127,25 @@ Function Get-CTXAPI_HealthCheck {
         AgentVersions = ($vdauptime | Group-Object -Property AgentVersion).count
         NeedsReboot   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
     }
+
+    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
+    $Locations = Get-CTXAPI_ResourceLocations -APIHeader $APIHeader
+    $CConnector = Get-CTXAPI_CloudConnectors -APIHeader $APIHeader | ForEach-Object {
+        $loc = $_.location
+        [PSCustomObject]@{
+            fqdn            = $_.fqdn
+            location        = ($Locations | Where-Object { $_.id -like $loc }).name
+            status          = $_.status
+            currentVersion  = $_.currentVersion
+            versionState    = $_.versionState
+            lastContactDate = (Get-Date ([datetime]$_.lastContactDate) -Format 'yyyy-MM-dd HH:mm')
+            inMaintenance   = $_.inMaintenance
+        }
+    }
+
+    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Site Tests"
+    $testResult = Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest
+    $testReport = $testResult.Alldata | Where-Object { $_.Serverity -notlike $null } | Sort-Object -Property TestScope
     #endregion
 
     #######################
@@ -138,10 +157,11 @@ Function Get-CTXAPI_HealthCheck {
     $HeadingText = $($APIHeader.CustomerName) + ' | Report | ' + (Get-Date -Format dd) + ' ' + (Get-Date -Format MMMM) + ',' + (Get-Date -Format yyyy) + ' ' + (Get-Date -Format HH:mm)
 
     New-HTML -TitleText "$CustomerId Report" -FilePath $HTMLReportname -ShowHTML {
-        New-HTMLLogo -RightLogoString $Logourl
+        New-HTMLLogo -RightLogoString $CTXAPI_LogoURL
         New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Session States' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }
+            New-HTMLSection -HeaderText 'Cloud Connectors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $CConnector }
         }
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }
@@ -153,9 +173,14 @@ Function Get-CTXAPI_HealthCheck {
         }
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
-            New-HTMLSection -HeaderText 'Machine Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable ($machinecount.psobject.Properties | Select-Object name, value) }
-        }
 
+        }       
+        New-HTMLSection @SectionSettings -Content {
+            New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
+        }
+        New-HTMLSection @SectionSettings -Content {
+            New-HTMLSection -HeaderText 'Test Result: Detailed' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
+        }
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $DeliveryGroups }
         }

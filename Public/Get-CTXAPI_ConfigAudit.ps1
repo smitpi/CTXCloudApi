@@ -186,7 +186,7 @@ Function Get-CTXAPI_ConfigAudit {
         [string]$HTMLReportname = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
         New-HTML -TitleText "$($APIHeader.CustomerName) Config Audit" -FilePath $HTMLReportname -ShowHTML {
-            New-HTMLLogo -RightLogoString $Logourl
+            New-HTMLLogo -RightLogoString $CTXAPI_LogoURL
             New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
             New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }

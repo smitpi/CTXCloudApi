@@ -64,7 +64,7 @@ Function Get-CTXAPI_CloudConnectors {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
-    (Invoke-RestMethod -Uri "https://agenthub.citrixworkspacesapi.net/$($APIHeaders.headers.'Citrix-CustomerId')/EdgeServers" -Method get -Headers $APIHeader.headers).id | ForEach-Object {
-        Invoke-RestMethod -Uri "https://agenthub.citrixworkspacesapi.net/$($APIHeaders.headers.'Citrix-CustomerId')/EdgeServers/$($_)" -Method Get -Headers $APIHeader.headers
+    (Invoke-RestMethod -Uri "https://agenthub.citrixworkspacesapi.net/$($APIHeader.headers.'Citrix-CustomerId')/EdgeServers" -Method get -Headers $APIHeader.headers).id | ForEach-Object {
+        Invoke-RestMethod -Uri "https://agenthub.citrixworkspacesapi.net/$($APIHeader.headers.'Citrix-CustomerId')/EdgeServers/$($_)" -Method Get -Headers $APIHeader.headers
     }
 } #end Function

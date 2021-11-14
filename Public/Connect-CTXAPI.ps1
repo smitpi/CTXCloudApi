@@ -72,6 +72,7 @@ $splat = @{
 	Customer_Name = 'HomeLab'
 }
 $APIHeader = Connect-CTXAPI @splat
+
 #>
 Function Connect-CTXAPI {
     [Cmdletbinding()]
@@ -99,10 +100,19 @@ Function Connect-CTXAPI {
     }
     $headers.Add('Citrix-InstanceId', (Invoke-RestMethod 'https://api-us.cloud.com/cvadapis/me' -Headers $headers).customers.sites.id)
 
+    $CTXApi = @()
+    $CTXApi = [PSCustomObject]@{
+        Customer_Id   = $Customer_Id
+        Client_Id     = $Client_Id
+        Client_Secret = $Client_Secret
+    }
+
     $myObject = [PSCustomObject]@{
-        PSTypeName   = 'CTXAPIHeaderObject'
-        CustomerName = $Customer_Name
-        headers      = $headers
+        PSTypeName    = 'CTXAPIHeaderObject'
+        CustomerName  = $Customer_Name
+        TokenExpireAt = Get-Date (Get-Date).AddHours(1)
+        CTXAPI        = $CTXApi
+        headers       = $headers
     }
     $myObject
 } #end Function
