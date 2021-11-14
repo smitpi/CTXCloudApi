@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.1.4
+.VERSION 1.1.5
 
 .GUID 9d297a8a-96ab-467a-ba68-f162937cc868
 
@@ -31,6 +31,7 @@ Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
 Updated [03/11/2021_19:17] Info Update
 Updated [06/11/2021_16:48] Using the new api
+Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
@@ -39,6 +40,7 @@ Updated [06/11/2021_16:48] Using the new api
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
+
 
 
 <#

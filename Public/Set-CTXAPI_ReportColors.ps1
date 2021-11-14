@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID 30604ec8-78ac-49d4-956e-2e4d9368b85f
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -27,16 +27,19 @@
 
 .RELEASENOTES
 Created [14/11/2021_03:31] Initital Script Creating
+Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 <# 
 
 .DESCRIPTION 
-Set the color for html reports 
+Set the color for html reports
 
 #> 
 

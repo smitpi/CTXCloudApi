@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 0.1.1
+.VERSION 0.1.2
 
 .GUID 18f4de3b-a991-4aee-8bd6-1892110bbb1a
 
@@ -28,10 +28,13 @@
 .RELEASENOTES
 Created [03/11/2021_23:30] Initial Script Creating
 Updated [06/11/2021_16:48] Using the new api
+Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
 #> 
+
+
 
 
 

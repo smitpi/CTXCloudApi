@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 0.1.0
+.VERSION 0.1.1
 
 .GUID b8005a47-3bde-42fe-bbf7-b12bda147ad2
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS ctx ps
 
 .LICENSEURI
 
@@ -27,16 +27,19 @@
 
 .RELEASENOTES
 Created [13/11/2021_23:35] Initital Script Creating
+Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
-#>
+#> 
+
+
 
 
 <# 
 
 .DESCRIPTION 
-Checks that the connection is still valid, and the token hasnt expired 
+Checks that the connection is still valid, and the token hasnt expired
 
 #> 
 

@@ -1,7 +1,7 @@
 
 <#PSScriptInfo
 
-.VERSION 1.1.3
+.VERSION 1.1.4
 
 .GUID 38c65711-1b10-4f0e-aa2a-c69d6fb4f8e4
 
@@ -30,10 +30,13 @@ Created [06/10/2021_21:23] Initial Script Creating
 Updated [07/10/2021_13:28] Script info updated for module
 Updated [03/11/2021_19:17] Info Update
 Updated [06/11/2021_16:48] Using the new api
+Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
 #> 
+
+
 
 
 

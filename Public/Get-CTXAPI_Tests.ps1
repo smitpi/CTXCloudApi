@@ -1,6 +1,6 @@
 <#PSScriptInfo
 
-.VERSION 0.1.1
+.VERSION 0.1.2
 
 .GUID e20e1814-58e5-47c1-a7ae-5a74c364b9b2
 
@@ -27,6 +27,7 @@
 .RELEASENOTES
 Created [03/11/2021_19:35] Initial Script Creating
 Updated [06/11/2021_16:49] Using the new api
+Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
@@ -34,7 +35,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
-#Requires -Module PSWriteColor
+
 
 
 <#
@@ -94,6 +95,7 @@ Function Get-CTXAPI_Tests {
     )
 
     [System.Collections.ArrayList]$data = @()
+    [System.Collections.ArrayList]$Sum = @()
     if ($SiteTest) {
     try{
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Site Tests"
@@ -114,7 +116,14 @@ Function Get-CTXAPI_Tests {
         $HypSum = Get-CTXAPI_Hypervisors -APIHeader $APIHeader | ForEach-Object {
               try {
                 Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
-                Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' 
+                Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' | ForEach-Object {[PSCustomObject]@{
+                     Test = 'Hypervisor'
+                     Name = $_.Hypervisor.Name
+                     NumPassed = $_.NumPassed
+                     NumWarnings = $_.NumWarnings
+                     NumFailures   = $_.NumFailures
+                     }
+                }
               }catch {Write-Warning "Hypervisor Sum Test -- $($_.Exception.Message)" }
         }
         $HypResult = Get-CTXAPI_Hypervisors -APIHeader $APIHeader | ForEach-Object { 
@@ -123,6 +132,7 @@ Function Get-CTXAPI_Tests {
                 (Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
               }catch {Write-Warning "Hypervisor Result Test -- $($_.Exception.Message)" }
         }
+        if ([bool]$HypSum) {$sum.AddRange($HypSum)}
         if ([bool]$HypResult) {$data.AddRange($HypResult)}
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] Hypervisor Tests"
         }catch {Write-Warning $($_.Exception.Message) }
@@ -134,7 +144,14 @@ Function Get-CTXAPI_Tests {
         $DeliverySum = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | ForEach-Object {
               try {
                 Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
-                Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' 
+                Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' | ForEach-Object {[PSCustomObject]@{
+                     Test = 'DeliveryGroup'
+                     Name = $_.DeliveryGroup.Name
+                     NumPassed = $_.NumPassed
+                     NumWarnings = $_.NumWarnings
+                     NumFailures   = $_.NumFailures
+                     }
+                }
               }catch {Write-Warning "DeliveryGroups Sum Test -- $($_.Exception.Message)" }
         }
         $DeliveryResult = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | ForEach-Object { 
@@ -143,6 +160,7 @@ Function Get-CTXAPI_Tests {
                 (Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
               }catch {Write-Warning "DeliveryGroups Result Test -- $($_.Exception.Message)" }
         }
+        if ([bool]$DeliverySum) {$sum.AddRange($DeliverySum)}
         if ([bool]$DeliveryResult) {$data.AddRange($DeliveryResult)}
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] DeliveryGroups Tests"
         }catch {Write-Warning $($_.Exception.Message) }
@@ -154,7 +172,14 @@ Function Get-CTXAPI_Tests {
         $MachineCatalogsSum = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object {
               try {
                 Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
-                Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' 
+                Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json'  | ForEach-Object {[PSCustomObject]@{
+                     Test = 'MachineCatalog'
+                     Name = $_.MachineCatalog.Name
+                     NumPassed = $_.NumPassed
+                     NumWarnings = $_.NumWarnings
+                     NumFailures   = $_.NumFailures
+                     }
+                }
               }catch {Write-Warning "MachineCatalogs Sum Test -- $($_.Exception.Message)" }
         }
         $MachineCatalogsResult = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object { 
@@ -163,6 +188,7 @@ Function Get-CTXAPI_Tests {
                 (Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
               }catch {Write-Warning "MachineCatalogs Result Test -- $($_.Exception.Message)" }
         }
+        if ([bool]$MachineCatalogsSum) {$sum.AddRange($MachineCatalogsSum)}
         if ([bool]$MachineCatalogsResult) {$data.AddRange($MachineCatalogsResult)}
         Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] MachineCatalogs Tests"
         }catch {Write-Warning $($_.Exception.Message) }
@@ -191,9 +217,7 @@ Function Get-CTXAPI_Tests {
         FatalError         = $expandedddata | Where-Object { $_.Serverity -like 'FatalError' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
         Error              = $expandedddata | Where-Object { $_.Serverity -like 'Error' } | Group-Object -Property TestServiceTarget | Select-Object Name, Count | Sort-Object count -Descending
         Alldata            = $expandedddata
-        HypSum             = $HypSum
-        DeliverySum        = $DeliverySum
-        MachineCatalogsSum = $MachineCatalogsSum
+        Summary            = $Sum
     }
 
 
