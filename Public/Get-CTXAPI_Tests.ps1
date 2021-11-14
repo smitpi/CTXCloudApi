@@ -1,4 +1,3 @@
-
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -95,37 +94,78 @@ Function Get-CTXAPI_Tests {
     )
 
     [System.Collections.ArrayList]$data = @()
-    ## TODO Add in better error reporting
     if ($SiteTest) {
-        Write-Color 'Retrieving test results' -Color Cyan -ShowTime -NoNewLine
-        $SiteTestSum = Invoke-RestMethod "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/`$test?async=true" -Headers $APIHeader.headers -Method Post -ContentType 'application/json'
-        $SiteTestResult = (Invoke-RestMethod "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/TestReport" -Headers $APIHeader.headers).TestResults
-        $data.AddRange($SiteTestResult)
-        Write-Color 'Complete' -Color Green -ShowTime
+    try{
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Site Tests"
+        try{
+           $SiteTestSum = Invoke-RestMethod "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/`$test?async=true" -Headers $APIHeader.headers -Method Post -ContentType 'application/json'
+        }catch {Write-Warning "Site Sum Test -- $($_.Exception.Message)" }
+        try{
+            $SiteTestResult = (Invoke-RestMethod "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')/TestReport" -Headers $APIHeader.headers).TestResults
+        }catch {Write-Warning "Site Result Test -- $($_.Exception.Message)" }
+        if ([bool]$SiteTestResult) {$data.AddRange($SiteTestResult)}
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] Site Tests"
+        }catch {Write-Warning $($_.Exception.Message) }
     }
 
     if ($HypervisorsTest) {
-        Write-Color 'Getting hypervisors test results' -Color Cyan -ShowTime -NoNewLine
-        $HypSum = (Get-CTXAPI_Hypervisors -APIHeader $APIHeader).id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$_/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' }
-        $HypResult = (Get-CTXAPI_Hypervisors -APIHeader $APIHeader).id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$_/TestReport" -Headers $APIHeader.headers).TestResults }
-        $data.AddRange($HypResult)
-        Write-Color 'Complete' -Color Green -ShowTime
+    try{
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Hypervisor Tests"
+        $HypSum = Get-CTXAPI_Hypervisors -APIHeader $APIHeader | ForEach-Object {
+              try {
+                Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
+                Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' 
+              }catch {Write-Warning "Hypervisor Sum Test -- $($_.Exception.Message)" }
+        }
+        $HypResult = Get-CTXAPI_Hypervisors -APIHeader $APIHeader | ForEach-Object { 
+              try {
+                Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
+                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
+              }catch {Write-Warning "Hypervisor Result Test -- $($_.Exception.Message)" }
+        }
+        if ([bool]$HypResult) {$data.AddRange($HypResult)}
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] Hypervisor Tests"
+        }catch {Write-Warning $($_.Exception.Message) }
     }
 
     if ($DeliveryGroupsTest) {
-        Write-Color 'Getting DeliveryGroups test results' -Color Cyan -ShowTime -NoNewLine
-        $DeliverySum = (Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader).id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$_/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' }
-        $DeliveryResult = (Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader).id | ForEach-Object { (Invoke-RestMethod 'https://api.cloud.com/cvad/manage/DeliveryGroups/b77c0864-609f-4e57-b93e-aeee2ec91323/TestReport' -Headers $APIHeader.headers).TestResults }
-        $data.AddRange($DeliveryResult)
-        Write-Color 'Complete' -Color Green -ShowTime
+    try{
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] DeliveryGroups Tests"
+        $DeliverySum = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | ForEach-Object {
+              try {
+                Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
+                Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' 
+              }catch {Write-Warning "DeliveryGroups Sum Test -- $($_.Exception.Message)" }
+        }
+        $DeliveryResult = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | ForEach-Object { 
+              try {
+                Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
+                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
+              }catch {Write-Warning "DeliveryGroups Result Test -- $($_.Exception.Message)" }
+        }
+        if ([bool]$DeliveryResult) {$data.AddRange($DeliveryResult)}
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] DeliveryGroups Tests"
+        }catch {Write-Warning $($_.Exception.Message) }
     }
 
     if ($MachineCatalogsTest) {
-        Write-Color 'Getting MachineCatalogs test results' -Color Cyan -ShowTime -NoNewLine
-        $MachineCatalogsSum = (Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader).id | ForEach-Object { Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$_/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' }
-        $MachineCatalogsResult = (Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader).id | ForEach-Object { (Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$_/TestReport" -Headers $APIHeader.headers).TestResults }
-        $data.AddRange($MachineCatalogsResult)
-        Write-Color 'Complete' -Color Green -ShowTime
+    try{
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] MachineCatalogs Tests"
+        $MachineCatalogsSum = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object {
+              try {
+                Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
+                Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/`$test" -Headers $APIHeader.headers -Method Post -ContentType 'application/json' 
+              }catch {Write-Warning "MachineCatalogs Sum Test -- $($_.Exception.Message)" }
+        }
+        $MachineCatalogsResult = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object { 
+              try {
+                Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
+                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
+              }catch {Write-Warning "MachineCatalogs Result Test -- $($_.Exception.Message)" }
+        }
+        if ([bool]$MachineCatalogsResult) {$data.AddRange($MachineCatalogsResult)}
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Completed] MachineCatalogs Tests"
+        }catch {Write-Warning $($_.Exception.Message) }
     }
 
     $expandedddata = @()

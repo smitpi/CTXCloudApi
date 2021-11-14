@@ -36,7 +36,7 @@ Created [14/11/2021_03:31] Initital Script Creating
 <# 
 
 .DESCRIPTION 
- Set the color for html reports 
+Set the color for html reports 
 
 #> 
 
