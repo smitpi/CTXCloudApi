@@ -51,6 +51,51 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Export
+In what format to export the reports.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -FailureType
+Type of failure to report on
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hours
+Amount of time to report on.
+
+```yaml
+Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
+
+Required: False
+Position: Named
+Default value: 24
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -MonitorData
 Use Get-CTXAPI_MonitorData to create OData.
 
@@ -77,51 +122,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -hours
-Amount of time to report on.
-
-```yaml
-Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: 24
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -FailureType
-Type of failure to report on
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -Export
-In what format to export the reports.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

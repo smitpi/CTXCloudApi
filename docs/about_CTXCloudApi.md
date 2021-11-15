@@ -40,4 +40,5 @@ Test-CTXAPI_Headers -- Checks that the connection is still valid, and the token 
 
 # SEE ALSO
 https://github.com/smitpi/CTXCloudApi
+https://smitpi.github.io/CTXCloudApi/
 

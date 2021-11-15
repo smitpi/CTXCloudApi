@@ -43,21 +43,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-Your Cloud instance hosted region.
-
-```yaml
-Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -hours
 Amount of time to report on.
 
@@ -69,6 +54,21 @@ Aliases:
 Required: True
 Position: 3
 Default value: 0
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -region
+Your Cloud instance hosted region.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

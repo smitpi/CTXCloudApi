@@ -57,6 +57,7 @@ Use Connect-CTXAPI to create headers
 Get-CTXAPI_Hypervisor -APIHeader $APIHeader
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_Hypervisors {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]

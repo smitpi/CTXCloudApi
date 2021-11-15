@@ -58,6 +58,7 @@ Use Connect-CTXAPI to create headers
 $MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_MachineCatalogs {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]

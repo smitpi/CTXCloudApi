@@ -143,13 +143,13 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#-apiheader">-APIHeader</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-monitordata">-MonitorData</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-region">-region</a>
+    <li class="toctree-l3"><a class="reference internal" href="#-export">-Export</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#-hours">-hours</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-export">-Export</a>
+    <li class="toctree-l3"><a class="reference internal" href="#-monitordata">-MonitorData</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#-region">-region</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#-reportpath">-ReportPath</a>
     </li>
@@ -186,6 +186,14 @@
                 </ul>
                 <ul>
                     <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_Zone/">Get-CTXAPI_Zone</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Set-CTXAPI_ReportColors/">Set-CTXAPI_ReportColors</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Test-CTXAPI_Headers/">Test-CTXAPI_Headers</a>
                     </li>
                 </ul>
                 <ul>
@@ -259,6 +267,30 @@ Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
+<h3 id="-export">-Export</h3>
+<p>In what format to export the reports.</p>
+<pre><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
+<h3 id="-hours">-hours</h3>
+<p>Amount of time to report on.</p>
+<pre><code class="language-yaml">Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
+
+Required: False
+Position: Named
+Default value: 24
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h3 id="-monitordata">-MonitorData</h3>
 <p>Use Get-CTXAPI_MonitorData to create OData</p>
 <pre><code class="language-yaml">Type: Object
@@ -280,30 +312,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-hours">-hours</h3>
-<p>Amount of time to report on.</p>
-<pre><code class="language-yaml">Type: Int32
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: 24
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-export">-Export</h3>
-<p>In what format to export the reports.</p>
-<pre><code class="language-yaml">Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: Host
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>

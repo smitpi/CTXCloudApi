@@ -61,6 +61,7 @@ If the token has expired, it will connect and renew the variable
 Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Test-CTXAPI_Headers {
     [Cmdletbinding()]
     PARAM(

@@ -61,6 +61,7 @@ $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
 $LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_LowLevelOperations {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]

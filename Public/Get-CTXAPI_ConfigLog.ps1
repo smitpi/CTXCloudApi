@@ -67,6 +67,7 @@ Use Connect-CTXAPI to create headers.
 Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_ConfigLog {
     [Cmdletbinding()]
     PARAM(

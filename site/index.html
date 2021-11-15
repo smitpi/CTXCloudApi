@@ -49,6 +49,60 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href=".">CTXCloudApi</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#description">Description</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#function-synopsis">Function Synopsis</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#connect-ctxapi">Connect-CTXAPI</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_applications">Get-CTXAPI_Applications</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_cloudconnectors">Get-CTXAPI_CloudConnectors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_cloudservices">Get-CTXAPI_CloudServices</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_configaudit">Get-CTXAPI_ConfigAudit</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_configlog">Get-CTXAPI_ConfigLog</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_connectionreport">Get-CTXAPI_ConnectionReport</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_deliverygroups">Get-CTXAPI_DeliveryGroups</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_failurereport">Get-CTXAPI_FailureReport</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_healthcheck">Get-CTXAPI_HealthCheck</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_hypervisors">Get-CTXAPI_Hypervisors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_lowleveloperations">Get-CTXAPI_LowLevelOperations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_machinecatalogs">Get-CTXAPI_MachineCatalogs</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_machines">Get-CTXAPI_Machines</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_monitordata">Get-CTXAPI_MonitorData</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_resourcelocations">Get-CTXAPI_ResourceLocations</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_resourceutilization">Get-CTXAPI_ResourceUtilization</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_sessions">Get-CTXAPI_Sessions</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_sitedetails">Get-CTXAPI_SiteDetails</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_tests">Get-CTXAPI_Tests</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_vdauptime">Get-CTXAPI_VDAUptime</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_zone">Get-CTXAPI_Zone</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#set-ctxapi_reportcolors">Set-CTXAPI_ReportColors</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#test-ctxapi_headers">Test-CTXAPI_Headers</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -145,6 +199,14 @@
                     </li>
                 </ul>
                 <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="Set-CTXAPI_ReportColors/">Set-CTXAPI_ReportColors</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="Test-CTXAPI_Headers/">Test-CTXAPI_Headers</a>
+                    </li>
+                </ul>
+                <ul>
                     <li class="toctree-l1"><a class="reference internal" href="about_CTXCloudApi/">CTXCloudApi</a>
                     </li>
                 </ul>
@@ -185,87 +247,59 @@
             <div class="section">
               
                 <h1 id="ctxcloudapi">CTXCloudApi</h1>
-<h1 id="synopsis">SYNOPSIS</h1>
-<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports</p>
-<h1 id="description">DESCRIPTION</h1>
-<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports</p>
-<h1 id="function-synopsis">FUNCTION SYNOPSIS</h1>
-<h2 id="connect-ctxapi">Connect-CTXAPI</h2>
+<h2 id="description">Description</h2>
+<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions</p>
+<h2 id="function-synopsis">Function Synopsis</h2>
+<h3 id="connect-ctxapi">Connect-CTXAPI</h3>
 <p>Connect to the cloud and create needed api headers</p>
-<h2 id="get-ctxapi_applications">Get-CTXAPI_Applications</h2>
+<h3 id="get-ctxapi_applications">Get-CTXAPI_Applications</h3>
 <p>Return details about published apps</p>
-<h2 id="get-ctxapi_cloudconnectors">Get-CTXAPI_CloudConnectors</h2>
+<h3 id="get-ctxapi_cloudconnectors">Get-CTXAPI_CloudConnectors</h3>
 <p>Details about current Cloud Connectors</p>
-<h2 id="get-ctxapi_cloudservices">Get-CTXAPI_CloudServices</h2>
+<h3 id="get-ctxapi_cloudservices">Get-CTXAPI_CloudServices</h3>
 <p>Return details about cloud services and subscription</p>
-<h2 id="get-ctxapi_configaudit">Get-CTXAPI_ConfigAudit</h2>
+<h3 id="get-ctxapi_configaudit">Get-CTXAPI_ConfigAudit</h3>
 <p>Reports on system config</p>
-<h2 id="get-ctxapi_configlog">Get-CTXAPI_ConfigLog</h2>
+<h3 id="get-ctxapi_configlog">Get-CTXAPI_ConfigLog</h3>
 <p>Get high level configuration changes in the last x days.</p>
-<h2 id="get-ctxapi_connectionreport">Get-CTXAPI_ConnectionReport</h2>
+<h3 id="get-ctxapi_connectionreport">Get-CTXAPI_ConnectionReport</h3>
 <p>Creates Connection report</p>
-<h2 id="get-ctxapi_deliverygroups">Get-CTXAPI_DeliveryGroups</h2>
+<h3 id="get-ctxapi_deliverygroups">Get-CTXAPI_DeliveryGroups</h3>
 <p>Return details about Delivery Groups</p>
-<h2 id="get-ctxapi_failurereport">Get-CTXAPI_FailureReport</h2>
+<h3 id="get-ctxapi_failurereport">Get-CTXAPI_FailureReport</h3>
 <p>Reports on failures in the last x hours.</p>
-<h2 id="get-ctxapi_healthcheck">Get-CTXAPI_HealthCheck</h2>
+<h3 id="get-ctxapi_healthcheck">Get-CTXAPI_HealthCheck</h3>
 <p>Show useful information for daily health check</p>
-<h2 id="get-ctxapi_hypervisors">Get-CTXAPI_Hypervisors</h2>
+<h3 id="get-ctxapi_hypervisors">Get-CTXAPI_Hypervisors</h3>
 <p>Return details about hosting (hypervisor)</p>
-<h2 id="get-ctxapi_lowleveloperations">Get-CTXAPI_LowLevelOperations</h2>
+<h3 id="get-ctxapi_lowleveloperations">Get-CTXAPI_LowLevelOperations</h3>
 <p>Return details about low lever config change (More detailed)</p>
-<h2 id="get-ctxapi_machinecatalogs">Get-CTXAPI_MachineCatalogs</h2>
+<h3 id="get-ctxapi_machinecatalogs">Get-CTXAPI_MachineCatalogs</h3>
 <p>Return details about machine catalogs</p>
-<h2 id="get-ctxapi_machines">Get-CTXAPI_Machines</h2>
+<h3 id="get-ctxapi_machines">Get-CTXAPI_Machines</h3>
 <p>Return details about vda machines</p>
-<h2 id="get-ctxapi_monitordata">Get-CTXAPI_MonitorData</h2>
+<h3 id="get-ctxapi_monitordata">Get-CTXAPI_MonitorData</h3>
 <p>Collect Monitoring OData for other reports</p>
-<h2 id="get-ctxapi_resourcelocations">Get-CTXAPI_ResourceLocations</h2>
+<h3 id="get-ctxapi_resourcelocations">Get-CTXAPI_ResourceLocations</h3>
 <p>Get cloud Resource Locations</p>
-<h2 id="get-ctxapi_resourceutilization">Get-CTXAPI_ResourceUtilization</h2>
+<h3 id="get-ctxapi_resourceutilization">Get-CTXAPI_ResourceUtilization</h3>
 <p>Resource utilization in the last x hours</p>
-<h2 id="get-ctxapi_sessions">Get-CTXAPI_Sessions</h2>
+<h3 id="get-ctxapi_sessions">Get-CTXAPI_Sessions</h3>
 <p>Return details about current sessions</p>
-<h2 id="get-ctxapi_sitedetails">Get-CTXAPI_SiteDetails</h2>
+<h3 id="get-ctxapi_sitedetails">Get-CTXAPI_SiteDetails</h3>
 <p>Return details about your farm / site</p>
-<h2 id="get-ctxapi_tests">Get-CTXAPI_Tests</h2>
+<h3 id="get-ctxapi_tests">Get-CTXAPI_Tests</h3>
 <p>Run Built in Citrix cloud tests</p>
-<h2 id="get-ctxapi_vdauptime">Get-CTXAPI_VDAUptime</h2>
+<h3 id="get-ctxapi_vdauptime">Get-CTXAPI_VDAUptime</h3>
 <p>Uses Registration date to calculate uptime</p>
-<h2 id="get-ctxapi_zone">Get-CTXAPI_Zone</h2>
+<h3 id="get-ctxapi_zone">Get-CTXAPI_Zone</h3>
 <p>Get zone details</p>
-<h1 id="notes">NOTES</h1>
-<h1 id="ctxcloudapi_1">CTXCloudApi</h1>
-<h2 id="getting-started">Getting Started</h2>
-<ul>
-<li>You will need access to the Citrix Cloud API. Follow <a href="https://developer.cloud.com/getting-started/docs/overview">Get API Access</a> to gain access.</li>
-<li><code>Install-Module -Name CTXCloudApi -Verbose</code></li>
-<li><code>Import-Module CTXCloudApi -Verbose -Force</code></li>
-<li><code>Get-Command -Module CTXCloudApi</code></li>
-<li>Run <code>Connect-CTXAPI</code> with the details obtained from above. This connect and create the needed headers for other commands.</li>
-</ul>
-<h2 id="example-1">Example 1:</h2>
-<pre><code class="language-powershell">$splat = @{
-    Customer_Id = &quot;xxx&quot;
-    Client_Id = &quot;xxx-xxx-xxx-xxx&quot;
-    Client_Secret = &quot;yyyyyy==&quot;
-    Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat
-Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
-</code></pre>
-<h2 id="html-reports">HTML Reports</h2>
-<p>When creating a HTML report:</p>
-<pre><code>The logo can be changed by replacing the variable 
-  - `$Global:Logourl` ='URL to your logo'
-The colors of the report can be changed, by replacing:
-  - `$global:colour1` = '# number of color'
-  - `$global:colour2` = '# number of color'
-Or permanently replace it by editing the following file
-  - `&lt;Module base&gt;\Private\Reports-Variables.ps1`
-</code></pre>
-<h1 id="see-also">SEE ALSO</h1>
-<p>https://github.com/smitpi/CTXCloudApi</p>
+<h3 id="set-ctxapi_reportcolors">Set-CTXAPI_ReportColors</h3>
+<p>Set the color and logo for HTML Reports</p>
+<h3 id="test-ctxapi_headers">Test-CTXAPI_Headers</h3>
+<p>Checks that the connection is still valid, and the token hasnt expired</p>
               
             </div>
           </div>
@@ -324,5 +358,5 @@ Or permanently replace it by editing the following file
 
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2021-11-06 15:31:41.801155+00:00
+Build Date UTC : 2021-11-14 08:21:00.491294+00:00
 -->

@@ -142,6 +142,14 @@
                     <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_Zone/">Get-CTXAPI_Zone</a>
                     </li>
                 </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Set-CTXAPI_ReportColors/">Set-CTXAPI_ReportColors</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Test-CTXAPI_Headers/">Test-CTXAPI_Headers</a>
+                    </li>
+                </ul>
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">CTXCloudApi</a>
     <ul class="current">
@@ -189,115 +197,41 @@
                 <h1 id="ctxcloudapi">CTXCloudApi</h1>
 <h2 id="about_ctxcloudapi">about_CTXCloudApi</h2>
 <h1 id="short-description">SHORT DESCRIPTION</h1>
-<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports</p>
+<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions</p>
 <h1 id="long-description">LONG DESCRIPTION</h1>
-<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, then run other reports</p>
-<p>Connect-CTXAPI - Connect to the cloud and create needed api headers
-Get-CTXAPI_Applications - Return details about published apps
-Get-CTXAPI_CloudConnectors - Details about current Cloud Connectors
-Get-CTXAPI_CloudServices - Return details about cloud services and subscription
-Get-CTXAPI_ConfigAudit - Reports on system config
-Get-CTXAPI_ConfigLog - Get high level configuration changes in the last x days.
-Get-CTXAPI_ConnectionReport - Creates Connection report
-Get-CTXAPI_DeliveryGroups - Return details about Delivery Groups
-Get-CTXAPI_FailureReport - Reports on failures in the last x hours.
-Get-CTXAPI_HealthCheck - Show useful information for daily health check
-Get-CTXAPI_Hypervisors - Return details about hosting (hypervisor)
-Get-CTXAPI_LowLevelOperations - Return details about low lever config change (More detailed)
-Get-CTXAPI_MachineCatalogs - Return details about machine catalogs
-Get-CTXAPI_Machines - Return details about vda machines
-Get-CTXAPI_MonitorData - Collect Monitoring OData for other reports
-Get-CTXAPI_ResourceLocations - Get cloud Resource Locations
-Get-CTXAPI_ResourceUtilization - Resource utilization in the last x hours
-Get-CTXAPI_Sessions - Return details about current sessions
-Get-CTXAPI_SiteDetails - Return details about your farm / site
-Get-CTXAPI_Tests - Run Built in Citrix cloud tests
-Get-CTXAPI_VDAUptime - Uses Registration date to calculate uptime
-Get-CTXAPI_Zone - Get zone details</p>
-<h1 id="examples">EXAMPLES</h1>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>$splat = @{</p>
-<p>Customer_Id = "xxx"
-    Client_Id = "xxx-xxx-xxx-xxx"
-    Client_Secret = "yyyyyy=="
-    Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_Applications -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_CloudConnectors -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_CloudServices -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_Hypervisor -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7</p>
-<p>$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>$MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>$machines = Get-CTXAPI_Machines -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>$MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region eu -hours 24</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_ResourceLocation -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPath C:\temp\</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_Session -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_SiteDetail -APIHeader $APIHeader</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -Export HTML -ReportPath C:\temp</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\</p>
-<p>-------------------------- EXAMPLE 1 --------------------------</p>
-<p>PS C:>Get-CTXAPI_Zone -APIHeader $APIHeader</p>
+<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions</p>
 <h1 id="notes">NOTES</h1>
-<h1 id="ctxcloudapi_1">CTXCloudApi</h1>
-<h2 id="getting-started">Getting Started</h2>
-<ul>
-<li>You will need access to the Citrix Cloud API. Follow <a href="https://developer.cloud.com/getting-started/docs/overview">Get API Access</a> to gain access.</li>
-<li><code>Install-Module -Name CTXCloudApi -Verbose</code></li>
-<li><code>Import-Module CTXCloudApi -Verbose -Force</code></li>
-<li><code>Get-Command -Module CTXCloudApi</code></li>
-<li>Run <code>Connect-CTXAPI</code> with the details obtained from above. This connect and create the needed headers for other commands.</li>
-</ul>
-<h2 id="example-1">Example 1:</h2>
-<pre><code class="language-powershell">$splat = @{
-    Customer_Id = &quot;xxx&quot;
-    Client_Id = &quot;xxx-xxx-xxx-xxx&quot;
-    Client_Secret = &quot;yyyyyy==&quot;
-    Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat
-Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
-</code></pre>
-<h2 id="html-reports">HTML Reports</h2>
-<p>When creating a HTML report:</p>
-<pre><code>The logo can be changed by replacing the variable 
-  - `$Global:Logourl` ='URL to your logo'
-The colors of the report can be changed, by replacing:
-  - `$global:colour1` = '# number of color'
-  - `$global:colour2` = '# number of color'
-Or permanently replace it by editing the following file
-  - `&lt;Module base&gt;\Private\Reports-Variables.ps1`
-</code></pre>
+<p>Connect-CTXAPI -- Connect to the cloud and create needed api headers
+Get-CTXAPI_Applications -- Return details about published apps
+Get-CTXAPI_CloudConnectors -- Details about current Cloud Connectors
+Get-CTXAPI_CloudServices -- Return details about cloud services and subscription
+Get-CTXAPI_ConfigAudit -- Reports on system config
+Get-CTXAPI_ConfigLog -- Get high level configuration changes in the last x days.
+Get-CTXAPI_ConnectionReport -- Creates Connection report
+Get-CTXAPI_DeliveryGroups -- Return details about Delivery Groups
+Get-CTXAPI_FailureReport -- Reports on failures in the last x hours.
+Get-CTXAPI_HealthCheck -- Show useful information for daily health check
+Get-CTXAPI_Hypervisors -- Return details about hosting (hypervisor)
+Get-CTXAPI_LowLevelOperations -- Return details about low lever config change (More detailed)
+Get-CTXAPI_MachineCatalogs -- Return details about machine catalogs
+Get-CTXAPI_Machines -- Return details about vda machines
+Get-CTXAPI_MonitorData -- Collect Monitoring OData for other reports
+Get-CTXAPI_ResourceLocations -- Get cloud Resource Locations
+Get-CTXAPI_ResourceUtilization -- Resource utilization in the last x hours
+Get-CTXAPI_Sessions -- Return details about current sessions
+Get-CTXAPI_SiteDetails -- Return details about your farm / site
+Get-CTXAPI_Tests -- Run Built in Citrix cloud tests
+Get-CTXAPI_VDAUptime -- Uses Registration date to calculate uptime
+Get-CTXAPI_Zone -- Get zone details
+Set-CTXAPI_ReportColors -- Set the color and logo for HTML Reports
+Test-CTXAPI_Headers -- Checks that the connection is still valid, and the token hasnt expired</p>
 <h1 id="see-also">SEE ALSO</h1>
-<p>https://github.com/smitpi/CTXCloudApi</p>
+<p>https://github.com/smitpi/CTXCloudApi
+https://smitpi.github.io/CTXCloudApi/</p>
               
             </div>
           </div>
@@ -306,7 +240,7 @@ Or permanently replace it by editing the following file
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
       
-        <a href="../Get-CTXAPI_Zone/" class="btn btn-neutral" title="Get-CTXAPI_Zone"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Test-CTXAPI_Headers/" class="btn btn-neutral" title="Test-CTXAPI_Headers"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -336,7 +270,7 @@ Or permanently replace it by editing the following file
         </span>
     
     
-      <span><a href="../Get-CTXAPI_Zone/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Test-CTXAPI_Headers/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
   </span>

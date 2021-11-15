@@ -85,6 +85,7 @@ Destination folder for the exported report.
 Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_FailureReport {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
     [OutputType([System.Object[]])]

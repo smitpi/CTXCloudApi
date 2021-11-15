@@ -73,7 +73,7 @@ Destination folder for the exported report.
 Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
 
 #>
-
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_HealthCheck {
     [Cmdletbinding()]
     PARAM(
@@ -146,7 +146,7 @@ Function Get-CTXAPI_HealthCheck {
     }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Site Tests"
-    $testResult = Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest
+    $testResult = Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest
     $testReport = $testResult.Alldata | Where-Object { $_.Serverity -notlike $null } | Sort-Object -Property TestScope
     #endregion
 
@@ -163,7 +163,17 @@ Function Get-CTXAPI_HealthCheck {
         New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Session States' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }
+        }
+        New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Cloud Connectors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $CConnector }
+            New-HTMLSection -HeaderText 'Test Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Summary }
+        }
+        New-HTMLSection @SectionSettings -Content {
+            New-HTMLSection -HeaderText 'Test Result: Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.FatalError }
+            New-HTMLSection -HeaderText 'Test Result: Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Error }
+        }
+        New-HTMLSection @SectionSettings -Content {
+            New-HTMLSection -HeaderText 'Test Result: Detailed' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
         }
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }
@@ -175,13 +185,6 @@ Function Get-CTXAPI_HealthCheck {
         }
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
-
-        }       
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
-        }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Test Result: Detailed' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
         }
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $DeliveryGroups }

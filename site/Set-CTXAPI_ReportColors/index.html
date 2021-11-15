@@ -9,7 +9,7 @@
   <meta name="author" content="Pierre Smit">
   
   <link rel="shortcut icon" href="../img/favicon.ico">
-  <title>Get-CTXAPI_Tests - CTXCloudApi</title>
+  <title>Set-CTXAPI_ReportColors - CTXCloudApi</title>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
   <link rel="stylesheet" href="../css/theme.css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Get-CTXAPI_Tests";
-    var mkdocs_page_input_path = "Get-CTXAPI_Tests.md";
+    var mkdocs_page_name = "Set-CTXAPI_ReportColors";
+    var mkdocs_page_input_path = "Set-CTXAPI_ReportColors.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -130,8 +130,20 @@
                     <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_SiteDetails/">Get-CTXAPI_SiteDetails</a>
                     </li>
                 </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_Tests/">Get-CTXAPI_Tests</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_VDAUptime/">Get-CTXAPI_VDAUptime</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_Zone/">Get-CTXAPI_Zone</a>
+                    </li>
+                </ul>
                 <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Get-CTXAPI_Tests</a>
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">Set-CTXAPI_ReportColors</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#synopsis">SYNOPSIS</a>
     </li>
@@ -147,19 +159,11 @@
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#parameters">PARAMETERS</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#-apiheader">-APIHeader</a>
+    <li class="toctree-l3"><a class="reference internal" href="#-color1">-Color1</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-deliverygroupstest">-DeliveryGroupsTest</a>
+    <li class="toctree-l3"><a class="reference internal" href="#-color2">-Color2</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-export">-Export</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-hypervisorstest">-HypervisorsTest</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-machinecatalogstest">-MachineCatalogsTest</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-reportpath">-ReportPath</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#-sitetest">-SiteTest</a>
+    <li class="toctree-l3"><a class="reference internal" href="#-logourl">-LogoURL</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#commonparameters">CommonParameters</a>
     </li>
@@ -168,28 +172,12 @@
     <li class="toctree-l2"><a class="reference internal" href="#inputs">INPUTS</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#outputs">OUTPUTS</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#systemcollectionshashtable">System.Collections.Hashtable</a>
-    </li>
-        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#notes">NOTES</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#related-links">RELATED LINKS</a>
     </li>
     </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_VDAUptime/">Get-CTXAPI_VDAUptime</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../Get-CTXAPI_Zone/">Get-CTXAPI_Zone</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../Set-CTXAPI_ReportColors/">Set-CTXAPI_ReportColors</a>
                     </li>
                 </ul>
                 <ul>
@@ -221,10 +209,10 @@
     
       
     
-    <li>Get-CTXAPI_Tests</li>
+    <li>Set-CTXAPI_ReportColors</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/Get-CTXAPI_Tests.md"
+        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/Set-CTXAPI_ReportColors.md"
           class="icon icon-github"> Edit on GitHub</a>
       
     </li>
@@ -236,101 +224,53 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="get-ctxapi_tests">Get-CTXAPI_Tests</h1>
+                <h1 id="set-ctxapi_reportcolors">Set-CTXAPI_ReportColors</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Run Built in Citrix cloud tests</p>
+<p>Set the color and logo for HTML Reports</p>
 <h2 id="syntax">SYNTAX</h2>
-<pre><code>Get-CTXAPI_Tests [[-APIHeader] &lt;Object&gt;] [-SiteTest] [-HypervisorsTest] [-DeliveryGroupsTest]
- [-MachineCatalogsTest] [[-Export] &lt;String&gt;] [[-ReportPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+<pre><code>Set-CTXAPI_ReportColors [[-Color1] &lt;String&gt;] [[-Color2] &lt;String&gt;] [[-LogoURL] &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre>
 <h2 id="description">DESCRIPTION</h2>
-<p>Run Built in Citrix cloud tests</p>
+<p>Set the color and logo for HTML Reports.
+It updates the registry keys in HKCU:\Software\CTXCloudApi with the new details and display a test report.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<pre><code>Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -Export HTML -ReportPath C:\temp
+<pre><code>Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
 </code></pre>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-apiheader">-APIHeader</h3>
-<p>Use Connect-CTXAPI to create headers</p>
-<pre><code class="language-yaml">Type: Object
+<h3 id="-color1">-Color1</h3>
+<p>New Background Color # code</p>
+<pre><code class="language-yaml">Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 1
-Default value: None
+Default value: #061820
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-deliverygroupstest">-DeliveryGroupsTest</h3>
-<p>Perform the Delivery Groups Test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-export">-Export</h3>
-<p>In what format to export the reports.</p>
+<h3 id="-color2">-Color2</h3>
+<p>New foreground Color # code</p>
 <pre><code class="language-yaml">Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 2
-Default value: Host
+Default value: #FFD400
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
-<h3 id="-hypervisorstest">-HypervisorsTest</h3>
-<p>Perform the Hypervisors Test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-machinecatalogstest">-MachineCatalogsTest</h3>
-<p>Perform the Machine Catalogs Test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-reportpath">-ReportPath</h3>
-<p>Destination folder for the exported report.</p>
+<h3 id="-logourl">-LogoURL</h3>
+<p>URL to the new Logo</p>
 <pre><code class="language-yaml">Type: String
 Parameter Sets: (All)
 Aliases:
 
 Required: False
 Position: 3
-Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-sitetest">-SiteTest</h3>
-<p>Perform Site test</p>
-<pre><code class="language-yaml">Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
+Default value: Https://c.na65.content.force.com/servlet/servlet.ImageServer?id=0150h000003yYnkAAE&amp;oid=00DE0000000c48tMAA
 Accept pipeline input: False
 Accept wildcard characters: False
 </code></pre>
@@ -338,7 +278,6 @@ Accept wildcard characters: False
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
-<h3 id="systemcollectionshashtable">System.Collections.Hashtable</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
               
@@ -348,10 +287,10 @@ Accept wildcard characters: False
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../Get-CTXAPI_VDAUptime/" class="btn btn-neutral float-right" title="Get-CTXAPI_VDAUptime">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../Test-CTXAPI_Headers/" class="btn btn-neutral float-right" title="Test-CTXAPI_Headers">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../Get-CTXAPI_SiteDetails/" class="btn btn-neutral" title="Get-CTXAPI_SiteDetails"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../Get-CTXAPI_Zone/" class="btn btn-neutral" title="Get-CTXAPI_Zone"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -381,10 +320,10 @@ Accept wildcard characters: False
         </span>
     
     
-      <span><a href="../Get-CTXAPI_SiteDetails/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../Get-CTXAPI_Zone/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../Get-CTXAPI_VDAUptime/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../Test-CTXAPI_Headers/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

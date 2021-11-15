@@ -44,53 +44,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -SiteTest
-Perform Site test
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -HypervisorsTest
-Perform the Hypervisors Test
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -DeliveryGroupsTest
 Perform the Delivery Groups Test
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -MachineCatalogsTest
-Perform the Machine Catalogs Test
 
 ```yaml
 Type: SwitchParameter
@@ -119,6 +74,36 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -HypervisorsTest
+Perform the Hypervisors Test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -MachineCatalogsTest
+Perform the Machine Catalogs Test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ReportPath
 Destination folder for the exported report.
 
@@ -130,6 +115,21 @@ Aliases:
 Required: False
 Position: 3
 Default value: $env:temp
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -SiteTest
+Perform Site test
+
+```yaml
+Type: SwitchParameter
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

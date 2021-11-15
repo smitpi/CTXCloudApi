@@ -2,16 +2,14 @@
     about_ctxcloudapi
 
 SHORT DESCRIPTION
-    Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK
-    anymore and manage your clients cloud infrastructure from anywhere.     
-    Start with Connect-CTXAPI to connect, then run other reports.     Or run
-    Get-Help CTXCloudApi for other instructions
+    Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere.     
+    Start with Connect-CTXAPI to connect, then run other reports.
+    Or run Get-Help CTXCloudApi for other instructions
 
 LONG DESCRIPTION
-    Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK
-    anymore and manage your clients cloud infrastructure from anywhere.     
-    Start with Connect-CTXAPI to connect, then run other reports.     Or run
-    Get-Help CTXCloudApi for other instructions
+    Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere.     
+    Start with Connect-CTXAPI to connect, then run other reports.     
+    Or run Get-Help CTXCloudApi for other instructions
 
 NOTES
     Connect-CTXAPI -- Connect to the cloud and create needed api headers
@@ -40,5 +38,6 @@ NOTES
     Test-CTXAPI_Headers -- Checks that the connection is still valid, and the token hasnt expired
 
 SEE ALSO
-    https://github.com/smitpi/CTXCloudApi
+    https://github.com/smitpi/CTXCloudApi 
+    https://smitpi.github.io/CTXCloudApi/
 

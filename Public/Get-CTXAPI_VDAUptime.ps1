@@ -72,6 +72,7 @@ Destination folder for the exported report.
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
 
 #>
+# .ExternalHelp  CTXCloudApi-help.xml
 Function Get-CTXAPI_VDAUptime {
     [Cmdletbinding()]
     PARAM(
