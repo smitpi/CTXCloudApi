@@ -125,15 +125,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$splat = @{
-Customer_Id = "xxx"
-	Client_Id = "xxx-xxx-xxx-xxx"
-	Client_Secret = "yyyyyy=="
-	Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat</dev:code>
+        <dev:code>$splat = @{</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Customer_Id = "xxx" 	Client_Id = "xxx-xxx-xxx-xxx" 	Client_Secret = "yyyyyy==" 	Customer_Name = 'HomeLab' } $APIHeader = Connect-CTXAPI @splat</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -207,12 +201,7 @@ $APIHeader = Connect-CTXAPI @splat</dev:code>
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>Online Version:</maml:linkText>
-        <maml:uri>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Applications</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
