@@ -1,5 +1,5 @@
-CTXCloudAPI
-    about_CTXCloudAPI
+CTXCloudApi
+    about_CTXCloudApi
 
 SHORT DESCRIPTION
     Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
