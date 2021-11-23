@@ -1,362 +1,265 @@
 <!DOCTYPE html>
-<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="None">
-  <meta name="author" content="Pierre Smit">
   
-  <link rel="shortcut icon" href="img/favicon.ico">
-  <title>CTXCloudAPI</title>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Documentation for CTXCloudApi">
+    <meta name="author" content="Pierre Smit">
+    <link rel="canonical" href="https://smitpi.github.io/CTXCloudApi/">
+    <link rel="shortcut icon" href="./img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Documentation for CTXCloudApi</title>
+    <link href="./css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="./css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="./css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="./css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
 
-  <link rel="stylesheet" href="css/theme.css" />
-  <link rel="stylesheet" href="css/theme_extra.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
-  
-  <script>
-    // Current page data
-    var mkdocs_page_name = "CTXCloudAPI";
-    var mkdocs_page_input_path = "index.md";
-    var mkdocs_page_url = null;
-  </script>
-  
-  <script src="js/jquery-2.1.1.min.js" defer></script>
-  <script src="js/modernizr-2.8.3.min.js" defer></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-  <script>hljs.initHighlightingOnLoad();</script> 
+    <script src="./js/jquery-3.2.1.min.js"></script>
+    <script src="./js/bootstrap-3.3.7.min.js"></script>
+    <script src="./js/highlight.pack.js"></script>
+    
+      <script src="./js/elasticlunr.min.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '.';
+      var is_top_frame = (window === window.parent);
+        
+        var pageToc = [
+          {title: "CTXCloudApi", url: "#_top", children: [
+              {title: "Description", url: "#description" },
+              {title: "Getting Started", url: "#getting-started" },
+              {title: "Functions", url: "#functions" },
+          ]},
+        ];
+
+    </script>
+    <script src="./js/base.js"></script> 
 </head>
 
-<body class="wy-body-for-nav" role="document">
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
 
-  <div class="wy-grid-for-nav">
-
+<nav class="navbar wm-page-top-frame">
+  <div class="container-fluid wm-top-container">
     
-    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
-    <div class="wy-side-scroll">
-      <div class="wy-side-nav-search">
-        <a href="." class="icon icon-home"> CTXCloudAPI</a>
-        <div role="search">
-  <form id ="rtd-search-form" class="wy-form" action="./search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
-  </form>
-</div>
-      </div>
+    <div class="wm-top-tool pull-right wm-vcenter">
+      <form class="dropdown wm-vcentered" id="wm-search-form" action="./search.html">
+        
+        <button id="wm-search-show" class="btn btn-sm btn-default" type="submit"
+          ><i class="fa fa-search" aria-hidden="true"></i></button>
 
-      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
-                <ul class="current">
-                    <li class="toctree-l1 current"><a class="reference internal current" href=".">CTXCloudAPI</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#description">Description</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#function-synopsis">Function Synopsis</a>
-        <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#connect-ctxapi">Connect-CTXAPI</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_applications">Get-CTXAPI_Applications</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_cloudconnectors">Get-CTXAPI_CloudConnectors</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_cloudservices">Get-CTXAPI_CloudServices</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_configaudit">Get-CTXAPI_ConfigAudit</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_configlog">Get-CTXAPI_ConfigLog</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_connectionreport">Get-CTXAPI_ConnectionReport</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_deliverygroups">Get-CTXAPI_DeliveryGroups</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_failurereport">Get-CTXAPI_FailureReport</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_healthcheck">Get-CTXAPI_HealthCheck</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_hypervisors">Get-CTXAPI_Hypervisors</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_lowleveloperations">Get-CTXAPI_LowLevelOperations</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_machinecatalogs">Get-CTXAPI_MachineCatalogs</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_machines">Get-CTXAPI_Machines</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_monitordata">Get-CTXAPI_MonitorData</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_resourcelocations">Get-CTXAPI_ResourceLocations</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_resourceutilization">Get-CTXAPI_ResourceUtilization</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_sessions">Get-CTXAPI_Sessions</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_sitedetails">Get-CTXAPI_SiteDetails</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_tests">Get-CTXAPI_Tests</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_vdauptime">Get-CTXAPI_VDAUptime</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#get-ctxapi_zone">Get-CTXAPI_Zone</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#set-ctxapi_reportcolors">Set-CTXAPI_ReportColors</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#test-ctxapi_headers">Test-CTXAPI_Headers</a>
-    </li>
-        </ul>
-    </li>
-    </ul>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="CTXCloudAPI/">CTXCloudAPI Module</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Connect-CTXAPI/">Connect-CTXAPI</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_Applications/">Get-CTXAPI_Applications</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_CloudConnectors/">Get-CTXAPI_CloudConnectors</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_CloudServices/">Get-CTXAPI_CloudServices</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_ConfigAudit/">Get-CTXAPI_ConfigAudit</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_ConfigLog/">Get-CTXAPI_ConfigLog</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_ConnectionReport/">Get-CTXAPI_ConnectionReport</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_DeliveryGroups/">Get-CTXAPI_DeliveryGroups</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_FailureReport/">Get-CTXAPI_FailureReport</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_HealthCheck/">Get-CTXAPI_HealthCheck</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_Hypervisors/">Get-CTXAPI_Hypervisors</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_LowLevelOperations/">Get-CTXAPI_LowLevelOperations</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_MachineCatalogs/">Get-CTXAPI_MachineCatalogs</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_Machines/">Get-CTXAPI_Machines</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_MonitorData/">Get-CTXAPI_MonitorData</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_ResourceLocations/">Get-CTXAPI_ResourceLocations</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_ResourceUtilization/">Get-CTXAPI_ResourceUtilization</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_Sessions/">Get-CTXAPI_Sessions</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_SiteDetails/">Get-CTXAPI_SiteDetails</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_Tests/">Get-CTXAPI_Tests</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_VDAUptime/">Get-CTXAPI_VDAUptime</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Get-CTXAPI_Zone/">Get-CTXAPI_Zone</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Set-CTXAPI_ReportColors/">Set-CTXAPI_ReportColors</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="Test-CTXAPI_Headers/">Test-CTXAPI_Headers</a>
-                    </li>
-                </ul>
-                <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="about_CTXCloudAPI/">CTXCloudAPI</a>
-                    </li>
-                </ul>
-      </div>
+        <div class="input-group input-group-sm wm-top-search">
+          <input type="text" name="q" class="form-control" id="mkdocs-search-query" placeholder="Search" autocomplete="off">
+          <span class="input-group-btn" role="search">
+            
+            <button class="btn btn-default dropdown-toggle collapse" data-toggle="dropdown" type="button"><span class="caret"></span></button>
+            <ul id="mkdocs-search-results" class="dropdown-menu dropdown-menu-right"></ul>
+            <button id="wm-search-go" class="btn btn-default" type="submit"><i class="fa fa-search" aria-hidden="true"></i></button>
+          </span>
+        </div>
+      </form>
     </div>
-    </nav>
 
-    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
-
-      
-      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
-        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
-        <a href=".">CTXCloudAPI</a>
-      </nav>
-
-      
-      <div class="wy-nav-content">
-        <div class="rst-content">
-          <div role="navigation" aria-label="breadcrumbs navigation">
-  <ul class="wy-breadcrumbs">
-    <li><a href=".">Docs</a> &raquo;</li>
     
-      
+    <div class="wm-top-tool wm-vcenter pull-right wm-small-left">
+      <button id="wm-toc-button" type="button" class="btn btn-sm btn-default wm-vcentered"><i class="fa fa-th-list" aria-hidden="true"></i></button>
+    </div>
+
     
-    <li>CTXCloudAPI</li>
-    <li class="wy-breadcrumbs-aside">
+    
+
+    
+    <a href="" class="wm-top-brand wm-top-link wm-vcenter">
       
-        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/index.md"
-          class="icon icon-github"> Edit on GitHub</a>
-      
-    </li>
-  </ul>
+      <div class="wm-top-title">
+        Documentation for CTXCloudApi<br>
+        
+      </div>
+    </a>
+  </div>
+</nav>
+
+  <div id="main-content" class="wm-page-top-frame">
+    
+<nav class="wm-toc-pane">
   
-  <hr/>
-</div>
+    <ul class="wm-toctree wm-toc-repo">
+      <li class="wm-toc-li wm-toc-lev1">
+      <a class="wm-article-link wm-toc-text" href="https://github.com/smitpi/CTXCloudApi/">
+        
+        smitpi/CTXCloudApi
+      </a>
+      </li>
+    </ul>
+  <ul class="wm-toctree">
+        <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">CTXCloudApi</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="CTXCloudAPI/" class="wm-article-link wm-toc-text">CTXCloudAPI Module</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Connect-CTXAPI/" class="wm-article-link wm-toc-text">Connect-CTXAPI</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Applications/" class="wm-article-link wm-toc-text">Get-CTXAPI_Applications</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_CloudConnectors/" class="wm-article-link wm-toc-text">Get-CTXAPI_CloudConnectors</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_CloudServices/" class="wm-article-link wm-toc-text">Get-CTXAPI_CloudServices</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_ConfigAudit/" class="wm-article-link wm-toc-text">Get-CTXAPI_ConfigAudit</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_ConfigLog/" class="wm-article-link wm-toc-text">Get-CTXAPI_ConfigLog</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_ConnectionReport/" class="wm-article-link wm-toc-text">Get-CTXAPI_ConnectionReport</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_DeliveryGroups/" class="wm-article-link wm-toc-text">Get-CTXAPI_DeliveryGroups</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_FailureReport/" class="wm-article-link wm-toc-text">Get-CTXAPI_FailureReport</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_HealthCheck/" class="wm-article-link wm-toc-text">Get-CTXAPI_HealthCheck</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Hypervisors/" class="wm-article-link wm-toc-text">Get-CTXAPI_Hypervisors</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_LowLevelOperations/" class="wm-article-link wm-toc-text">Get-CTXAPI_LowLevelOperations</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_MachineCatalogs/" class="wm-article-link wm-toc-text">Get-CTXAPI_MachineCatalogs</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Machines/" class="wm-article-link wm-toc-text">Get-CTXAPI_Machines</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_MonitorData/" class="wm-article-link wm-toc-text">Get-CTXAPI_MonitorData</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_ResourceLocations/" class="wm-article-link wm-toc-text">Get-CTXAPI_ResourceLocations</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_ResourceUtilization/" class="wm-article-link wm-toc-text">Get-CTXAPI_ResourceUtilization</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Sessions/" class="wm-article-link wm-toc-text">Get-CTXAPI_Sessions</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_SiteDetails/" class="wm-article-link wm-toc-text">Get-CTXAPI_SiteDetails</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Tests/" class="wm-article-link wm-toc-text">Get-CTXAPI_Tests</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_VDAUptime/" class="wm-article-link wm-toc-text">Get-CTXAPI_VDAUptime</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Zone/" class="wm-article-link wm-toc-text">Get-CTXAPI_Zone</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Set-CTXAPI_ReportColors/" class="wm-article-link wm-toc-text">Set-CTXAPI_ReportColors</a>
+</li>
+        <li class="wm-toc-li wm-toc-lev1 "><a href="Test-CTXAPI_Headers/" class="wm-article-link wm-toc-text">Test-CTXAPI_Headers</a>
+</li>
+  </ul>
+</nav>
 
-          <div role="main">
-            <div class="section">
-              
-                <h1 id="ctxcloudapi">CTXCloudAPI</h1>
+    <div class="wm-content-pane">
+      <iframe class="wm-article" name="article"></iframe>
+    </div>
+  </div>
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="CTXCloudAPI/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="CTXCloudAPI/" class="btn btn-xs btn-link">
+        CTXCloudAPI Module
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="ctxcloudapi">CTXCloudApi</h1>
 <h2 id="description">Description</h2>
 <p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
     Start with Connect-CTXAPI to connect, then run other reports.
     Or run Get-Help CTXCloudApi for other instructions</p>
-<h2 id="function-synopsis">Function Synopsis</h2>
-<h3 id="connect-ctxapi">Connect-CTXAPI</h3>
-<p>Connect to the cloud and create needed api headers</p>
-<h3 id="get-ctxapi_applications">Get-CTXAPI_Applications</h3>
-<p>Return details about published apps</p>
-<h3 id="get-ctxapi_cloudconnectors">Get-CTXAPI_CloudConnectors</h3>
-<p>Details about current Cloud Connectors</p>
-<h3 id="get-ctxapi_cloudservices">Get-CTXAPI_CloudServices</h3>
-<p>Return details about cloud services and subscription</p>
-<h3 id="get-ctxapi_configaudit">Get-CTXAPI_ConfigAudit</h3>
-<p>Reports on system config</p>
-<h3 id="get-ctxapi_configlog">Get-CTXAPI_ConfigLog</h3>
-<p>Get high level configuration changes in the last x days.</p>
-<h3 id="get-ctxapi_connectionreport">Get-CTXAPI_ConnectionReport</h3>
-<p>Creates Connection report</p>
-<h3 id="get-ctxapi_deliverygroups">Get-CTXAPI_DeliveryGroups</h3>
-<p>Return details about Delivery Groups</p>
-<h3 id="get-ctxapi_failurereport">Get-CTXAPI_FailureReport</h3>
-<p>Reports on failures in the last x hours.</p>
-<h3 id="get-ctxapi_healthcheck">Get-CTXAPI_HealthCheck</h3>
-<p>Show useful information for daily health check</p>
-<h3 id="get-ctxapi_hypervisors">Get-CTXAPI_Hypervisors</h3>
-<p>Return details about hosting (hypervisor)</p>
-<h3 id="get-ctxapi_lowleveloperations">Get-CTXAPI_LowLevelOperations</h3>
-<p>Return details about low lever config change (More detailed)</p>
-<h3 id="get-ctxapi_machinecatalogs">Get-CTXAPI_MachineCatalogs</h3>
-<p>Return details about machine catalogs</p>
-<h3 id="get-ctxapi_machines">Get-CTXAPI_Machines</h3>
-<p>Return details about vda machines</p>
-<h3 id="get-ctxapi_monitordata">Get-CTXAPI_MonitorData</h3>
-<p>Collect Monitoring OData for other reports</p>
-<h3 id="get-ctxapi_resourcelocations">Get-CTXAPI_ResourceLocations</h3>
-<p>Get cloud Resource Locations</p>
-<h3 id="get-ctxapi_resourceutilization">Get-CTXAPI_ResourceUtilization</h3>
-<p>Resource utilization in the last x hours</p>
-<h3 id="get-ctxapi_sessions">Get-CTXAPI_Sessions</h3>
-<p>Return details about current sessions</p>
-<h3 id="get-ctxapi_sitedetails">Get-CTXAPI_SiteDetails</h3>
-<p>Return details about your farm / site</p>
-<h3 id="get-ctxapi_tests">Get-CTXAPI_Tests</h3>
-<p>Run Built in Citrix cloud tests</p>
-<h3 id="get-ctxapi_vdauptime">Get-CTXAPI_VDAUptime</h3>
-<p>Uses Registration date to calculate uptime</p>
-<h3 id="get-ctxapi_zone">Get-CTXAPI_Zone</h3>
-<p>Get zone details</p>
-<h3 id="set-ctxapi_reportcolors">Set-CTXAPI_ReportColors</h3>
-<p>Set the color and logo for HTML Reports</p>
-<h3 id="test-ctxapi_headers">Test-CTXAPI_Headers</h3>
-<p>Checks that the connection is still valid, and the token hasnt expired</p>
-              
-            </div>
-          </div>
-          <footer>
-  
-    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+<h2 id="getting-started">Getting Started</h2>
+<ul>
+<li><code>Install-Module -Name CTXCloudApi -Verbose</code></li>
+<li><code>Import-Module CTXCloudApi -Verbose -Force</code></li>
+<li><code>Get-Command -Module CTXCloudApi</code></li>
+</ul>
+<h2 id="functions">Functions</h2>
+<p>Connect-CTXAPI -- Connect to the cloud and create needed api headers
+Get-CTXAPI_Applications -- Return details about published apps
+Get-CTXAPI_CloudConnectors -- Details about current Cloud Connectors
+Get-CTXAPI_CloudServices -- Return details about cloud services and subscription
+Get-CTXAPI_ConfigAudit -- Reports on system config
+Get-CTXAPI_ConfigLog -- Get high level configuration changes in the last x days.
+Get-CTXAPI_ConnectionReport -- Creates Connection report
+Get-CTXAPI_DeliveryGroups -- Return details about Delivery Groups
+Get-CTXAPI_FailureReport -- Reports on failures in the last x hours.
+Get-CTXAPI_HealthCheck -- Show useful information for daily health check
+Get-CTXAPI_Hypervisors -- Return details about hosting (hypervisor)
+Get-CTXAPI_LowLevelOperations -- Return details about low lever config change (More detailed)
+Get-CTXAPI_MachineCatalogs -- Return details about machine catalogs
+Get-CTXAPI_Machines -- Return details about vda machines
+Get-CTXAPI_MonitorData -- Collect Monitoring OData for other reports
+Get-CTXAPI_ResourceLocations -- Get cloud Resource Locations
+Get-CTXAPI_ResourceUtilization -- Resource utilization in the last x hours
+Get-CTXAPI_Sessions -- Return details about current sessions
+Get-CTXAPI_SiteDetails -- Return details about your farm / site
+Get-CTXAPI_Tests -- Run Built in Citrix cloud tests
+Get-CTXAPI_VDAUptime -- Uses Registration date to calculate uptime
+Get-CTXAPI_Zone -- Get zone details
+Set-CTXAPI_ReportColors -- Set the color and logo for HTML Reports
+Test-CTXAPI_Headers -- Checks that the connection is still valid, and the token hasnt expired</p>
+
+  <br>
+    
+
+    
+    
       
-        <a href="CTXCloudAPI/" class="btn btn-neutral float-right" title="CTXCloudAPI Module">Next <span class="icon icon-circle-arrow-right"></span></a>
-      
-      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="CTXCloudAPI/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="CTXCloudAPI/" class="btn btn-xs btn-link">
+        CTXCloudAPI Module
+      </a>
     </div>
-  
-
-  <hr/>
-
-  <div role="contentinfo">
-    <!-- Copyright etc -->
     
   </div>
 
-  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
-</footer>
-      
-        </div>
-      </div>
-
-    </section>
-
-  </div>
-
-  <div class="rst-versions" role="note" aria-label="versions">
-  <span class="rst-current-version" data-toggle="rst-current-version">
-    
-        <span>
-          <a href="https://github.com/smitpi/CTXCloudApi/" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
-        </span>
-    
-    
-    
-      <span><a href="CTXCloudAPI/" style="color: #fcfcfc">Next &raquo;</a></span>
-    
-  </span>
+    <br>
 </div>
-    <script>var base_url = '.';</script>
-    <script src="js/theme_extra.js" defer></script>
-    <script src="js/theme.js" defer></script>
-      <script src="search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
-            SphinxRtdTheme.Navigation.enable(true);
-        };
-    </script>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/index.md">Edit on smitpi/CTXCloudApi</a>
+      </p><p>(c) 2021 Pierre Smit. All rights reserved.</p>
+  <p>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
 
 </body>
 </html>
-
 <!--
 MkDocs version : 1.2.3
-Build Date UTC : 2021-11-16 22:25:38.407407+00:00
+Build Date UTC : 2021-11-23 14:28:59.055862+00:00
 -->

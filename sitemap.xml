@@ -1,138 +1,133 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/CTXCloudAPI/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Applications/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnectors/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudServices/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigLog/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroups/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_HealthCheck/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisors/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperations/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalogs/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machines/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MonitorData/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocations/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Sessions/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetails/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Tests/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_ReportColors/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
-         <loc>None</loc>
-         <lastmod>2021-11-16</lastmod>
+         <loc>https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Headers/</loc>
+         <lastmod>2021-11-23</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
