@@ -1,5 +1,4 @@
 ﻿
-## TODO create a function to change the report colours
 
 $global:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
