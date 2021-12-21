@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.2
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -32,7 +32,7 @@ Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -40,7 +40,7 @@ Updated [14/11/2021_07:05] Added more functions
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Details about current Cloud Connectors
 
 #>
@@ -61,7 +61,7 @@ Get-CTXAPI_CloudConnectors -APIHeader $APIHeader
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Get-CTXAPI_CloudConnectors {
+Function Get-CTXAPI_CloudConnector {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

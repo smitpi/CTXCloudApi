@@ -1,7 +1,7 @@
 ---
-external help file: CTXCloudAPI-help.xml
-Module Name: CTXCloudAPI
-online version:
+external help file: CTXCloudApi-help.xml
+Module Name: CTXCloudApi
+online version: https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_MonitorData
 schema: 2.0.0
 ---
 
@@ -43,21 +43,6 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-Amount of time to report on.
-
-```yaml
-Type: Int32
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 3
-Default value: 0
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
 ### -region
 Your Cloud instance hosted region.
 
@@ -69,6 +54,21 @@ Aliases:
 Required: True
 Position: 2
 Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -hours
+Amount of time to report on.
+
+```yaml
+Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 3
+Default value: 0
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,13 +31,13 @@ Updated [06/11/2021_16:48] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Return details about Delivery Groups
 
 #>
@@ -58,7 +58,7 @@ Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Get-CTXAPI_DeliveryGroups {
+Function Get-CTXAPI_DeliveryGroup {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

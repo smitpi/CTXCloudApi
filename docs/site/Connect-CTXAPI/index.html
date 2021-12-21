@@ -78,10 +78,10 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
     </div>
     
     <div class="wm-article-nav">
-      <a href="../CTXCloudAPI/" class="btn btn-xs btn-default pull-left">
+      <a href=".." class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../CTXCloudAPI/" class="btn btn-xs btn-link">
-        CTXCloudAPI Module
+        Previous</a><a href=".." class="btn btn-xs btn-link">
+        CTXCloudApi
       </a>
     </div>
     
@@ -101,14 +101,26 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
 <pre><code>$splat = @{
-</code></pre>
-<p>Customer_Id = "xxx"
-    Client_Id = "xxx-xxx-xxx-xxx"
-    Client_Secret = "yyyyyy=="
+    Customer_Id = &quot;xxx&quot;
+    Client_Id = &quot;xxx-xxx-xxx-xxx&quot;
+    Client_Secret = &quot;yyyyyy==&quot;
     Customer_Name = 'HomeLab'
 }
-$APIHeader = Connect-CTXAPI @splat</p>
+$APIHeader = Connect-CTXAPI @splat
+</code></pre>
 <h2 id="parameters">PARAMETERS</h2>
+<h3 id="-customer_id">-Customer_Id</h3>
+<p>From Citrix Cloud</p>
+<pre><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+</code></pre>
 <h3 id="-client_id">-Client_Id</h3>
 <p>From Citrix Cloud</p>
 <pre><code class="language-yaml">Type: String
@@ -129,18 +141,6 @@ Aliases:
 
 Required: True
 Position: 3
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-</code></pre>
-<h3 id="-customer_id">-Customer_Id</h3>
-<p>From Citrix Cloud</p>
-<pre><code class="language-yaml">Type: String
-Parameter Sets: (All)
-Aliases:
-
-Required: True
-Position: 1
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
@@ -185,10 +185,10 @@ Accept wildcard characters: False
     </div>
     
     <div class="wm-article-nav">
-      <a href="../CTXCloudAPI/" class="btn btn-xs btn-default pull-left">
+      <a href=".." class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../CTXCloudAPI/" class="btn btn-xs btn-link">
-        CTXCloudAPI Module
+        Previous</a><a href=".." class="btn btn-xs btn-link">
+        CTXCloudApi
       </a>
     </div>
     

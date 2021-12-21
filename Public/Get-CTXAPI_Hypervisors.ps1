@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,13 +31,13 @@ Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Return details about hosting (hypervisor)
 
 #>
@@ -58,7 +58,7 @@ Get-CTXAPI_Hypervisor -APIHeader $APIHeader
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Get-CTXAPI_Hypervisors {
+Function Get-CTXAPI_Hypervisor {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

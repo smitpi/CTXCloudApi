@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.2.4
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -34,7 +34,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -46,7 +46,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 "Get the data from odata"
 
 #>

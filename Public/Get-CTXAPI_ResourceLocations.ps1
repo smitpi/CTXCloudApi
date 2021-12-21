@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.7
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -34,7 +34,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -42,7 +42,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get cloud Resource Locations
 
 #>
@@ -62,7 +62,7 @@ Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Get-CTXAPI_ResourceLocations {
+Function Get-CTXAPI_ResourceLocation {
     [Cmdletbinding()]
     PARAM(
         [Parameter(Mandatory = $true)]

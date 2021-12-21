@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,14 +31,14 @@ Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Return details about vda machines
 
 #>
@@ -62,7 +62,7 @@ $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Get-CTXAPI_Machines {
+Function Get-CTXAPI_Machine {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

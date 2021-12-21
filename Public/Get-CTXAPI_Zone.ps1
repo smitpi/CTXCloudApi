@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,7 +31,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -39,7 +39,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Get zone details
 
 #>

@@ -1,4 +1,4 @@
-<#PSScriptInfo
+﻿<#PSScriptInfo
 
 .VERSION 0.1.2
 
@@ -18,7 +18,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,7 +31,7 @@ Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
-#> 
+#>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
@@ -40,7 +40,7 @@ Updated [14/11/2021_07:05] Added more functions
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Run Built in Citrix cloud tests
 
 #>
@@ -78,7 +78,7 @@ Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroup
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Get-CTXAPI_Tests {
+Function Get-CTXAPI_Test {
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]
     PARAM(
@@ -131,10 +131,10 @@ Function Get-CTXAPI_Tests {
                 }
                 catch { Write-Warning "Hypervisor Sum Test -- $($_.Exception.Message)" }
             }
-            $HypResult = Get-CTXAPI_Hypervisors -APIHeader $APIHeader | ForEach-Object { 
+            $HypResult = Get-CTXAPI_Hypervisors -APIHeader $APIHeader | ForEach-Object {
                 try {
                     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
-                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
+                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/hypervisors/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults
                 }
                 catch { Write-Warning "Hypervisor Result Test -- $($_.Exception.Message)" }
             }
@@ -162,10 +162,10 @@ Function Get-CTXAPI_Tests {
                 }
                 catch { Write-Warning "DeliveryGroups Sum Test -- $($_.Exception.Message)" }
             }
-            $DeliveryResult = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | ForEach-Object { 
+            $DeliveryResult = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | ForEach-Object {
                 try {
                     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
-                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
+                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/DeliveryGroups/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults
                 }
                 catch { Write-Warning "DeliveryGroups Result Test -- $($_.Exception.Message)" }
             }
@@ -193,10 +193,10 @@ Function Get-CTXAPI_Tests {
                 }
                 catch { Write-Warning "MachineCatalogs Sum Test -- $($_.Exception.Message)" }
             }
-            $MachineCatalogsResult = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object { 
+            $MachineCatalogsResult = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object {
                 try {
                     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] $($_.name)"
-                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults 
+                (Invoke-RestMethod "https://api.cloud.com/cvad/manage/MachineCatalogs/$($_.id)/TestReport" -Headers $APIHeader.headers).TestResults
                 }
                 catch { Write-Warning "MachineCatalogs Result Test -- $($_.Exception.Message)" }
             }

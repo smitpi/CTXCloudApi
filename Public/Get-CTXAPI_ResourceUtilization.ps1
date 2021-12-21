@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 1.1.8
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -38,7 +38,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
@@ -50,7 +50,7 @@ Updated [06/11/2021_16:49] Using the new api
 
 <#
 
-.DESCRIPTION 
+.DESCRIPTION
 Resource utilization in the last x hours
 
 #>

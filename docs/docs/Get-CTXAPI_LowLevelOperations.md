@@ -1,7 +1,7 @@
 ---
-external help file: CTXCloudAPI-help.xml
-Module Name: CTXCloudAPI
-online version:
+external help file: CTXCloudApi-help.xml
+Module Name: CTXCloudApi
+online version: https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_LowLevelOperations
 schema: 2.0.0
 ---
 
@@ -24,9 +24,8 @@ Return details about low lever config change (More detailed)
 ### EXAMPLE 1
 ```
 $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
+$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
 ```
-
-$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog\[0\].id
 
 ## PARAMETERS
 

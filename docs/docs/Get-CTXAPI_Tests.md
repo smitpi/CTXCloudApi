@@ -1,7 +1,7 @@
 ---
-external help file: CTXCloudAPI-help.xml
-Module Name: CTXCloudAPI
-online version:
+external help file: CTXCloudApi-help.xml
+Module Name: CTXCloudApi
+online version: https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_Tests
 schema: 2.0.0
 ---
 
@@ -44,8 +44,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -DeliveryGroupsTest
-Perform the Delivery Groups Test
+### -SiteTest
+Perform Site test
 
 ```yaml
 Type: SwitchParameter
@@ -59,23 +59,23 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -Export
-In what format to export the reports.
+### -HypervisorsTest
+Perform the Hypervisors Test
 
 ```yaml
-Type: String
+Type: SwitchParameter
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 2
-Default value: Host
+Position: Named
+Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -HypervisorsTest
-Perform the Hypervisors Test
+### -DeliveryGroupsTest
+Perform the Delivery Groups Test
 
 ```yaml
 Type: SwitchParameter
@@ -104,6 +104,21 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -Export
+In what format to export the reports.
+
+```yaml
+Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: 2
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### -ReportPath
 Destination folder for the exported report.
 
@@ -115,21 +130,6 @@ Aliases:
 Required: False
 Position: 3
 Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -SiteTest
-Perform Site test
-
-```yaml
-Type: SwitchParameter
-Parameter Sets: (All)
-Aliases:
-
-Required: False
-Position: Named
-Default value: False
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

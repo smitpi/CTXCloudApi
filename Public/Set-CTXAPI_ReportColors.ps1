@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,17 +31,17 @@ Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Set the color for html reports
 
-#> 
+#>
 
 
 <#
@@ -65,18 +65,18 @@ Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gi
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Set-CTXAPI_ReportColors {
+Function Set-CTXAPI_ReportColor {
 	[Cmdletbinding()]
 	PARAM(
 		[string]$Color1 = '#061820',
 		[string]$Color2 = '#FFD400',
 		[string]$LogoURL = 'https://c.na65.content.force.com/servlet/servlet.ImageServer?id=0150h000003yYnkAAE&oid=00DE0000000c48tMAA'
 	)
-    
+
 	$mod = Import-Module CTXCloudApi -Force -PassThru
 	$file = Get-Item (Join-Path $mod.ModuleBase -ChildPath '\Private\Reports-Colors.ps1')
 	Import-Module $file.FullName
- 
+
 	Set-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color1 -Value $($Color1)
 	Set-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color2 -Value $($Color2)
 	Set-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name LogoURL -Value $($LogoURL)

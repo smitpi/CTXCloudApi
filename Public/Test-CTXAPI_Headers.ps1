@@ -1,4 +1,4 @@
-
+﻿
 <#PSScriptInfo
 
 .VERSION 0.1.1
@@ -19,7 +19,7 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES 
+.EXTERNALMODULEDEPENDENCIES
 
 .REQUIREDSCRIPTS
 
@@ -31,25 +31,25 @@ Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
 
-#> 
+#>
 
 
 
 
-<# 
+<#
 
-.DESCRIPTION 
+.DESCRIPTION
 Checks that the connection is still valid, and the token hasnt expired
 
-#> 
+#>
 
 
 <#
 .SYNOPSIS
-Checks that the connection is still valid, and the token hasnt expired 
+Checks that the connection is still valid, and the token hasnt expired
 
 .DESCRIPTION
-Checks that the connection is still valid, and the token hasnt expired 
+Checks that the connection is still valid, and the token hasnt expired
 
 .PARAMETER APIHeader
 Use Connect-CTXAPI to create headers
@@ -62,13 +62,13 @@ Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
 
 #>
 # .ExternalHelp  CTXCloudApi-help.xml
-Function Test-CTXAPI_Headers {
+Function Test-CTXAPI_Header {
     [Cmdletbinding()]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [switch]$AutoRenew = $false
     )
-    
+
     $timeleft = [math]::Truncate(($APIHeader.TokenExpireAt - (Get-Date)).totalminutes)
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Time Left in min: $($timeleft)"
     if ($timeleft -lt 0) {

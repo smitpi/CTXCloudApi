@@ -1,7 +1,7 @@
 ---
-external help file: CTXCloudAPI-help.xml
-Module Name: CTXCloudAPI
-online version:
+external help file: CTXCloudApi-help.xml
+Module Name: CTXCloudApi
+online version: https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_Applications
 schema: 2.0.0
 ---
 
