@@ -1,20 +1,15 @@
 site_name: 'CTXCloudApi'
-site_description: 'Documentation for CTXCloudApi'
+site_description: 'Documentation for PowerShell Module: CTXCloudApi'
 site_author: 'Pierre Smit'
 site_url: 'https://smitpi.github.io/CTXCloudApi'
-
+theme:
+  name: 'flatly'
+  language: 'en'
+  logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/c4zej5lm4dgfykg26wdb'
 repo_name: 'smitpi/CTXCloudApi'
 repo_url: 'https://github.com/smitpi/CTXCloudApi'
-
 copyright: '(c) 2021 Pierre Smit. All rights reserved.'
-
 extra:
-  manifest: manifest.webmanifest
   social:
     - icon: fontawesome/brands/github-square
       link: https://github.com/smitpi/CTXCloudApi
-
-theme:
-  name: flatly
-  language: en
-  logo: 'https://res.cloudinary.com/crunchbase-production/image/upload/c_lpad,h_256,w_256,f_auto,q_auto:eco,dpr_1/c4zej5lm4dgfykg26wdb'
