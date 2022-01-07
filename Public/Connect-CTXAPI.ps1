@@ -77,7 +77,7 @@ $splat = @{
 $APIHeader = Connect-CTXAPI @splat
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Connect-CTXAPI {
     [Cmdletbinding()]
     PARAM(

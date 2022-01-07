@@ -61,7 +61,7 @@ Get published desktop details
 $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_Machine {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]

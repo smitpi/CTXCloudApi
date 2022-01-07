@@ -64,7 +64,7 @@ URL to the new Logo
 Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Set-CTXAPI_ReportColor {
 	[Cmdletbinding()]
 	PARAM(

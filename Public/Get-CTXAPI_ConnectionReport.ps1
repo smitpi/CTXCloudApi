@@ -82,7 +82,7 @@ Destination folder for the exported report.
 Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_ConnectionReport {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
     PARAM(

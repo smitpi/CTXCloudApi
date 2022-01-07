@@ -73,7 +73,7 @@ Destination folder for the exported report.
 Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_HealthCheck {
     [Cmdletbinding()]
     PARAM(

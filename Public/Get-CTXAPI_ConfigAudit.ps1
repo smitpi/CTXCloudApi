@@ -71,7 +71,7 @@ Destination folder for the exported report.
 Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_ConfigAudit {
     [Cmdletbinding()]
     PARAM(

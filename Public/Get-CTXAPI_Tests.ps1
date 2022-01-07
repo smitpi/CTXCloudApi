@@ -77,7 +77,7 @@ Destination folder for the exported report.
 Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -Export HTML -ReportPath C:\temp
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_Test {
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]

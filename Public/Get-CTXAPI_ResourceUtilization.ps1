@@ -84,7 +84,7 @@ Destination folder for the exported report.
 Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPath C:\temp\
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_ResourceUtilization {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
     PARAM(

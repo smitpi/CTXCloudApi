@@ -57,7 +57,7 @@ Use Connect-CTXAPI to create headers
 Get-CTXAPI_Applications -APIHeader $APIHeader
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_Application {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]

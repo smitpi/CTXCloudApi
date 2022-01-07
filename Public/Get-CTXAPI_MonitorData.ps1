@@ -72,7 +72,7 @@ Amount of time to report on.
 $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region eu -hours 24
 
 #>
-# .ExternalHelp  CTXCloudApi-help.xml
+
 Function Get-CTXAPI_MonitorData {
     [Cmdletbinding()]
     PARAM(
