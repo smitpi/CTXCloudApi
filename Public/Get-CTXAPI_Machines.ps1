@@ -62,7 +62,7 @@ $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Machine {
+Function Get-CTXAPI_Machines {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

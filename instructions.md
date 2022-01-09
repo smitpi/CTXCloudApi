@@ -7,6 +7,7 @@
 - Run `Connect-CTXAPI` with the details obtained from above. This connect and create the needed headers for other commands.
 
 ## Example 1:
+
 ```powershell
 $splat = @{
 	Customer_Id = "xxx"

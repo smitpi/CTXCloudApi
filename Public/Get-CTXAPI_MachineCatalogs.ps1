@@ -59,7 +59,7 @@ $MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_MachineCatalog {
+Function Get-CTXAPI_MachineCatalogs {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

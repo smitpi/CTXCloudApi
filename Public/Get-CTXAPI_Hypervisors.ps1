@@ -58,7 +58,7 @@ Get-CTXAPI_Hypervisor -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Hypervisor {
+Function Get-CTXAPI_Hypervisors {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

@@ -62,8 +62,9 @@ Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
 
 #>
 
-Function Test-CTXAPI_Header {
+Function Test-CTXAPI_Headers {
     [Cmdletbinding()]
+    [OutputType([System.Boolean[]])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [switch]$AutoRenew = $false

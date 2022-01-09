@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
-.VERSION 0.1.1
+.VERSION 0.1.0
 
-.GUID 9dfebdd1-fcf2-4cf3-949e-a7be9a46537d
+.GUID 0e921c82-3104-4753-9a17-344af43706ab
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS ctx
 
 .LICENSEURI
 
@@ -19,28 +19,25 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:26] Initials Script Creating
-Updated [06/11/2021_16:48] Using the new api
+Created [09/01/2022_09:17] Initial Script Creating
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
-
-<#
-
-.DESCRIPTION
+.DESCRIPTION 
 Return details about published apps
 
-#>
+#> 
 
 
 <#
@@ -58,15 +55,15 @@ Get-CTXAPI_Applications -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Application {
-    [Cmdletbinding()]
-    [OutputType([System.Object[]])]
-    PARAM(
-        [Parameter(Mandatory = $true)]
-        [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
+Function Get-CTXAPI_Applications {
+	[Cmdletbinding()]
+	[OutputType([System.Object[]])]
+	PARAM(
+		[Parameter(Mandatory = $true)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
     (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Applications/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Applications/$($_.id)" -Method Get -Headers $APIHeader.headers
-    }
+		Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Applications/$($_.id)" -Method Get -Headers $APIHeader.headers
+	}
 
 } #end Function

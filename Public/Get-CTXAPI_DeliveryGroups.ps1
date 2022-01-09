@@ -58,7 +58,7 @@ Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_DeliveryGroup {
+Function Get-CTXAPI_DeliveryGroups {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

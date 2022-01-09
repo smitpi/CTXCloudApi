@@ -58,11 +58,11 @@ Get cloud Resource Locations
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+Get-CTXAPI_ResourceLocations -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_ResourceLocation {
+Function Get-CTXAPI_ResourceLocations {
     [Cmdletbinding()]
     PARAM(
         [Parameter(Mandatory = $true)]

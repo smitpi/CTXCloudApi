@@ -62,7 +62,7 @@ $LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighL
 
 #>
 
-Function Get-CTXAPI_LowLevelOperation {
+Function Get-CTXAPI_LowLevelOperations {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

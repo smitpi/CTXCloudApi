@@ -61,7 +61,7 @@ Get-CTXAPI_CloudConnectors -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_CloudConnector {
+Function Get-CTXAPI_CloudConnectors {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

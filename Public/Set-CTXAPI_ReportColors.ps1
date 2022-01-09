@@ -65,7 +65,7 @@ Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gi
 
 #>
 
-Function Set-CTXAPI_ReportColor {
+Function Set-CTXAPI_ReportColors {
 	[Cmdletbinding()]
 	PARAM(
 		[string]$Color1 = '#061820',

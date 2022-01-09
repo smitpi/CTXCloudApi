@@ -78,7 +78,7 @@ Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroup
 
 #>
 
-Function Get-CTXAPI_Test {
+Function Get-CTXAPI_Tests {
     [Cmdletbinding()]
     [OutputType([System.Collections.Hashtable])]
     PARAM(

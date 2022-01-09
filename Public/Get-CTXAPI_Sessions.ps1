@@ -55,11 +55,11 @@ Return details about current sessions
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_Session -APIHeader $APIHeader
+Get-CTXAPI_Sessions -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Session {
+Function Get-CTXAPI_Sessions {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(

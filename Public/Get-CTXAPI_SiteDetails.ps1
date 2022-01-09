@@ -54,11 +54,11 @@ Return details about your farm / site
 Use Connect-CTXAPI to create headers
 
 .EXAMPLE
-Get-CTXAPI_SiteDetail -APIHeader $APIHeader
+Get-CTXAPI_SiteDetails -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_SiteDetail {
+Function Get-CTXAPI_SiteDetails {
     [Cmdletbinding()]
     [OutputType([System.Object[]])]
     PARAM(
