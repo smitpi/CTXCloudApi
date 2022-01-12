@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version: https://smitpi.github.io/CTXCloudApi/#Test-CTXAPI_Headers
+online version:
 schema: 2.0.0
 ---
 
@@ -65,6 +65,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### System.Boolean[]
 ## NOTES
 
 ## RELATED LINKS
