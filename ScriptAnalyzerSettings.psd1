@@ -20,7 +20,8 @@
     ExcludeRules = @(
         'PSMissingModuleManifestField',
 	    'PSAvoidUsingWriteHost',
-        'PSUseSingularNouns'
+'PSUseShouldProcessForStateChangingFunctions',
+'PSUseSingularNouns'
     )
  
     # You can use the following entry to supply parameters to rules that take parameters.
