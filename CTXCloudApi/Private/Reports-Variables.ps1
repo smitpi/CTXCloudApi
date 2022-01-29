@@ -1,11 +1,11 @@
 ﻿
 
-$global:RegistrationState = [PSCustomObject]@{
+$script:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Registered'
     2 = 'Unregistered'
 }
-$global:ConnectionState = [PSCustomObject]@{
+$script:ConnectionState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Connected'
     2 = 'Disconnected'
@@ -17,7 +17,7 @@ $global:ConnectionState = [PSCustomObject]@{
     8 = 'Other'
     9 = 'Pending'
 }
-$global:ConnectionFailureType = [PSCustomObject]@{
+$script:ConnectionFailureType = [PSCustomObject]@{
     0 = 'None'
     1 = 'ClientConnectionFailure'
     2 = 'MachineFailure'
@@ -25,7 +25,7 @@ $global:ConnectionFailureType = [PSCustomObject]@{
     4 = 'NoLicensesAvailable'
     5 = 'Configuration'
 }
-$global:SessionFailureCode = [PSCustomObject]@{
+$script:SessionFailureCode = [PSCustomObject]@{
     0   = 'Unknown'
     1   = 'None'
     2   = 'SessionPreparation'

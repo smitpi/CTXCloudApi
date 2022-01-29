@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigAudit
 
 ## SYNOPSIS
-Reports on system config
+Reports on system config.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [-Export] <String> [[-ReportPath] <
 ```
 
 ## DESCRIPTION
-Reports on machine catalog, delivery groups and published desktops
+Reports on machine Catalog, delivery groups and published desktops.
 
 ## EXAMPLES
 
@@ -29,7 +29,7 @@ Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Use Connect-CTXAPI to create headers.
 
 ```yaml
 Type: Object
@@ -44,7 +44,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-In what format to export the reports
+In what format to export the reports.
 
 ```yaml
 Type: String

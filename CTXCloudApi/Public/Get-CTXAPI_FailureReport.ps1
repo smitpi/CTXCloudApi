@@ -86,8 +86,9 @@ Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 
 #>
 
-Function Get-CTXAPI_FailureReports {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReports')]
+Function Get-CTXAPI_FailureReport {
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport')]
+    [Alias('Get-CTXAPI_FailureReports')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]

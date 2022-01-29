@@ -47,22 +47,22 @@ Updated [14/11/2021_07:05] Added more functions
 <#
 
 .DESCRIPTION
-Reports on machine catalog, delivery groups and published desktops
+Reports on machine Catalog, delivery groups and published desktops.
 
 #>
 
 <#
 .SYNOPSIS
-Reports on system config
+Reports on system config.
 
 .DESCRIPTION
-Reports on machine catalog, delivery groups and published desktops
+Reports on machine Catalog, delivery groups and published desktops.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Use Connect-CTXAPI to create headers.
 
 .PARAMETER Export
-In what format to export the reports
+In what format to export the reports.
 
 .PARAMETER ReportPath
 Destination folder for the exported report.

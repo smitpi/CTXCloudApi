@@ -1,9 +1,9 @@
 
 if (Test-Path HKCU:\Software\CTXCloudApi) {
 
-    $global:CTXAPI_Color1 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color1
-    $global:CTXAPI_Color2 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color2
-    $global:CTXAPI_LogoURL = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name LogoURL
+    $script:CTXAPI_Color1 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color1
+    $script:CTXAPI_Color2 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color2
+    $script:CTXAPI_LogoURL = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name LogoURL
 
 }
 else {
@@ -12,14 +12,14 @@ else {
         New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color2 -Value '#FFD400'
         New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name LogoURL -Value 'https://c.na65.content.force.com/servlet/servlet.ImageServer?id=0150h000003yYnkAAE&oid=00DE0000000c48tMAA'
 
-    $global:CTXAPI_Color1 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color1
-    $global:CTXAPI_Color2 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color2
-    $global:CTXAPI_LogoURL = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name LogoURL
+    $script:CTXAPI_Color1 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color1
+    $script:CTXAPI_Color2 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color2
+    $script:CTXAPI_LogoURL = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name LogoURL
 }
 
 
 #region Html Settings
-$global:TableSettings = @{
+$script:TableSettings = @{
 	Style           = 'cell-border'
 	TextWhenNoData  = 'No Data to display here'
 	Buttons         = 'searchBuilder', 'pdfHtml5', 'excelHtml5'
@@ -32,7 +32,7 @@ $global:TableSettings = @{
 	ScrollY         = $true
 	SearchHighlight = $true
 }
-$global:SectionSettings = @{
+$script:SectionSettings = @{
 	BackgroundColor       = 'grey'
 	CanCollapse           = $true
 	HeaderBackGroundColor = $CTXAPI_Color1
@@ -41,7 +41,7 @@ $global:SectionSettings = @{
 	HeaderTextSize        = '10'
 	BorderRadius          = '15px'
 }
-$global:TableSectionSettings = @{
+$script:TableSectionSettings = @{
 	BackgroundColor       = 'white'
 	CanCollapse           = $true
 	HeaderBackGroundColor = $CTXAPI_Color2
