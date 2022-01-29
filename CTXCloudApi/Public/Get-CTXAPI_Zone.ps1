@@ -61,7 +61,7 @@ Use Connect-CTXAPI to create headers
 #>
 
 Function Get-CTXAPI_Zone {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone')]
     [OutputType([System.Object[]])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader

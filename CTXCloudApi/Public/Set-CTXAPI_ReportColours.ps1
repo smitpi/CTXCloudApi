@@ -26,7 +26,7 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [14/11/2021_03:31] Initital Script Creating
+Created [14/11/2021_03:31] Initial Script Creating
 Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
@@ -39,34 +39,34 @@ Updated [14/11/2021_07:05] Added more functions
 <#
 
 .DESCRIPTION
-Set the color for html reports
+Set the colour for html reports
 
 #>
 
 
 <#
 .SYNOPSIS
-Set the color and logo for HTML Reports
+Set the colour and logo for HTML Reports
 
 .DESCRIPTION
-Set the color and logo for HTML Reports. It updates the registry keys in HKCU:\Software\CTXCloudApi with the new details and display a test report.
+Set the colour and logo for HTML Reports. It updates the registry keys in HKCU:\Software\CTXCloudApi with the new details and display a test report.
 
 .PARAMETER Color1
-New Background Color # code
+New Background Colour # code
 
 .PARAMETER Color2
-New foreground Color # code
+New foreground Colour # code
 
 .PARAMETER LogoURL
 URL to the new Logo
 
 .EXAMPLE
-Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
+Set-CTXAPI_ReportColours -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
 
 #>
 
-Function Set-CTXAPI_ReportColor {
-	[Cmdletbinding()]
+Function Set-CTXAPI_ReportColours {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_ReportColours')]
 	PARAM(
 		[string]$Color1 = '#061820',
 		[string]$Color2 = '#FFD400',

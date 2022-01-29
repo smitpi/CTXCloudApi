@@ -58,8 +58,8 @@ Get-CTXAPI_SiteDetails -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_SiteDetail {
-    [Cmdletbinding()]
+Function Get-CTXAPI_SiteDetails {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetails')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

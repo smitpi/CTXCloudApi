@@ -26,7 +26,7 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [13/11/2021_23:35] Initital Script Creating
+Created [13/11/2021_23:35] Initial Script Creating
 Updated [14/11/2021_07:05] Added more functions
 
 .PRIVATEDATA
@@ -39,23 +39,23 @@ Updated [14/11/2021_07:05] Added more functions
 <#
 
 .DESCRIPTION
-Checks that the connection is still valid, and the token hasnt expired
+Checks that the connection is still valid, and the token hasn't expired.
 
 #>
 
 
 <#
 .SYNOPSIS
-Checks that the connection is still valid, and the token hasnt expired
+Checks that the connection is still valid, and the token hasn't expired.
 
 .DESCRIPTION
-Checks that the connection is still valid, and the token hasnt expired
+Checks that the connection is still valid, and the token hasn't expired.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Use Connect-CTXAPI to create headers.
 
 .PARAMETER AutoRenew
-If the token has expired, it will connect and renew the variable
+If the token has expired, it will connect and renew the variable.
 
 .EXAMPLE
 Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
@@ -63,7 +63,7 @@ Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
 #>
 
 Function Test-CTXAPI_Header {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header')]
     [OutputType([System.Boolean[]])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

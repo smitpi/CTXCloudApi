@@ -69,7 +69,7 @@ Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
 #>
 
 Function Get-CTXAPI_ConfigLog {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigLog')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

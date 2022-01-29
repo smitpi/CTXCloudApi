@@ -58,8 +58,8 @@ Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_DeliveryGroup {
-    [Cmdletbinding()]
+Function Get-CTXAPI_DeliveryGroups {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroups')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

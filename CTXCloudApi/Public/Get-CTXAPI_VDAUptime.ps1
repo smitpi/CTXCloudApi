@@ -74,7 +74,7 @@ Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
 #>
 
 Function Get-CTXAPI_VDAUptime {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

@@ -56,7 +56,8 @@ Get-CTXAPI_Applications -APIHeader $APIHeader
 #>
 
 Function Get-CTXAPI_Application {
-	[Cmdletbinding()]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Applications')]
+	[Alias('Get-CTXAPI_Applications')]
 	[OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true)]

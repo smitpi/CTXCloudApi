@@ -62,8 +62,8 @@ $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Machine {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Machines {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machines')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

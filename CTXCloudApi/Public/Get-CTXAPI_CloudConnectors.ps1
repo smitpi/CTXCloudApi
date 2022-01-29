@@ -61,8 +61,8 @@ Get-CTXAPI_CloudConnectors -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_CloudConnector {
-    [Cmdletbinding()]
+Function Get-CTXAPI_CloudConnectors {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnectors')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

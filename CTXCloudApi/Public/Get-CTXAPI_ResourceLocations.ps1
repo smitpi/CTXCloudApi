@@ -62,8 +62,8 @@ Get-CTXAPI_ResourceLocations -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_ResourceLocation {
-    [Cmdletbinding()]
+Function Get-CTXAPI_ResourceLocations {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocations')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)

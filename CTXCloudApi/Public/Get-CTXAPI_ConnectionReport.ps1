@@ -84,7 +84,7 @@ Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c
 #>
 
 Function Get-CTXAPI_ConnectionReport {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport')]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]

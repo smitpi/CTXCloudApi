@@ -1,9 +1,8 @@
-﻿########### Private Function ###############
+########### Private Function ###############
 # source: Export-Odata.ps1
 # Module: CTXCloudApi
 ############################################
 Function Export-Odata {
-    [CmdletBinding()]
     [OutputType([System.Object[]])]
     param(
         [string]$URI,
@@ -150,7 +149,7 @@ $global:SessionFailureCode = [PSCustomObject]@{
 ############################################
 # source: Connect-CTXAPI.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -186,7 +185,7 @@ $APIHeader = Connect-CTXAPI @splat
 #>
 
 Function Connect-CTXAPI {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [string]$Customer_Id,
@@ -231,7 +230,7 @@ Function Connect-CTXAPI {
 ############################################
 # source: Get-CTXAPI_Applications.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -251,8 +250,8 @@ Get-CTXAPI_Applications -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Application {
-	[Cmdletbinding()]
+Function Get-CTXAPI_Applications {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Applications')]
 	[OutputType([System.Object[]])]
 	PARAM(
 		[Parameter(Mandatory = $true)]
@@ -267,7 +266,7 @@ Function Get-CTXAPI_Application {
 ############################################
 # source: Get-CTXAPI_CloudConnectors.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -287,8 +286,8 @@ Get-CTXAPI_CloudConnectors -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_CloudConnector {
-    [Cmdletbinding()]
+Function Get-CTXAPI_CloudConnectors {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnectors')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -302,7 +301,7 @@ Function Get-CTXAPI_CloudConnector {
 ############################################
 # source: Get-CTXAPI_CloudServices.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -322,8 +321,8 @@ Get-CTXAPI_CloudServices -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_CloudService {
-    [Cmdletbinding()]
+Function Get-CTXAPI_CloudServices {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudServices')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -336,7 +335,7 @@ Function Get-CTXAPI_CloudService {
 ############################################
 # source: Get-CTXAPI_ConfigAudit.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -363,7 +362,7 @@ Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 #>
 
 Function Get-CTXAPI_ConfigAudit {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -519,7 +518,7 @@ Function Get-CTXAPI_ConfigAudit {
 ############################################
 # source: Get-CTXAPI_ConfigLog.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -543,7 +542,7 @@ Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
 #>
 
 Function Get-CTXAPI_ConfigLog {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigLog')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -558,7 +557,7 @@ Function Get-CTXAPI_ConfigLog {
 ############################################
 # source: Get-CTXAPI_ConnectionReport.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -594,7 +593,7 @@ Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c
 #>
 
 Function Get-CTXAPI_ConnectionReport {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport')]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]
@@ -675,7 +674,7 @@ Function Get-CTXAPI_ConnectionReport {
 ############################################
 # source: Get-CTXAPI_DeliveryGroups.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -695,8 +694,8 @@ Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_DeliveryGroup {
-    [Cmdletbinding()]
+Function Get-CTXAPI_DeliveryGroups {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroups')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -712,7 +711,7 @@ Function Get-CTXAPI_DeliveryGroup {
 ############################################
 # source: Get-CTXAPI_FailureReport.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -722,7 +721,7 @@ Function Get-CTXAPI_DeliveryGroup {
 Reports on failures in the last x hours.
 
 .DESCRIPTION
-Reports on machine or connewction failures in the last x hours.
+Reports on machine or connection failures in the last x hours.
 
 .PARAMETER APIHeader
 Use Connect-CTXAPI to create headers.
@@ -750,8 +749,8 @@ Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 
 #>
 
-Function Get-CTXAPI_FailureReport {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+Function Get-CTXAPI_FailureReports {
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReports')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
@@ -833,7 +832,7 @@ Function Get-CTXAPI_FailureReport {
 ############################################
 # source: Get-CTXAPI_HealthCheck.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -860,7 +859,7 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
 #>
 
 Function Get-CTXAPI_HealthCheck {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_HealthCheck')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -992,7 +991,7 @@ Function Get-CTXAPI_HealthCheck {
 ############################################
 # source: Get-CTXAPI_Hypervisors.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1012,8 +1011,8 @@ Get-CTXAPI_Hypervisor -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Hypervisor {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Hypervisors {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisors')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -1030,7 +1029,7 @@ Function Get-CTXAPI_Hypervisor {
 ############################################
 # source: Get-CTXAPI_LowLevelOperations.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1054,8 +1053,8 @@ $LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighL
 
 #>
 
-Function Get-CTXAPI_LowLevelOperation {
-    [Cmdletbinding()]
+Function Get-CTXAPI_LowLevelOperations {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperations')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -1072,7 +1071,7 @@ Function Get-CTXAPI_LowLevelOperation {
 ############################################
 # source: Get-CTXAPI_MachineCatalogs.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1092,8 +1091,8 @@ $MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_MachineCatalog {
-    [Cmdletbinding()]
+Function Get-CTXAPI_MachineCatalogs {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalogs')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -1108,7 +1107,7 @@ Function Get-CTXAPI_MachineCatalog {
 ############################################
 # source: Get-CTXAPI_Machines.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1131,8 +1130,8 @@ $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Machine {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Machines {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machines')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -1154,7 +1153,7 @@ Function Get-CTXAPI_Machine {
 ############################################
 # source: Get-CTXAPI_MonitorData.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1181,7 +1180,7 @@ $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region eu -hours 24
 #>
 
 Function Get-CTXAPI_MonitorData {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MonitorData')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -1246,7 +1245,7 @@ Function Get-CTXAPI_MonitorData {
 ############################################
 # source: Get-CTXAPI_ResourceLocations.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1266,8 +1265,8 @@ Get-CTXAPI_ResourceLocations -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_ResourceLocation {
-    [Cmdletbinding()]
+Function Get-CTXAPI_ResourceLocations {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocations')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
@@ -1280,7 +1279,7 @@ Function Get-CTXAPI_ResourceLocation {
 ############################################
 # source: Get-CTXAPI_ResourceUtilization.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1316,7 +1315,7 @@ Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPa
 #>
 
 Function Get-CTXAPI_ResourceUtilization {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization')]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]
@@ -1385,7 +1384,7 @@ Function Get-CTXAPI_ResourceUtilization {
 ############################################
 # source: Get-CTXAPI_Sessions.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1405,8 +1404,8 @@ Get-CTXAPI_Sessions -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Session {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Sessions {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Sessions')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -1419,7 +1418,7 @@ Function Get-CTXAPI_Session {
 ############################################
 # source: Get-CTXAPI_SiteDetails.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1439,8 +1438,8 @@ Get-CTXAPI_SiteDetails -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_SiteDetail {
-    [Cmdletbinding()]
+Function Get-CTXAPI_SiteDetails {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetails')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]
@@ -1455,7 +1454,7 @@ Function Get-CTXAPI_SiteDetail {
 ############################################
 # source: Get-CTXAPI_Tests.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1493,8 +1492,8 @@ Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroup
 
 #>
 
-Function Get-CTXAPI_Test {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Tests {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Tests')]
     [OutputType([System.Collections.Hashtable])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -1677,7 +1676,7 @@ Function Get-CTXAPI_Test {
 ############################################
 # source: Get-CTXAPI_VDAUptime.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1704,7 +1703,7 @@ Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
 #>
 
 Function Get-CTXAPI_VDAUptime {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -1770,7 +1769,7 @@ Function Get-CTXAPI_VDAUptime {
 ############################################
 # source: Get-CTXAPI_Zone.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
@@ -1791,7 +1790,7 @@ Use Connect-CTXAPI to create headers
 #>
 
 Function Get-CTXAPI_Zone {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone')]
     [OutputType([System.Object[]])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
@@ -1803,36 +1802,36 @@ Function Get-CTXAPI_Zone {
 } #end Function
  
 ############################################
-# source: Set-CTXAPI_ReportColors.ps1
+# source: Set-CTXAPI_ReportColours.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
  
 <#
 .SYNOPSIS
-Set the color and logo for HTML Reports
+Set the colour and logo for HTML Reports
 
 .DESCRIPTION
-Set the color and logo for HTML Reports. It updates the registry keys in HKCU:\Software\CTXCloudApi with the new details and display a test report.
+Set the colour and logo for HTML Reports. It updates the registry keys in HKCU:\Software\CTXCloudApi with the new details and display a test report.
 
 .PARAMETER Color1
-New Background Color # code
+New Background Colour # code
 
 .PARAMETER Color2
-New foreground Color # code
+New foreground Colour # code
 
 .PARAMETER LogoURL
 URL to the new Logo
 
 .EXAMPLE
-Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
+Set-CTXAPI_ReportColours -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
 
 #>
 
-Function Set-CTXAPI_ReportColor {
-	[Cmdletbinding()]
+Function Set-CTXAPI_ReportColours {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_ReportColours')]
 	PARAM(
 		[string]$Color1 = '#061820',
 		[string]$Color2 = '#FFD400',
@@ -1867,23 +1866,23 @@ Function Set-CTXAPI_ReportColor {
 ############################################
 # source: Test-CTXAPI_Headers.ps1
 # Module: CTXCloudApi
-# version: 0.1.25
+# version: 0.1.29
 # Author: Pierre Smit
 # Company: iOCO Tech
 #############################################
  
 <#
 .SYNOPSIS
-Checks that the connection is still valid, and the token hasnt expired
+Checks that the connection is still valid, and the token hasn't expired.
 
 .DESCRIPTION
-Checks that the connection is still valid, and the token hasnt expired
+Checks that the connection is still valid, and the token hasn't expired.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Use Connect-CTXAPI to create headers.
 
 .PARAMETER AutoRenew
-If the token has expired, it will connect and renew the variable
+If the token has expired, it will connect and renew the variable.
 
 .EXAMPLE
 Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
@@ -1891,7 +1890,7 @@ Test-CTXAPI_Headers -APIHeader $APIHeader -AutoRenew
 #>
 
 Function Test-CTXAPI_Header {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header')]
     [OutputType([System.Boolean[]])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

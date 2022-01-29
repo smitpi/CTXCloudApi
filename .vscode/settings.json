@@ -5,6 +5,8 @@
 	"spellright.documentTypes": [
 		"markdown",
 		"latex",
-		"plaintext"
-	]
+		"plaintext",
+		"powershell"
+	],
+	"powershell.scriptAnalysis.settingsPath": "ScriptAnalyzerSettings.psd1"
 }

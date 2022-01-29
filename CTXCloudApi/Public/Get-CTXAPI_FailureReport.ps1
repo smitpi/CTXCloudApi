@@ -58,7 +58,7 @@ Updated [06/11/2021_16:48] Using the new api
 Reports on failures in the last x hours.
 
 .DESCRIPTION
-Reports on machine or connewction failures in the last x hours.
+Reports on machine or connection failures in the last x hours.
 
 .PARAMETER APIHeader
 Use Connect-CTXAPI to create headers.
@@ -86,8 +86,8 @@ Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 
 #>
 
-Function Get-CTXAPI_FailureReport {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+Function Get-CTXAPI_FailureReports {
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReports')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]

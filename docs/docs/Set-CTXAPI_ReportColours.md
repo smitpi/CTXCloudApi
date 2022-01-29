@@ -5,32 +5,32 @@ online version:
 schema: 2.0.0
 ---
 
-# Set-CTXAPI_ReportColors
+# Set-CTXAPI_ReportColours
 
 ## SYNOPSIS
-Set the color and logo for HTML Reports
+Set the colour and logo for HTML Reports
 
 ## SYNTAX
 
 ```
-Set-CTXAPI_ReportColors [[-Color1] <String>] [[-Color2] <String>] [[-LogoURL] <String>] [<CommonParameters>]
+Set-CTXAPI_ReportColours [[-Color1] <String>] [[-Color2] <String>] [[-LogoURL] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Set the color and logo for HTML Reports.
+Set the colour and logo for HTML Reports.
 It updates the registry keys in HKCU:\Software\CTXCloudApi with the new details and display a test report.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Set-CTXAPI_ReportColors -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
+Set-CTXAPI_ReportColours -Color1 '#d22c26' -Color2 '#2bb74e' -LogoURL 'https://gist.githubusercontent.com/default-monochrome.png'
 ```
 
 ## PARAMETERS
 
 ### -Color1
-New Background Color # code
+New Background Colour # code
 
 ```yaml
 Type: String
@@ -45,7 +45,7 @@ Accept wildcard characters: False
 ```
 
 ### -Color2
-New foreground Color # code
+New foreground Colour # code
 
 ```yaml
 Type: String

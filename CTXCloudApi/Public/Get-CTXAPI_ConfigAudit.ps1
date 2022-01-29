@@ -73,7 +73,7 @@ Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
 #>
 
 Function Get-CTXAPI_ConfigAudit {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

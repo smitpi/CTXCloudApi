@@ -3,9 +3,7 @@ CTXCloudApi
 	 about_CTXCloudApi
  
 SHORT DESCRIPTION
-	 Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore and manage your clients cloud infrastructure from anywhere. 
-    Start with Connect-CTXAPI to connect, then run other reports.
-    Or run Get-Help CTXCloudApi for other instructions
+	 Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, it will create the needed hearders for the other functions.
 
  
 NOTES
@@ -18,7 +16,6 @@ Functions in this module:
 	 Get-CTXAPI_ConfigLog -- Get high level configuration changes in the last x days.
 	 Get-CTXAPI_ConnectionReport -- Creates Connection report
 	 Get-CTXAPI_DeliveryGroups -- Return details about Delivery Groups
-	 Get-CTXAPI_FailureReport -- Reports on failures in the last x hours.
 	 Get-CTXAPI_HealthCheck -- Show useful information for daily health check
 	 Get-CTXAPI_Hypervisors -- Return details about hosting (hypervisor)
 	 Get-CTXAPI_LowLevelOperations -- Return details about low lever config change (More detailed)
@@ -32,8 +29,7 @@ Functions in this module:
 	 Get-CTXAPI_Tests -- Run Built in Citrix cloud tests
 	 Get-CTXAPI_VDAUptime -- Uses Registration date to calculate uptime
 	 Get-CTXAPI_Zone -- Get zone details
-	 Set-CTXAPI_ReportColors -- Set the color and logo for HTML Reports
-	 Test-CTXAPI_Headers -- Checks that the connection is still valid, and the token hasnt expired
+	 Set-CTXAPI_ReportColours -- Set the colour and logo for HTML Reports
  
 SEE ALSO
 	 https://github.com/smitpi/CTXCloudApi

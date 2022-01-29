@@ -74,7 +74,7 @@ $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region eu -hours 24
 #>
 
 Function Get-CTXAPI_MonitorData {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MonitorData')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

@@ -62,8 +62,8 @@ $LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighL
 
 #>
 
-Function Get-CTXAPI_LowLevelOperation {
-    [Cmdletbinding()]
+Function Get-CTXAPI_LowLevelOperations {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperations')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

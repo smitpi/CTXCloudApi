@@ -24,9 +24,8 @@ Return details about low lever config change (More detailed)
 ### EXAMPLE 1
 ```
 $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
+$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
 ```
-
-$LowLevelOperations = Get-CTXAPI_LowLevelOperations -APIHeader $APIHeader -HighLevelID $ConfigLog\[0\].id
 
 ## PARAMETERS
 

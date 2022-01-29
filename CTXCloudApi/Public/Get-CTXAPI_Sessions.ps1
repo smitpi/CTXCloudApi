@@ -59,8 +59,8 @@ Get-CTXAPI_Sessions -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Session {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Sessions {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Sessions')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

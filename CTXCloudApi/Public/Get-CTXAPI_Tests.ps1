@@ -78,8 +78,8 @@ Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroup
 
 #>
 
-Function Get-CTXAPI_Test {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Tests {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Tests')]
     [OutputType([System.Collections.Hashtable])]
     PARAM(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

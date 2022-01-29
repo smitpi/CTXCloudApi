@@ -75,7 +75,7 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
 #>
 
 Function Get-CTXAPI_HealthCheck {
-    [Cmdletbinding()]
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_HealthCheck')]
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,

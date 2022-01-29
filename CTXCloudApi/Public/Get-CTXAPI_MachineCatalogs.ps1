@@ -59,8 +59,8 @@ $MachineCatalogs = Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_MachineCatalog {
-    [Cmdletbinding()]
+Function Get-CTXAPI_MachineCatalogs {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalogs')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

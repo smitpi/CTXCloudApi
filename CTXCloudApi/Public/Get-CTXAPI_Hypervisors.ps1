@@ -58,8 +58,8 @@ Get-CTXAPI_Hypervisor -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Hypervisor {
-    [Cmdletbinding()]
+Function Get-CTXAPI_Hypervisors {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisors')]
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true)]

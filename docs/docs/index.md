@@ -28,7 +28,6 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
 - [Get-CTXAPI_ConfigLog](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_ConfigLog) -- Get high level configuration changes in the last x days.
 - [Get-CTXAPI_ConnectionReport](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_ConnectionReport) -- Creates Connection report
 - [Get-CTXAPI_DeliveryGroups](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_DeliveryGroups) -- Return details about Delivery Groups
-- [Get-CTXAPI_FailureReport](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_FailureReport) -- Reports on failures in the last x hours.
 - [Get-CTXAPI_HealthCheck](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_HealthCheck) -- Show useful information for daily health check
 - [Get-CTXAPI_Hypervisors](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_Hypervisors) -- Return details about hosting (hypervisor)
 - [Get-CTXAPI_LowLevelOperations](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_LowLevelOperations) -- Return details about low lever config change (More detailed)
@@ -42,5 +41,4 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp\
 - [Get-CTXAPI_Tests](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_Tests) -- Run Built in Citrix cloud tests
 - [Get-CTXAPI_VDAUptime](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_VDAUptime) -- Uses Registration date to calculate uptime
 - [Get-CTXAPI_Zone](https://smitpi.github.io/CTXCloudApi/#Get-CTXAPI_Zone) -- Get zone details
-- [Set-CTXAPI_ReportColors](https://smitpi.github.io/CTXCloudApi/#Set-CTXAPI_ReportColors) -- Set the color and logo for HTML Reports
-- [Test-CTXAPI_Headers](https://smitpi.github.io/CTXCloudApi/#Test-CTXAPI_Headers) -- Checks that the connection is still valid, and the token hasnt expired
+- [Set-CTXAPI_ReportColours](https://smitpi.github.io/CTXCloudApi/#Set-CTXAPI_ReportColours) -- Set the colour and logo for HTML Reports

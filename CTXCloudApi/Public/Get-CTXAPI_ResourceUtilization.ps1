@@ -86,7 +86,7 @@ Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPa
 #>
 
 Function Get-CTXAPI_ResourceUtilization {
-    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata')]
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization')]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]
