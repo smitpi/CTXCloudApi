@@ -151,7 +151,7 @@ $script:SessionFailureCode = [PSCustomObject]@{
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -232,7 +232,7 @@ Function Connect-CTXAPI {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -269,7 +269,7 @@ Function Get-CTXAPI_Application {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -305,7 +305,7 @@ Function Get-CTXAPI_CloudConnector {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -340,7 +340,7 @@ Function Get-CTXAPI_CloudService {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -523,7 +523,7 @@ Function Get-CTXAPI_ConfigAudit {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -562,7 +562,7 @@ Function Get-CTXAPI_ConfigLog {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -679,7 +679,7 @@ Function Get-CTXAPI_ConnectionReport {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -717,7 +717,7 @@ Function Get-CTXAPI_DeliveryGroup {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -839,7 +839,7 @@ Function Get-CTXAPI_FailureReport {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -998,7 +998,7 @@ Function Get-CTXAPI_HealthCheck {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1037,7 +1037,7 @@ Function Get-CTXAPI_Hypervisor {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1080,7 +1080,7 @@ Function Get-CTXAPI_LowLevelOperation {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1127,7 +1127,7 @@ Function Get-CTXAPI_Machine {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1164,7 +1164,7 @@ Function Get-CTXAPI_MachineCatalog {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1256,7 +1256,7 @@ Function Get-CTXAPI_MonitorData {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1291,7 +1291,7 @@ Function Get-CTXAPI_ResourceLocation {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1396,7 +1396,7 @@ Function Get-CTXAPI_ResourceUtilization {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1431,7 +1431,7 @@ Function Get-CTXAPI_Session {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1468,7 +1468,7 @@ Function Get-CTXAPI_SiteDetail {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1691,7 +1691,7 @@ Function Get-CTXAPI_Test {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1784,7 +1784,7 @@ Function Get-CTXAPI_VDAUptime {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1820,7 +1820,7 @@ Function Get-CTXAPI_Zone {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
@@ -1918,7 +1918,7 @@ Function Set-CTXAPI_ReportColour {
 # Module: CTXCloudApi
 # version: 0.1.30
 # Author: Pierre Smit
-# Company: iOCO Tech
+# Company: HTPCZA Tech
 #############################################
  
 <#
