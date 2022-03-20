@@ -1,3 +1,4 @@
+#region Private Functions
 ########### Private Function ###############
 # source: Export-Odata.ps1
 # Module: CTXCloudApi
@@ -146,10 +147,13 @@ $script:SessionFailureCode = [PSCustomObject]@{
 
 
 
+#endregion
+#region Public Functions
+#region Connect-CTXAPI.ps1
 ############################################
 # source: Connect-CTXAPI.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -227,10 +231,14 @@ Function Connect-CTXAPI {
     $myObject
 } #end Function
  
+Export-ModuleMember -Function Connect-CTXAPI
+#endregion
+ 
+#region Get-CTXAPI_Application.ps1
 ############################################
 # source: Get-CTXAPI_Application.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -264,10 +272,14 @@ Function Get-CTXAPI_Application {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_Application
+#endregion
+ 
+#region Get-CTXAPI_CloudConnector.ps1
 ############################################
 # source: Get-CTXAPI_CloudConnector.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -300,10 +312,14 @@ Function Get-CTXAPI_CloudConnector {
     }
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_CloudConnector
+#endregion
+ 
+#region Get-CTXAPI_CloudService.ps1
 ############################################
 # source: Get-CTXAPI_CloudService.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -335,10 +351,14 @@ Function Get-CTXAPI_CloudService {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_CloudService
+#endregion
+ 
+#region Get-CTXAPI_ConfigAudit.ps1
 ############################################
 # source: Get-CTXAPI_ConfigAudit.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -518,10 +538,14 @@ Function Get-CTXAPI_ConfigAudit {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
+#endregion
+ 
+#region Get-CTXAPI_ConfigLog.ps1
 ############################################
 # source: Get-CTXAPI_ConfigLog.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -557,10 +581,14 @@ Function Get-CTXAPI_ConfigLog {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_ConfigLog
+#endregion
+ 
+#region Get-CTXAPI_ConnectionReport.ps1
 ############################################
 # source: Get-CTXAPI_ConnectionReport.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -674,10 +702,14 @@ Function Get-CTXAPI_ConnectionReport {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
+#endregion
+ 
+#region Get-CTXAPI_DeliveryGroup.ps1
 ############################################
 # source: Get-CTXAPI_DeliveryGroup.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -712,10 +744,14 @@ Function Get-CTXAPI_DeliveryGroup {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
+#endregion
+ 
+#region Get-CTXAPI_FailureReport.ps1
 ############################################
 # source: Get-CTXAPI_FailureReport.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -834,10 +870,14 @@ Function Get-CTXAPI_FailureReport {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_FailureReport
+#endregion
+ 
+#region Get-CTXAPI_HealthCheck.ps1
 ############################################
 # source: Get-CTXAPI_HealthCheck.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -993,10 +1033,14 @@ Function Get-CTXAPI_HealthCheck {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_HealthCheck
+#endregion
+ 
+#region Get-CTXAPI_Hypervisor.ps1
 ############################################
 # source: Get-CTXAPI_Hypervisor.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1032,10 +1076,14 @@ Function Get-CTXAPI_Hypervisor {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_Hypervisor
+#endregion
+ 
+#region Get-CTXAPI_LowLevelOperation.ps1
 ############################################
 # source: Get-CTXAPI_LowLevelOperation.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1075,10 +1123,14 @@ Function Get-CTXAPI_LowLevelOperation {
 
 }
  
+Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
+#endregion
+ 
+#region Get-CTXAPI_Machine.ps1
 ############################################
 # source: Get-CTXAPI_Machine.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1122,10 +1174,14 @@ Function Get-CTXAPI_Machine {
     }
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_Machine
+#endregion
+ 
+#region Get-CTXAPI_MachineCatalog.ps1
 ############################################
 # source: Get-CTXAPI_MachineCatalog.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1159,10 +1215,14 @@ Function Get-CTXAPI_MachineCatalog {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
+#endregion
+ 
+#region Get-CTXAPI_MonitorData.ps1
 ############################################
 # source: Get-CTXAPI_MonitorData.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1251,10 +1311,14 @@ Function Get-CTXAPI_MonitorData {
     $APItimer.Stop()
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_MonitorData
+#endregion
+ 
+#region Get-CTXAPI_ResourceLocation.ps1
 ############################################
 # source: Get-CTXAPI_ResourceLocation.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1286,10 +1350,14 @@ Function Get-CTXAPI_ResourceLocation {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
+#endregion
+ 
+#region Get-CTXAPI_ResourceUtilization.ps1
 ############################################
 # source: Get-CTXAPI_ResourceUtilization.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1391,10 +1459,14 @@ Function Get-CTXAPI_ResourceUtilization {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
+#endregion
+ 
+#region Get-CTXAPI_Session.ps1
 ############################################
 # source: Get-CTXAPI_Session.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1426,10 +1498,14 @@ Function Get-CTXAPI_Session {
     (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Sessions/' -Method get -Headers $APIHeader.headers).items
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_Session
+#endregion
+ 
+#region Get-CTXAPI_SiteDetail.ps1
 ############################################
 # source: Get-CTXAPI_SiteDetail.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1463,10 +1539,14 @@ Function Get-CTXAPI_SiteDetail {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_SiteDetail
+#endregion
+ 
+#region Get-CTXAPI_Test.ps1
 ############################################
 # source: Get-CTXAPI_Test.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1686,10 +1766,14 @@ Function Get-CTXAPI_Test {
 
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_Test
+#endregion
+ 
+#region Get-CTXAPI_VDAUptime.ps1
 ############################################
 # source: Get-CTXAPI_VDAUptime.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1779,10 +1863,14 @@ Function Get-CTXAPI_VDAUptime {
 } #end Function
 
  
+Export-ModuleMember -Function Get-CTXAPI_VDAUptime
+#endregion
+ 
+#region Get-CTXAPI_Zone.ps1
 ############################################
 # source: Get-CTXAPI_Zone.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1815,10 +1903,14 @@ Function Get-CTXAPI_Zone {
     }
 } #end Function
  
+Export-ModuleMember -Function Get-CTXAPI_Zone
+#endregion
+ 
+#region Set-CTXAPI_ReportColour.ps1
 ############################################
 # source: Set-CTXAPI_ReportColour.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1913,10 +2005,14 @@ Function Set-CTXAPI_ReportColour {
 
 } #end Function
  
+Export-ModuleMember -Function Set-CTXAPI_ReportColour
+#endregion
+ 
+#region Test-CTXAPI_Header.ps1
 ############################################
 # source: Test-CTXAPI_Header.ps1
 # Module: CTXCloudApi
-# version: 0.1.30
+# version: 0.1.31
 # Author: Pierre Smit
 # Company: HTPCZA Tech
 #############################################
@@ -1965,3 +2061,7 @@ Function Test-CTXAPI_Header {
 
 } #end Function
  
+Export-ModuleMember -Function Test-CTXAPI_Header
+#endregion
+ 
+#endregion

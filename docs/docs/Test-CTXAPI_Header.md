@@ -1,5 +1,5 @@
 ---
-external help file: CTXCloudApi-help.xml
+external help file: CTXCloudAPI-help.xml
 Module Name: CTXCloudApi
 online version:
 schema: 2.0.0

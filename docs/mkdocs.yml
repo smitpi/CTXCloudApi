@@ -24,8 +24,8 @@ theme:
   features:
     - navigation.instant
   language: en
-  favicon: 'https://mentorshipmovement.co.za/wp-content/uploads/2019/09/linkedin-profilepic-400x400.png'
-  logo: 'https://mentorshipmovement.co.za/wp-content/uploads/2019/09/linkedin-profilepic-400x400.png'
+  favicon: ''
+  logo: ''
   palette:
     - media: "(prefers-color-scheme: light)"
       primary: blue grey
