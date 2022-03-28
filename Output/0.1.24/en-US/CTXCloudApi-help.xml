@@ -125,15 +125,9 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$splat = @{
-	Customer_Id = "xxx"
-	Client_Id = "xxx-xxx-xxx-xxx"
-	Client_Secret = "yyyyyy=="
-	Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat</dev:code>
+        <dev:code>$splat = @{</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Customer_Id = "xxx" 	Client_Id = "xxx-xxx-xxx-xxx" 	Client_Secret = "yyyyyy==" 	Customer_Name = 'HomeLab' } $APIHeader = Connect-CTXAPI @splat</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1339,10 +1333,9 @@ $APIHeader = Connect-CTXAPI @splat</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
-$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id</dev:code>
+        <dev:code>$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>

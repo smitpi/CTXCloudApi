@@ -1,5 +1,5 @@
 ---
-external help file: CTXCloudAPI-help.xml
+external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
 online version:
 schema: 2.0.0
@@ -25,13 +25,14 @@ Connect to the cloud and create needed api headers
 ### EXAMPLE 1
 ```
 $splat = @{
-	Customer_Id = "xxx"
+```
+
+Customer_Id = "xxx"
 	Client_Id = "xxx-xxx-xxx-xxx"
 	Client_Secret = "yyyyyy=="
 	Customer_Name = 'HomeLab'
 }
 $APIHeader = Connect-CTXAPI @splat
-```
 
 ## PARAMETERS
 
