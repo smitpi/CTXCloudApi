@@ -1,4 +1,4 @@
-﻿
+﻿# https://developer-docs.citrix.com/projects/monitor-service-odata-api/en/latest/api-reference/Monitor.Model/#enums-error-codes-and-descriptions
 
 $script:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
@@ -55,6 +55,51 @@ $script:SessionFailureCode = [PSCustomObject]@{
     100 = 'NoMachineAvailable'
     101 = 'MachineNotFunctional'
 }
-
-
-
+$script:MachineDeregistration = [PSCustomObject]@{
+    0	='AgentShutdown'
+    1	='AgentSuspended'
+    100	='IncompatibleVersion'
+    101	='AgentAddressResolutionFailed'
+    102	='AgentNotContactable'
+    103	='AgentWrongActiveDirectoryOU'
+    104	='EmptyRegistrationRequest'
+    105	='MissingRegistrationCapabilities'
+    106	='MissingAgentVersion'
+    107	='InconsistentRegistrationCapabilities'
+    108	='NotLicensedForFeature'
+    109	='UnsupportedCredentialSecurityversion'
+    110	='InvalidRegistrationRequest'
+    111	='SingleMultiSessionMismatch'
+    112	='FunctionalLevelTooLowForCatalog'
+    113	='FunctionalLevelTooLowForDesktopGroup'
+    200	='PowerOff'
+    203	='AgentRejectedSettingsUpdate'
+    206	='SessionPrepareFailure'
+    207	='ContactLost'
+    301	='BrokerRegistrationLimitReached'
+    208	='SettingsCreationFailure'
+    204	='SendSettingsFailure'
+    2	='AgentRequested'
+    201	='DesktopRestart'
+    202	='DesktopRemoved'
+    205	='SessionAuditFailure'
+    300	='UnknownError'
+    302	='RegistrationStateMismatch'
+}
+$script:MachineFailureType = [PSCustomObject]@{
+    4 = 'MaxCapacity'
+    2 = 'StuckOnBoot'	
+    1 = 'FailedToStart'
+}
+$script:ConnectionState = [PSCustomObject]@{
+        0   =	'Unknown'
+        1	=	'Connected'
+        2	=	'Disconnected'
+        3	=	'Terminated'
+        4	=	'PreparingSession'
+        5	=	'Active'
+        6	=	'Reconnecting'
+        7	=	'NonBrokeredSession'
+        8	=	'Other'
+        9	=	'Pending'
+}
