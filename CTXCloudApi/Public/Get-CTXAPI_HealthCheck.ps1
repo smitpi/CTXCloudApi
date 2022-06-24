@@ -122,13 +122,13 @@ Function Get-CTXAPI_HealthCheck {
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Machines"
     $vdauptime = Get-CTXAPI_VDAUptime -APIHeader $APIHeader
-    $machinecount = [PSCustomObject]@{
-        Inmaintenance = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
-        DesktopCount  = ($vdauptime | Where-Object { $_.OSType -like 'Windows 10' }).count
-        ServerCount   = ($vdauptime | Where-Object { $_.OSType -notlike 'Windows 10' }).count
-        AgentVersions = ($vdauptime | Group-Object -Property AgentVersion).count
-        NeedsReboot   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
-    }
+    # $machinecount = [PSCustomObject]@{
+    #     Inmaintenance = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
+    #     DesktopCount  = ($vdauptime | Where-Object { $_.OSType -like 'Windows 10' }).count
+    #     ServerCount   = ($vdauptime | Where-Object { $_.OSType -notlike 'Windows 10' }).count
+    #     AgentVersions = ($vdauptime | Group-Object -Property AgentVersion).count
+    #     NeedsReboot   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
+    # }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
     $Locations = Get-CTXAPI_ResourceLocations -APIHeader $APIHeader

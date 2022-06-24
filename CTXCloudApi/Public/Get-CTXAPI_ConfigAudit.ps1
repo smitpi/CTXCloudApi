@@ -190,10 +190,10 @@ Function Get-CTXAPI_ConfigAudit {
             FreezeTopRow     = $True
             FreezePane       = '3'
         }
-        $catalogs | Export-Excel -Title Catalogs -WorksheetName Catalogs @ExcelOptions
-        $deliverygroups | Export-Excel -Title DeliveryGroups -WorksheetName DeliveryGroups @ExcelOptions
-        $apps | Export-Excel -Title "Published Apps" -WorksheetName apps @ExcelOptions
-        $machines | Export-Excel -Title Machines -WorksheetName machines @ExcelOptions
+        if ($catalogs) {$catalogs | Export-Excel -Title Catalogs -WorksheetName Catalogs @ExcelOptions}
+        if ($deliverygroups){$deliverygroups | Export-Excel -Title DeliveryGroups -WorksheetName DeliveryGroups @ExcelOptions}
+        if ($apps) {$apps | Export-Excel -Title "Published Apps" -WorksheetName apps @ExcelOptions}
+        if ($machines) {$machines | Export-Excel -Title Machines -WorksheetName machines @ExcelOptions}
     }
     if ($Export -eq 'HTML') {
 

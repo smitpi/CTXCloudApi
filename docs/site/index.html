@@ -269,15 +269,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting Started
+  <a href="#description" class="md-nav__link">
+    Description
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-1" class="md-nav__link">
-    Example 1:
+  <a href="#getting-started" class="md-nav__link">
+    Getting Started
   </a>
   
 </li>
@@ -684,15 +684,15 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#getting-started" class="md-nav__link">
-    Getting Started
+  <a href="#description" class="md-nav__link">
+    Description
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#example-1" class="md-nav__link">
-    Example 1:
+  <a href="#getting-started" class="md-nav__link">
+    Getting Started
   </a>
   
 </li>
@@ -723,24 +723,25 @@
 
 
 <h1 id="ctxcloudapi">CTXCloudApi</h1>
+<h2 id="description">Description</h2>
+<p>Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, it will create the needed hearders for the other functions.</p>
 <h2 id="getting-started">Getting Started</h2>
 <ul>
-<li>You will need access to the Citrix Cloud API. Follow <a href="https://developer.cloud.com/getting-started/docs/overview">Get API Access</a> to gain access.</li>
-<li><code>Install-Module -Name CTXCloudApi -Verbose</code></li>
-<li><code>Import-Module CTXCloudApi -Verbose -Force</code></li>
-<li><code>Get-Command -Module CTXCloudApi</code></li>
-<li>Run <code>Connect-CTXAPI</code> with the details obtained from above. This connect and create the needed headers for other commands.</li>
-</ul>
-<h2 id="example-1">Example 1:</h2>
-<div class="highlight"><pre><span></span><code><span class="nv">$splat</span> <span class="p">=</span> <span class="p">@{</span>
-    <span class="n">Customer_Id</span> <span class="p">=</span> <span class="s2">&quot;xxx&quot;</span>
-    <span class="n">Client_Id</span> <span class="p">=</span> <span class="s2">&quot;xxx-xxx-xxx-xxx&quot;</span>
-    <span class="n">Client_Secret</span> <span class="p">=</span> <span class="s2">&quot;yyyyyy==&quot;</span>
-    <span class="n">Customer_Name</span> <span class="p">=</span> <span class="s1">&#39;HomeLab&#39;</span>
-<span class="p">}</span>
-<span class="nv">$APIHeader</span> <span class="p">=</span> <span class="nb">Connect-CTXAPI</span> <span class="nv">@splat</span>
-<span class="nb">Get-CTXAPI_HealthCheck</span> <span class="n">-APIHeader</span> <span class="nv">$APIHeader</span> <span class="n">-region</span> <span class="n">eu</span> <span class="n">-ReportPath</span> <span class="n">C</span><span class="p">:\</span><span class="n">Temp</span><span class="p">\</span>
+<li>Install from PowerShell Gallery <a href="https://www.powershellgallery.com/packages/CTXCloudApi">PS Gallery</a>
+<div class="highlight"><pre><span></span><code>Install-Module -Name CTXCloudApi -Verbose
+</code></pre></div></li>
+<li>or from GitHub <a href="https://github.com/smitpi/CTXCloudApi">GitHub Repo</a>
+<div class="highlight"><pre><span></span><code>git clone https://github.com/smitpi/CTXCloudApi (Join-Path (get-item (Join-Path (Get-Item $profile).Directory &#39;Modules&#39;)).FullName -ChildPath CTXCloudApi)
+</code></pre></div></li>
+<li>Then import the module into your session
+<div class="highlight"><pre><span></span><code>Import-Module CTXCloudApi -Verbose -Force
+</code></pre></div></li>
+<li>or run these commands for more help and details.
+<div class="highlight"><pre><span></span><code>Get-Command -Module CTXCloudApi
+Get-Help about_CTXCloudApi
 </code></pre></div>
+Documentation can be found at: <a href="https://smitpi.github.io/CTXCloudApi">Github_Pages</a></li>
+</ul>
 <h2 id="functions">Functions</h2>
 <ul>
 <li><a href="https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI"><code>Connect-CTXAPI</code></a> -- Connect to the cloud and create needed api headers</li>
