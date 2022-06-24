@@ -161,7 +161,20 @@ Function Get-CTXAPI_FailureReport {
 
 
 
-    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $data | Export-Excel -Title Sessions -WorksheetName Sessions @ExcelOptions
+    }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
     if ($Export -eq 'Host') { $data }
 

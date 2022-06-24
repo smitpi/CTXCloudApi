@@ -1,7 +1,12 @@
 ﻿#region Private Functions
+#region Export-Odata.ps1
 ########### Private Function ###############
-# source: Export-Odata.ps1
-# Module: CTXCloudApi
+# Source:           Export-Odata.ps1
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
 ############################################
 Function Export-Odata {
     [OutputType([System.Object[]])]
@@ -25,9 +30,15 @@ Function Export-Odata {
 
 
 } #end Function
+#endregion
+#region Reports-Colors.ps1
 ########### Private Function ###############
-# source: Reports-Colors.ps1
-# Module: CTXCloudApi
+# Source:           Reports-Colors.ps1
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 23:28:21
 ############################################
 
 if (Test-Path HKCU:\Software\CTXCloudApi) {
@@ -39,9 +50,9 @@ if (Test-Path HKCU:\Software\CTXCloudApi) {
 }
 else {
         New-Item -Path HKCU:\Software\CTXCloudApi
-        New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color1 -Value '#061820'
-        New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color2 -Value '#FFD400'
-        New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name LogoURL -Value 'https://c.na65.content.force.com/servlet/servlet.ImageServer?id=0150h000003yYnkAAE&oid=00DE0000000c48tMAA'
+        New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color1 -Value '#2b1200'
+        New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name Color2 -Value '#f37000'
+        New-ItemProperty -Path HKCU:\Software\CTXCloudApi -Name LogoURL -Value 'https://gist.githubusercontent.com/smitpi/ecdaae80dd79ad585e571b1ba16ce272/raw/6d0645968c7ba4553e7ab762c55270ebcc054f04/default-monochrome.png'
 
     $script:CTXAPI_Color1 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color1
     $script:CTXAPI_Color2 = Get-ItemPropertyValue -Path HKCU:\Software\CTXCloudApi -Name Color2
@@ -83,11 +94,17 @@ $script:TableSectionSettings = @{
 #endregion
 
 
+#endregion
+#region Reports-Variables.ps1
 ########### Private Function ###############
-# source: Reports-Variables.ps1
-# Module: CTXCloudApi
+# Source:           Reports-Variables.ps1
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/05/03 21:55:20
 ############################################
-
+# https://developer-docs.citrix.com/projects/monitor-service-odata-api/en/latest/api-reference/Monitor.Model/#enums-error-codes-and-descriptions
 
 $script:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
@@ -144,18 +161,68 @@ $script:SessionFailureCode = [PSCustomObject]@{
     100 = 'NoMachineAvailable'
     101 = 'MachineNotFunctional'
 }
-
-
-
+$script:MachineDeregistration = [PSCustomObject]@{
+    0	='AgentShutdown'
+    1	='AgentSuspended'
+    100	='IncompatibleVersion'
+    101	='AgentAddressResolutionFailed'
+    102	='AgentNotContactable'
+    103	='AgentWrongActiveDirectoryOU'
+    104	='EmptyRegistrationRequest'
+    105	='MissingRegistrationCapabilities'
+    106	='MissingAgentVersion'
+    107	='InconsistentRegistrationCapabilities'
+    108	='NotLicensedForFeature'
+    109	='UnsupportedCredentialSecurityversion'
+    110	='InvalidRegistrationRequest'
+    111	='SingleMultiSessionMismatch'
+    112	='FunctionalLevelTooLowForCatalog'
+    113	='FunctionalLevelTooLowForDesktopGroup'
+    200	='PowerOff'
+    203	='AgentRejectedSettingsUpdate'
+    206	='SessionPrepareFailure'
+    207	='ContactLost'
+    301	='BrokerRegistrationLimitReached'
+    208	='SettingsCreationFailure'
+    204	='SendSettingsFailure'
+    2	='AgentRequested'
+    201	='DesktopRestart'
+    202	='DesktopRemoved'
+    205	='SessionAuditFailure'
+    300	='UnknownError'
+    302	='RegistrationStateMismatch'
+}
+$script:MachineFailureType = [PSCustomObject]@{
+    4 = 'MaxCapacity'
+    2 = 'StuckOnBoot'	
+    1 = 'FailedToStart'
+}
+$script:ConnectionState = [PSCustomObject]@{
+        0   =	'Unknown'
+        1	=	'Connected'
+        2	=	'Disconnected'
+        3	=	'Terminated'
+        4	=	'PreparingSession'
+        5	=	'Active'
+        6	=	'Reconnecting'
+        7	=	'NonBrokeredSession'
+        8	=	'Other'
+        9	=	'Pending'
+}
 #endregion
+#endregion
+ 
 #region Public Functions
 #region Connect-CTXAPI.ps1
-############################################
-# source: Connect-CTXAPI.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 1 of 24 ##################
+# Function:         Connect-CTXAPI
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Connect to the cloud and create needed api headers
 #############################################
  
 <#
@@ -235,12 +302,15 @@ Export-ModuleMember -Function Connect-CTXAPI
 #endregion
  
 #region Get-CTXAPI_Application.ps1
-############################################
-# source: Get-CTXAPI_Application.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 2 of 24 ##################
+# Function:         Get-CTXAPI_Application
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about published apps
 #############################################
  
 <#
@@ -276,12 +346,15 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 #endregion
  
 #region Get-CTXAPI_CloudConnector.ps1
-############################################
-# source: Get-CTXAPI_CloudConnector.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 3 of 24 ##################
+# Function:         Get-CTXAPI_CloudConnector
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Details about current Cloud Connectors
 #############################################
  
 <#
@@ -316,12 +389,15 @@ Export-ModuleMember -Function Get-CTXAPI_CloudConnector
 #endregion
  
 #region Get-CTXAPI_CloudService.ps1
-############################################
-# source: Get-CTXAPI_CloudService.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 4 of 24 ##################
+# Function:         Get-CTXAPI_CloudService
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about cloud services and subscription
 #############################################
  
 <#
@@ -355,12 +431,15 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 #endregion
  
 #region Get-CTXAPI_ConfigAudit.ps1
-############################################
-# source: Get-CTXAPI_ConfigAudit.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 5 of 24 ##################
+# Function:         Get-CTXAPI_ConfigAudit
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 22:36:19
+# Synopsis:         Reports on system config.
 #############################################
  
 <#
@@ -491,11 +570,21 @@ Function Get-CTXAPI_ConfigAudit {
     }
 
     if ($Export -eq 'Excel') {
-        [string]$ExcelReportname = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-        $catalogs | Export-Excel -Path $ExcelReportname -WorksheetName Catalogs -AutoSize -AutoFilter
-        $deliverygroups | Export-Excel -Path $ExcelReportname -WorksheetName DeliveryGroups -AutoSize -AutoFilter
-        $apps | Export-Excel -Path $ExcelReportname -WorksheetName apps -AutoSize -AutoFilter
-        $machines | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter -Show
+        $ExcelOptions = @{
+            Path             = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $catalogs | Export-Excel -Title Catalogs -WorksheetName Catalogs @ExcelOptions
+        $deliverygroups | Export-Excel -Title DeliveryGroups -WorksheetName DeliveryGroups @ExcelOptions
+        $apps | Export-Excel -Title "Published Apps" -WorksheetName apps @ExcelOptions
+        $machines | Export-Excel -Title Machines -WorksheetName machines @ExcelOptions
     }
     if ($Export -eq 'HTML') {
 
@@ -542,12 +631,15 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
 #endregion
  
 #region Get-CTXAPI_ConfigLog.ps1
-############################################
-# source: Get-CTXAPI_ConfigLog.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 6 of 24 ##################
+# Function:         Get-CTXAPI_ConfigLog
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Get high level configuration changes in the last x days.
 #############################################
  
 <#
@@ -585,12 +677,15 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 #endregion
  
 #region Get-CTXAPI_ConnectionReport.ps1
-############################################
-# source: Get-CTXAPI_ConnectionReport.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 7 of 24 ##################
+# Function:         Get-CTXAPI_ConnectionReport
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 22:49:22
+# Synopsis:         Creates Connection report
 #############################################
  
 <#
@@ -660,8 +755,7 @@ Function Get-CTXAPI_ConnectionReport {
             $mashine = $mondata.machines | Where-Object { $_.id -like $OneSession.MachineId }
             try {
                 $avgrtt = 0
-                $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
-                $avgrtt = $avgrtt / ($mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
+                $avgrtt = $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | Measure-Object -Property IcaRttMS -Average
             }
             catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
         }
@@ -692,11 +786,24 @@ Function Get-CTXAPI_ConnectionReport {
             EndDate                  = $OneSession.EndDate
             ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
             FailureDate              = $OneSession.FailureDate
-            AVG_ICA_RTT              = [math]::Round($avgrtt)
+            AVG_ICA_RTT              = [math]::Round($avgrtt.Average)
         }
     }
 
-    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $data | Export-Excel -Title Sessions -WorksheetName Sessions @ExcelOptions
+    }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
     if ($Export -eq 'Host') { $data }
 
@@ -706,12 +813,15 @@ Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
 #endregion
  
 #region Get-CTXAPI_DeliveryGroup.ps1
-############################################
-# source: Get-CTXAPI_DeliveryGroup.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 8 of 24 ##################
+# Function:         Get-CTXAPI_DeliveryGroup
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about Delivery Groups
 #############################################
  
 <#
@@ -748,12 +858,15 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 #endregion
  
 #region Get-CTXAPI_FailureReport.ps1
-############################################
-# source: Get-CTXAPI_FailureReport.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 9 of 24 ##################
+# Function:         Get-CTXAPI_FailureReport
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 22:50:54
+# Synopsis:         Reports on failures in the last x hours.
 #############################################
  
 <#
@@ -864,7 +977,20 @@ Function Get-CTXAPI_FailureReport {
 
 
 
-    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $data | Export-Excel -Title Sessions -WorksheetName Sessions @ExcelOptions
+    }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
     if ($Export -eq 'Host') { $data }
 
@@ -874,12 +1000,15 @@ Export-ModuleMember -Function Get-CTXAPI_FailureReport
 #endregion
  
 #region Get-CTXAPI_HealthCheck.ps1
-############################################
-# source: Get-CTXAPI_HealthCheck.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 10 of 24 ##################
+# Function:         Get-CTXAPI_HealthCheck
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 22:51:17
+# Synopsis:         Show useful information for daily health check
 #############################################
  
 <#
@@ -1037,12 +1166,15 @@ Export-ModuleMember -Function Get-CTXAPI_HealthCheck
 #endregion
  
 #region Get-CTXAPI_Hypervisor.ps1
-############################################
-# source: Get-CTXAPI_Hypervisor.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 11 of 24 ##################
+# Function:         Get-CTXAPI_Hypervisor
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about hosting (hypervisor)
 #############################################
  
 <#
@@ -1080,12 +1212,15 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 #endregion
  
 #region Get-CTXAPI_LowLevelOperation.ps1
-############################################
-# source: Get-CTXAPI_LowLevelOperation.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 12 of 24 ##################
+# Function:         Get-CTXAPI_LowLevelOperation
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about low lever config change (More detailed)
 #############################################
  
 <#
@@ -1127,12 +1262,15 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 #endregion
  
 #region Get-CTXAPI_Machine.ps1
-############################################
-# source: Get-CTXAPI_Machine.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 13 of 24 ##################
+# Function:         Get-CTXAPI_Machine
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about vda machines
 #############################################
  
 <#
@@ -1178,20 +1316,23 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 #endregion
  
 #region Get-CTXAPI_MachineCatalog.ps1
-############################################
-# source: Get-CTXAPI_MachineCatalog.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 14 of 24 ##################
+# Function:         Get-CTXAPI_MachineCatalog
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 22:53:06
+# Synopsis:         Return details about machine Catalogs
 #############################################
  
 <#
 .SYNOPSIS
-Return details about machine catalogs
+Return details about machine Catalogs
 
 .DESCRIPTION
-Return details about machine catalogs
+Return details about machine Catalogs
 
 .PARAMETER APIHeader
 Use Connect-CTXAPI to create headers
@@ -1219,12 +1360,15 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 #endregion
  
 #region Get-CTXAPI_MonitorData.ps1
-############################################
-# source: Get-CTXAPI_MonitorData.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 15 of 24 ##################
+# Function:         Get-CTXAPI_MonitorData
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 22:53:18
+# Synopsis:         Collect Monitoring OData for other reports
 #############################################
  
 <#
@@ -1315,12 +1459,15 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 #endregion
  
 #region Get-CTXAPI_ResourceLocation.ps1
-############################################
-# source: Get-CTXAPI_ResourceLocation.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 16 of 24 ##################
+# Function:         Get-CTXAPI_ResourceLocation
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Get cloud Resource Locations
 #############################################
  
 <#
@@ -1354,12 +1501,15 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 #endregion
  
 #region Get-CTXAPI_ResourceUtilization.ps1
-############################################
-# source: Get-CTXAPI_ResourceUtilization.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 17 of 24 ##################
+# Function:         Get-CTXAPI_ResourceUtilization
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 23:17:13
+# Synopsis:         Resource utilization in the last x hours
 #############################################
  
 <#
@@ -1427,18 +1577,12 @@ Function Get-CTXAPI_ResourceUtilization {
         $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $Machines.DesktopGroupId } | ForEach-Object { $_.name }
 
         try {
-            $PercentCpu = $UsedMemory = $SessionCount = 0
-            foreach ($Resource in $ResourceUtilization) {
-                $PercentCpu = $PercentCpu + $Resource.PercentCpu
-                $UsedMemory = $UsedMemory + $Resource.UsedMemory
-                $SessionCount = $SessionCount + $Resource.SessionCount
-            }
-            $AVGPercentCpu = [math]::Round($PercentCpu / $ResourceUtilization.Count)
-            $AVGUsedMemory = [math]::Ceiling(($UsedMemory / $ResourceUtilization.Count) / 1gb)
+            $AVGPercentCpu = [math]::Round(($ResourceUtilization | Measure-Object -Property PercentCpu -Average).Average)
+            $AVGUsedMemory = [math]::Ceiling((($ResourceUtilization | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
+            $AVGSessionCount = ($ResourceUtilization | Measure-Object -Property SessionCount -Average).Average
             $AVGTotalMemory = [math]::Round($ResourceUtilization[0].TotalMemory / 1gb)
-            $AVGSessionCount = [math]::Round($SessionCount / $ResourceUtilization.Count)
-        }
-        catch { Write-Warning 'divide by 0 attempted' }
+
+        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
         $data += [PSCustomObject]@{
             DnsName                  = $Machines.DnsName
             IsInMaintenanceMode      = $Machines.IsInMaintenanceMode
@@ -1453,7 +1597,20 @@ Function Get-CTXAPI_ResourceUtilization {
             AVGSessionCount          = $AVGSessionCount
         }
     }
-    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') {
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $data | Export-Excel -Title 'Resource Audit' -WorksheetName Resources @ExcelOptions
+     }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
     if ($Export -eq 'Host') { $data }
 
@@ -1463,12 +1620,15 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
 #endregion
  
 #region Get-CTXAPI_Session.ps1
-############################################
-# source: Get-CTXAPI_Session.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 18 of 24 ##################
+# Function:         Get-CTXAPI_Session
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about current sessions
 #############################################
  
 <#
@@ -1502,12 +1662,15 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 #endregion
  
 #region Get-CTXAPI_SiteDetail.ps1
-############################################
-# source: Get-CTXAPI_SiteDetail.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 19 of 24 ##################
+# Function:         Get-CTXAPI_SiteDetail
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Return details about your farm / site
 #############################################
  
 <#
@@ -1543,12 +1706,15 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 #endregion
  
 #region Get-CTXAPI_Test.ps1
-############################################
-# source: Get-CTXAPI_Test.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 20 of 24 ##################
+# Function:         Get-CTXAPI_Test
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 23:21:36
+# Synopsis:         Run Built in Citrix cloud tests
 #############################################
  
 <#
@@ -1742,9 +1908,20 @@ Function Get-CTXAPI_Test {
 
 
     if ($Export -eq 'Excel') {
-        $Alldata.FatalError | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName FatalError
-        $Alldata.Error | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName error
-        $Alldata.Alldata | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName Alldata -Show
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $Alldata.FatalError | Export-Excel -Title FatalError -WorksheetName FatalError @ExcelOptions
+        $Alldata.Error | Export-Excel -Title Errors -WorksheetName error @ExcelOptions
+        $Alldata.Alldata | Export-Excel -Title Alldata -WorksheetName Alldata @ExcelOptions
     }
     if ($Export -eq 'HTML') {
         [string]$HTMLReportname = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
@@ -1770,12 +1947,15 @@ Export-ModuleMember -Function Get-CTXAPI_Test
 #endregion
  
 #region Get-CTXAPI_VDAUptime.ps1
-############################################
-# source: Get-CTXAPI_VDAUptime.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 21 of 24 ##################
+# Function:         Get-CTXAPI_VDAUptime
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/06/24 23:23:47
+# Synopsis:         Uses Registration date to calculate uptime
 #############################################
  
 <#
@@ -1856,7 +2036,20 @@ Function Get-CTXAPI_VDAUptime {
         }
     }
     catch { Write-Warning 'Date calculation failed' }
-    if ($Export -eq 'Excel') { $complist | Export-Excel -Path ($ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $complist | Export-Excel -Title VDAUptime -WorksheetName VDAUptime @ExcelOptions
+     }
     if ($Export -eq 'HTML') { $complist | Out-HtmlView -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
     if ($Export -eq 'Host') { $complist }
 
@@ -1867,12 +2060,15 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 #endregion
  
 #region Get-CTXAPI_Zone.ps1
-############################################
-# source: Get-CTXAPI_Zone.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 22 of 24 ##################
+# Function:         Get-CTXAPI_Zone
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Get zone details
 #############################################
  
 <#
@@ -1907,12 +2103,15 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 #endregion
  
 #region Set-CTXAPI_ReportColour.ps1
-############################################
-# source: Set-CTXAPI_ReportColour.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 23 of 24 ##################
+# Function:         Set-CTXAPI_ReportColour
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Set the colour and logo for HTML Reports
 #############################################
  
 <#
@@ -2009,12 +2208,15 @@ Export-ModuleMember -Function Set-CTXAPI_ReportColour
 #endregion
  
 #region Test-CTXAPI_Header.ps1
-############################################
-# source: Test-CTXAPI_Header.ps1
-# Module: CTXCloudApi
-# version: 0.1.24
-# Author: Pierre Smit
-# Company: HTPCZA Tech
+######## Function 24 of 24 ##################
+# Function:         Test-CTXAPI_Header
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.25
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/03/20 13:16:40
+# ModifiedOn:       2022/03/20 13:16:40
+# Synopsis:         Checks that the connection is still valid, and the token hasn't expired.
 #############################################
  
 <#

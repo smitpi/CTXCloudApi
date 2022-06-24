@@ -21,7 +21,7 @@ Functions in this module:
 	 Get-CTXAPI_Hypervisor -- Return details about hosting (hypervisor)
 	 Get-CTXAPI_LowLevelOperation -- Return details about low lever config change (More detailed)
 	 Get-CTXAPI_Machine -- Return details about vda machines
-	 Get-CTXAPI_MachineCatalog -- Return details about machine catalogs
+	 Get-CTXAPI_MachineCatalog -- Return details about machine Catalogs
 	 Get-CTXAPI_MonitorData -- Collect Monitoring OData for other reports
 	 Get-CTXAPI_ResourceLocation -- Get cloud Resource Locations
 	 Get-CTXAPI_ResourceUtilization -- Resource utilization in the last x hours

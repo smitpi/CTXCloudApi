@@ -47,7 +47,7 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-"Get the data from odata"
+"Get the data from OData"
 
 #>
 

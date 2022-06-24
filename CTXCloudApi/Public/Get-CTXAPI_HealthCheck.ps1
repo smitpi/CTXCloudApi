@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api CItrix ctx cvad ps
+.TAGS api Citrix ctx cvad ps
 
 .LICENSEURI
 

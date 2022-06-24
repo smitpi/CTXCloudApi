@@ -39,17 +39,17 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Return details about machine catalogs
+Return details about machine Catalogs
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about machine catalogs
+Return details about machine Catalogs
 
 .DESCRIPTION
-Return details about machine catalogs
+Return details about machine Catalogs
 
 .PARAMETER APIHeader
 Use Connect-CTXAPI to create headers

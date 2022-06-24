@@ -179,11 +179,21 @@ Function Get-CTXAPI_ConfigAudit {
     }
 
     if ($Export -eq 'Excel') {
-        [string]$ExcelReportname = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
-        $catalogs | Export-Excel -Path $ExcelReportname -WorksheetName Catalogs -AutoSize -AutoFilter
-        $deliverygroups | Export-Excel -Path $ExcelReportname -WorksheetName DeliveryGroups -AutoSize -AutoFilter
-        $apps | Export-Excel -Path $ExcelReportname -WorksheetName apps -AutoSize -AutoFilter
-        $machines | Export-Excel -Path $ExcelReportname -WorksheetName machines -AutoSize -AutoFilter -Show
+        $ExcelOptions = @{
+            Path             = $ReportPath + "\XD_Audit-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $catalogs | Export-Excel -Title Catalogs -WorksheetName Catalogs @ExcelOptions
+        $deliverygroups | Export-Excel -Title DeliveryGroups -WorksheetName DeliveryGroups @ExcelOptions
+        $apps | Export-Excel -Title "Published Apps" -WorksheetName apps @ExcelOptions
+        $machines | Export-Excel -Title Machines -WorksheetName machines @ExcelOptions
     }
     if ($Export -eq 'HTML') {
 

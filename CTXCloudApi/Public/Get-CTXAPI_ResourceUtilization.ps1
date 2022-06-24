@@ -120,18 +120,12 @@ Function Get-CTXAPI_ResourceUtilization {
         $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $Machines.DesktopGroupId } | ForEach-Object { $_.name }
 
         try {
-            $PercentCpu = $UsedMemory = $SessionCount = 0
-            foreach ($Resource in $ResourceUtilization) {
-                $PercentCpu = $PercentCpu + $Resource.PercentCpu
-                $UsedMemory = $UsedMemory + $Resource.UsedMemory
-                $SessionCount = $SessionCount + $Resource.SessionCount
-            }
-            $AVGPercentCpu = [math]::Round($PercentCpu / $ResourceUtilization.Count)
-            $AVGUsedMemory = [math]::Ceiling(($UsedMemory / $ResourceUtilization.Count) / 1gb)
+            $AVGPercentCpu = [math]::Round(($ResourceUtilization | Measure-Object -Property PercentCpu -Average).Average)
+            $AVGUsedMemory = [math]::Ceiling((($ResourceUtilization | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
+            $AVGSessionCount = ($ResourceUtilization | Measure-Object -Property SessionCount -Average).Average
             $AVGTotalMemory = [math]::Round($ResourceUtilization[0].TotalMemory / 1gb)
-            $AVGSessionCount = [math]::Round($SessionCount / $ResourceUtilization.Count)
-        }
-        catch { Write-Warning 'divide by 0 attempted' }
+
+        } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
         $data += [PSCustomObject]@{
             DnsName                  = $Machines.DnsName
             IsInMaintenanceMode      = $Machines.IsInMaintenanceMode
@@ -146,7 +140,20 @@ Function Get-CTXAPI_ResourceUtilization {
             AVGSessionCount          = $AVGSessionCount
         }
     }
-    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') {
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $data | Export-Excel -Title 'Resource Audit' -WorksheetName Resources @ExcelOptions
+     }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
     if ($Export -eq 'Host') { $data }
 

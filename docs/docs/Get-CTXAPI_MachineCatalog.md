@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_MachineCatalog
 
 ## SYNOPSIS
-Return details about machine catalogs
+Return details about machine Catalogs
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_MachineCatalog [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about machine catalogs
+Return details about machine Catalogs
 
 ## EXAMPLES
 

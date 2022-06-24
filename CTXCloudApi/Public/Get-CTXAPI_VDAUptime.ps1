@@ -130,7 +130,20 @@ Function Get-CTXAPI_VDAUptime {
         }
     }
     catch { Write-Warning 'Date calculation failed' }
-    if ($Export -eq 'Excel') { $complist | Export-Excel -Path ($ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $complist | Export-Excel -Title VDAUptime -WorksheetName VDAUptime @ExcelOptions
+     }
     if ($Export -eq 'HTML') { $complist | Out-HtmlView -DisablePaging -Title 'Citrix Uptime' -HideFooter -FixedHeader }
     if ($Export -eq 'Host') { $complist }
 

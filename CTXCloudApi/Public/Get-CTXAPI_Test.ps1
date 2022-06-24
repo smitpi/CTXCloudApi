@@ -236,9 +236,20 @@ Function Get-CTXAPI_Test {
 
 
     if ($Export -eq 'Excel') {
-        $Alldata.FatalError | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName FatalError
-        $Alldata.Error | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName error
-        $Alldata.Alldata | Export-Excel -Path ($ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -WorksheetName Alldata -Show
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $Alldata.FatalError | Export-Excel -Title FatalError -WorksheetName FatalError @ExcelOptions
+        $Alldata.Error | Export-Excel -Title Errors -WorksheetName error @ExcelOptions
+        $Alldata.Alldata | Export-Excel -Title Alldata -WorksheetName Alldata @ExcelOptions
     }
     if ($Export -eq 'HTML') {
         [string]$HTMLReportname = $ReportPath + '\Tests-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'

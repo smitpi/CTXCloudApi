@@ -1440,11 +1440,11 @@
       <command:verb>Get</command:verb>
       <command:noun>CTXAPI_MachineCatalog</command:noun>
       <maml:description>
-        <maml:para>Return details about machine catalogs</maml:para>
+        <maml:para>Return details about machine Catalogs</maml:para>
       </maml:description>
     </command:details>
     <maml:description>
-      <maml:para>Return details about machine catalogs</maml:para>
+      <maml:para>Return details about machine Catalogs</maml:para>
     </maml:description>
     <command:syntax>
       <command:syntaxItem>

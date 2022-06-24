@@ -26,13 +26,13 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [20/04/2021_10:46] Initital Script Creating
-Updated [22/04/2021_11:42] Script Fle Info was updated
+Created [20/04/2021_10:46] Initial Script Creating
+Updated [22/04/2021_11:42] Script File Info was updated
 Updated [05/05/2021_00:03] added monitor data
 Updated [05/05/2021_14:33] 'Update Manifest'
 Updated [05/10/2021_21:22] Module Info Updated
 Updated [07/10/2021_13:28] Script info updated for module
-Updated [03/11/2021_19:17] Info Upate
+Updated [03/11/2021_19:17] Info Update
 Updated [06/11/2021_16:48] Using the new api
 
 .PRIVATEDATA
@@ -120,8 +120,7 @@ Function Get-CTXAPI_ConnectionReport {
             $mashine = $mondata.machines | Where-Object { $_.id -like $OneSession.MachineId }
             try {
                 $avgrtt = 0
-                $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | ForEach-Object { $avgrtt = $avgrtt + $_.IcaRttMS }
-                $avgrtt = $avgrtt / ($mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }).count
+                $avgrtt = $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | Measure-Object -Property IcaRttMS -Average
             }
             catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
         }
@@ -152,11 +151,24 @@ Function Get-CTXAPI_ConnectionReport {
             EndDate                  = $OneSession.EndDate
             ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
             FailureDate              = $OneSession.FailureDate
-            AVG_ICA_RTT              = [math]::Round($avgrtt)
+            AVG_ICA_RTT              = [math]::Round($avgrtt.Average)
         }
     }
 
-    if ($Export -eq 'Excel') { $data | Export-Excel -Path ($ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx') -AutoSize -AutoFilter -Show }
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        $data | Export-Excel -Title Sessions -WorksheetName Sessions @ExcelOptions
+    }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader }
     if ($Export -eq 'Host') { $data }
 
