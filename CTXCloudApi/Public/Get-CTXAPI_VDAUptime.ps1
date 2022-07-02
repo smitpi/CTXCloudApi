@@ -86,32 +86,36 @@ Function Get-CTXAPI_VDAUptime {
         [string]$ReportPath = $env:temp)
 
     try {
-        $Complist = @()
+
+    [System.Collections.ArrayList]$complist = @()
         $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
 
         foreach ($machine in $machines) {
-            if ($null -eq $machine.LastDeregistrationTime) { $lastBootTime = Get-Date -Format 'M/d/yyyy h:mm:ss tt' }
-            else { $lastBootTime = [Datetime]::ParseExact($machine.LastDeregistrationTime, 'M/d/yyyy h:mm:ss tt', $null) }
+            try {
+                
+                $lastBootTime = [Datetime]$machine.LastDeregistrationTime
 
-            $Uptime = (New-TimeSpan -Start $lastBootTime -End (Get-Date))
-            $SelectProps =
-            'Days',
-            'Hours',
-            'Minutes',
-            @{
-                Name       = 'TotalHours'
-                Expression = { [math]::Round($Uptime.TotalHours) }
-            },
-            @{
-                Name       = 'OnlineSince'
-                Expression = { $LastBootTime }
-            },
-            @{
-                Name       = 'DayOfWeek'
-                Expression = { $LastBootTime.DayOfWeek }
-            }
-            $CompUptime = $Uptime | Select-Object $SelectProps
-            $Complist += [PSCustomObject]@{
+                $Uptime = (New-TimeSpan -Start $lastBootTime -End (Get-Date))
+                $SelectProps =
+                'Days',
+                'Hours',
+                'Minutes',
+                @{
+                    Name       = 'TotalHours'
+                    Expression = { [math]::Round($Uptime.TotalHours) }
+                },
+                @{
+                    Name       = 'OnlineSince'
+                    Expression = { $LastBootTime }
+                },
+                @{
+                    Name       = 'DayOfWeek'
+                    Expression = { $LastBootTime.DayOfWeek }
+                }
+                $CompUptime = $Uptime | Select-Object $SelectProps
+            } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"} 
+            
+            [void]$complist.Add([PSCustomObject]@{
                 DnsName           = $machine.DnsName
                 AgentVersion      = $machine.AgentVersion
                 MachineCatalog    = $machine.MachineCatalog.Name
@@ -126,9 +130,10 @@ Function Get-CTXAPI_VDAUptime {
                 TotalHours        = $CompUptime.TotalHours
                 OnlineSince       = $CompUptime.OnlineSince
                 DayOfWeek         = $CompUptime.DayOfWeek
+                })
             }
-        }
     } catch { Write-Warning 'Date calculation failed' }
+
     if ($Export -eq 'Excel') { 
         $ExcelOptions = @{
             Path             = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
@@ -147,4 +152,5 @@ Function Get-CTXAPI_VDAUptime {
     if ($Export -eq 'Host') { $complist }
 
 } #end Function
+
 
