@@ -3,39 +3,41 @@
 ########### Private Function ###############
 # Source:           Export-Odata.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/03/20 13:16:40
+# ModifiedOn:       2022/09/03 19:15:36
 ############################################
-Function Export-Odata {
-    [OutputType([System.Object[]])]
-    param(
-        [string]$URI,
-        [Hashtable]$headers)
+    Function Export-Odata {
+        [OutputType([System.Object[]])]
+        param(
+            [string]$URI,
+            [Hashtable]$headers)
 
-    $data = @()
-    $NextLink = $URI
+        [System.Collections.generic.List[PSObject]]$MonitorDataObject = @()
+        $NextLink = $URI
 
-    Write-Color -Text 'Fetching :',$URI.split('?')[0].split('\')[1] -Color Yellow,Cyan -ShowTime -DateTimeFormat HH:mm:ss -NoNewLine
-    $APItimer.Restart()
-    While ($Null -ne $NextLink) {
-        $tmp = Invoke-WebRequest -Uri $NextLink -Headers $headers | ConvertFrom-Json
-        $tmp.Value | ForEach-Object { $data += $_ }
-        $NextLink = $tmp.'@odata.NextLink'
-    }
-    [String]$seconds = '[' + ($APItimer.elapsed.seconds).ToString() + 'sec]'
-    Write-Color $seconds -Color Red
-    return $data
+        Write-Color -Text 'Fetching :', $URI.split('?')[0].split('\')[1] -Color Yellow, Cyan -ShowTime -DateTimeFormat HH:mm:ss -NoNewLine
+        $APItimer.Restart()
+        While (-not([string]::IsNullOrEmpty($NextLink))) {
+            $request = Invoke-RestMethod -Method Get -Uri $NextLink -Headers $headers
+            $request.Value | ForEach-Object { $MonitorDataObject.Add($_) }
+            
+            if (-not([string]::IsNullOrEmpty($request.'@odata.NextLink'))) {$NextLink = $request.'@odata.NextLink'}
+            else {$NextLink = $null}
+        }
+        [String]$seconds = '[' + ($APItimer.elapsed.seconds).ToString() + 'sec]'
+        Write-Color $seconds -Color Red
+        return $MonitorDataObject
 
 
-} #end Function
+    } #end Function
 #endregion
 #region Reports-Colors.ps1
 ########### Private Function ###############
 # Source:           Reports-Colors.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/06/24 23:28:21
@@ -99,7 +101,7 @@ $script:TableSectionSettings = @{
 ########### Private Function ###############
 # Source:           Reports-Variables.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/05/03 21:55:20
@@ -213,15 +215,108 @@ $script:ConnectionState = [PSCustomObject]@{
 #endregion
  
 #region Public Functions
+#region Add-CTXAPI_DefaultsToProfile.ps1
+######## Function 1 of 25 ##################
+# Function:         Add-CTXAPI_DefaultsToProfile
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.26.1
+# Author:           Pierre Smit
+# Company:          HTPCZA Tech
+# CreatedOn:        2022/09/03 16:47:13
+# ModifiedOn:       2022/09/03 17:00:30
+# Synopsis:         This function will add connection settings to PSDefaultParameter and your profile.
+#############################################
+ 
+<#
+.SYNOPSIS
+This function will add connection settings to PSDefaultParameter and your profile.
+
+.DESCRIPTION
+This function will add connection settings to PSDefaultParameter and your profile.
+
+.PARAMETER Customer_Id
+From Citrix Cloud
+
+.PARAMETER Client_Id
+From Citrix Cloud
+
+.PARAMETER Client_Secret
+From Citrix Cloud
+
+.PARAMETER Customer_Name
+Name of your Company, or what you want to call your connection.
+
+.PARAMETER RemoveConfig
+Remove the config from your profile.
+
+.EXAMPLE
+$splat = @{
+	Customer_Id = "xxx"
+	Client_Id = "xxx-xxx-xxx-xxx"
+	Client_Secret = "yyyyyy=="
+	Customer_Name = 'HomeLab'
+}
+Add-CTXAPI_DefaultsToProfile @splat
+
+#>
+Function Add-CTXAPI_DefaultsToProfile {
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Add-CTXAPI_DefaultsToProfile')]
+	[OutputType([System.Object[]])]
+	PARAM(
+		[Parameter(Mandatory)]
+		[string]$Customer_Id,
+		[Parameter(Mandatory)]
+		[string]$Client_Id,
+		[Parameter(Mandatory)]
+		[string]$Client_Secret,
+		[Parameter(Mandatory)]
+		[string]$Customer_Name,
+		[switch]$RemoveConfig
+	)
+	try {
+		$PSDefaultParameterValues.Add('*CTXAPI*:Customer_Id', "$($Customer_Id)")
+		$PSDefaultParameterValues.Add('*CTXAPI*:Client_Id', "$($Client_Id)")
+		$PSDefaultParameterValues.Add('*CTXAPI*:Client_Secret', "$($Client_Secret)")
+		$PSDefaultParameterValues.Add('*CTXAPI*:Customer_Name', "$($Customer_Name)")
+	} catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
+	$ToAppend = @"
+
+#region CTXAPI Defaults
+`$PSDefaultParameterValues['*CTXAPI*:Customer_Id'] = "$($Customer_Id)"
+`$PSDefaultParameterValues['*CTXAPI*:Client_Id'] = "$($Client_Id)"
+`$PSDefaultParameterValues['*CTXAPI*:Client_Secret'] = "$($Client_Secret)"
+`$PSDefaultParameterValues['*CTXAPI*:Customer_Name'] = "$($Customer_Name)"
+#endregion CTXAPI
+
+"@
+	
+	try {
+		$CheckProfile = Get-Item $PROFILE -ErrorAction Stop
+	} catch { $CheckProfile = New-Item $PROFILE -ItemType File -Force}
+	
+	$Files = Get-ChildItem -Path "$($CheckProfile.Directory)\*profile*"
+
+	foreach ($file in $files) {	
+		$tmp = Get-Content -Path $file.FullName | Where-Object { $_ -notlike '*CTXAPI*'}
+		$tmp | Set-Content -Path $file.FullName -Force
+		if (-not($RemoveConfig)) {Add-Content -Value $ToAppend -Path $file.FullName -Force -Encoding utf8 }
+		Write-Host '[Updated]' -NoNewline -ForegroundColor Yellow; Write-Host ' Profile File:' -NoNewline -ForegroundColor Cyan; Write-Host " $($file.FullName)" -ForegroundColor Green
+	}
+
+} #end Function
+ 
+Export-ModuleMember -Function Add-CTXAPI_DefaultsToProfile
+#endregion
+ 
 #region Connect-CTXAPI.ps1
-######## Function 1 of 24 ##################
+######## Function 2 of 25 ##################
 # Function:         Connect-CTXAPI
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/03/20 13:16:40
+# ModifiedOn:       2022/09/03 16:45:20
 # Synopsis:         Connect to the cloud and create needed api headers
 #############################################
  
@@ -258,13 +353,13 @@ $APIHeader = Connect-CTXAPI @splat
 Function Connect-CTXAPI {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI')]
     PARAM(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Customer_Id,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Client_Id,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Client_Secret,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Customer_Name
     )
 
@@ -302,10 +397,10 @@ Export-ModuleMember -Function Connect-CTXAPI
 #endregion
  
 #region Get-CTXAPI_Application.ps1
-######## Function 2 of 24 ##################
+######## Function 3 of 25 ##################
 # Function:         Get-CTXAPI_Application
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -346,10 +441,10 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 #endregion
  
 #region Get-CTXAPI_CloudConnector.ps1
-######## Function 3 of 24 ##################
+######## Function 4 of 25 ##################
 # Function:         Get-CTXAPI_CloudConnector
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -389,10 +484,10 @@ Export-ModuleMember -Function Get-CTXAPI_CloudConnector
 #endregion
  
 #region Get-CTXAPI_CloudService.ps1
-######## Function 4 of 24 ##################
+######## Function 5 of 25 ##################
 # Function:         Get-CTXAPI_CloudService
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -431,10 +526,10 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 #endregion
  
 #region Get-CTXAPI_ConfigAudit.ps1
-######## Function 5 of 24 ##################
+######## Function 6 of 25 ##################
 # Function:         Get-CTXAPI_ConfigAudit
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -631,10 +726,10 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
 #endregion
  
 #region Get-CTXAPI_ConfigLog.ps1
-######## Function 6 of 24 ##################
+######## Function 7 of 25 ##################
 # Function:         Get-CTXAPI_ConfigLog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -677,10 +772,10 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 #endregion
  
 #region Get-CTXAPI_ConnectionReport.ps1
-######## Function 7 of 24 ##################
+######## Function 8 of 25 ##################
 # Function:         Get-CTXAPI_ConnectionReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -813,10 +908,10 @@ Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
 #endregion
  
 #region Get-CTXAPI_DeliveryGroup.ps1
-######## Function 8 of 24 ##################
+######## Function 9 of 25 ##################
 # Function:         Get-CTXAPI_DeliveryGroup
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -858,14 +953,14 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 #endregion
  
 #region Get-CTXAPI_FailureReport.ps1
-######## Function 9 of 24 ##################
+######## Function 10 of 25 ##################
 # Function:         Get-CTXAPI_FailureReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/06/24 22:50:54
+# ModifiedOn:       2022/09/03 17:22:03
 # Synopsis:         Reports on failures in the last x hours.
 #############################################
  
@@ -935,14 +1030,14 @@ Function Get-CTXAPI_FailureReport {
     if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
     else { $mondata = $MonitorData }
 
-    $data = @()
-
+    [System.Collections.generic.List[PSObject]]$Data = @()
+        
     if ($FailureType -eq 'Machine') {
-        $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
+        $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
         foreach ($log in $mondata.MachineFailureLogs) {
             $MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
             $APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }
-            $data += [PSCustomObject]@{
+            $Data.Add([PSCustomObject]@{
                 Name                     = $MonDataMachine.DnsName
                 IP                       = $MonDataMachine.IPAddress
                 OSType                   = $MonDataMachine.OSType
@@ -953,8 +1048,7 @@ Function Get-CTXAPI_FailureReport {
                 LastConnectionFailure    = $APIMachine.LastConnectionFailure
                 LastErrorReason          = $APIMachine.LastErrorReason
                 CurrentFaultState        = $APIMachine.FaultState
-
-            }
+            })
 
         }
     }
@@ -963,7 +1057,7 @@ Function Get-CTXAPI_FailureReport {
             $session = $mondata.Session | Where-Object { $_.SessionKey -eq $log.SessionKey }
             $user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
             $mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
-            $data += [PSCustomObject]@{
+            $Data.Add([PSCustomObject]@{
                 UserName                   = $user.UserName
                 FullName                   = $user.FullName
                 DnsName                    = $mashine.DnsName
@@ -971,7 +1065,7 @@ Function Get-CTXAPI_FailureReport {
                 CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
                 FailureDate                = $log.FailureDate
                 ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
-            }
+            })
         }
     }
 
@@ -1000,14 +1094,14 @@ Export-ModuleMember -Function Get-CTXAPI_FailureReport
 #endregion
  
 #region Get-CTXAPI_HealthCheck.ps1
-######## Function 10 of 24 ##################
+######## Function 11 of 25 ##################
 # Function:         Get-CTXAPI_HealthCheck
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/06/25 00:06:04
+# ModifiedOn:       2022/09/03 17:24:33
 # Synopsis:         Show useful information for daily health check
 #############################################
  
@@ -1052,7 +1146,7 @@ Function Get-CTXAPI_HealthCheck {
     $configlog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Group-Object -Property text | Select-Object count, name | Sort-Object -Property count -Descending | Select-Object -First 5
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Delivery Groups"
-    $DeliveryGroups = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
+    $DeliveryGroups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
 
     $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24
 
@@ -1070,7 +1164,7 @@ Function Get-CTXAPI_HealthCheck {
 
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
-    $sessions = Get-CTXAPI_Sessions -APIHeader $APIHeader
+    $sessions = Get-CTXAPI_Session -APIHeader $APIHeader
     $sessioncount = [PSCustomObject]@{
         Connected         = ($sessions | Where-Object { $_.state -like 'active' }).count
         Disconnected      = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
@@ -1089,8 +1183,8 @@ Function Get-CTXAPI_HealthCheck {
     # }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
-    $Locations = Get-CTXAPI_ResourceLocations -APIHeader $APIHeader
-    $CConnector = Get-CTXAPI_CloudConnectors -APIHeader $APIHeader | ForEach-Object {
+    $Locations = Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+    $CConnector = Get-CTXAPI_CloudConnector -APIHeader $APIHeader | ForEach-Object {
         $loc = $_.location
         [PSCustomObject]@{
             fqdn            = $_.fqdn
@@ -1104,7 +1198,7 @@ Function Get-CTXAPI_HealthCheck {
     }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Site Tests"
-    $testResult = Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest
+    $testResult = Get-CTXAPI_Test -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest
     $testReport = $testResult.Alldata | Where-Object { $_.Serverity -notlike $null } | Sort-Object -Property TestScope
     #endregion
 
@@ -1166,10 +1260,10 @@ Export-ModuleMember -Function Get-CTXAPI_HealthCheck
 #endregion
  
 #region Get-CTXAPI_Hypervisor.ps1
-######## Function 11 of 24 ##################
+######## Function 12 of 25 ##################
 # Function:         Get-CTXAPI_Hypervisor
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1212,10 +1306,10 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 #endregion
  
 #region Get-CTXAPI_LowLevelOperation.ps1
-######## Function 12 of 24 ##################
+######## Function 13 of 25 ##################
 # Function:         Get-CTXAPI_LowLevelOperation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1262,10 +1356,10 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 #endregion
  
 #region Get-CTXAPI_Machine.ps1
-######## Function 13 of 24 ##################
+######## Function 14 of 25 ##################
 # Function:         Get-CTXAPI_Machine
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1316,10 +1410,10 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 #endregion
  
 #region Get-CTXAPI_MachineCatalog.ps1
-######## Function 14 of 24 ##################
+######## Function 15 of 25 ##################
 # Function:         Get-CTXAPI_MachineCatalog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1360,14 +1454,14 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 #endregion
  
 #region Get-CTXAPI_MonitorData.ps1
-######## Function 15 of 24 ##################
+######## Function 16 of 25 ##################
 # Function:         Get-CTXAPI_MonitorData
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/06/24 22:53:18
+# ModifiedOn:       2022/09/03 19:16:28
 # Synopsis:         Collect Monitoring OData for other reports
 #############################################
  
@@ -1405,8 +1499,6 @@ Function Get-CTXAPI_MonitorData {
         [Parameter(Mandatory = $true)]
         [int]$hours
     )
-
-
 
     $timer = [Diagnostics.Stopwatch]::StartNew();
     $APItimer = [Diagnostics.Stopwatch]::StartNew();
@@ -1459,10 +1551,10 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 #endregion
  
 #region Get-CTXAPI_ResourceLocation.ps1
-######## Function 16 of 24 ##################
+######## Function 17 of 25 ##################
 # Function:         Get-CTXAPI_ResourceLocation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1501,10 +1593,10 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 #endregion
  
 #region Get-CTXAPI_ResourceUtilization.ps1
-######## Function 17 of 24 ##################
+######## Function 18 of 25 ##################
 # Function:         Get-CTXAPI_ResourceUtilization
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1620,10 +1712,10 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
 #endregion
  
 #region Get-CTXAPI_Session.ps1
-######## Function 18 of 24 ##################
+######## Function 19 of 25 ##################
 # Function:         Get-CTXAPI_Session
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1662,10 +1754,10 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 #endregion
  
 #region Get-CTXAPI_SiteDetail.ps1
-######## Function 19 of 24 ##################
+######## Function 20 of 25 ##################
 # Function:         Get-CTXAPI_SiteDetail
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1706,10 +1798,10 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 #endregion
  
 #region Get-CTXAPI_Test.ps1
-######## Function 20 of 24 ##################
+######## Function 21 of 25 ##################
 # Function:         Get-CTXAPI_Test
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1947,10 +2039,10 @@ Export-ModuleMember -Function Get-CTXAPI_Test
 #endregion
  
 #region Get-CTXAPI_VDAUptime.ps1
-######## Function 21 of 24 ##################
+######## Function 22 of 25 ##################
 # Function:         Get-CTXAPI_VDAUptime
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2065,10 +2157,10 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 #endregion
  
 #region Get-CTXAPI_Zone.ps1
-######## Function 22 of 24 ##################
+######## Function 23 of 25 ##################
 # Function:         Get-CTXAPI_Zone
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2108,10 +2200,10 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 #endregion
  
 #region Set-CTXAPI_ReportColour.ps1
-######## Function 23 of 24 ##################
+######## Function 24 of 25 ##################
 # Function:         Set-CTXAPI_ReportColour
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2213,10 +2305,10 @@ Export-ModuleMember -Function Set-CTXAPI_ReportColour
 #endregion
  
 #region Test-CTXAPI_Header.ps1
-######## Function 24 of 24 ##################
+######## Function 25 of 25 ##################
 # Function:         Test-CTXAPI_Header
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.0
+# ModuleVersion:    0.1.26.1
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40

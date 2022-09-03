@@ -94,7 +94,7 @@ Function Get-CTXAPI_HealthCheck {
     $configlog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Group-Object -Property text | Select-Object count, name | Sort-Object -Property count -Descending | Select-Object -First 5
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Delivery Groups"
-    $DeliveryGroups = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
+    $DeliveryGroups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
 
     $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24
 
@@ -112,7 +112,7 @@ Function Get-CTXAPI_HealthCheck {
 
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
-    $sessions = Get-CTXAPI_Sessions -APIHeader $APIHeader
+    $sessions = Get-CTXAPI_Session -APIHeader $APIHeader
     $sessioncount = [PSCustomObject]@{
         Connected         = ($sessions | Where-Object { $_.state -like 'active' }).count
         Disconnected      = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
@@ -131,8 +131,8 @@ Function Get-CTXAPI_HealthCheck {
     # }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
-    $Locations = Get-CTXAPI_ResourceLocations -APIHeader $APIHeader
-    $CConnector = Get-CTXAPI_CloudConnectors -APIHeader $APIHeader | ForEach-Object {
+    $Locations = Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+    $CConnector = Get-CTXAPI_CloudConnector -APIHeader $APIHeader | ForEach-Object {
         $loc = $_.location
         [PSCustomObject]@{
             fqdn            = $_.fqdn
@@ -146,7 +146,7 @@ Function Get-CTXAPI_HealthCheck {
     }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Site Tests"
-    $testResult = Get-CTXAPI_Tests -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest
+    $testResult = Get-CTXAPI_Test -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest
     $testReport = $testResult.Alldata | Where-Object { $_.Serverity -notlike $null } | Sort-Object -Property TestScope
     #endregion
 

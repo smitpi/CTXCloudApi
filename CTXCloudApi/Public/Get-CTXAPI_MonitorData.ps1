@@ -87,8 +87,6 @@ Function Get-CTXAPI_MonitorData {
         [int]$hours
     )
 
-
-
     $timer = [Diagnostics.Stopwatch]::StartNew();
     $APItimer = [Diagnostics.Stopwatch]::StartNew();
 

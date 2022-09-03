@@ -81,13 +81,13 @@ $APIHeader = Connect-CTXAPI @splat
 Function Connect-CTXAPI {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI')]
     PARAM(
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Customer_Id,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Client_Id,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Client_Secret,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory)]
         [string]$Customer_Name
     )
 

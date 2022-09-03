@@ -119,14 +119,14 @@ Function Get-CTXAPI_FailureReport {
     if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
     else { $mondata = $MonitorData }
 
-    $data = @()
-
+    [System.Collections.generic.List[PSObject]]$Data = @()
+        
     if ($FailureType -eq 'Machine') {
-        $machines = Get-CTXAPI_Machines -APIHeader $APIHeader
+        $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
         foreach ($log in $mondata.MachineFailureLogs) {
             $MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
             $APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }
-            $data += [PSCustomObject]@{
+            $Data.Add([PSCustomObject]@{
                 Name                     = $MonDataMachine.DnsName
                 IP                       = $MonDataMachine.IPAddress
                 OSType                   = $MonDataMachine.OSType
@@ -137,8 +137,7 @@ Function Get-CTXAPI_FailureReport {
                 LastConnectionFailure    = $APIMachine.LastConnectionFailure
                 LastErrorReason          = $APIMachine.LastErrorReason
                 CurrentFaultState        = $APIMachine.FaultState
-
-            }
+            })
 
         }
     }
@@ -147,7 +146,7 @@ Function Get-CTXAPI_FailureReport {
             $session = $mondata.Session | Where-Object { $_.SessionKey -eq $log.SessionKey }
             $user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
             $mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
-            $data += [PSCustomObject]@{
+            $Data.Add([PSCustomObject]@{
                 UserName                   = $user.UserName
                 FullName                   = $user.FullName
                 DnsName                    = $mashine.DnsName
@@ -155,7 +154,7 @@ Function Get-CTXAPI_FailureReport {
                 CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
                 FailureDate                = $log.FailureDate
                 ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
-            }
+            })
         }
     }
 
