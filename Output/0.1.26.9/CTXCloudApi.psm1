@@ -3,7 +3,7 @@
 ########### Private Function ###############
 # Source:           Export-Odata.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/09/03 19:15:36
@@ -37,7 +37,7 @@
 ########### Private Function ###############
 # Source:           Reports-Colors.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/06/24 23:28:21
@@ -101,7 +101,7 @@ $script:TableSectionSettings = @{
 ########### Private Function ###############
 # Source:           Reports-Variables.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/05/03 21:55:20
@@ -219,7 +219,7 @@ $script:ConnectionState = [PSCustomObject]@{
 ######## Function 1 of 25 ##################
 # Function:         Add-CTXAPI_DefaultsToProfile
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/03 16:47:13
@@ -312,7 +312,7 @@ Export-ModuleMember -Function Add-CTXAPI_DefaultsToProfile
 ######## Function 2 of 25 ##################
 # Function:         Connect-CTXAPI
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -400,7 +400,7 @@ Export-ModuleMember -Function Connect-CTXAPI
 ######## Function 3 of 25 ##################
 # Function:         Get-CTXAPI_Application
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -444,7 +444,7 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 ######## Function 4 of 25 ##################
 # Function:         Get-CTXAPI_CloudConnector
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -487,7 +487,7 @@ Export-ModuleMember -Function Get-CTXAPI_CloudConnector
 ######## Function 5 of 25 ##################
 # Function:         Get-CTXAPI_CloudService
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -529,11 +529,11 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 ######## Function 6 of 25 ##################
 # Function:         Get-CTXAPI_ConfigAudit
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/06/25 00:00:45
+# ModifiedOn:       2022/09/06 17:40:41
 # Synopsis:         Reports on system config.
 #############################################
  
@@ -688,18 +688,18 @@ Function Get-CTXAPI_ConfigAudit {
         New-HTML -TitleText "$($APIHeader.CustomerName) Config Audit" -FilePath $HTMLReportname -ShowHTML {
             New-HTMLLogo -RightLogoString $CTXAPI_LogoURL
             New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
-            New-HTMLSection @SectionSettings -Content {
+           if ($catalogs) { New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }
-            }
-            New-HTMLSection @SectionSettings -Content {
+            }}
+            if ($deliverygroups) {New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $deliverygroups }
-            }
-            New-HTMLSection @SectionSettings -Content {
+            }}
+           if ($apps) { New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Published Applications' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $apps }
-            }
-            New-HTMLSection @SectionSettings -Content {
+            }}
+            if ($machines) {New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'VDI Devices' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $machines }
-            }
+            }}
         }
 
 
@@ -729,7 +729,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
 ######## Function 7 of 25 ##################
 # Function:         Get-CTXAPI_ConfigLog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -775,7 +775,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 ######## Function 8 of 25 ##################
 # Function:         Get-CTXAPI_ConnectionReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -911,7 +911,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
 ######## Function 9 of 25 ##################
 # Function:         Get-CTXAPI_DeliveryGroup
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -956,7 +956,7 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 ######## Function 10 of 25 ##################
 # Function:         Get-CTXAPI_FailureReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1098,7 +1098,7 @@ Export-ModuleMember -Function Get-CTXAPI_FailureReport
 ######## Function 11 of 25 ##################
 # Function:         Get-CTXAPI_HealthCheck
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1301,7 +1301,7 @@ Export-ModuleMember -Function Get-CTXAPI_HealthCheck
 ######## Function 12 of 25 ##################
 # Function:         Get-CTXAPI_Hypervisor
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1347,7 +1347,7 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 ######## Function 13 of 25 ##################
 # Function:         Get-CTXAPI_LowLevelOperation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1397,7 +1397,7 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 ######## Function 14 of 25 ##################
 # Function:         Get-CTXAPI_Machine
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1451,7 +1451,7 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 ######## Function 15 of 25 ##################
 # Function:         Get-CTXAPI_MachineCatalog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1495,7 +1495,7 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 ######## Function 16 of 25 ##################
 # Function:         Get-CTXAPI_MonitorData
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1592,7 +1592,7 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 ######## Function 17 of 25 ##################
 # Function:         Get-CTXAPI_ResourceLocation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1634,7 +1634,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 ######## Function 18 of 25 ##################
 # Function:         Get-CTXAPI_ResourceUtilization
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1754,7 +1754,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
 ######## Function 19 of 25 ##################
 # Function:         Get-CTXAPI_Session
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1796,7 +1796,7 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 ######## Function 20 of 25 ##################
 # Function:         Get-CTXAPI_SiteDetail
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1840,7 +1840,7 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 ######## Function 21 of 25 ##################
 # Function:         Get-CTXAPI_Test
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2081,7 +2081,7 @@ Export-ModuleMember -Function Get-CTXAPI_Test
 ######## Function 22 of 25 ##################
 # Function:         Get-CTXAPI_VDAUptime
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2199,7 +2199,7 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 ######## Function 23 of 25 ##################
 # Function:         Get-CTXAPI_Zone
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2242,7 +2242,7 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 ######## Function 24 of 25 ##################
 # Function:         Set-CTXAPI_ReportColour
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2347,7 +2347,7 @@ Export-ModuleMember -Function Set-CTXAPI_ReportColour
 ######## Function 25 of 25 ##################
 # Function:         Test-CTXAPI_Header
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.8
+# ModuleVersion:    0.1.26.9
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40

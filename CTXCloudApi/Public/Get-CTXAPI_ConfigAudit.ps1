@@ -202,18 +202,18 @@ Function Get-CTXAPI_ConfigAudit {
         New-HTML -TitleText "$($APIHeader.CustomerName) Config Audit" -FilePath $HTMLReportname -ShowHTML {
             New-HTMLLogo -RightLogoString $CTXAPI_LogoURL
             New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
-            New-HTMLSection @SectionSettings -Content {
+           if ($catalogs) { New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }
-            }
-            New-HTMLSection @SectionSettings -Content {
+            }}
+            if ($deliverygroups) {New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $deliverygroups }
-            }
-            New-HTMLSection @SectionSettings -Content {
+            }}
+           if ($apps) { New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'Published Applications' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $apps }
-            }
-            New-HTMLSection @SectionSettings -Content {
+            }}
+            if ($machines) {New-HTMLSection @SectionSettings -Content {
                 New-HTMLSection -HeaderText 'VDI Devices' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $machines }
-            }
+            }}
         }
 
 
