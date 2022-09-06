@@ -19,25 +19,4 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
  
-theme:
-  name: material
-  features:
-    - navigation.instant
-  language: en
-  favicon: ''
-  logo: ''
-  palette:
-    - media: "(prefers-color-scheme: light)"
-      primary: blue grey
-      accent: indigo
-      scheme: default
-      toggle:
-        icon: material/toggle-switch-off-outline
-        name: Switch to dark mode
-    - media: "(prefers-color-scheme: dark)"
-      primary: blue grey
-      accent: indigo
-      scheme: slate
-      toggle:
-        icon: material/toggle-switch
-        name: Switch to light mode
+theme: windmill

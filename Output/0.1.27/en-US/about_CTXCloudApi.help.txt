@@ -1,0 +1,41 @@
+
+CTXCloudApi
+	 about_CTXCloudApi
+ 
+SHORT DESCRIPTION
+	 Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, it will create the needed hearders for the other functions.
+
+ 
+NOTES
+Functions in this module:
+	 Add-CTXAPI_DefaultsToProfile -- This function will add connection settings to PSDefaultParameter and your profile.
+	 Connect-CTXAPI -- Connect to the cloud and create needed api headers
+	 Get-CTXAPI_Application -- Return details about published apps
+	 Get-CTXAPI_CloudConnector -- Details about current Cloud Connectors
+	 Get-CTXAPI_CloudService -- Return details about cloud services and subscription
+	 Get-CTXAPI_ConfigAudit -- Reports on system config.
+	 Get-CTXAPI_ConfigLog -- Get high level configuration changes in the last x days.
+	 Get-CTXAPI_ConnectionReport -- Creates Connection report
+	 Get-CTXAPI_DeliveryGroup -- Return details about Delivery Groups
+	 Get-CTXAPI_FailureReport -- Reports on failures in the last x hours.
+	 Get-CTXAPI_HealthCheck -- Show useful information for daily health check
+	 Get-CTXAPI_Hypervisor -- Return details about hosting (hypervisor)
+	 Get-CTXAPI_LowLevelOperation -- Return details about low lever config change (More detailed)
+	 Get-CTXAPI_Machine -- Return details about vda machines
+	 Get-CTXAPI_MachineCatalog -- Return details about machine Catalogs
+	 Get-CTXAPI_MonitorData -- Collect Monitoring OData for other reports
+	 Get-CTXAPI_ResourceLocation -- Get cloud Resource Locations
+	 Get-CTXAPI_ResourceUtilization -- Resource utilization in the last x hours
+	 Get-CTXAPI_Session -- Return details about current sessions
+	 Get-CTXAPI_SiteDetail -- Return details about your farm / site
+	 Get-CTXAPI_Test -- Run Built in Citrix cloud tests
+	 Get-CTXAPI_VDAUptime -- Uses Registration date to calculate uptime
+	 Get-CTXAPI_Zone -- Get zone details
+	 Set-CTXAPI_ReportColour -- Set the colour and logo for HTML Reports
+	 Test-CTXAPI_Header -- Checks that the connection is still valid, and the token hasn't expired.
+ 
+SEE ALSO
+	 https://github.com/smitpi/CTXCloudApi
+
+	 https://smitpi.github.io/CTXCloudApi/
+

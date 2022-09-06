@@ -20,7 +20,7 @@ Get-CTXAPI_FailureReport -APIHeader <Object> [-region <String>] [-hours <Int32>]
 
 ### Got odata
 ```
-Get-CTXAPI_FailureReport [-MonitorData <Object>] -FailureType <String> [-Export <String>]
+Get-CTXAPI_FailureReport [-APIHeader <Object>] [-MonitorData <Object>] -FailureType <String> [-Export <String>]
  [-ReportPath <String>] [<CommonParameters>]
 ```
 
@@ -45,6 +45,18 @@ Parameter Sets: Fetch odata
 Aliases:
 
 Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+```yaml
+Type: Object
+Parameter Sets: Got odata
+Aliases:
+
+Required: False
 Position: Named
 Default value: None
 Accept pipeline input: False

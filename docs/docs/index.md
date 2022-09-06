@@ -24,6 +24,7 @@ Get-Help about_CTXCloudApi
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/CTXCloudApi)
  
 ## Functions
+- [`Add-CTXAPI_DefaultsToProfile`](https://smitpi.github.io/CTXCloudApi/Add-CTXAPI_DefaultsToProfile) -- This function will add connection settings to PSDefaultParameter and your profile.
 - [`Connect-CTXAPI`](https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI) -- Connect to the cloud and create needed api headers
 - [`Get-CTXAPI_Application`](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application) -- Return details about published apps
 - [`Get-CTXAPI_CloudConnector`](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnector) -- Details about current Cloud Connectors
