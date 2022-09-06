@@ -8,10 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="author" content="Pierre Smit">
-    <link rel="canonical" href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime/">
+    <link rel="canonical" href="https://smitpi.github.io/CTXCloudApi/Add-CTXAPI_DefaultsToProfile/">
     <link rel="shortcut icon" href="../img/favicon.ico">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
-    <title>Get-CTXAPI_VDAUptime - CTXCloudApi</title>
+    <title>Add-CTXAPI_DefaultsToProfile - CTXCloudApi</title>
     <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
     <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
     <link href="../css/base.css" rel="stylesheet">
@@ -32,7 +32,7 @@
       var is_top_frame = false;
         
         var pageToc = [
-          {title: "Get-CTXAPI_VDAUptime", url: "#_top", children: [
+          {title: "Add-CTXAPI_DefaultsToProfile", url: "#_top", children: [
               {title: "SYNOPSIS", url: "#synopsis" },
               {title: "SYNTAX", url: "#syntax" },
               {title: "DESCRIPTION", url: "#description" },
@@ -68,20 +68,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-CTXAPI_Zone/" class="btn btn-xs btn-default pull-right">
+      <a href="../Connect-CTXAPI/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-CTXAPI_Zone/" class="btn btn-xs btn-link">
-        Get-CTXAPI_Zone
+      <a href="../Connect-CTXAPI/" class="btn btn-xs btn-link">
+        Connect-CTXAPI
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Get-CTXAPI_Test/" class="btn btn-xs btn-default pull-left">
+      <a href=".." class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Get-CTXAPI_Test/" class="btn btn-xs btn-link">
-        Get-CTXAPI_Test
+        Previous</a><a href=".." class="btn btn-xs btn-link">
+        CTXCloudApi
       </a>
     </div>
     
@@ -89,22 +89,29 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     
 
-    <h1 id="get-ctxapi_vdauptime">Get-CTXAPI_VDAUptime</h1>
+    <h1 id="add-ctxapi_defaultstoprofile">Add-CTXAPI_DefaultsToProfile</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Uses Registration date to calculate uptime</p>
+<p>This function will add connection settings to PSDefaultParameter and your profile.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_VDAUptime [-APIHeader] &lt;Object&gt; [[-Export] &lt;String&gt;] [[-ReportPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Add-CTXAPI_DefaultsToProfile [-Customer_Id] &lt;String&gt; [-Client_Id] &lt;String&gt; [-Client_Secret] &lt;String&gt;
+ [-Customer_Name] &lt;String&gt; [-RemoveConfig] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
-<p>Uses Registration date to calculate uptime</p>
+<p>This function will add connection settings to PSDefaultParameter and your profile.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
+<div class="highlight"><pre><span></span><code>$splat = @{
 </code></pre></div>
+<p>Customer_Id = "xxx"
+    Client_Id = "xxx-xxx-xxx-xxx"
+    Client_Secret = "yyyyyy=="
+    Customer_Name = 'HomeLab'
+}
+Add-CTXAPI_DefaultsToProfile @splat</p>
 <h2 id="parameters">PARAMETERS</h2>
-<h3 id="-apiheader">-APIHeader</h3>
-<p>Use Connect-CTXAPI to create headers</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object</span><span class="w"></span>
+<h3 id="-customer_id">-Customer_Id</h3>
+<p>From Citrix Cloud</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
@@ -114,27 +121,51 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-export">-Export</h3>
-<p>In what format to export the reports.</p>
+<h3 id="-client_id">-Client_Id</h3>
+<p>From Citrix Cloud</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Host</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
-<h3 id="-reportpath">-ReportPath</h3>
-<p>Destination folder for the exported report.</p>
+<h3 id="-client_secret">-Client_Secret</h3>
+<p>From Citrix Cloud</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
 <span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$env:temp</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-customer_name">-Customer_Name</h3>
+<p>Name of your Company, or what you want to call your connection.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">4</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
+<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+</code></pre></div>
+<h3 id="-removeconfig">-RemoveConfig</h3>
+<p>Remove the config from your profile.</p>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SwitchParameter</span><span class="w"></span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
+<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+
+<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
+<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
+<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
 </code></pre></div>
@@ -142,6 +173,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
 
@@ -156,20 +188,20 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="../Get-CTXAPI_Zone/" class="btn btn-xs btn-default pull-right">
+      <a href="../Connect-CTXAPI/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="../Get-CTXAPI_Zone/" class="btn btn-xs btn-link">
-        Get-CTXAPI_Zone
+      <a href="../Connect-CTXAPI/" class="btn btn-xs btn-link">
+        Connect-CTXAPI
       </a>
     </div>
     
     <div class="wm-article-nav">
-      <a href="../Get-CTXAPI_Test/" class="btn btn-xs btn-default pull-left">
+      <a href=".." class="btn btn-xs btn-default pull-left">
         <i class="fa fa-chevron-left" aria-hidden="true"></i>
-        Previous</a><a href="../Get-CTXAPI_Test/" class="btn btn-xs btn-link">
-        Get-CTXAPI_Test
+        Previous</a><a href=".." class="btn btn-xs btn-link">
+        CTXCloudApi
       </a>
     </div>
     
@@ -180,7 +212,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
 <footer class="container-fluid wm-page-content">
       <p>
-        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/Get-CTXAPI_VDAUptime.md">Edit on smitpi/CTXCloudApi</a>
+        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/Add-CTXAPI_DefaultsToProfile.md">Edit on smitpi/CTXCloudApi</a>
       </p><p>(c) 2021 Pierre Smit. All rights reserved.</p>
   <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
 </footer>
