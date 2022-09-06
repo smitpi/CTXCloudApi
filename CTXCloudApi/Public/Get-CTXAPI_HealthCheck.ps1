@@ -89,59 +89,91 @@ Function Get-CTXAPI_HealthCheck {
     #######################
     #region Get data
     #######################
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Config Log' -ForegroundColor Gray -NoNewline
+        $configlog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 -ErrorAction Stop | Group-Object -Property text | Select-Object count, name | Sort-Object -Property count -Descending | Select-Object -First 5
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error Configlog: `n`tMessage:$($_.Exception.Message)"}
 
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Config Log"
-    $configlog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Group-Object -Property text | Select-Object count, name | Sort-Object -Property count -Descending | Select-Object -First 5
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Delivery Groups"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Delivery Groups' -ForegroundColor Gray -NoNewline
+        $DeliveryGroups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader -ErrorAction Stop | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error Delevery groups: `n`tMessage:$($_.Exception.Message)"}
 
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Delivery Groups"
-    $DeliveryGroups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, DeliveryType, DesktopsAvailable, DesktopsDisconnected, DesktopsFaulted, DesktopsNeverRegistered, DesktopsUnregistered, InMaintenanceMode, IsBroken, RegisteredMachines, SessionCount
+    try {
+        $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24 -ErrorAction Stop
+    } catch {Write-Warning "Error Monitor Data: `n`tMessage:$($_.Exception.Message)"}
 
-    $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Connection Report"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Connection Report' -ForegroundColor Gray -NoNewline
+        $ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -ErrorAction Stop
+        $connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique | Select-Object -First 5 FullName, ClientVersion, ClientAddress, AVG_ICA_RTT
+        $connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique | Select-Object -First 5 FullName, ClientVersion, ClientAddress, LogOnDuration
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error connection report: `n`tMessage:$($_.Exception.Message)"}
 
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Connection Report"
-    $ConnectionReport = Get-CTXAPI_ConnectionReport -MonitorData $MonitorData
-    $connectionRTT = $ConnectionReport | Sort-Object -Property AVG_ICA_RTT -Descending -Unique | Select-Object -First 5 FullName, ClientVersion, ClientAddress, AVG_ICA_RTT
-    $connectionLogon = $ConnectionReport | Sort-Object -Property LogOnDuration -Descending -Unique | Select-Object -First 5 FullName, ClientVersion, ClientAddress, LogOnDuration
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Resource Utilization"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Resource Utilization' -ForegroundColor Gray -NoNewline
+        $ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -ErrorAction Stop
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error Resource Utilization: `n`tMessage:$($_.Exception.Message)"}
 
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Resource Utilization"
-    $ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Failure Report' -ForegroundColor Gray -NoNewline
+        $ConnectionFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Connection
+        $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error Failure Report: `n`tMessage:$($_.Exception.Message)"}
 
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
-    $ConnectionFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Connection
-    $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
-
-
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
-    $vdauptime = Get-CTXAPI_VDAUptime -APIHeader $APIHeader
-    $sessions = Get-CTXAPI_Session -APIHeader $APIHeader
-    $sessioncount = [PSCustomObject]@{
-        Connected           = ($sessions | Where-Object { $_.state -like 'active' }).count
-        Disconnected        = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
-        ConnectionFailure   = $ConnectionFailureReport.count
-        MachineFailure      = $MachineFailureReport.count
-        'VDA InMaintenance' = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
-        'VDA AgentVersions' = ($vdauptime | Group-Object -Property AgentVersion).count
-        'VDA NeedsReboot'   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
-    }
-
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
-    $Locations = Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
-    $CConnector = Get-CTXAPI_CloudConnector -APIHeader $APIHeader | ForEach-Object {
-        $loc = $_.location
-        [PSCustomObject]@{
-            fqdn            = $_.fqdn
-            location        = ($Locations | Where-Object { $_.id -like $loc }).name
-            status          = $_.status
-            currentVersion  = $_.currentVersion
-            versionState    = $_.versionState
-            lastContactDate = (Get-Date ([datetime]$_.lastContactDate) -Format 'yyyy-MM-dd HH:mm')
-            inMaintenance   = $_.inMaintenance
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Sessions' -ForegroundColor Gray -NoNewline
+        $vdauptime = Get-CTXAPI_VDAUptime -APIHeader $APIHeader
+        $sessions = Get-CTXAPI_Session -APIHeader $APIHeader
+        $sessioncount = [PSCustomObject]@{
+            Connected           = ($sessions | Where-Object { $_.state -like 'active' }).count
+            Disconnected        = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
+            ConnectionFailure   = $ConnectionFailureReport.count
+            MachineFailure      = $MachineFailureReport.count
+            'VDA InMaintenance' = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
+            'VDA AgentVersions' = ($vdauptime | Group-Object -Property AgentVersion).count
+            'VDA NeedsReboot'   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
         }
-    }
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error VDA And sessions: `n`tMessage:$($_.Exception.Message)"}
 
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Site Tests"
-    $testResult = Get-CTXAPI_Test -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest
-    $testReport = $testResult.Alldata | Where-Object { $_.Serverity -notlike $null } | Sort-Object -Property TestScope
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Cloud Connectors' -ForegroundColor Gray -NoNewline
+        $Locations = Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+        $CConnector = Get-CTXAPI_CloudConnector -APIHeader $APIHeader | ForEach-Object {
+            $loc = $_.location
+            [PSCustomObject]@{
+                fqdn            = $_.fqdn
+                location        = ($Locations | Where-Object { $_.id -like $loc }).name
+                status          = $_.status
+                currentVersion  = $_.currentVersion
+                versionState    = $_.versionState
+                lastContactDate = (Get-Date ([datetime]$_.lastContactDate) -Format 'yyyy-MM-dd HH:mm')
+                inMaintenance   = $_.inMaintenance
+            }
+        }
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error Connectors: `n`tMessage:$($_.Exception.Message)"}
+
+    try {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Site Tests"
+        Write-Host '[Collecting] ' -ForegroundColor Yellow -NoNewline; Write-Host 'Cloud Site Tests' -ForegroundColor Gray -NoNewline
+        $testResult = Get-CTXAPI_Test -APIHeader $APIHeader -SiteTest -HypervisorsTest -DeliveryGroupsTest -MachineCatalogsTest -ErrorAction Stop
+        $testReport = $testResult.Alldata | Where-Object { $_.Serverity -notlike $null } | Sort-Object -Property TestScope
+        Write-Host ' Complete' -ForegroundColor Green
+    } catch {Write-Warning "Error Site Test: `n`tMessage:$($_.Exception.Message)"}
     #endregion
 
     #######################
