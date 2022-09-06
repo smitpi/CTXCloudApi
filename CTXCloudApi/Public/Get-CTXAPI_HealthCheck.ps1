@@ -153,6 +153,8 @@ Function Get-CTXAPI_HealthCheck {
     #######################
     #region Building HTML the report
     #######################
+    ## TODO don't add to report if it is empty
+
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Building HTML Page"
     [string]$HTMLReportname = $ReportPath + "\XD_HealthChecks-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 
@@ -164,36 +166,46 @@ Function Get-CTXAPI_HealthCheck {
         New-HTMLSection @SectionSettings -Content {
             New-HTMLSection -HeaderText 'Session States' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $sessioncount }
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Cloud Connectors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $CConnector }
-            New-HTMLSection -HeaderText 'Test Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Summary }
+        New-HTMLSection -HeaderText 'Summary' @SectionSettings -Content {
+            if ($CConnector) { New-HTMLSection -HeaderText 'Cloud Connectors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $CConnector }}
+            if ($testResult.Summary) { New-HTMLSection -HeaderText 'Test Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Summary }}
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Test Result: Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.FatalError }
-            New-HTMLSection -HeaderText 'Test Result: Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Error }
+        New-HTMLSection -HeaderText 'Test Results' @SectionSettings -Content {
+            if ($testResult.FatalError) {    New-HTMLSection -HeaderText 'Test Result: Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.FatalError }}
+            if ($testResult.Error) {    New-HTMLSection -HeaderText 'Test Result: Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Error }}
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Test Result: Detailed' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
+        if ($testReport) {
+            New-HTMLSection @SectionSettings -Content {
+                New-HTMLSection -HeaderText 'Test Result: Detailed' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
+            }
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }
-            New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }
+        New-HTMLSection -HeaderText 'Top 5' @SectionSettings -Content {
+            if ($connectionRTT) {New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }}
+            if ($ $connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Connection Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ConnectionFailureReport }
-            New-HTMLSection -HeaderText 'Machine Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $MachineFailureReport }
+        New-HTMLSection -HeaderText 'Failure Logs' @SectionSettings -Content {
+            if ($ConnectionFailureReport) {New-HTMLSection -HeaderText 'Connection Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ConnectionFailureReport }}
+            if ($MachineFailureReport) {New-HTMLSection -HeaderText 'Machine Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $MachineFailureReport }}
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Config Changes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
+        if ($configlog) {
+            New-HTMLSection -HeaderText 'Config Changes' @SectionSettings -Content {
+                New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $configlog }
+            }
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $DeliveryGroups }
+        if ($DeliveryGroups) {
+            New-HTMLSection -HeaderText 'Delivery Groups' @SectionSettings -Content {
+                New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $DeliveryGroups }
+            }
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'VDI Uptimes' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $vdauptime }
+        if ($vdauptime) {
+            New-HTMLSection -HeaderText 'VDI Uptimes' @SectionSettings -Content {
+                New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $vdauptime }
+            }
         }
-        New-HTMLSection @SectionSettings -Content {
-            New-HTMLSection -HeaderText 'Resource Utilization' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ResourceUtilization }
+        if ($ResourceUtilization) {
+            New-HTMLSection -HeaderText 'Resource Utilization' @SectionSettings -Content {
+                New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ResourceUtilization }
+            }
         }
     }
     #endregion
