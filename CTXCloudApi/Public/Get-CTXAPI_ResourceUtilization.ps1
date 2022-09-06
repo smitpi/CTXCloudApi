@@ -110,35 +110,36 @@ Function Get-CTXAPI_ResourceUtilization {
 
     if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
     else { $monitor = $MonitorData }
+    
+   
 
-
-    $data = @()
-    foreach ($Machines in ($monitor.Machines | Where-Object { $_.MachineRole -ne 1 })) {
-
-        $ResourceUtilization = $monitor.ResourceUtilization | Where-Object { $_.MachineId -eq $Machines.Id }
-        $catalog = $monitor.Catalogs | Where-Object { $_.id -eq $Machines.CatalogId } | ForEach-Object { $_.name }
-        $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $Machines.DesktopGroupId } | ForEach-Object { $_.name }
-
+    [System.Collections.generic.List[PSObject]]$data = @()
+    $InGroups = $monitor.ResourceUtilization | Group-Object -Property MachineId
+    foreach ($machine in $InGroups) {
+        $MachineDetails = $monitor.Machines | Where-Object {$_.id -like $machine.Name}
+        $catalog = $monitor.Catalogs | Where-Object { $_.id -eq $MachineDetails.CatalogId } | ForEach-Object { $_.name }
+        $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $MachineDetails.DesktopGroupId } | ForEach-Object { $_.name }
+    
         try {
-            $AVGPercentCpu = [math]::Round(($ResourceUtilization | Measure-Object -Property PercentCpu -Average).Average)
-            $AVGUsedMemory = [math]::Ceiling((($ResourceUtilization | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
-            $AVGSessionCount = ($ResourceUtilization | Measure-Object -Property SessionCount -Average).Average
-            $AVGTotalMemory = [math]::Round($ResourceUtilization[0].TotalMemory / 1gb)
+            $AVGPercentCpu = [math]::Round(($machine.Group | Measure-Object -Property PercentCpu -Average).Average)
+            $AVGUsedMemory = [math]::Ceiling((($machine.Group | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
+            $AVGSessionCount = [math]::Ceiling(($machine.Group | Measure-Object -Property SessionCount -Average).Average)
+            $AVGTotalMemory = [math]::Round($machine.Group[0].TotalMemory / 1gb)
 
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-        $data += [PSCustomObject]@{
-            DnsName                  = $Machines.DnsName
-            IsInMaintenanceMode      = $Machines.IsInMaintenanceMode
-            AgentVersion             = $Machines.AgentVersion
-            CurrentRegistrationState = $RegistrationState.($Machines.CurrentRegistrationState)
-            OSType                   = $Machines.OSType
-            Catalog                  = $catalog
-            DesktopGroup             = $desktopgroup
-            AVGPercentCpu            = $AVGPercentCpu
-            AVGUsedMemory            = $AVGUsedMemory
-            AVGTotalMemory           = $AVGTotalMemory
-            AVGSessionCount          = $AVGSessionCount
-        }
+        $data.Add([PSCustomObject]@{
+                DnsName                  = $MachineDetails.DnsName
+                IsInMaintenanceMode      = $MachineDetails.IsInMaintenanceMode
+                AgentVersion             = $MachineDetails.AgentVersion
+                CurrentRegistrationState = $RegistrationState.($MachineDetails.CurrentRegistrationState)
+                OSType                   = $MachineDetails.OSType
+                Catalog                  = $catalog
+                DesktopGroup             = $desktopgroup
+                AVGPercentCpu            = $AVGPercentCpu
+                AVGUsedMemory            = $AVGUsedMemory
+                AVGTotalMemory           = $AVGTotalMemory
+                AVGSessionCount          = $AVGSessionCount
+            })
     }
     if ($Export -eq 'Excel') {
         $ExcelOptions = @{
@@ -153,7 +154,7 @@ Function Get-CTXAPI_ResourceUtilization {
             FreezePane       = '3'
         }
         $data | Export-Excel -Title 'Resource Audit' -WorksheetName Resources @ExcelOptions
-     }
+    }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
     if ($Export -eq 'Host') { $data }
 

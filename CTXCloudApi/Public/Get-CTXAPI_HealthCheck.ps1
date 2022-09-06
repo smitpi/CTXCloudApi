@@ -107,8 +107,8 @@ Function Get-CTXAPI_HealthCheck {
     $ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
-    $ConnectionFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
-    $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -region $region -hours 24 -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
+    $ConnectionFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Connection
+    $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
 
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
@@ -163,6 +163,10 @@ Function Get-CTXAPI_HealthCheck {
             if ($CConnector) { New-HTMLSection -HeaderText 'Cloud Connectors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $CConnector }}
             if ($testResult.Summary) { New-HTMLSection -HeaderText 'Test Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Summary }}
         }
+        New-HTMLSection -HeaderText 'Top 5' @SectionSettings -Content {
+            if ($connectionRTT) {New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }}
+            if ($connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
+        }
         New-HTMLSection -HeaderText 'Test Results' @SectionSettings -Content {
             if ($testResult.FatalError) {    New-HTMLSection -HeaderText 'Test Result: Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.FatalError }}
             if ($testResult.Error) {    New-HTMLSection -HeaderText 'Test Result: Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Error }}
@@ -171,10 +175,6 @@ Function Get-CTXAPI_HealthCheck {
             New-HTMLSection -HeaderText 'Test Result: Detailed' @SectionSettings -Content {
                 New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
             }
-        }
-        New-HTMLSection -HeaderText 'Top 5' @SectionSettings -Content {
-            if ($connectionRTT) {New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }}
-            if ($connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
         }
         New-HTMLSection -HeaderText 'Failure Logs' @SectionSettings -Content {
             if ($ConnectionFailureReport) {New-HTMLSection -HeaderText 'Connection Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ConnectionFailureReport }}

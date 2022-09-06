@@ -92,6 +92,7 @@ Function Get-CTXAPI_FailureReport {
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
@@ -127,17 +128,17 @@ Function Get-CTXAPI_FailureReport {
             $MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
             $APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }
             $Data.Add([PSCustomObject]@{
-                Name                     = $MonDataMachine.DnsName
-                IP                       = $MonDataMachine.IPAddress
-                OSType                   = $MonDataMachine.OSType
-                FailureStartDate         = $log.FailureStartDate
-                FailureEndDate           = $log.FailureEndDate
-                FaultState               = $log.FaultState
-                LastDeregistrationReason = $APIMachine.LastDeregistrationReason
-                LastConnectionFailure    = $APIMachine.LastConnectionFailure
-                LastErrorReason          = $APIMachine.LastErrorReason
-                CurrentFaultState        = $APIMachine.FaultState
-            })
+                    Name                     = $MonDataMachine.DnsName
+                    IP                       = $MonDataMachine.IPAddress
+                    OSType                   = $MonDataMachine.OSType
+                    FailureStartDate         = $log.FailureStartDate
+                    FailureEndDate           = $log.FailureEndDate
+                    FaultState               = $log.FaultState
+                    LastDeregistrationReason = $APIMachine.LastDeregistrationReason
+                    LastConnectionFailure    = $APIMachine.LastConnectionFailure
+                    LastErrorReason          = $APIMachine.LastErrorReason
+                    CurrentFaultState        = $APIMachine.FaultState
+                })
 
         }
     }
@@ -147,14 +148,14 @@ Function Get-CTXAPI_FailureReport {
             $user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
             $mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
             $Data.Add([PSCustomObject]@{
-                UserName                   = $user.UserName
-                FullName                   = $user.FullName
-                DnsName                    = $mashine.DnsName
-                IPAddress                  = $mashine.IPAddress
-                CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
-                FailureDate                = $log.FailureDate
-                ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
-            })
+                    UserName                   = $user.UserName
+                    FullName                   = $user.FullName
+                    DnsName                    = $mashine.DnsName
+                    IPAddress                  = $mashine.IPAddress
+                    CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
+                    FailureDate                = $log.FailureDate
+                    ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
+                })
         }
     }
 

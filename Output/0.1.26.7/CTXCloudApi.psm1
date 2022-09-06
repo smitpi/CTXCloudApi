@@ -3,7 +3,7 @@
 ########### Private Function ###############
 # Source:           Export-Odata.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/09/03 19:15:36
@@ -37,7 +37,7 @@
 ########### Private Function ###############
 # Source:           Reports-Colors.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/06/24 23:28:21
@@ -101,7 +101,7 @@ $script:TableSectionSettings = @{
 ########### Private Function ###############
 # Source:           Reports-Variables.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
 # ModifiedOn:       2022/05/03 21:55:20
@@ -219,7 +219,7 @@ $script:ConnectionState = [PSCustomObject]@{
 ######## Function 1 of 25 ##################
 # Function:         Add-CTXAPI_DefaultsToProfile
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/09/03 16:47:13
@@ -312,7 +312,7 @@ Export-ModuleMember -Function Add-CTXAPI_DefaultsToProfile
 ######## Function 2 of 25 ##################
 # Function:         Connect-CTXAPI
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -400,7 +400,7 @@ Export-ModuleMember -Function Connect-CTXAPI
 ######## Function 3 of 25 ##################
 # Function:         Get-CTXAPI_Application
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -444,7 +444,7 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 ######## Function 4 of 25 ##################
 # Function:         Get-CTXAPI_CloudConnector
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -487,7 +487,7 @@ Export-ModuleMember -Function Get-CTXAPI_CloudConnector
 ######## Function 5 of 25 ##################
 # Function:         Get-CTXAPI_CloudService
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -529,7 +529,7 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 ######## Function 6 of 25 ##################
 # Function:         Get-CTXAPI_ConfigAudit
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -729,7 +729,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
 ######## Function 7 of 25 ##################
 # Function:         Get-CTXAPI_ConfigLog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -775,7 +775,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 ######## Function 8 of 25 ##################
 # Function:         Get-CTXAPI_ConnectionReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -911,7 +911,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
 ######## Function 9 of 25 ##################
 # Function:         Get-CTXAPI_DeliveryGroup
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -956,11 +956,11 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 ######## Function 10 of 25 ##################
 # Function:         Get-CTXAPI_FailureReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/09/03 17:22:03
+# ModifiedOn:       2022/09/06 16:45:31
 # Synopsis:         Reports on failures in the last x hours.
 #############################################
  
@@ -1003,6 +1003,7 @@ Function Get-CTXAPI_FailureReport {
     [OutputType([System.Object[]])]
     PARAM(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
@@ -1038,17 +1039,17 @@ Function Get-CTXAPI_FailureReport {
             $MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
             $APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }
             $Data.Add([PSCustomObject]@{
-                Name                     = $MonDataMachine.DnsName
-                IP                       = $MonDataMachine.IPAddress
-                OSType                   = $MonDataMachine.OSType
-                FailureStartDate         = $log.FailureStartDate
-                FailureEndDate           = $log.FailureEndDate
-                FaultState               = $log.FaultState
-                LastDeregistrationReason = $APIMachine.LastDeregistrationReason
-                LastConnectionFailure    = $APIMachine.LastConnectionFailure
-                LastErrorReason          = $APIMachine.LastErrorReason
-                CurrentFaultState        = $APIMachine.FaultState
-            })
+                    Name                     = $MonDataMachine.DnsName
+                    IP                       = $MonDataMachine.IPAddress
+                    OSType                   = $MonDataMachine.OSType
+                    FailureStartDate         = $log.FailureStartDate
+                    FailureEndDate           = $log.FailureEndDate
+                    FaultState               = $log.FaultState
+                    LastDeregistrationReason = $APIMachine.LastDeregistrationReason
+                    LastConnectionFailure    = $APIMachine.LastConnectionFailure
+                    LastErrorReason          = $APIMachine.LastErrorReason
+                    CurrentFaultState        = $APIMachine.FaultState
+                })
 
         }
     }
@@ -1058,14 +1059,14 @@ Function Get-CTXAPI_FailureReport {
             $user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
             $mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
             $Data.Add([PSCustomObject]@{
-                UserName                   = $user.UserName
-                FullName                   = $user.FullName
-                DnsName                    = $mashine.DnsName
-                IPAddress                  = $mashine.IPAddress
-                CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
-                FailureDate                = $log.FailureDate
-                ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
-            })
+                    UserName                   = $user.UserName
+                    FullName                   = $user.FullName
+                    DnsName                    = $mashine.DnsName
+                    IPAddress                  = $mashine.IPAddress
+                    CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
+                    FailureDate                = $log.FailureDate
+                    ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
+                })
         }
     }
 
@@ -1097,11 +1098,11 @@ Export-ModuleMember -Function Get-CTXAPI_FailureReport
 ######## Function 11 of 25 ##################
 # Function:         Get-CTXAPI_HealthCheck
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/09/06 16:35:21
+# ModifiedOn:       2022/09/06 16:48:05
 # Synopsis:         Show useful information for daily health check
 #############################################
  
@@ -1159,8 +1160,8 @@ Function Get-CTXAPI_HealthCheck {
     $ResourceUtilization = Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
-    $ConnectionFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
-    $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -region $region -hours 24 -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
+    $ConnectionFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Connection
+    $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -MonitorData $MonitorData -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
 
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
@@ -1215,6 +1216,10 @@ Function Get-CTXAPI_HealthCheck {
             if ($CConnector) { New-HTMLSection -HeaderText 'Cloud Connectors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $CConnector }}
             if ($testResult.Summary) { New-HTMLSection -HeaderText 'Test Summary' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Summary }}
         }
+        New-HTMLSection -HeaderText 'Top 5' @SectionSettings -Content {
+            if ($connectionRTT) {New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }}
+            if ($connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
+        }
         New-HTMLSection -HeaderText 'Test Results' @SectionSettings -Content {
             if ($testResult.FatalError) {    New-HTMLSection -HeaderText 'Test Result: Fatal Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.FatalError }}
             if ($testResult.Error) {    New-HTMLSection -HeaderText 'Test Result: Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Error }}
@@ -1223,10 +1228,6 @@ Function Get-CTXAPI_HealthCheck {
             New-HTMLSection -HeaderText 'Test Result: Detailed' @SectionSettings -Content {
                 New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
             }
-        }
-        New-HTMLSection -HeaderText 'Top 5' @SectionSettings -Content {
-            if ($connectionRTT) {New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }}
-            if ($connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
         }
         New-HTMLSection -HeaderText 'Failure Logs' @SectionSettings -Content {
             if ($ConnectionFailureReport) {New-HTMLSection -HeaderText 'Connection Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ConnectionFailureReport }}
@@ -1268,7 +1269,7 @@ Export-ModuleMember -Function Get-CTXAPI_HealthCheck
 ######## Function 12 of 25 ##################
 # Function:         Get-CTXAPI_Hypervisor
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1314,7 +1315,7 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 ######## Function 13 of 25 ##################
 # Function:         Get-CTXAPI_LowLevelOperation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1364,7 +1365,7 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 ######## Function 14 of 25 ##################
 # Function:         Get-CTXAPI_Machine
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1418,7 +1419,7 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 ######## Function 15 of 25 ##################
 # Function:         Get-CTXAPI_MachineCatalog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1462,7 +1463,7 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 ######## Function 16 of 25 ##################
 # Function:         Get-CTXAPI_MonitorData
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1559,7 +1560,7 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 ######## Function 17 of 25 ##################
 # Function:         Get-CTXAPI_ResourceLocation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1601,11 +1602,11 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 ######## Function 18 of 25 ##################
 # Function:         Get-CTXAPI_ResourceUtilization
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
-# ModifiedOn:       2022/06/24 23:17:13
+# ModifiedOn:       2022/09/06 17:06:35
 # Synopsis:         Resource utilization in the last x hours
 #############################################
  
@@ -1664,35 +1665,36 @@ Function Get-CTXAPI_ResourceUtilization {
 
     if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
     else { $monitor = $MonitorData }
+    
+   
 
-
-    $data = @()
-    foreach ($Machines in ($monitor.Machines | Where-Object { $_.MachineRole -ne 1 })) {
-
-        $ResourceUtilization = $monitor.ResourceUtilization | Where-Object { $_.MachineId -eq $Machines.Id }
-        $catalog = $monitor.Catalogs | Where-Object { $_.id -eq $Machines.CatalogId } | ForEach-Object { $_.name }
-        $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $Machines.DesktopGroupId } | ForEach-Object { $_.name }
-
+    [System.Collections.generic.List[PSObject]]$data = @()
+    $InGroups = $monitor.ResourceUtilization | Group-Object -Property MachineId
+    foreach ($machine in $InGroups) {
+        $MachineDetails = $monitor.Machines | Where-Object {$_.id -like $machine.Name}
+        $catalog = $monitor.Catalogs | Where-Object { $_.id -eq $MachineDetails.CatalogId } | ForEach-Object { $_.name }
+        $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $MachineDetails.DesktopGroupId } | ForEach-Object { $_.name }
+    
         try {
-            $AVGPercentCpu = [math]::Round(($ResourceUtilization | Measure-Object -Property PercentCpu -Average).Average)
-            $AVGUsedMemory = [math]::Ceiling((($ResourceUtilization | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
-            $AVGSessionCount = ($ResourceUtilization | Measure-Object -Property SessionCount -Average).Average
-            $AVGTotalMemory = [math]::Round($ResourceUtilization[0].TotalMemory / 1gb)
+            $AVGPercentCpu = [math]::Round(($machine.Group | Measure-Object -Property PercentCpu -Average).Average)
+            $AVGUsedMemory = [math]::Ceiling((($machine.Group | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
+            $AVGSessionCount = [math]::Ceiling(($machine.Group | Measure-Object -Property SessionCount -Average).Average)
+            $AVGTotalMemory = [math]::Round($machine.Group[0].TotalMemory / 1gb)
 
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
-        $data += [PSCustomObject]@{
-            DnsName                  = $Machines.DnsName
-            IsInMaintenanceMode      = $Machines.IsInMaintenanceMode
-            AgentVersion             = $Machines.AgentVersion
-            CurrentRegistrationState = $RegistrationState.($Machines.CurrentRegistrationState)
-            OSType                   = $Machines.OSType
-            Catalog                  = $catalog
-            DesktopGroup             = $desktopgroup
-            AVGPercentCpu            = $AVGPercentCpu
-            AVGUsedMemory            = $AVGUsedMemory
-            AVGTotalMemory           = $AVGTotalMemory
-            AVGSessionCount          = $AVGSessionCount
-        }
+        $data.Add([PSCustomObject]@{
+                DnsName                  = $MachineDetails.DnsName
+                IsInMaintenanceMode      = $MachineDetails.IsInMaintenanceMode
+                AgentVersion             = $MachineDetails.AgentVersion
+                CurrentRegistrationState = $RegistrationState.($MachineDetails.CurrentRegistrationState)
+                OSType                   = $MachineDetails.OSType
+                Catalog                  = $catalog
+                DesktopGroup             = $desktopgroup
+                AVGPercentCpu            = $AVGPercentCpu
+                AVGUsedMemory            = $AVGUsedMemory
+                AVGTotalMemory           = $AVGTotalMemory
+                AVGSessionCount          = $AVGSessionCount
+            })
     }
     if ($Export -eq 'Excel') {
         $ExcelOptions = @{
@@ -1707,7 +1709,7 @@ Function Get-CTXAPI_ResourceUtilization {
             FreezePane       = '3'
         }
         $data | Export-Excel -Title 'Resource Audit' -WorksheetName Resources @ExcelOptions
-     }
+    }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Resources' -HideFooter -FixedHeader }
     if ($Export -eq 'Host') { $data }
 
@@ -1720,7 +1722,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
 ######## Function 19 of 25 ##################
 # Function:         Get-CTXAPI_Session
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1762,7 +1764,7 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 ######## Function 20 of 25 ##################
 # Function:         Get-CTXAPI_SiteDetail
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -1806,7 +1808,7 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 ######## Function 21 of 25 ##################
 # Function:         Get-CTXAPI_Test
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2047,7 +2049,7 @@ Export-ModuleMember -Function Get-CTXAPI_Test
 ######## Function 22 of 25 ##################
 # Function:         Get-CTXAPI_VDAUptime
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2165,7 +2167,7 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 ######## Function 23 of 25 ##################
 # Function:         Get-CTXAPI_Zone
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2208,7 +2210,7 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 ######## Function 24 of 25 ##################
 # Function:         Set-CTXAPI_ReportColour
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
@@ -2313,7 +2315,7 @@ Export-ModuleMember -Function Set-CTXAPI_ReportColour
 ######## Function 25 of 25 ##################
 # Function:         Test-CTXAPI_Header
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.26.6
+# ModuleVersion:    0.1.26.7
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        2022/03/20 13:16:40
