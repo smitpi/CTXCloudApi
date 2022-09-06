@@ -108,27 +108,21 @@ Function Get-CTXAPI_HealthCheck {
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Failure Report"
     $ConnectionFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
-    $MachineFailureReport = Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
+    $MachineFailureReport = Get-CTXAPI_FailureReport -APIHeader $APIHeader -region $region -hours 24 -FailureType Machine | Select-Object Name, IP, OSType, FailureStartDate, FailureEndDate, FaultState
 
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Sessions"
+    $vdauptime = Get-CTXAPI_VDAUptime -APIHeader $APIHeader
     $sessions = Get-CTXAPI_Session -APIHeader $APIHeader
     $sessioncount = [PSCustomObject]@{
-        Connected         = ($sessions | Where-Object { $_.state -like 'active' }).count
-        Disconnected      = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
-        ConnectionFailure = $ConnectionFailureReport.count
-        MachineFailure    = $MachineFailureReport.count
+        Connected           = ($sessions | Where-Object { $_.state -like 'active' }).count
+        Disconnected        = ($sessions | Where-Object { $_.state -like 'Disconnected' }).count
+        ConnectionFailure   = $ConnectionFailureReport.count
+        MachineFailure      = $MachineFailureReport.count
+        'VDA InMaintenance' = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
+        'VDA AgentVersions' = ($vdauptime | Group-Object -Property AgentVersion).count
+        'VDA NeedsReboot'   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
     }
-
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Machines"
-    $vdauptime = Get-CTXAPI_VDAUptime -APIHeader $APIHeader
-    # $machinecount = [PSCustomObject]@{
-    #     Inmaintenance = ($vdauptime | Where-Object { $_.InMaintenanceMode -like 'true' }).count
-    #     DesktopCount  = ($vdauptime | Where-Object { $_.OSType -like 'Windows 10' }).count
-    #     ServerCount   = ($vdauptime | Where-Object { $_.OSType -notlike 'Windows 10' }).count
-    #     AgentVersions = ($vdauptime | Group-Object -Property AgentVersion).count
-    #     NeedsReboot   = ($vdauptime | Where-Object { $_.days -gt 7 }).count
-    # }
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) Cloud Connectors"
     $Locations = Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
@@ -153,7 +147,6 @@ Function Get-CTXAPI_HealthCheck {
     #######################
     #region Building HTML the report
     #######################
-    ## TODO don't add to report if it is empty
 
     Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Proccessing] Building HTML Page"
     [string]$HTMLReportname = $ReportPath + "\XD_HealthChecks-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
