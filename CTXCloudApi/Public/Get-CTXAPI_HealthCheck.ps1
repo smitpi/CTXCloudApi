@@ -175,13 +175,13 @@ Function Get-CTXAPI_HealthCheck {
             if ($testResult.Error) {    New-HTMLSection -HeaderText 'Test Result: Errors' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testResult.Error }}
         }
         if ($testReport) {
-            New-HTMLSection @SectionSettings -Content {
-                New-HTMLSection -HeaderText 'Test Result: Detailed' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
+            New-HTMLSection -HeaderText 'Test Result: Detailed' @SectionSettings -Content {
+                New-HTMLSection @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $testReport }
             }
         }
         New-HTMLSection -HeaderText 'Top 5' @SectionSettings -Content {
             if ($connectionRTT) {New-HTMLSection -HeaderText 'Top 5 RTT Sessions' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionRTT }}
-            if ($ $connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
+            if ($connectionLogon) { New-HTMLSection -HeaderText 'Top 5 Logon Duration' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $connectionLogon }}
         }
         New-HTMLSection -HeaderText 'Failure Logs' @SectionSettings -Content {
             if ($ConnectionFailureReport) {New-HTMLSection -HeaderText 'Connection Failures' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ConnectionFailureReport }}
