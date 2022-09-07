@@ -1,7 +1,7 @@
 # CTXCloudApi
  
 ## Description
-Wrapper for Citrix Cloud CVAD API. You dont require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with Connect-CTXAPI to connect, it will create the needed hearders for the other functions.
+A wrapper for Citrix Cloud CVAD API. You do not require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with the Connect-CTXAPI function to connect, it will create the needed headers for the other functions.
  
 ## Getting Started
 - Install from PowerShell Gallery [PS Gallery](https://www.powershellgallery.com/packages/CTXCloudApi)
