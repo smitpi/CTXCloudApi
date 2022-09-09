@@ -8,9 +8,14 @@ A wrapper for Citrix Cloud CVAD API. You do not require the installed SDK anymor
 ```
 Install-Module -Name CTXCloudApi -Verbose
 ```
-- or from GitHub [GitHub Repo](https://github.com/smitpi/CTXCloudApi)
+- or run this script to install from GitHub [GitHub Repo](https://github.com/smitpi/CTXCloudApi)
 ```
-git clone https://github.com/smitpi/CTXCloudApi (Join-Path (get-item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath CTXCloudApi)
+$CurrentLocation = Get-Item .
+$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath CTXCloudApi)
+git clone --depth 1 https://github.com/smitpi/CTXCloudApi $ModuleDestination 2>&1 | Write-Host -ForegroundColor Yellow
+Set-Location $ModuleDestination
+git filter-branch --prune-empty --subdirectory-filter Output HEAD 2>&1 | Write-Host -ForegroundColor Yellow
+Set-Location $CurrentLocation
 ```
 - Then import the module into your session
 ```
