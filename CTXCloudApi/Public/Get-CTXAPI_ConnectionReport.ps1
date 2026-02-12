@@ -83,9 +83,9 @@ Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c
 
 #>
 
-Function Get-CTXAPI_ConnectionReport {
+function Get-CTXAPI_ConnectionReport {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport')]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -112,8 +112,11 @@ Function Get-CTXAPI_ConnectionReport {
     if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
     else { $mondata = $MonitorData }
 
-    $data = @()
+    [System.Collections.generic.List[PSObject]]$data = @()
+        
+
     foreach ($connection in $mondata.Connections) {
+        Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($mondata.Connections.IndexOf($connection) + 1) of $($mondata.Connections.Count)"
         try {
             $OneSession = $mondata.session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
             $user = $mondata.users | Where-Object { $_.id -like $OneSession.UserId }
@@ -121,40 +124,38 @@ Function Get-CTXAPI_ConnectionReport {
             try {
                 $avgrtt = 0
                 $avgrtt = $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | Measure-Object -Property IcaRttMS -Average
-            }
-            catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
-        }
-        catch { Write-Warning "Error processing - $_.Exception.Message" }
-        $data += [PSCustomObject]@{
-            Id                       = $connection.id
-            FullName                 = $user.FullName
-            Upn                      = $user.upn
-            ConnectionState          = $ConnectionState.($OneSession.ConnectionState)
-            DnsName                  = $mashine.DnsName
-            IPAddress                = $mashine.IPAddress
-            IsInMaintenanceMode      = $mashine.IsInMaintenanceMode
-            CurrentRegistrationState = $RegistrationState.($mashine.CurrentRegistrationState)
-            OSType                   = $mashine.OSType
-            ClientName               = $connection.ClientName
-            ClientVersion            = $connection.ClientVersion
-            ClientAddress            = $connection.ClientAddress
-            ClientPlatform           = $connection.ClientPlatform
-            IsReconnect              = $connection.IsReconnect
-            IsSecureIca              = $connection.IsSecureIca
-            Protocol                 = $connection.Protocol
-            EstablishmentDate        = $connection.EstablishmentDate
-            LogOnStartDate           = $connection.LogOnStartDate
-            LogOnEndDate             = $connection.LogOnEndDate
-            AuthenticationDuration   = $connection.AuthenticationDuration
-            LogOnDuration            = $OneSession.LogOnDuration
-            DisconnectDate           = $connection.DisconnectDate
-            EndDate                  = $OneSession.EndDate
-            ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
-            FailureDate              = $OneSession.FailureDate
-            AVG_ICA_RTT              = [math]::Round($avgrtt.Average)
-        }
+            } catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
+        } catch { Write-Warning "Error processing - $_.Exception.Message" }
+        $data.Add([PSCustomObject]@{
+                Id                       = $connection.id
+                # FullName                 = if ($user.FullName -eq $null) { $user.FullName } else { $user.upn }
+                Upn                      = $user.upn
+                ConnectionState          = $ConnectionState.($OneSession.ConnectionState)
+                DnsName                  = $mashine.DnsName
+                IPAddress                = $mashine.IPAddress
+                IsInMaintenanceMode      = $mashine.IsInMaintenanceMode
+                CurrentRegistrationState = $RegistrationState.($mashine.CurrentRegistrationState)
+                OSType                   = $mashine.OSType
+                ClientName               = $connection.ClientName
+                ClientVersion            = $connection.ClientVersion
+                ClientAddress            = $connection.ClientAddress
+                ClientPlatform           = $connection.ClientPlatform
+                IsReconnect              = $connection.IsReconnect
+                IsSecureIca              = $connection.IsSecureIca
+                Protocol                 = $connection.Protocol
+                EstablishmentDate        = $connection.EstablishmentDate
+                LogOnStartDate           = $connection.LogOnStartDate
+                LogOnEndDate             = $connection.LogOnEndDate
+                AuthenticationDuration   = $connection.AuthenticationDuration
+                LogOnDuration            = $OneSession.LogOnDuration
+                DisconnectDate           = $connection.DisconnectDate
+                EndDate                  = $OneSession.EndDate
+                ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
+                FailureDate              = $OneSession.FailureDate
+                AVG_ICA_RTT              = if ($avgrtt -eq $null) { 0 } else { [math]::Round($avgrtt.Average) }
+            }) #PSList
     }
-
+    
     if ($Export -eq 'Excel') { 
         $ExcelOptions = @{
             Path             = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
