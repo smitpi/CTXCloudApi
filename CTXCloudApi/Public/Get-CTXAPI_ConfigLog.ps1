@@ -76,6 +76,7 @@ Function Get-CTXAPI_ConfigLog {
         [Parameter(Mandatory = $true)]
         [string]$Days)
 
+        
 
     (Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations?days=$days" -Headers $APIHeader.headers).items
 

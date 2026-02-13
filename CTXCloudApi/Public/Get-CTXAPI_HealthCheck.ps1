@@ -74,9 +74,9 @@ Get-CTXAPI_HealthCheck -APIHeader $APIHeader -region eu -ReportPath C:\Temp
 
 #>
 
-Function Get-CTXAPI_HealthCheck {
+function Get-CTXAPI_HealthCheck {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_HealthCheck')]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [ValidateScript( { (Test-Path $_) })]
@@ -100,7 +100,7 @@ Function Get-CTXAPI_HealthCheck {
     } catch {Write-Warning "Error Delevery groups: `n`tMessage:$($_.Exception.Message)"}
 
     try {
-        $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -ErrorAction Stop
+        $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours 24 -ErrorAction Stop
     } catch {Write-Warning "Error Monitor Data: `n`tMessage:$($_.Exception.Message)"}
 
     try {

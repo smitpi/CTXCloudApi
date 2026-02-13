@@ -62,23 +62,38 @@ $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
 
 #>
 
-Function Get-CTXAPI_Machine {
+function Get-CTXAPI_Machine {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machine')]
     [Alias('Get-CTXAPI_Machines')]
-    [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
-        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-        [switch]$GetPubDesktop = $false
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
+    $requestUri = 'https://api-eu.cloud.com/cvad/manage/Machines?limit=1000'
+    $response = Invoke-RestMethod -Uri $requestUri -Method GET -Headers $APIHeader.headers
 
-    (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-        Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)" -Method Get -Headers $APIHeader.headers
+    # Safely get initial continuation token if present
+    if ($response.PSObject.Properties['ContinuationToken']) {
+        $ContinuationToken = $response.ContinuationToken
+    } else {
+        $ContinuationToken = $null
     }
 
-    if ($GetPubDesktop) {
-        (Invoke-RestMethod -Uri 'https://api.cloud.com/cvad/manage/Machines/' -Method get -Headers $APIHeader.headers).items | ForEach-Object {
-            Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Machines/$($_.id)/Desktop" -Method Get -Headers $APIHeader.headers
+    while (-not [string]::IsNullOrEmpty($ContinuationToken)) {
+        $requestUriContinue = $requestUri + '&continuationtoken=' + $ContinuationToken
+        $responsePage = Invoke-RestMethod -Uri $requestUriContinue -Method GET -Headers $APIHeader.headers
+
+        # Merge items from the next page when available
+        if ($responsePage.PSObject.Properties['Items']) {
+            $response.Items += $responsePage.Items
+        }
+
+        # Safely read continuation token for the next page
+        if ($responsePage.PSObject.Properties['ContinuationToken'] -and -not [string]::IsNullOrEmpty($responsePage.ContinuationToken)) {
+            $ContinuationToken = $responsePage.ContinuationToken
+        } else {
+            $ContinuationToken = $null
         }
     }
+    $response.items
 } #end Function

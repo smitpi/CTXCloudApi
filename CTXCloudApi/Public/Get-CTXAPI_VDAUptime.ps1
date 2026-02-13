@@ -73,9 +73,9 @@ Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
 
 #>
 
-Function Get-CTXAPI_VDAUptime {
+function Get-CTXAPI_VDAUptime {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime')]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false)]
@@ -87,53 +87,46 @@ Function Get-CTXAPI_VDAUptime {
 
     try {
 
-    [System.Collections.ArrayList]$complist = @()
+        [System.Collections.generic.List[PSObject]]$complist = @()
         $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
 
         foreach ($machine in $machines) {
             try {
-                
-                $lastBootTime = [Datetime]$machine.LastDeregistrationTime
-
-                $Uptime = (New-TimeSpan -Start $lastBootTime -End (Get-Date))
-                $SelectProps =
-                'Days',
-                'Hours',
-                'Minutes',
-                @{
-                    Name       = 'TotalHours'
-                    Expression = { [math]::Round($Uptime.TotalHours) }
-                },
-                @{
-                    Name       = 'OnlineSince'
-                    Expression = { $LastBootTime }
-                },
-                @{
-                    Name       = 'DayOfWeek'
-                    Expression = { $LastBootTime.DayOfWeek }
+                # Safely read and convert the last deregistration/registration time
+                if ($machine.PSObject.Properties['LastDeregistrationTime'] -and -not [string]::IsNullOrWhiteSpace($machine.LastDeregistrationTime)) {
+                    $lastBootTime = [Datetime]$machine.LastDeregistrationTime
+                } elseif ($machine.PSObject.Properties['LastRegistrationTime'] -and -not [string]::IsNullOrWhiteSpace($machine.LastRegistrationTime)) {
+                    # Fallback to LastRegistrationTime if available
+                    $lastBootTime = [Datetime]$machine.LastRegistrationTime
+                } else {
+                    $lastBootTime = $null
                 }
-                $CompUptime = $Uptime | Select-Object $SelectProps
+
+                # Compute uptime only when we have a valid start time
+                if ($null -ne $lastBootTime) {
+                    $Uptime = New-TimeSpan -Start $lastBootTime -End (Get-Date)
+                } else {
+                    $Uptime = $null
+                }
             } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"} 
             
-            [void]$complist.Add([PSCustomObject]@{
-                DnsName           = $machine.DnsName
-                AgentVersion      = $machine.AgentVersion
-                MachineCatalog    = $machine.MachineCatalog.Name
-                DeliveryGroup     = $machine.DeliveryGroup.Name
-                InMaintenanceMode = $machine.InMaintenanceMode
-                IPAddress         = $machine.IPAddress
-                OSType            = $machine.OSType
-                ProvisioningType  = $machine.ProvisioningType
-                SummaryState      = $machine.SummaryState
-                FaultState        = $machine.FaultState
-                Days              = $CompUptime.Days
-                TotalHours        = $CompUptime.TotalHours
-                OnlineSince       = $CompUptime.OnlineSince
-                DayOfWeek         = $CompUptime.DayOfWeek
+            $complist.Add([PSCustomObject]@{
+                    DnsName           = $machine.DnsName
+                    AgentVersion      = $machine.AgentVersion
+                    MachineCatalog    = $machine.MachineCatalog.Name
+                    DeliveryGroup     = $machine.DeliveryGroup.Name
+                    InMaintenanceMode = $machine.InMaintenanceMode
+                    IPAddress         = $machine.IPAddress
+                    OSType            = $machine.OSType
+                    ProvisioningType  = $machine.ProvisioningType
+                    SummaryState      = $machine.SummaryState
+                    FaultState        = $machine.FaultState
+                    Days              = if ($null -ne $Uptime) { $Uptime.Days } else { $null }
+                    OnlineSince       = if ($null -eq $lastBootTime) { $null } else { $lastBootTime }
                 })
-            }
+        }
     } catch { Write-Warning 'Date calculation failed' }
-
+    ##TODO - fix error  Message:Cannot convert null to type "System.DateTime".
     if ($Export -eq 'Excel') { 
         $ExcelOptions = @{
             Path             = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'

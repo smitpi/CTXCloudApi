@@ -1,5 +1,4 @@
-﻿# https://developer-docs.citrix.com/projects/monitor-service-odata-api/en/latest/api-reference/Monitor.Model/#enums-error-codes-and-descriptions
-
+﻿# https://developer-docs.citrix.com/en-us/monitor-service-odata-api/monitor-service-enums
 $script:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Registered'
@@ -111,4 +110,18 @@ $script:MachineFaultStateCode = [PSCustomObject]@{
     4	=	'Unregistered'
     5	=	'MaxCapacity'
     6	=	'VirtualMachineNotFound'
+}
+$script:PowerStateCode = [PSCustomObject]@{
+    0 = 'Unknown'
+    1 = 'Unavailable'
+    2 = 'Off'
+    3 = 'On'
+    4 = 'Suspended'
+    5 = 'TurningOn'
+    6 = 'TurningOff'
+    7 = 'Suspending'
+    8 = 'Resuming'
+    9 = 'Unmanaged'
+    10 = 'NotSupported'
+    11 = 'VirtualMachineNotFound'
 }

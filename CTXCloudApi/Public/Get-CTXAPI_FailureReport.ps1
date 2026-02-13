@@ -66,9 +66,6 @@ Use Connect-CTXAPI to create headers.
 .PARAMETER MonitorData
 Use Get-CTXAPI_MonitorData to create OData.
 
-.PARAMETER region
-Your Cloud instance hosted region.
-
 .PARAMETER hours
 Amount of time to report on.
 
@@ -118,25 +115,26 @@ function Get-CTXAPI_FailureReport {
     [System.Collections.generic.List[PSObject]]$Data = @()
         
     if ($FailureType -eq 'Machine') {
+        Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] ""Fetching machine data from API"
         $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
         foreach ($log in $mondata.MachineFailureLogs) {
-            $MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
-            $APIMachine = $machines | Where-Object { $MonDataMachine.DnsName -in $_.DnsName }
+            $MonDataMachine = $mondata.machines | Where-Object { $_.id -like $log.MachineId }
+            $MachinesFiltered = $machines | Where-Object {$_.Name -like $MonDataMachine.Name }
             $Data.Add([PSCustomObject]@{
                     Name                     = $MonDataMachine.DnsName
-                    IP                       = $MonDataMachine.IPAddress
+                    AssociatedUserUPNs       = $MonDataMachine.AssociatedUserUPNs
                     OSType                   = $MonDataMachine.OSType
                     FailureStartDate         = $log.FailureStartDate
                     FailureEndDate           = $log.FailureEndDate
                     FaultState               = $MachineFaultStateCode.($log.FaultState)
-                    LastDeregistrationReason = $APIMachine.LastDeregistrationReason
-                    LastDeregistrationTime   = $APIMachine.LastDeregistrationTime
-                    LastConnectionFailure    = $APIMachine.LastConnectionFailure
-                    LastErrorReason          = $APIMachine.LastErrorReason
-                    CurrentFaultState        = $MachineFaultStateCode.($APIMachine.FaultState)
-                    InMaintenanceMode        = $MonDataMachine.InMaintenanceMode
-                    MaintenanceModeReason    = $MonDataMachine.MaintenanceModeReason
-                    RegistrationState        = $APIMachine.RegistrationState
+                    LastDeregistrationReason = $MachinesFiltered.LastDeregistrationReason 
+                    LastDeregistrationTime   = $MachinesFiltered.LastDeregistrationTime
+                    LastConnectionFailure    = $MachinesFiltered.LastConnectionFailure
+                    LastErrorReason          = $MachinesFiltered.LastErrorReason
+                    CurrentFaultState        = $MachinesFiltered.FaultState
+                    InMaintenanceMode        = $MachinesFiltered.InMaintenanceMode
+                    MaintenanceModeReason    = $MachinesFiltered.MaintenanceModeReason
+                    RegistrationState        = $MachinesFiltered.RegistrationState
                 })
 
         }
@@ -147,13 +145,15 @@ function Get-CTXAPI_FailureReport {
             $user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
             $mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
             $Data.Add([PSCustomObject]@{
-                    UserName                   = $user.UserName
-                    FullName                   = $user.FullName
+                    User                       = $user.Upn
                     DnsName                    = $mashine.DnsName
-                    IPAddress                  = $mashine.IPAddress
                     CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
                     FailureDate                = $log.FailureDate
                     ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
+                    IsInMaintenanceMode        = $log.IsInMaintenanceMode
+                    PowerState                 = $PowerStateCode.($log.PowerState)
+                    RegistrationState          = $RegistrationState.($log.RegistrationState)
+
                 })
         }
     }
@@ -162,7 +162,7 @@ function Get-CTXAPI_FailureReport {
 
     if ($Export -eq 'Excel') { 
         $ExcelOptions = @{
-            Path             = $ReportPath + '\Failure_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            Path             = $ReportPath + "\$($FailureType)_Failure_Report_" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
             AutoSize         = $True
             AutoFilter       = $True
             TitleBold        = $True
