@@ -91,10 +91,6 @@ function Get-CTXAPI_ConnectionReport {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [PSTypeName('CTXMonitorData')]$MonitorData,
-        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
-        [ValidateNotNullOrEmpty()]
-        [ValidateSet('us', 'eu', 'ap-s')]
-        [string]$region,
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
         [int]$hours = 24,
@@ -109,7 +105,7 @@ function Get-CTXAPI_ConnectionReport {
 
 
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours $hours }
     else { $mondata = $MonitorData }
 
     [System.Collections.generic.List[PSObject]]$data = @()

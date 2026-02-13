@@ -79,10 +79,6 @@ Function Get-CTXAPI_HealthCheck {
     PARAM(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-        [Parameter(Mandatory = $true)]
-        [ValidateNotNullOrEmpty()]
-        [ValidateSet('us', 'eu', 'ap-s')]
-        [string]$region,
         [ValidateScript( { (Test-Path $_) })]
         [string]$ReportPath = $env:temp
     )
@@ -104,7 +100,7 @@ Function Get-CTXAPI_HealthCheck {
     } catch {Write-Warning "Error Delevery groups: `n`tMessage:$($_.Exception.Message)"}
 
     try {
-        $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours 24 -ErrorAction Stop
+        $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -ErrorAction Stop
     } catch {Write-Warning "Error Monitor Data: `n`tMessage:$($_.Exception.Message)"}
 
     try {

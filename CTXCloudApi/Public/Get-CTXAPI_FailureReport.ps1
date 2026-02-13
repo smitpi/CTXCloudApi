@@ -86,23 +86,18 @@ Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 
 #>
 
-Function Get-CTXAPI_FailureReport {
+function Get-CTXAPI_FailureReport {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport')]
     [Alias('Get-CTXAPI_FailureReports')]
     [OutputType([System.Object[]])]
-    PARAM(
-        [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
-        [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
+    param(
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [PSTypeName('CTXMonitorData')]$MonitorData,
-        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]
-        [ValidateSet('us', 'eu', 'ap-s')]
-        [string]$region,
-        [ValidateNotNullOrEmpty()]
-        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
+        [Parameter(Mandatory = $false)]
         [int]$hours = 24,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
@@ -117,7 +112,7 @@ Function Get-CTXAPI_FailureReport {
 
     )
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours $hours }
     else { $mondata = $MonitorData }
 
     [System.Collections.generic.List[PSObject]]$Data = @()
@@ -126,18 +121,22 @@ Function Get-CTXAPI_FailureReport {
         $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
         foreach ($log in $mondata.MachineFailureLogs) {
             $MonDataMachine = $mondata.Machines | Where-Object { $_.id -eq $log.MachineId }
-            $APIMachine = $machines | Where-Object { $_.dnsname -like $MonDataMachine.DnsName }
+            $APIMachine = $machines | Where-Object { $MonDataMachine.DnsName -in $_.DnsName }
             $Data.Add([PSCustomObject]@{
                     Name                     = $MonDataMachine.DnsName
                     IP                       = $MonDataMachine.IPAddress
                     OSType                   = $MonDataMachine.OSType
                     FailureStartDate         = $log.FailureStartDate
                     FailureEndDate           = $log.FailureEndDate
-                    FaultState               = $log.FaultState
+                    FaultState               = $MachineFaultStateCode.($log.FaultState)
                     LastDeregistrationReason = $APIMachine.LastDeregistrationReason
+                    LastDeregistrationTime   = $APIMachine.LastDeregistrationTime
                     LastConnectionFailure    = $APIMachine.LastConnectionFailure
                     LastErrorReason          = $APIMachine.LastErrorReason
-                    CurrentFaultState        = $APIMachine.FaultState
+                    CurrentFaultState        = $MachineFaultStateCode.($APIMachine.FaultState)
+                    InMaintenanceMode        = $MonDataMachine.InMaintenanceMode
+                    MaintenanceModeReason    = $MonDataMachine.MaintenanceModeReason
+                    RegistrationState        = $APIMachine.RegistrationState
                 })
 
         }
@@ -173,7 +172,7 @@ Function Get-CTXAPI_FailureReport {
             FreezeTopRow     = $True
             FreezePane       = '3'
         }
-        $data | Export-Excel -Title Sessions -WorksheetName Sessions @ExcelOptions
+        $data | Export-Excel -Title "$($FailureType) Failure" -WorksheetName "$($FailureType) Failure" @ExcelOptions
     }
     if ($Export -eq 'HTML') { $data | Out-HtmlView -DisablePaging -Title 'Citrix Failures' -HideFooter -SearchHighlight -FixedHeader }
     if ($Export -eq 'Host') { $data }

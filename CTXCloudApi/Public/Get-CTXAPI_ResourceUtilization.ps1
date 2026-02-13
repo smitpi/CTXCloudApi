@@ -93,10 +93,6 @@ Function Get-CTXAPI_ResourceUtilization {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [PSTypeName('CTXMonitorData')]$MonitorData,
-        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
-        [ValidateNotNullOrEmpty()]
-        [ValidateSet('us', 'eu', 'ap-s')]
-        [string]$region,
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
         [int]$hours = 24,
@@ -108,7 +104,7 @@ Function Get-CTXAPI_ResourceUtilization {
         [string]$ReportPath = $env:temp
     )
 
-    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -region $region -hours $hours }
+    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours $hours }
     else { $monitor = $MonitorData }
     
    
