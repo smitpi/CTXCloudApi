@@ -45,7 +45,8 @@ Updated [06/11/2021_16:48] Using the new api
 <#
 
 .DESCRIPTION
-"Reports on connection failures"
+Reports on connection or machine failures.
+Fetches CVAD Monitor OData (or uses provided `MonitorData`) and builds a failure dataset depending on `FailureType` (Connection or Machine).
 
 #>
 
@@ -55,31 +56,50 @@ Updated [06/11/2021_16:48] Using the new api
 
 <#
 .SYNOPSIS
-Reports on failures in the last x hours.
+Reports on connection or machine failures in the last X hours.
 
 .DESCRIPTION
-Reports on machine or connection failures in the last x hours.
+Reports on machine or connection failures in the last X hours using Monitor OData.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers.
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .PARAMETER MonitorData
-Use Get-CTXAPI_MonitorData to create OData.
+Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
 
 .PARAMETER hours
-Amount of time to report on.
+Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.
 
 .PARAMETER FailureType
-Type of failure to report on
+Type of failure to report on. Supported values: Connection, Machine.
 
 .PARAMETER Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
 
 .PARAMETER ReportPath
-Destination folder for the exported report.
+Destination folder for exported files when using Excel or HTML. Defaults to $env:Temp.
 
 .EXAMPLE
 Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
+Returns connection failures to the host.
+
+.EXAMPLE
+Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
+Exports machine failures for the last 48 hours to an Excel workbook.
+
+.EXAMPLE
+Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Connection | Select-Object User, DnsName, FailureDate, PowerState
+Shows common fields for connection failures.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+When Export is Host: array of failure report objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport
 
 #>
 
@@ -109,7 +129,7 @@ function Get-CTXAPI_FailureReport {
 
     )
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours $hours }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
     else { $mondata = $MonitorData }
 
     [System.Collections.generic.List[PSObject]]$Data = @()

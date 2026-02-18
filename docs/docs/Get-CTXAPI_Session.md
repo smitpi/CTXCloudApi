@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Session
 
 ## SYNOPSIS
-Return details about current sessions
+Returns details about current sessions (handles pagination).
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_Session [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about current sessions
+Returns details about current sessions from Citrix Cloud CVAD.
 
 ## EXAMPLES
 
@@ -25,11 +25,18 @@ Return details about current sessions
 ```
 Get-CTXAPI_Session -APIHeader $APIHeader
 ```
+Retrieves and lists current session objects.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_Session -APIHeader $APIHeader | Select-Object UserName, DnsName, LogOnDuration, ConnectionState
+```
+Shows key fields for each session.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -47,10 +54,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+Array of session objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS

@@ -8,24 +8,22 @@ schema: 2.0.0
 # Get-CTXAPI_FailureReport
 
 ## SYNOPSIS
-Reports on failures in the last x hours.
+Reports on connection or machine failures in the last X hours.
 
 ## SYNTAX
 
 ### Fetch odata (Default)
 ```
-Get-CTXAPI_FailureReport -APIHeader <Object> [-region <String>] [-hours <Int32>] -FailureType <String>
- [-Export <String>] [-ReportPath <String>] [<CommonParameters>]
+Get-CTXAPI_FailureReport -APIHeader <Object> [-hours <Int32>] -FailureType <String> [-Export <String>] [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ### Got odata
 ```
-Get-CTXAPI_FailureReport [-APIHeader <Object>] [-MonitorData <Object>] -FailureType <String> [-Export <String>]
- [-ReportPath <String>] [<CommonParameters>]
+Get-CTXAPI_FailureReport -APIHeader <Object> [-MonitorData <Object>] -FailureType <String> [-Export <String>] [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Reports on machine or connection failures in the last x hours.
+Reports on machine or connection failures in the last X hours using Monitor OData. Builds a failure dataset depending on `FailureType` (Connection or Machine).
 
 ## EXAMPLES
 
@@ -33,11 +31,24 @@ Reports on machine or connection failures in the last x hours.
 ```
 Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 ```
+Returns connection failures to the host.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
+```
+Exports machine failures for the last 48 hours to an Excel workbook.
+
+### EXAMPLE 3
+```
+Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Connection | Select-Object User, DnsName, FailureDate, PowerState
+```
+Shows common fields for connection failures.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers.
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -78,20 +89,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -region
-Your Cloud instance hosted region.
-
-```yaml
-Type: String
-Parameter Sets: Fetch odata
-Aliases:
-
-Required: False
-Position: Named
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
+### -hours
+Duration window (in hours) to fetch when retrieving Monitor OData.
 
 ### -hours
 Amount of time to report on.
@@ -109,7 +108,7 @@ Accept wildcard characters: False
 ```
 
 ### -FailureType
-Type of failure to report on
+Type of failure to report on. Supported values: Connection, Machine.
 
 ```yaml
 Type: String
@@ -124,7 +123,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Excel, HTML, Host. Default is Host.
 
 ```yaml
 Type: String
@@ -157,10 +156,14 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+When Export is Host: Array of failure report objects.
+
+When Export is Excel or HTML: No output objects; files are written to ReportPath.
 ## NOTES
 
 ## RELATED LINKS

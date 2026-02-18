@@ -56,37 +56,57 @@ Reports on machine Catalog, delivery groups and published desktops.
 Reports on system config.
 
 .DESCRIPTION
-Reports on machine Catalog, delivery groups and published desktops.
+Reports on Machine Catalogs, Delivery Groups, Published Applications, and VDI Machines.
+Collects audit data and either returns it to the host (default) or exports it to Excel/HTML.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers.
+Header object created by Connect-CTXAPI; contains authentication and context.
 
 .PARAMETER Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
 
 .PARAMETER ReportPath
-Destination folder for the exported report.
+Destination folder for exported files when using Excel or HTML. Defaults to $env:Temp.
+
+.EXAMPLE
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader
+Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.
 
 .EXAMPLE
 Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+Exports an Excel workbook (XD_Audit-<CustomerName>-<yyyy.MM.dd-HH.mm>.xlsx) with sheets for each dataset.
+
+.EXAMPLE
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
+Generates an HTML report (XD_Audit-<CustomerName>-<yyyy.MM.dd-HH.mm>.html) with tables and branding.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+When Export is Host: PSCustomObject with properties Machine_Catalogs, Delivery_Groups, Published_Apps, VDI_Devices.
+When Export is Excel or HTML: No objects returned; files are written to ReportPath.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit
 
 #>
 
-Function Get-CTXAPI_ConfigAudit {
+function Get-CTXAPI_ConfigAudit {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit')]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-        [Parameter(Mandatory = $true)]
+        [Parameter(Mandatory = $false)]
         [ValidateSet('Excel', 'HTML', 'Host')]
-        [string]$Export,
+        [string]$Export = 'Host',
         [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]
         [string]$ReportPath = $env:temp
     )
 
     $catalogs = @()
-    Get-CTXAPI_MachineCatalogs -APIHeader $APIHeader | ForEach-Object {
+    Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | ForEach-Object {
         $catalogs += [pscustomobject]@{
             Name                     = $_.Name
             OSType                   = $_.OSType
@@ -108,7 +128,7 @@ Function Get-CTXAPI_ConfigAudit {
         }
     }
     $deliverygroups = @()
-    $groups = Get-CTXAPI_DeliveryGroups -APIHeader $APIHeader
+    $groups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
 
     foreach ($grp in $groups) {
         $SimpleAccessPolicy = $grp.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
@@ -135,7 +155,7 @@ Function Get-CTXAPI_ConfigAudit {
 
     $apps = @()
     $assgroups = @()
-    $applications = Get-CTXAPI_Applications -APIHeader $APIHeader
+    $applications = Get-CTXAPI_Application -APIHeader $APIHeader
 
     foreach ($application in $applications) {
         $IncludedUsers = $application.IncludedUsers | ForEach-Object { $_.samname }
@@ -155,7 +175,7 @@ Function Get-CTXAPI_ConfigAudit {
     }
 
     $machines = @()
-    Get-CTXAPI_Machines -APIHeader $APIHeader | ForEach-Object {
+    Get-CTXAPI_Machine -APIHeader $APIHeader | ForEach-Object {
         $AssociatedUsers = $_.AssociatedUsers | ForEach-Object { $_.samname }
         $machines += [pscustomobject]@{
             DnsName               = $_.DnsName
@@ -191,8 +211,8 @@ Function Get-CTXAPI_ConfigAudit {
             FreezePane       = '3'
         }
         if ($catalogs) {$catalogs | Export-Excel -Title Catalogs -WorksheetName Catalogs @ExcelOptions}
-        if ($deliverygroups){$deliverygroups | Export-Excel -Title DeliveryGroups -WorksheetName DeliveryGroups @ExcelOptions}
-        if ($apps) {$apps | Export-Excel -Title "Published Apps" -WorksheetName apps @ExcelOptions}
+        if ($deliverygroups) {$deliverygroups | Export-Excel -Title DeliveryGroups -WorksheetName DeliveryGroups @ExcelOptions}
+        if ($apps) {$apps | Export-Excel -Title 'Published Apps' -WorksheetName apps @ExcelOptions}
         if ($machines) {$machines | Export-Excel -Title Machines -WorksheetName machines @ExcelOptions}
     }
     if ($Export -eq 'HTML') {
@@ -202,36 +222,34 @@ Function Get-CTXAPI_ConfigAudit {
         New-HTML -TitleText "$($APIHeader.CustomerName) Config Audit" -FilePath $HTMLReportname -ShowHTML {
             New-HTMLLogo -RightLogoString $CTXAPI_LogoURL
             New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
-           if ($catalogs) { New-HTMLSection @SectionSettings -Content {
-                New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }
-            }}
-            if ($deliverygroups) {New-HTMLSection @SectionSettings -Content {
-                New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $deliverygroups }
-            }}
-           if ($apps) { New-HTMLSection @SectionSettings -Content {
-                New-HTMLSection -HeaderText 'Published Applications' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $apps }
-            }}
-            if ($machines) {New-HTMLSection @SectionSettings -Content {
-                New-HTMLSection -HeaderText 'VDI Devices' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $machines }
-            }}
+            if ($catalogs) {
+                New-HTMLSection @SectionSettings -Content {
+                    New-HTMLSection -HeaderText 'Machine Catalogs' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $catalogs }
+                }
+            }
+            if ($deliverygroups) {
+                New-HTMLSection @SectionSettings -Content {
+                    New-HTMLSection -HeaderText 'Delivery Groups' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $deliverygroups }
+                }
+            }
+            if ($apps) {
+                New-HTMLSection @SectionSettings -Content {
+                    New-HTMLSection -HeaderText 'Published Applications' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $apps }
+                }
+            }
+            if ($machines) {
+                New-HTMLSection @SectionSettings -Content {
+                    New-HTMLSection -HeaderText 'VDI Devices' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $machines }
+                }
+            }
         }
-
-
     }
     if ($Export -eq 'Host') {
-        Write-Color 'Machine Catalogs' -Color Cyan -LinesAfter 2 -StartTab 2
-        $catalogs | Format-Table -AutoSize
-        Write-Color 'Delivery Groups' -Color Cyan -LinesAfter 2 -StartTab 2
-        $deliverygroups | Format-Table -AutoSize
-        Write-Color 'Published Applications' -Color Cyan -LinesAfter 2 -StartTab 2
-        $apps | Format-Table -AutoSize
-        Write-Color 'VDI Devices' -Color Cyan -LinesAfter 2 -StartTab 2
-        $machines | Format-Table -AutoSize
-
-
+        [PSCustomObject]@{
+            Machine_Catalogs = $catalogs
+            Delivery_Groups   = $deliverygroups
+            Published_Apps    = $apps
+            VDI_Devices       = $machines
+        }
     }
-
-
-
-
 } #end Function

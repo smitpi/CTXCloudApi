@@ -8,7 +8,7 @@ schema: 2.0.0
 # Connect-CTXAPI
 
 ## SYNOPSIS
-Connect to the cloud and create needed api headers
+Connects to Citrix Cloud and creates required API headers.
 
 ## SYNTAX
 
@@ -18,21 +18,26 @@ Connect-CTXAPI [-Customer_Id] <String> [-Client_Id] <String> [-Client_Secret] <S
 ```
 
 ## DESCRIPTION
-Connect to the cloud and create needed api headers
+Authenticates to Citrix Cloud using Client Id/Secret, resolves the CVAD Instance Id, and returns a CTXAPIHeaderObject containing headers and context for other CTXCloudApi cmdlets.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 $splat = @{
-```
-
-Customer_Id = "xxx"
-	Client_Id = "xxx-xxx-xxx-xxx"
+	Customer_Id   = "xxx"
+	Client_Id     = "xxx-xxx-xxx-xxx"
 	Client_Secret = "yyyyyy=="
 	Customer_Name = 'HomeLab'
 }
 $APIHeader = Connect-CTXAPI @splat
+```
+
+### EXAMPLE 2
+```
+Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
+```
+Creates and returns a CTXAPIHeaderObject. Store it (e.g., $APIHeader) and pass to other cmdlets.
 
 ## PARAMETERS
 
@@ -100,8 +105,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
+CTXAPIHeaderObject
+
+Contains authentication headers and context (CustomerName, TokenExpireAt, CTXAPI fields) for CTXCloudApi cmdlets.
 
 ## NOTES
 

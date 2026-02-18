@@ -25,6 +25,7 @@ Checks that the connection is still valid, and the token hasn't expired.
 ```
 Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew
 ```
+Returns True if the header is valid, or refreshes the token and returns True when -AutoRenew is specified; otherwise returns False when expired.
 
 ## PARAMETERS
 
@@ -62,10 +63,11 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
-
-### System.Boolean[]
+### System.Boolean
+True/False indicating whether the header is valid at the time of test.
 ## NOTES
 
 ## RELATED LINKS

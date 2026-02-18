@@ -39,31 +39,47 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Return details about machine Catalogs
+Returns details about Machine Catalogs from Citrix Cloud CVAD.
+Retrieves all catalogs (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about machine Catalogs
+Returns details about Machine Catalogs (handles pagination).
 
 .DESCRIPTION
-Return details about machine Catalogs
+Returns details about Machine Catalogs from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
 $MachineCatalogs = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader
+Retrieves all machine catalogs and stores them for reuse.
+
+.EXAMPLE
+Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Select-Object Name, SessionSupport, TotalCount, IsPowerManaged
+Lists key catalog fields including session support, total machines, and power management.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of machine catalog objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalog
 
 #>
 
-Function Get-CTXAPI_MachineCatalog {
+function Get-CTXAPI_MachineCatalog {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalog')]
     [Alias('Get-CTXAPI_MachineCatalogs')]
     [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
 

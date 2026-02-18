@@ -35,28 +35,44 @@ Created [09/01/2022_09:17] Initial Script Creating
 <#
 
 .DESCRIPTION
-Return details about published apps
+Returns details about published applications from Citrix Cloud CVAD.
+Retrieves all applications (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about published apps
+Returns details about published applications (handles pagination).
 
 .DESCRIPTION
-Return details about published apps
+Returns details about published applications from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
-Get-CTXAPI_Applications -APIHeader $APIHeader
+Get-CTXAPI_Application -APIHeader $APIHeader | Select-Object Name, Enabled, NumAssociatedDeliveryGroups
+Lists application names, enabled state, and associated delivery group count.
+
+.EXAMPLE
+Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
+Shows only enabled applications.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of application objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
 
 #>
 
 function Get-CTXAPI_Application {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Applications')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application')]
 	[Alias('Get-CTXAPI_Applications')]
 	[OutputType([System.Object[]])]
 	param(

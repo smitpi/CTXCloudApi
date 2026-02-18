@@ -51,43 +51,60 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Resource utilization in the last x hours
+Reports on resource utilization for VDA machines over the past X hours.
+Fetches CVAD Monitor OData (or uses provided `MonitorData`) and builds a per-machine dataset with averages (CPU, memory, sessions) and key details.
 
 #>
 
 <#
 .SYNOPSIS
-Resource utilization in the last x hours
+Resource utilization in the last X hours.
 
 .DESCRIPTION
-Resource utilization in the last x hours
+Reports on resource utilization for VDA machines over the past X hours.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).
 
 .PARAMETER MonitorData
-Use Get-CTXAPI_MonitorData to create OData
-
-.PARAMETER region
-Your Cloud instance hosted region.
+Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
 
 .PARAMETER hours
-Amount of time to report on.
+Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.
 
 .PARAMETER Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
 
 .PARAMETER ReportPath
-Destination folder for the exported report.
+Destination folder for exported files when using Excel or HTML. Defaults to $env:Temp.
 
 .EXAMPLE
-Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPath C:\temp\
+Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export Excel -ReportPath C:\temp\
+Exports an Excel workbook (Resources_Audit-<yyyy.MM.dd-HH.mm>.xlsx) with aggregated resource metrics.
+
+.EXAMPLE
+Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp
+Generates an HTML report titled "Citrix Resources" for the last 48 hours.
+
+.EXAMPLE
+Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader | Select-Object DnsName, AVGPercentCpu, AVGUsedMemory, AVGSessionCount
+Returns objects to the host and selects common fields for quick inspection.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+When Export is Host: array of resource utilization objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization
 
 #>
 
-Function Get-CTXAPI_ResourceUtilization {
+function Get-CTXAPI_ResourceUtilization {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization')]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
@@ -104,7 +121,7 @@ Function Get-CTXAPI_ResourceUtilization {
         [string]$ReportPath = $env:temp
     )
 
-    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours $hours }
+    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
     else { $monitor = $MonitorData }
     
    

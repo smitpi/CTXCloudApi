@@ -41,31 +41,47 @@ Updated [14/11/2021_07:05] Added more functions
 <#
 
 .DESCRIPTION
-Details about current Cloud Connectors
+Returns details about current Citrix Cloud Connectors.
+Queries the Agent Hub API to list edge servers and retrieves full details for each connector.
 
 #>
 
 
 <#
 .SYNOPSIS
-Details about current Cloud Connectors
+Returns details about current Cloud Connectors.
 
 .DESCRIPTION
-Details about current Cloud Connectors
+Returns details about current Citrix Cloud Connectors by enumerating EdgeServers and expanding each to full detail.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
-Get-CTXAPI_CloudConnector -APIHeader $APIHeader
+Get-CTXAPI_CloudConnector -APIHeader $APIHeader | Select-Object name, version, status
+Lists connector name, version, and status.
+
+.EXAMPLE
+Get-CTXAPI_CloudConnector -APIHeader $APIHeader | Where-Object {$_.status -ne 'Healthy'}
+Shows connectors not in a healthy state.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of Cloud Connector objects returned from the Agent Hub API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnector
 
 #>
 
-Function Get-CTXAPI_CloudConnector {
+function Get-CTXAPI_CloudConnector {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnector')]
     [Alias('Get-CTXAPI_CloudConnectors')]
     [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 

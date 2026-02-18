@@ -62,11 +62,11 @@ Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew
 
 #>
 
-Function Test-CTXAPI_Header {
+function Test-CTXAPI_Header {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header')]
     [Alias('Test-CTXAPI_Headers')]
-    [OutputType([System.Boolean[]])]
-    PARAM(
+    [OutputType([System.Boolean])]
+    param(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [switch]$AutoRenew = $false
     )
@@ -80,10 +80,8 @@ Function Test-CTXAPI_Header {
             $APItmp = Connect-CTXAPI -Customer_Id $APIHeader.CTXAPI.Customer_Id -Client_Id $APIHeader.CTXAPI.Client_Id -Client_Secret $APIHeader.CTXAPI.Client_Secret -Customer_Name $APIHeader.CustomerName
             Get-Variable | Where-Object { $_.value -like '*TokenExpireAt=*' -and $_.Name -notlike 'APItmp' } | Set-Variable -Value $APItmp -Force -Scope global
             return $true
-        }
-        else { return $false }
-    }
-    else { return $true }
+        } else { return $false }
+    } else { return $true }
 
 
 } #end Function

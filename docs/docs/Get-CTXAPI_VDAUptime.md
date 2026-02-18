@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_VDAUptime
 
 ## SYNOPSIS
-Uses Registration date to calculate uptime
+Calculate VDA uptime and export or return results.
 
 ## SYNTAX
 
@@ -17,19 +17,32 @@ Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <
 ```
 
 ## DESCRIPTION
-Uses Registration date to calculate uptime
+Calculates VDA machine uptime based on registration/deregistration timestamps. Builds a list of per-machine details and days online, optionally exporting to Excel/HTML.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\
 ```
+Exports an Excel workbook with uptime details.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
+```
+Generates an HTML report titled "Citrix Uptime".
+
+### EXAMPLE 3
+```
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState
+```
+Returns objects to the host and selects common fields.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -44,7 +57,7 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Excel, HTML, Host. Default is Host.
 
 ```yaml
 Type: String
@@ -77,8 +90,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
+When Export is Host: Array of uptime objects.
+
+When Export is Excel or HTML: No output objects; files are written to ReportPath.
 
 ## NOTES
 

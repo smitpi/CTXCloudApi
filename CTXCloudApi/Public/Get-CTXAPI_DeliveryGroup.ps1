@@ -38,31 +38,47 @@ Updated [06/11/2021_16:48] Using the new api
 <#
 
 .DESCRIPTION
-Return details about Delivery Groups
+Returns details about Delivery Groups from Citrix Cloud CVAD.
+Retrieves all delivery groups (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about Delivery Groups
+Returns details about Delivery Groups (handles pagination).
 
 .DESCRIPTION
-Return details about Delivery Groups
+Returns details about Delivery Groups from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
-Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
+Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, TotalMachines, InMaintenanceMode
+Lists group name, total machines, and maintenance status.
+
+.EXAMPLE
+Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Where-Object { $_.IsBroken }
+Shows delivery groups marked as broken.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of delivery group objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroup
 
 #>
 
-Function Get-CTXAPI_DeliveryGroup {
+function Get-CTXAPI_DeliveryGroup {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroup')]
     [Alias('Get-CTXAPI_DeliveryGroups')]
     [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )

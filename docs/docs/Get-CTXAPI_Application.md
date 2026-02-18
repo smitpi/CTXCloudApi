@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Application
 
 ## SYNOPSIS
-Return details about published apps
+Returns details about published applications (handles pagination).
 
 ## SYNTAX
 
@@ -17,19 +17,26 @@ Get-CTXAPI_Application [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about published apps
+Returns details about published applications from Citrix Cloud CVAD.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_Applications -APIHeader $APIHeader
+Get-CTXAPI_Application -APIHeader $APIHeader | Select-Object Name, Enabled, NumAssociatedDeliveryGroups
 ```
+Lists application names, enabled state, and associated delivery group count.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
+```
+Shows only enabled applications.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -47,10 +54,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+Array of application objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS

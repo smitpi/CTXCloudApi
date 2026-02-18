@@ -43,29 +43,45 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Get cloud Resource Locations
+Returns Citrix Cloud Resource Locations for the current customer.
+Queries the Registry API and returns the `items` collection.
 
 #>
 
 <#
 .SYNOPSIS
-Get cloud Resource Locations
+Returns cloud Resource Locations.
 
 .DESCRIPTION
-Get cloud Resource Locations
+Returns Citrix Cloud Resource Locations for the current customer.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
 Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
+Lists all Resource Locations for the tenant.
+
+.EXAMPLE
+Get-CTXAPI_ResourceLocation -APIHeader $APIHeader | Select-Object name, description, id
+Selects key fields from the returned items.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of resource location objects returned from the Registry API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocation
 
 #>
 
-Function Get-CTXAPI_ResourceLocation {
+function Get-CTXAPI_ResourceLocation {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocation')]
     [Alias('Get-CTXAPI_ResourceLocations')]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 

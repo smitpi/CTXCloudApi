@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ResourceLocation
 
 ## SYNOPSIS
-Get cloud Resource Locations
+Returns cloud Resource Locations.
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_ResourceLocation [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get cloud Resource Locations
+Returns Citrix Cloud Resource Locations for the current customer by querying the Registry API.
 
 ## EXAMPLES
 
@@ -25,11 +25,18 @@ Get cloud Resource Locations
 ```
 Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
 ```
+Lists all Resource Locations for the tenant.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_ResourceLocation -APIHeader $APIHeader | Select-Object name, description, id
+```
+Selects key fields from the returned items.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -47,8 +54,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
+System.Object[]
+
+Array of resource location objects returned from the Registry API.
 
 ## NOTES
 

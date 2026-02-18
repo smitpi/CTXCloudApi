@@ -46,7 +46,8 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Uses Registration date to calculate uptime
+Calculates VDA machine uptime based on registration/deregistration timestamps.
+Builds a list with per-machine details and days online, optionally exporting to Excel/HTML.
 
 #>
 
@@ -54,22 +55,41 @@ Uses Registration date to calculate uptime
 
 <#
 .SYNOPSIS
-Uses Registration date to calculate uptime
+Calculate VDA uptime and export or return results.
 
 .DESCRIPTION
-Uses Registration date to calculate uptime
+Calculates VDA machine uptime based on registration/deregistration timestamps.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .PARAMETER Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
 
 .PARAMETER ReportPath
 Destination folder for the exported report.
 
 .EXAMPLE
-Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export excel -ReportPath C:\temp\
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\
+Exports an Excel workbook (VDAUptime-<yyyy.MM.dd-HH.mm>.xlsx) with uptime details.
+
+.EXAMPLE
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
+Generates an HTML report titled "Citrix Uptime".
+
+.EXAMPLE
+Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState
+Returns objects to the host and selects common fields for quick inspection.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+When Export is Host: array of uptime objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime
 
 #>
 
@@ -79,7 +99,7 @@ function Get-CTXAPI_VDAUptime {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false)]
-        [ValidateSet('Excel', 'HTML')]
+        [ValidateSet('Host', 'Excel', 'HTML')]
         [string]$Export = 'Host',
         [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]

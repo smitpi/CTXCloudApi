@@ -40,31 +40,47 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Get zone details
+Returns Zone details from Citrix Cloud CVAD.
+Retrieves all zones (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Get zone details
+Returns Zone details (handles pagination).
 
 .DESCRIPTION
-Get zone details
+Returns Zone details from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
  Get-CTXAPI_Zone -APIHeader $APIHeader
+Lists all zones for the tenant.
+
+.EXAMPLE
+Get-CTXAPI_Zone -APIHeader $APIHeader | Select-Object Name, Enabled, Description
+Shows key fields for each zone.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of zone objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone
 
 #>
 
-Function Get-CTXAPI_Zone {
+function Get-CTXAPI_Zone {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone')]
     [Alias('Get-CTXAPI_Zones')]
     [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
 

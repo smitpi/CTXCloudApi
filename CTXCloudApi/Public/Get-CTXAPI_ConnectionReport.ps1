@@ -49,37 +49,57 @@ Updated [06/11/2021_16:48] Using the new api
 
 <#
 .DESCRIPTION
-Report on connections in the last x hours
+Reports on user session connections for the last X hours.
+Fetches CVAD Monitor OData (or uses provided `MonitorData`) and builds a connection dataset including client details, timing, registration state, and avg ICA RTT.
 
 #>
 
 <#
 .SYNOPSIS
-Creates Connection report
+Creates a connection report from CVAD Monitor data.
 
 .DESCRIPTION
-Report on connections in the last x hours
+Reports on user session connections for the last X hours.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).
 
 .PARAMETER MonitorData
-Use Get-CTXAPI_MonitorData to create OData
+Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
 
 .PARAMETER region
-You Cloud region
+Deprecated. Not required.
 
 .PARAMETER hours
-Duration of the report
+Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.
 
 .PARAMETER Export
-In what format to export the reports.
+Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
 
 .PARAMETER ReportPath
-Destination folder for the exported report.
+Destination folder for exported files when using Excel or HTML. Defaults to $env:Temp.
 
 .EXAMPLE
 Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
+Generates an HTML report titled "Citrix Sessions" with the full dataset.
+
+.EXAMPLE
+Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp
+Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-<yyyy.MM.dd-HH.mm>.xlsx).
+
+.EXAMPLE
+Get-CTXAPI_ConnectionReport -APIHeader $APIHeader | Select-Object Upn, DnsName, EstablishmentDate, AVG_ICA_RTT
+Returns objects to the host and selects common fields for quick inspection.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+When Export is Host: array of connection report objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport
 
 #>
 
@@ -105,7 +125,7 @@ function Get-CTXAPI_ConnectionReport {
 
 
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -hours $hours }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
     else { $mondata = $MonitorData }
 
     [System.Collections.generic.List[PSObject]]$data = @()
@@ -148,7 +168,7 @@ function Get-CTXAPI_ConnectionReport {
                 EndDate                  = $OneSession.EndDate
                 ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
                 FailureDate              = $OneSession.FailureDate
-                AVG_ICA_RTT              = if ($avgrtt -eq $null) { 0 } else { [math]::Round($avgrtt.Average) }
+                AVG_ICA_RTT              = if ($null -eq $avgrtt) { 0 } else { [math]::Round($avgrtt.Average) }
             }) #PSList
     }
     

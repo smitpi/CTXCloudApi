@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_CloudService
 
 ## SYNOPSIS
-Return details about cloud services and subscription
+Returns details about cloud services and subscription.
 
 ## SYNTAX
 
@@ -17,19 +17,26 @@ Get-CTXAPI_CloudService [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about cloud services and subscription
+Returns details about Citrix Cloud services and subscription state from the Core Workspaces API `serviceStates` endpoint.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_CloudService -APIHeader $APIHeader
+Get-CTXAPI_CloudService -APIHeader $APIHeader | Select-Object serviceName, state, lastUpdated
 ```
+Lists each service name, current state, and last update time.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_CloudService -APIHeader $APIHeader | Where-Object { $_.state -ne 'Enabled' }
+```
+Shows services that are not currently enabled.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -47,10 +54,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+Array of service state objects returned from the Core Workspaces API.
 ## NOTES
 
 ## RELATED LINKS

@@ -38,31 +38,47 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Return details about hosting (hypervisor)
+Returns details about hosting (hypervisor) connections from Citrix Cloud CVAD.
+Retrieves all hypervisors (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about hosting (hypervisor)
+Returns details about hosting (hypervisor) connections (handles pagination).
 
 .DESCRIPTION
-Return details about hosting (hypervisor)
+Returns details about hosting (hypervisor) connections from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
-Get-CTXAPI_Hypervisor -APIHeader $APIHeader
+Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Select-Object Name, HostingType, Enabled
+Lists hypervisor name, hosting type, and enabled state.
+
+.EXAMPLE
+Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Where-Object { $_.IsBroken }
+Shows hypervisors marked as broken.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of hypervisor objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisor
 
 #>
 
-Function Get-CTXAPI_Hypervisor {
+function Get-CTXAPI_Hypervisor {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisor')]
     [Alias('Get-CTXAPI_Hypervisors')]
     [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )

@@ -50,22 +50,22 @@ Connect to the cloud and create needed api headers
 
 <#
 .SYNOPSIS
-Connect to the cloud and create needed api headers
+Connects to Citrix Cloud and creates required API headers.
 
 .DESCRIPTION
-Connect to the cloud and create needed api headers
+Authenticates against Citrix Cloud using `Client_Id` and `Client_Secret`, resolves the CVAD `Citrix-InstanceId`, and constructs headers for subsequent CTXCloudApi requests. Returns a `CTXAPIHeaderObject` containing `CustomerName`, `TokenExpireAt` (about 1 hour), `CTXAPI` (ids), and `headers`.
 
 .PARAMETER Customer_Id
-From Citrix Cloud
+Citrix Customer ID (GUID) from the Citrix Cloud console.
 
 .PARAMETER Client_Id
-From Citrix Cloud
+OAuth Client ID created under Citrix Cloud API access.
 
 .PARAMETER Client_Secret
-From Citrix Cloud
+OAuth Client Secret for the above Client ID.
 
 .PARAMETER Customer_Name
-Name of your Company, or what you want to call your connection
+Display name used in reports/filenames to identify this connection.
 
 .EXAMPLE
 $splat = @{
@@ -75,6 +75,22 @@ $splat = @{
 	Customer_Name = 'HomeLab'
 }
 $APIHeader = Connect-CTXAPI @splat
+
+.EXAMPLE
+Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
+Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+CTXAPIHeaderObject. Contains authentication headers and context for CTXCloudApi cmdlets.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
+
+.NOTES
+The access token typically expires in ~1 hour. Re-run Connect-CTXAPI to refresh headers when needed.
 
 #>
 

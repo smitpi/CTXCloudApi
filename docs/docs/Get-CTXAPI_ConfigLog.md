@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_ConfigLog
 
 ## SYNOPSIS
-Get high level configuration changes in the last x days.
+Returns high-level configuration changes in the last X days.
 
 ## SYNTAX
 
@@ -17,19 +17,26 @@ Get-CTXAPI_ConfigLog [-APIHeader] <Object> [-Days] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Get high level configuration changes in the last x days.
+Returns high-level configuration changes over the past X days from the CVAD Manage API `ConfigLog/Operations?days=<X>` endpoint.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15
+Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15 | Select-Object TimeStamp, ObjectType, OperationType, User
 ```
+Shows recent configuration operations with key fields for the past 15 days.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Where-Object { $_.ObjectType -eq 'DeliveryGroup' }
+```
+Filters operations related to Delivery Groups in the last 7 days.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers.
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -44,7 +51,7 @@ Accept wildcard characters: False
 ```
 
 ### -Days
-Number of days to report on.
+Number of days to report on (e.g., 7, 15, 30).
 
 ```yaml
 Type: String
@@ -62,8 +69,11 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
+### System.Object[]
+Array of configuration operation objects returned from the CVAD Manage API.
 
 ## NOTES
 

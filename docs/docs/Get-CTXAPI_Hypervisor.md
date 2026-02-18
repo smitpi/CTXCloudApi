@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_Hypervisor
 
 ## SYNOPSIS
-Return details about hosting (hypervisor)
+Returns details about hosting (hypervisor) connections (handles pagination).
 
 ## SYNTAX
 
@@ -17,19 +17,26 @@ Get-CTXAPI_Hypervisor [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about hosting (hypervisor)
+Returns details about hosting (hypervisor) connections from Citrix Cloud CVAD.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_Hypervisor -APIHeader $APIHeader
+Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Select-Object Name, HostingType, Enabled
 ```
+Lists hypervisor name, hosting type, and enabled state.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Where-Object { $_.IsBroken }
+```
+Shows hypervisors marked as broken.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -47,10 +54,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+Array of hypervisor objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS

@@ -38,35 +38,51 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Return details about low lever config change (More detailed)
+Returns details about low-level configuration changes for a specific operation.
+Queries the CVAD Manage API `ConfigLog/Operations/<HighLevelID>/LowLevelOperations` and returns the `items` collection.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about low lever config change (More detailed)
+Returns details about low-level configuration changes (more detailed).
 
 .DESCRIPTION
-Return details about low lever config change (More detailed)
+Returns details about low-level configuration changes for a specific operation ID from Config Log.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .PARAMETER HighLevelID
-Unique id for a config change. From the Get-CTXAPI_ConfigLog function.
+Unique id for a config change (from Get-CTXAPI_ConfigLog).
 
 .EXAMPLE
 $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
 $LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
+Retrieves low-level operations for the first high-level operation in the past 7 days.
+
+.EXAMPLE
+Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID "<operation-id>" | Select-Object OperationType, Property, OldValue, NewValue
+Shows key fields for each low-level change.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of low-level operation objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation
 
 #>
 
-Function Get-CTXAPI_LowLevelOperation {
+function Get-CTXAPI_LowLevelOperation {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation')]
     [Alias('Get-CTXAPI_LowLevelOperations')]
     [OutputType([System.Object[]])]
-    PARAM(
+    param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $true)]

@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_LowLevelOperation
 
 ## SYNOPSIS
-Return details about low lever config change (More detailed)
+Returns details about low-level configuration changes (more detailed).
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_LowLevelOperation [-APIHeader] <Object> [-HighLevelID] <String> [<Com
 ```
 
 ## DESCRIPTION
-Return details about low lever config change (More detailed)
+Returns details about low-level configuration changes for a specific operation ID from the CVAD Manage API `ConfigLog/Operations/<HighLevelID>/LowLevelOperations` endpoint.
 
 ## EXAMPLES
 
@@ -27,11 +27,18 @@ $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
 ```
 
 $LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog\[0\].id
+Retrieves low-level operations for the first high-level operation in the past 7 days.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID "<operation-id>" | Select-Object OperationType, Property, OldValue, NewValue
+```
+Shows key fields for each low-level change.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -46,8 +53,7 @@ Accept wildcard characters: False
 ```
 
 ### -HighLevelID
-Unique id for a config change.
-From the Get-CTXAPI_ConfigLog function.
+Unique id for a config change (from Get-CTXAPI_ConfigLog).
 
 ```yaml
 Type: String
@@ -65,10 +71,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+Array of low-level operation objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS

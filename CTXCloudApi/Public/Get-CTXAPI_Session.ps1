@@ -39,23 +39,39 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Return details about current sessions
+Returns details about current sessions from Citrix Cloud CVAD.
+Retrieves all sessions (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about current sessions
+Returns details about current sessions (handles pagination).
 
 .DESCRIPTION
-Return details about current sessions
+Returns details about current sessions from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 .EXAMPLE
 Get-CTXAPI_Session -APIHeader $APIHeader
+Retrieves and lists current session objects.
+
+.EXAMPLE
+Get-CTXAPI_Session -APIHeader $APIHeader | Select-Object UserName, DnsName, LogOnDuration, ConnectionState
+Shows key fields for each session.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of session objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Session
 
 #>
 

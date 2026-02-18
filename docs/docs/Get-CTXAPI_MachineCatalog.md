@@ -8,7 +8,7 @@ schema: 2.0.0
 # Get-CTXAPI_MachineCatalog
 
 ## SYNOPSIS
-Return details about machine Catalogs
+Returns details about Machine Catalogs (handles pagination).
 
 ## SYNTAX
 
@@ -17,7 +17,7 @@ Get-CTXAPI_MachineCatalog [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Return details about machine Catalogs
+Returns details about Machine Catalogs from Citrix Cloud CVAD.
 
 ## EXAMPLES
 
@@ -25,11 +25,18 @@ Return details about machine Catalogs
 ```
 $MachineCatalogs = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader
 ```
+Retrieves all machine catalogs and stores them for reuse.
+
+### EXAMPLE 2
+```
+Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Select-Object Name, SessionSupport, TotalCount, IsPowerManaged
+```
+Lists key catalog fields including session support, total machines, and power management.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
 ```yaml
 Type: Object
@@ -47,10 +54,12 @@ Accept wildcard characters: False
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
+None
 
 ## OUTPUTS
 
 ### System.Object[]
+Array of machine catalog objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS

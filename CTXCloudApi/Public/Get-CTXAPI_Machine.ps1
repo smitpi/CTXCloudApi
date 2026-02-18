@@ -39,26 +39,41 @@ Updated [06/11/2021_16:49] Using the new api
 <#
 
 .DESCRIPTION
-Return details about vda machines
+Returns details about VDA machines from Citrix Cloud CVAD.
+Retrieves all machines (handling continuation tokens) and outputs the items returned by the API.
 
 #>
 
 
 <#
 .SYNOPSIS
-Return details about vda machines
+Returns details about VDA machines (handles pagination).
 
 .DESCRIPTION
-Return details about vda machines
+Returns details about VDA machines from Citrix Cloud CVAD.
 
 .PARAMETER APIHeader
-Use Connect-CTXAPI to create headers
+Header object created by Connect-CTXAPI; contains authentication and request headers.
 
-.PARAMETER GetPubDesktop
-Get published desktop details
+
 
 .EXAMPLE
 $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
+Retrieves all machines and stores them for reuse.
+
+.EXAMPLE
+Get-CTXAPI_Machine -APIHeader $APIHeader | Select-Object DnsName, IPAddress, OSType, RegistrationState
+Lists key machine fields for quick inspection.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of machine objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machine
 
 #>
 
@@ -69,6 +84,7 @@ function Get-CTXAPI_Machine {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
+
     $requestUri = 'https://api-eu.cloud.com/cvad/manage/Machines?limit=1000'
     $response = Invoke-RestMethod -Uri $requestUri -Method GET -Headers $APIHeader.headers
 
