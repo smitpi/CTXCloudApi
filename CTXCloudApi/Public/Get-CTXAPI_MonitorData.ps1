@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 1.2.4
 
-.GUID 3e0321fa-75f4-4cb4-b4d4-cb806bc52a5a
+.GUID 89464c22-68f1-499c-bec1-056895fd7766
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS "api" "cloud") "vda" ("ctx" api cloud ctx ps vda
+.TAGS
 
 .LICENSEURI
 
@@ -19,38 +19,25 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_18:17] Initial Script Creating
-Updated [06/10/2021_20:09] "Help Files Added"
-Updated [07/10/2021_13:28] Script info updated for module
-Updated [03/11/2021_19:17] Info Update
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Collect Monitoring OData for other reports. 
 
-
-
-
-
-
-
-<#
-
-.DESCRIPTION
-Collects Citrix Monitor OData entities for a specified time window.
-Returns a `CTXMonitorData` object containing commonly used entities (Connections, Session, Machines, Catalogs, DesktopGroups, ResourceUtilization, SessionMetrics, etc.).
-
-#>
+#> 
 
 
 

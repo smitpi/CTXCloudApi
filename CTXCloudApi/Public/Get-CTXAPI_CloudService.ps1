@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID a7feac60-f442-4370-b96d-56e0613376ab
+.GUID 8d1b61fe-2a0b-4389-a251-ffde5d16334f
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,29 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:28] Initial Script Creating
-Updated [06/11/2021_16:48] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about cloud services and subscription. 
 
-<#
+#> 
 
-.DESCRIPTION
-Returns details about Citrix Cloud services and subscription state.
-Queries the Core Citrix Workspaces API `serviceStates` endpoint and returns the `items` collection.
-
-#>
 
 
 <#

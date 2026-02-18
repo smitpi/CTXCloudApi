@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version:
+online version: https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
 schema: 2.0.0
 ---
 
@@ -14,19 +14,20 @@ Connects to Citrix Cloud and creates required API headers.
 
 ```
 Connect-CTXAPI [-Customer_Id] <String> [-Client_Id] <String> [-Client_Secret] <String>
- [-Customer_Name] <String> [<CommonParameters>]
+ [-Customer_Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Authenticates to Citrix Cloud using Client Id/Secret, resolves the CVAD Instance Id, and returns a CTXAPIHeaderObject containing headers and context for other CTXCloudApi cmdlets.
+Authenticates against Citrix Cloud using \`Client_Id\` and \`Client_Secret\`, resolves the CVAD \`Citrix-InstanceId\`, and constructs headers for subsequent CTXCloudApi requests.
+Returns a \`CTXAPIHeaderObject\` containing \`CustomerName\`, \`TokenExpireAt\` (about 1 hour), \`CTXAPI\` (ids), and \`headers\`.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 $splat = @{
-	Customer_Id   = "xxx"
-	Client_Id     = "xxx-xxx-xxx-xxx"
+	Customer_Id = "xxx"
+	Client_Id = "xxx-xxx-xxx-xxx"
 	Client_Secret = "yyyyyy=="
 	Customer_Name = 'HomeLab'
 }
@@ -36,13 +37,13 @@ $APIHeader = Connect-CTXAPI @splat
 ### EXAMPLE 2
 ```
 Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
+Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
 ```
-Creates and returns a CTXAPIHeaderObject. Store it (e.g., $APIHeader) and pass to other cmdlets.
 
 ## PARAMETERS
 
 ### -Customer_Id
-From Citrix Cloud
+Citrix Customer ID (GUID) from the Citrix Cloud console.
 
 ```yaml
 Type: String
@@ -57,7 +58,7 @@ Accept wildcard characters: False
 ```
 
 ### -Client_Id
-From Citrix Cloud
+OAuth Client ID created under Citrix Cloud API access.
 
 ```yaml
 Type: String
@@ -72,7 +73,7 @@ Accept wildcard characters: False
 ```
 
 ### -Client_Secret
-From Citrix Cloud
+OAuth Client Secret for the above Client ID.
 
 ```yaml
 Type: String
@@ -87,7 +88,7 @@ Accept wildcard characters: False
 ```
 
 ### -Customer_Name
-Name of your Company, or what you want to call your connection
+Display name used in reports/filenames to identify this connection.
 
 ```yaml
 Type: String
@@ -101,17 +102,35 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-None
 
+### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
-CTXAPIHeaderObject
 
-Contains authentication headers and context (CustomerName, TokenExpireAt, CTXAPI fields) for CTXCloudApi cmdlets.
-
+### CTXAPIHeaderObject. Contains authentication headers and context for CTXCloudApi cmdlets.
 ## NOTES
+The access token typically expires in ~1 hour.
+Re-run Connect-CTXAPI to refresh headers when needed.
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI](https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI)
+

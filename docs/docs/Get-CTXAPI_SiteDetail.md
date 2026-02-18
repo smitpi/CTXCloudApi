@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version:
+online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetail
 schema: 2.0.0
 ---
 
@@ -13,25 +13,25 @@ Returns details about your CVAD site.
 ## SYNTAX
 
 ```
-Get-CTXAPI_SiteDetail [-APIHeader] <Object> [<CommonParameters>]
+Get-CTXAPI_SiteDetail [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns details about your CVAD site (farm) from Citrix Cloud using the resolved Citrix-InstanceId.
+Returns details about your CVAD site (farm) from Citrix Cloud.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 Get-CTXAPI_SiteDetail -APIHeader $APIHeader
+Returns the site details for the current `Citrix-InstanceId`.
 ```
-Returns the site details for the current instance.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_SiteDetail -APIHeader $APIHeader | Select-Object Name, FunctionalLevel, LicensingMode
-```
 Selects key fields from the site object.
+```
 
 ## PARAMETERS
 
@@ -50,16 +50,34 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-None
 
+### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
 ### System.Object
-Site detail object returned from the CVAD Manage API.
+### Site detail object returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetail](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetail)
+

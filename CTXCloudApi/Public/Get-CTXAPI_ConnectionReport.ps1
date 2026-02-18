@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 1.1.7
 
-.GUID ccc3348a-02f0-4e82-91bf-d65549ca3533
+.GUID e65f15dc-db97-45e7-8aa2-23d168cd9603
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,40 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [20/04/2021_10:46] Initial Script Creating
-Updated [22/04/2021_11:42] Script File Info was updated
-Updated [05/05/2021_00:03] added monitor data
-Updated [05/05/2021_14:33] 'Update Manifest'
-Updated [05/10/2021_21:22] Module Info Updated
-Updated [07/10/2021_13:28] Script info updated for module
-Updated [03/11/2021_19:17] Info Update
-Updated [06/11/2021_16:48] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Creates a connection report from CVAD Monitor data. 
+
+#> 
 
 
-
-
-
-
-
-
-<#
-.DESCRIPTION
-Reports on user session connections for the last X hours.
-Fetches CVAD Monitor OData (or uses provided `MonitorData`) and builds a connection dataset including client details, timing, registration state, and avg ICA RTT.
-
-#>
 
 <#
 .SYNOPSIS

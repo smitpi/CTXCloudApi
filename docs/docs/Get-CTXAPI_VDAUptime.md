@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version:
+online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime
 schema: 2.0.0
 ---
 
@@ -13,31 +13,32 @@ Calculate VDA uptime and export or return results.
 ## SYNTAX
 
 ```
-Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Calculates VDA machine uptime based on registration/deregistration timestamps. Builds a list of per-machine details and days online, optionally exporting to Excel/HTML.
+Calculates VDA machine uptime based on registration/deregistration timestamps.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\
+Exports an Excel workbook (VDAUptime-<yyyy.MM.dd-HH.mm>.xlsx) with uptime details.
 ```
-Exports an Excel workbook with uptime details.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
-```
 Generates an HTML report titled "Citrix Uptime".
+```
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState
+Returns objects to the host and selects common fields for quick inspection.
 ```
-Returns objects to the host and selects common fields.
 
 ## PARAMETERS
 
@@ -57,7 +58,9 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-Destination/output for the report. Supported values: Excel, HTML, Host. Default is Host.
+Destination/output for the report.
+Supported values: Host, Excel, HTML.
+Default: Host.
 
 ```yaml
 Type: String
@@ -86,17 +89,34 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-None
 
+### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
-When Export is Host: Array of uptime objects.
 
-When Export is Excel or HTML: No output objects; files are written to ReportPath.
-
+### System.Object[]
+### When Export is Host: array of uptime objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
 ## NOTES
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime)
+

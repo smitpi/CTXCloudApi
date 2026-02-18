@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 1.1.4
 
-.GUID 38c65711-1b10-4f0e-aa2a-c69d6fb4f8e4
+.GUID 7667f859-d734-40c2-a08d-c1801588627a
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,37 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [06/10/2021_21:23] Initial Script Creating
-Updated [07/10/2021_13:28] Script info updated for module
-Updated [03/11/2021_19:17] Info Update
-Updated [06/11/2021_16:48] Using the new api
-Updated [14/11/2021_07:05] Added more functions
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Reports on system config. 
+
+#> 
 
 
-
-
-
-
-
-
-<#
-
-.DESCRIPTION
-Reports on machine Catalog, delivery groups and published desktops.
-
-#>
 
 <#
 .SYNOPSIS

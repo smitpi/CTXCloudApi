@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.3
 
-.GUID f17c5fba-37fb-4230-a529-812470428a3a
+.GUID 2f0e062e-8b6c-40af-a74c-24af44e04d38
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,34 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [27/10/2021_12:52] Initial Script Creating
-Updated [03/11/2021_19:17] Info Update
-Updated [06/11/2021_16:48] Using the new api
-Updated [14/11/2021_07:05] Added more functions
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Connects to Citrix Cloud and creates required API headers. 
+
+#> 
 
 
-
-
-
-
-<#
-
-.DESCRIPTION
-Connect to the cloud and create needed api headers
-
-#>
 
 <#
 .SYNOPSIS

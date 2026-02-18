@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version:
+online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation
 schema: 2.0.0
 ---
 
@@ -13,27 +13,27 @@ Returns details about low-level configuration changes (more detailed).
 ## SYNTAX
 
 ```
-Get-CTXAPI_LowLevelOperation [-APIHeader] <Object> [-HighLevelID] <String> [<CommonParameters>]
+Get-CTXAPI_LowLevelOperation [-APIHeader] <Object> [-HighLevelID] <String> [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Returns details about low-level configuration changes for a specific operation ID from the CVAD Manage API `ConfigLog/Operations/<HighLevelID>/LowLevelOperations` endpoint.
+Returns details about low-level configuration changes for a specific operation ID from Config Log.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
 $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
-```
-
-$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog\[0\].id
+$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
 Retrieves low-level operations for the first high-level operation in the past 7 days.
+```
 
 ### EXAMPLE 2
 ```
-Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID "<operation-id>" | Select-Object OperationType, Property, OldValue, NewValue
-```
+" | Select-Object OperationType, Property, OldValue, NewValue
 Shows key fields for each low-level change.
+```
 
 ## PARAMETERS
 
@@ -67,16 +67,34 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-None
 
+### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
 ### System.Object[]
-Array of low-level operation objects returned from the CVAD Manage API.
+### Array of low-level operation objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation)
+

@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.0
 
-.GUID 0e921c82-3104-4753-9a17-344af43706ab
+.GUID 8977ca78-f6bb-420b-bb98-6c0af40d3f7d
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx
+.TAGS
 
 .LICENSEURI
 
@@ -19,26 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [09/01/2022_09:17] Initial Script Creating
+
 
 .PRIVATEDATA
 
 #>
 
-<#
+<# 
 
-.DESCRIPTION
-Returns details about published applications from Citrix Cloud CVAD.
-Retrieves all applications (handling continuation tokens) and outputs the items returned by the API.
+.DESCRIPTION 
+ Returns details about published applications (handles pagination). 
 
-#>
+#> 
+
 
 
 <#

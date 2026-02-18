@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID d52798b4-350d-491e-bd04-dea52b1ef49c
+.GUID c8aa2754-8e3a-44bf-947d-bf7eb8355890
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,29 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:34] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about your CVAD site. 
 
-<#
+#> 
 
-.DESCRIPTION
-Returns details about your CVAD site (farm).
-Queries the CVAD Manage API using the resolved `Citrix-InstanceId` and returns the site object.
-
-#>
 
 
 <#

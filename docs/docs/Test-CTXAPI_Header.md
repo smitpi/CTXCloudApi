@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version:
+online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone
 schema: 2.0.0
 ---
 
@@ -13,7 +13,8 @@ Checks that the connection is still valid, and the token hasn't expired.
 ## SYNTAX
 
 ```
-Test-CTXAPI_Header [[-APIHeader] <Object>] [-AutoRenew] [<CommonParameters>]
+Test-CTXAPI_Header [[-APIHeader] <Object>] [-AutoRenew] [-ProgressAction <ActionPreference>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,7 +26,6 @@ Checks that the connection is still valid, and the token hasn't expired.
 ```
 Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew
 ```
-Returns True if the header is valid, or refreshes the token and returns True when -AutoRenew is specified; otherwise returns False when expired.
 
 ## PARAMETERS
 
@@ -59,15 +59,29 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-None
 
 ## OUTPUTS
+
 ### System.Boolean
-True/False indicating whether the header is valid at the time of test.
 ## NOTES
 
 ## RELATED LINKS

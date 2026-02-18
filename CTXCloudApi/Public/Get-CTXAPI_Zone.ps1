@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID dd758abe-6542-401a-a224-6507b6f590c7
+.GUID 1e065433-f10b-4849-9e43-eaae0dd4509c
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,31 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:35] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns Zone details (handles pagination). 
 
+#> 
 
-
-<#
-
-.DESCRIPTION
-Returns Zone details from Citrix Cloud CVAD.
-Retrieves all zones (handling continuation tokens) and outputs the items returned by the API.
-
-#>
 
 
 <#

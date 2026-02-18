@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID b8005a47-3bde-42fe-bbf7-b12bda147ad2
+.GUID 75782f6c-a8f0-40a4-a0c2-708d827b3fa1
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,29 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [13/11/2021_23:35] Initial Script Creating
-Updated [14/11/2021_07:05] Added more functions
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Checks that the connection is still valid, and the token hasn't expired. 
 
+#> 
 
-<#
-
-.DESCRIPTION
-Checks that the connection is still valid, and the token hasn't expired.
-
-#>
 
 
 <#

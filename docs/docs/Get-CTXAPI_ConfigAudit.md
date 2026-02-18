@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version:
+online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit
 schema: 2.0.0
 ---
 
@@ -13,35 +13,38 @@ Reports on system config.
 ## SYNTAX
 
 ```
-Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [-Export <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>]
+ [-ProgressAction <ActionPreference>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Reports on machine Catalog, delivery groups and published desktops.
+Reports on Machine Catalogs, Delivery Groups, Published Applications, and VDI Machines.
+Collects audit data and either returns it to the host (default) or exports it to Excel/HTML.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 ```
-Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader
+Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.
 ```
 
 ### EXAMPLE 2
 ```
-Get-CTXAPI_ConfigAudit -APIHeader $APIHeader
+Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
+Exports an Excel workbook (XD_Audit-<CustomerName>-<yyyy.MM.dd-HH.mm>.xlsx) with sheets for each dataset.
 ```
-Returns a PSCustomObject with properties: Machine_Catalogs, Delivery_Groups, Published_Apps, VDI_Devices.
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
+Generates an HTML report (XD_Audit-<CustomerName>-<yyyy.MM.dd-HH.mm>.html) with tables and branding.
 ```
-Writes an HTML report to the specified folder.
 
 ## PARAMETERS
 
 ### -APIHeader
-Use Connect-CTXAPI to create headers.
+Header object created by Connect-CTXAPI; contains authentication and context.
 
 ```yaml
 Type: Object
@@ -56,7 +59,9 @@ Accept wildcard characters: False
 ```
 
 ### -Export
-In what format to export the reports. Supported values: Excel, HTML, Host. Default is Host.
+Destination/output for the report.
+Supported values: Host, Excel, HTML.
+Default: Host.
 
 ```yaml
 Type: String
@@ -71,7 +76,8 @@ Accept wildcard characters: False
 ```
 
 ### -ReportPath
-Destination folder for the exported report.
+Destination folder for exported files when using Excel or HTML.
+Defaults to $env:Temp.
 
 ```yaml
 Type: String
@@ -85,17 +91,34 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
+### -ProgressAction
+{{ Fill ProgressAction Description }}
+
+```yaml
+Type: ActionPreference
+Parameter Sets: (All)
+Aliases: proga
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False
+```
+
 ### CommonParameters
 This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see [about_CommonParameters](http://go.microsoft.com/fwlink/?LinkID=113216).
 
 ## INPUTS
-None
 
+### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
-When Export is Host: PSCustomObject with properties Machine_Catalogs, Delivery_Groups, Published_Apps, VDI_Devices.
 
-When Export is Excel or HTML: No output objects; files are written to ReportPath.
-
+### When Export is Host: PSCustomObject with properties Machine_Catalogs, Delivery_Groups, Published_Apps, VDI_Devices.
+### When Export is Excel or HTML: No objects returned; files are written to ReportPath.
 ## NOTES
 
 ## RELATED LINKS
+
+[https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit)
+

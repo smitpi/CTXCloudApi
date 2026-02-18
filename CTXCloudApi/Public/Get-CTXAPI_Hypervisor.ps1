@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID 7696386a-1c5f-4f56-81d4-926c33d2bc6e
+.GUID 5dabc378-361c-4722-b53e-060fdf3995a6
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,29 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:29] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about hosting (hypervisor) connections (handles pagination). 
 
-<#
+#> 
 
-.DESCRIPTION
-Returns details about hosting (hypervisor) connections from Citrix Cloud CVAD.
-Retrieves all hypervisors (handling continuation tokens) and outputs the items returned by the API.
-
-#>
 
 
 <#

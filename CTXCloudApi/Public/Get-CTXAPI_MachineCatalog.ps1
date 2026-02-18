@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID 36405065-6970-4852-94ce-0cddf2898d29
+.GUID bd100467-ed6b-4425-890c-88ab058b045c
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,30 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:33] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about Machine Catalogs (handles pagination). 
 
+#> 
 
-<#
-
-.DESCRIPTION
-Returns details about Machine Catalogs from Citrix Cloud CVAD.
-Retrieves all catalogs (handling continuation tokens) and outputs the items returned by the API.
-
-#>
 
 
 <#

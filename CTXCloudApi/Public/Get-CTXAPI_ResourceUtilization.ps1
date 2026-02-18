@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 1.1.8
 
-.GUID f2cc4273-d5ac-49b1-b12c-a8e2d1b8cf06
+.GUID 9007d474-0143-4f4f-97f3-5c0cece45783
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS api citrix ctx cvad PowerShell ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,42 +19,27 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [21/04/2021_11:32] Initial Script Creating
-Updated [22/04/2021_11:42] Script File Info was updated
-Updated [24/04/2021_07:22] Changes the report options
-Updated [05/05/2021_00:04] added monitor data
-Updated [05/05/2021_14:33] 'Update Manifest'
-Updated [05/10/2021_21:22] Module Info Updated
-Updated [07/10/2021_13:28] Script info updated for module
-Updated [03/11/2021_19:17] Info Update
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
+
+.DESCRIPTION 
+ Resource utilization in the last X hours. 
+
+#> 
 
 
-
-
-
-
-
-
-<#
-
-.DESCRIPTION
-Reports on resource utilization for VDA machines over the past X hours.
-Fetches CVAD Monitor OData (or uses provided `MonitorData`) and builds a per-machine dataset with averages (CPU, memory, sessions) and key details.
-
-#>
 
 <#
 .SYNOPSIS

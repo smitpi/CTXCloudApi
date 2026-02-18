@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID 02947c49-f670-4398-8fdb-3b522c22b593
+.GUID bb39daa6-1851-4fc1-999e-79e9ee26f69f
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,30 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:34] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about current sessions (handles pagination). 
 
+#> 
 
-<#
-
-.DESCRIPTION
-Returns details about current sessions from Citrix Cloud CVAD.
-Retrieves all sessions (handling continuation tokens) and outputs the items returned by the API.
-
-#>
 
 
 <#

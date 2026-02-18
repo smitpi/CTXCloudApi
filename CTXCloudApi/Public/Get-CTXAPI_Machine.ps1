@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID 54693dbd-02ca-4269-96d6-96e30c60fb0b
+.GUID 678131dd-2669-40b1-8dec-45fa6842882d
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,30 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:33] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about VDA machines (handles pagination). 
 
+#> 
 
-<#
-
-.DESCRIPTION
-Returns details about VDA machines from Citrix Cloud CVAD.
-Retrieves all machines (handling continuation tokens) and outputs the items returned by the API.
-
-#>
 
 
 <#

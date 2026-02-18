@@ -1,4 +1,3 @@
-﻿
 <#PSScriptInfo
 
 .VERSION 1.1.7
@@ -9,39 +8,33 @@
 
 .COMPANYNAME HTPCZA Tech
 
-.COPYRIGHT
+.COPYRIGHT 
 
 .TAGS api citrix ctx cvad ps
 
-.LICENSEURI
+.LICENSEURI 
 
-.PROJECTURI
+.PROJECTURI 
 
-.ICONURI
+.ICONURI 
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
-.REQUIREDSCRIPTS
+.REQUIREDSCRIPTS 
 
-.EXTERNALSCRIPTDEPENDENCIES
+.EXTERNALSCRIPTDEPENDENCIES 
 
 .RELEASENOTES
-Created [06/04/2021_11:17] Initial Script Creating
-Updated [20/04/2021_10:43] Script File Info was updated
-Updated [05/05/2021_14:33] 'Update Manifest'
-Updated [05/10/2021_21:22] Module Info Updated
-Updated [07/10/2021_13:28] Script info updated for module
-Updated [03/11/2021_19:17] Info Update
-Updated [06/11/2021_16:49] Using the new api
+[02/18/2026 10:18:42] Updated with new paging logic
 
 .PRIVATEDATA
+
 
 #>
 
 #Requires -Module ImportExcel
 #Requires -Module PSWriteHTML
 #Requires -Module PSWriteColor
-
 
 <#
 

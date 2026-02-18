@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID 2d5b1922-da2b-48c8-8d33-0686390699a8
+.GUID 058db445-cc83-4d71-aa74-017b8785f5f1
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,29 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:29] Initial Script Creating
-Updated [06/11/2021_16:48] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about Delivery Groups (handles pagination). 
 
-<#
+#> 
 
-.DESCRIPTION
-Returns details about Delivery Groups from Citrix Cloud CVAD.
-Retrieves all delivery groups (handling continuation tokens) and outputs the items returned by the API.
-
-#>
 
 
 <#

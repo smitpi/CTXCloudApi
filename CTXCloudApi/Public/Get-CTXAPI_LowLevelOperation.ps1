@@ -1,9 +1,9 @@
-﻿
+
 <#PSScriptInfo
 
 .VERSION 0.1.1
 
-.GUID 341638e1-4b02-4f7c-ae55-c4756a21d724
+.GUID bfd9d3bd-f5af-42f2-8f6d-522a63a20091
 
 .AUTHOR Pierre Smit
 
@@ -11,7 +11,7 @@
 
 .COPYRIGHT
 
-.TAGS ctx ps
+.TAGS
 
 .LICENSEURI
 
@@ -19,29 +19,26 @@
 
 .ICONURI
 
-.EXTERNALMODULEDEPENDENCIES
+.EXTERNALMODULEDEPENDENCIES 
 
 .REQUIREDSCRIPTS
 
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [03/11/2021_19:32] Initial Script Creating
-Updated [06/11/2021_16:49] Using the new api
+
 
 .PRIVATEDATA
 
 #>
 
+<# 
 
+.DESCRIPTION 
+ Returns details about low-level configuration changes (more detailed). 
 
-<#
+#> 
 
-.DESCRIPTION
-Returns details about low-level configuration changes for a specific operation.
-Queries the CVAD Manage API `ConfigLog/Operations/<HighLevelID>/LowLevelOperations` and returns the `items` collection.
-
-#>
 
 
 <#
