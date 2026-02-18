@@ -217,7 +217,7 @@ $script:PowerStateCode = [PSCustomObject]@{
 # Author:           Pierre Smit
 # Company:          HTPCZA Tech
 # CreatedOn:        11/26/2024 11:41:06 AM
-# ModifiedOn:       2/18/2026 10:39:37 AM
+# ModifiedOn:       2/18/2026 10:59:38 AM
 # Synopsis:         Connects to Citrix Cloud and creates required API headers.
 #############################################
  
@@ -240,6 +240,11 @@ OAuth Client Secret for the above Client ID.
 .PARAMETER Customer_Name
 Display name used in reports/filenames to identify this connection.
 
+.parameter ProgressAction
+Specifies how PowerShell responds to progress updates for the command.  
+Valid values are: `Continue`, `SilentlyContinue`, `Ignore`, `Inquire`, `Stop`, and `Suspend`.  
+Use this parameter to control whether progress bars are shown or suppressed during execution.
+
 .EXAMPLE
 $splat = @{
 	Customer_Id = "xxx"
@@ -261,6 +266,7 @@ CTXAPIHeaderObject. Contains authentication headers and context for CTXCloudApi 
 
 .LINK
 https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
+
 
 .NOTES
 The access token typically expires in ~1 hour. Re-run Connect-CTXAPI to refresh headers when needed.
