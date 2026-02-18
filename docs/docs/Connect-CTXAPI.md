@@ -14,7 +14,7 @@ Connects to Citrix Cloud and creates required API headers.
 
 ```
 Connect-CTXAPI [-Customer_Id] <String> [-Client_Id] <String> [-Client_Secret] <String>
- [-Customer_Name] <String> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Customer_Name] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,19 +26,22 @@ Returns a \`CTXAPIHeaderObject\` containing \`CustomerName\`, \`TokenExpireAt\` 
 ### EXAMPLE 1
 ```
 $splat = @{
-	Customer_Id = "xxx"
+```
+
+Customer_Id = "xxx"
 	Client_Id = "xxx-xxx-xxx-xxx"
 	Client_Secret = "yyyyyy=="
 	Customer_Name = 'HomeLab'
 }
 $APIHeader = Connect-CTXAPI @splat
-```
 
 ### EXAMPLE 2
 ```
 Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
-Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
 ```
+
+Creates and returns a \`CTXAPIHeaderObject\`.
+Store it in a variable (e.g., \`$APIHeader\`) and pass to other cmdlets.
 
 ## PARAMETERS
 
@@ -97,21 +100,6 @@ Aliases:
 
 Required: True
 Position: 4
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -4,7 +4,7 @@
 # Source:           Export-Odata.ps1
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:31:21 AM
 # ModifiedOn:       2/18/2026 9:57:34 AM
 ############################################
@@ -74,7 +74,7 @@ function Export-Odata {
 # Source:           Reports-Variables.ps1
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:31:29 AM
 # ModifiedOn:       2/13/2026 6:12:21 PM
 ############################################
@@ -215,9 +215,9 @@ $script:PowerStateCode = [PSCustomObject]@{
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:06 AM
-# ModifiedOn:       2/18/2026 10:59:38 AM
+# ModifiedOn:       2/18/2026 11:04:14 AM
 # Synopsis:         Connects to Citrix Cloud and creates required API headers.
 #############################################
  
@@ -240,10 +240,8 @@ OAuth Client Secret for the above Client ID.
 .PARAMETER Customer_Name
 Display name used in reports/filenames to identify this connection.
 
-.parameter ProgressAction
-Specifies how PowerShell responds to progress updates for the command.  
-Valid values are: `Continue`, `SilentlyContinue`, `Ignore`, `Inquire`, `Stop`, and `Suspend`.  
-Use this parameter to control whether progress bars are shown or suppressed during execution.
+.PARAMETER ProgressAction
+Specifies how PowerShell responds to progress updates. Valid values include Continue, SilentlyContinue, Stop, Inquire, Ignore, and Suspend.
 
 .EXAMPLE
 $splat = @{
@@ -328,9 +326,9 @@ Export-ModuleMember -Function Connect-CTXAPI
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:56 AM
-# ModifiedOn:       2/18/2026 10:39:39 AM
+# ModifiedOn:       2/18/2026 11:22:22 AM
 # Synopsis:         Returns details about published applications (handles pagination).
 #############################################
  
@@ -351,17 +349,6 @@ Lists application names, enabled state, and associated delivery group count.
 .EXAMPLE
 Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
 Shows only enabled applications.
-
-.INPUTS
-None. Parameters are not accepted from the pipeline.
-
-.OUTPUTS
-System.Object[]
-Array of application objects returned from the CVAD Manage API.
-
-.LINK
-https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
-
 #>
 
 function Get-CTXAPI_Application {
@@ -414,9 +401,9 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:40 AM
-# ModifiedOn:       2/18/2026 10:39:41 AM
+# ModifiedOn:       2/18/2026 11:22:22 AM
 # Synopsis:         Returns details about cloud services and subscription.
 #############################################
  
@@ -471,7 +458,7 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:50 AM
 # ModifiedOn:       2/18/2026 10:39:43 AM
 # Synopsis:         Reports on system config.
@@ -689,9 +676,9 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:14 AM
-# ModifiedOn:       2/18/2026 10:39:44 AM
+# ModifiedOn:       2/18/2026 11:22:22 AM
 # Synopsis:         Returns high-level configuration changes in the last X days.
 #############################################
  
@@ -751,7 +738,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:17 AM
 # ModifiedOn:       2/18/2026 10:39:46 AM
 # Synopsis:         Creates a connection report from CVAD Monitor data.
@@ -905,9 +892,9 @@ Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:59 AM
-# ModifiedOn:       2/18/2026 10:39:48 AM
+# ModifiedOn:       2/18/2026 11:22:22 AM
 # Synopsis:         Returns details about Delivery Groups (handles pagination).
 #############################################
  
@@ -993,7 +980,7 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:25 AM
 # ModifiedOn:       2/18/2026 10:39:50 AM
 # Synopsis:         Reports on connection or machine failures in the last X hours.
@@ -1153,7 +1140,7 @@ Export-ModuleMember -Function Get-CTXAPI_FailureReport
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:11 AM
 # ModifiedOn:       2/18/2026 10:39:51 AM
 # Synopsis:         Returns details about hosting (hypervisor) connections (handles pagination).
@@ -1240,7 +1227,7 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:53 AM
 # ModifiedOn:       2/18/2026 10:39:53 AM
 # Synopsis:         Returns details about low-level configuration changes (more detailed).
@@ -1305,9 +1292,9 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:38 AM
-# ModifiedOn:       2/18/2026 10:39:55 AM
+# ModifiedOn:       2/18/2026 11:22:23 AM
 # Synopsis:         Returns details about VDA machines (handles pagination).
 #############################################
  
@@ -1391,9 +1378,9 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:43 AM
-# ModifiedOn:       2/18/2026 10:39:56 AM
+# ModifiedOn:       2/18/2026 11:22:23 AM
 # Synopsis:         Returns details about Machine Catalogs (handles pagination).
 #############################################
  
@@ -1477,7 +1464,7 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:30 AM
 # ModifiedOn:       2/18/2026 10:39:58 AM
 # Synopsis:         Collect Monitoring OData for other reports.
@@ -1701,9 +1688,9 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:33 AM
-# ModifiedOn:       2/18/2026 10:40:00 AM
+# ModifiedOn:       2/18/2026 11:22:23 AM
 # Synopsis:         Returns cloud Resource Locations.
 #############################################
  
@@ -1758,7 +1745,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:03 AM
 # ModifiedOn:       2/18/2026 10:40:01 AM
 # Synopsis:         Resource utilization in the last X hours.
@@ -1848,7 +1835,7 @@ function Get-CTXAPI_ResourceUtilization {
             $AVGTotalMemory = [math]::Round($machine.Group[0].TotalMemory / 1gb)
 
         }
-        catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
+ catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
         $data.Add([PSCustomObject]@{
                 DnsName                  = $MachineDetails.DnsName
                 IsInMaintenanceMode      = $MachineDetails.IsInMaintenanceMode
@@ -1891,7 +1878,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:28 AM
 # ModifiedOn:       2/18/2026 10:40:03 AM
 # Synopsis:         Returns details about current sessions (handles pagination).
@@ -1975,7 +1962,7 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:39 AM
 # ModifiedOn:       2/18/2026 10:40:05 AM
 # Synopsis:         Returns details about your CVAD site.
@@ -2034,7 +2021,7 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:45 AM
 # ModifiedOn:       2/18/2026 10:38:56 AM
 # Synopsis:         Calculate VDA uptime and export or return results.
@@ -2119,7 +2106,7 @@ function Get-CTXAPI_VDAUptime {
                     $Uptime = $null
                 }
             }
-            catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" } 
+ catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" } 
             
             $complist.Add([PSCustomObject]@{
                     DnsName           = $machine.DnsName
@@ -2169,7 +2156,7 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:40:48 AM
 # ModifiedOn:       2/18/2026 10:40:06 AM
 # Synopsis:         Returns Zone details (handles pagination).
@@ -2253,7 +2240,7 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.29
 # Author:           Pierre Smit
-# Company:          HTPCZA Tech
+# Company:          Private
 # CreatedOn:        11/26/2024 11:41:08 AM
 # ModifiedOn:       2/18/2026 10:40:08 AM
 # Synopsis:         Checks that the connection is still valid, and the token hasn't expired.

@@ -13,7 +13,7 @@ Returns details about cloud services and subscription.
 ## SYNTAX
 
 ```
-Get-CTXAPI_CloudService [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_CloudService [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about Citrix Cloud services and subscription state from the \`se
 ### EXAMPLE 1
 ```
 Get-CTXAPI_CloudService -APIHeader $APIHeader | Select-Object serviceName, state, lastUpdated
-Lists each service name, its current state, and the last update time.
 ```
+
+Lists each service name, its current state, and the last update time.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_CloudService -APIHeader $APIHeader | Where-Object { $_.state -ne 'Enabled' }
-Shows services that are not currently enabled.
 ```
+
+Shows services that are not currently enabled.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

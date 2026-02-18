@@ -60,10 +60,8 @@ OAuth Client Secret for the above Client ID.
 .PARAMETER Customer_Name
 Display name used in reports/filenames to identify this connection.
 
-.parameter ProgressAction
-Specifies how PowerShell responds to progress updates for the command.  
-Valid values are: `Continue`, `SilentlyContinue`, `Ignore`, `Inquire`, `Stop`, and `Suspend`.  
-Use this parameter to control whether progress bars are shown or suppressed during execution.
+.PARAMETER ProgressAction
+Specifies how PowerShell responds to progress updates. Valid values include Continue, SilentlyContinue, Stop, Inquire, Ignore, and Suspend.
 
 .EXAMPLE
 $splat = @{

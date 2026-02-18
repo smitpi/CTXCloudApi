@@ -15,13 +15,13 @@ Creates a connection report from CVAD Monitor data.
 ### Fetch odata (Default)
 ```
 Get-CTXAPI_ConnectionReport -APIHeader <Object> [-hours <Int32>] [-Export <String>] [-ReportPath <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### Got odata
 ```
 Get-CTXAPI_ConnectionReport [-MonitorData <Object>] [-Export <String>] [-ReportPath <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,20 +32,23 @@ Reports on user session connections for the last X hours.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
-Generates an HTML report titled "Citrix Sessions" with the full dataset.
 ```
+
+Generates an HTML report titled "Citrix Sessions" with the full dataset.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp
-Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-<yyyy.MM.dd-HH.mm>.xlsx).
 ```
+
+Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-\<yyyy.MM.dd-HH.mm\>.xlsx).
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_ConnectionReport -APIHeader $APIHeader | Select-Object Upn, DnsName, EstablishmentDate, AVG_ICA_RTT
-Returns objects to the host and selects common fields for quick inspection.
 ```
+
+Returns objects to the host and selects common fields for quick inspection.
 
 ## PARAMETERS
 
@@ -125,21 +128,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

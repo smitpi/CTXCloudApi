@@ -13,7 +13,7 @@ Returns details about VDA machines (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_Machine [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_Machine [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about VDA machines from Citrix Cloud CVAD.
 ### EXAMPLE 1
 ```
 $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
-Retrieves all machines and stores them for reuse.
 ```
+
+Retrieves all machines and stores them for reuse.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_Machine -APIHeader $APIHeader | Select-Object DnsName, IPAddress, OSType, RegistrationState
-Lists key machine fields for quick inspection.
 ```
+
+Lists key machine fields for quick inspection.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

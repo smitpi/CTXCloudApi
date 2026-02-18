@@ -13,8 +13,7 @@ Returns details about low-level configuration changes (more detailed).
 ## SYNTAX
 
 ```
-Get-CTXAPI_LowLevelOperation [-APIHeader] <Object> [-HighLevelID] <String> [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Get-CTXAPI_LowLevelOperation [-APIHeader] <Object> [-HighLevelID] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,15 +24,17 @@ Returns details about low-level configuration changes for a specific operation I
 ### EXAMPLE 1
 ```
 $ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
-$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
-Retrieves low-level operations for the first high-level operation in the past 7 days.
 ```
+
+$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog\[0\].id
+Retrieves low-level operations for the first high-level operation in the past 7 days.
 
 ### EXAMPLE 2
 ```
 " | Select-Object OperationType, Property, OldValue, NewValue
-Shows key fields for each low-level change.
 ```
+
+Shows key fields for each low-level change.
 
 ## PARAMETERS
 
@@ -62,21 +63,6 @@ Aliases:
 
 Required: True
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

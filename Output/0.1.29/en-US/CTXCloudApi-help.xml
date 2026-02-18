@@ -63,18 +63,6 @@
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -126,18 +114,6 @@
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -167,23 +143,16 @@
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$splat = @{
-	Customer_Id = "xxx"
-	Client_Id = "xxx-xxx-xxx-xxx"
-	Client_Secret = "yyyyyy=="
-	Customer_Name = 'HomeLab'
-}
-$APIHeader = Connect-CTXAPI @splat</dev:code>
+        <dev:code>$splat = @{</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Customer_Id = "xxx" 	Client_Id = "xxx-xxx-xxx-xxx" 	Client_Secret = "yyyyyy==" 	Customer_Name = 'HomeLab' } $APIHeader = Connect-CTXAPI @splat</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
-Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.</dev:code>
+        <dev:code>Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -221,18 +190,6 @@ Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIH
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -244,18 +201,6 @@ Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIH
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -297,18 +242,16 @@ Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIH
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Application -APIHeader $APIHeader | Select-Object Name, Enabled, NumAssociatedDeliveryGroups
-Lists application names, enabled state, and associated delivery group count.</dev:code>
+        <dev:code>Get-CTXAPI_Application -APIHeader $APIHeader | Select-Object Name, Enabled, NumAssociatedDeliveryGroups</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists application names, enabled state, and associated delivery group count.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
-Shows only enabled applications.</dev:code>
+        <dev:code>Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows only enabled applications.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -346,18 +289,6 @@ Shows only enabled applications.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -369,18 +300,6 @@ Shows only enabled applications.</dev:code>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -422,18 +341,16 @@ Shows only enabled applications.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_CloudService -APIHeader $APIHeader | Select-Object serviceName, state, lastUpdated
-Lists each service name, its current state, and the last update time.</dev:code>
+        <dev:code>Get-CTXAPI_CloudService -APIHeader $APIHeader | Select-Object serviceName, state, lastUpdated</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists each service name, its current state, and the last update time.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_CloudService -APIHeader $APIHeader | Where-Object { $_.state -ne 'Enabled' }
-Shows services that are not currently enabled.</dev:code>
+        <dev:code>Get-CTXAPI_CloudService -APIHeader $APIHeader | Where-Object { $_.state -ne 'Enabled' }</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows services that are not currently enabled.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -495,18 +412,6 @@ Shows services that are not currently enabled.</dev:code>
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -546,18 +451,6 @@ Shows services that are not currently enabled.</dev:code>
         </dev:type>
         <dev:defaultValue>$env:temp</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -595,26 +488,23 @@ Shows services that are not currently enabled.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader
-Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.</dev:code>
+        <dev:code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
-Exports an Excel workbook (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with sheets for each dataset.</dev:code>
+        <dev:code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Exports an Excel workbook (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with sheets for each dataset.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
-Generates an HTML report (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;.html) with tables and branding.</dev:code>
+        <dev:code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Generates an HTML report (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;.html) with tables and branding.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -664,18 +554,6 @@ Generates an HTML report (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -699,18 +577,6 @@ Generates an HTML report (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -752,18 +618,16 @@ Generates an HTML report (XD_Audit-&lt;CustomerName&gt;-&lt;yyyy.MM.dd-HH.mm&gt;
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15 | Select-Object TimeStamp, ObjectType, OperationType, User
-Shows recent configuration operations with key fields for the past 15 days.</dev:code>
+        <dev:code>Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15 | Select-Object TimeStamp, ObjectType, OperationType, User</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows recent configuration operations with key fields for the past 15 days.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Where-Object { $_.ObjectType -eq 'DeliveryGroup' }
-Filters operations related to Delivery Groups in the last 7 days.</dev:code>
+        <dev:code>Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Where-Object { $_.ObjectType -eq 'DeliveryGroup' }</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Filters operations related to Delivery Groups in the last 7 days.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -837,18 +701,6 @@ Filters operations related to Delivery Groups in the last 7 days.</dev:code>
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_ConnectionReport</maml:name>
@@ -887,18 +739,6 @@ Filters operations related to Delivery Groups in the last 7 days.</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -963,18 +803,6 @@ Filters operations related to Delivery Groups in the last 7 days.</dev:code>
         </dev:type>
         <dev:defaultValue>$env:temp</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1012,26 +840,23 @@ Filters operations related to Delivery Groups in the last 7 days.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
-Generates an HTML report titled "Citrix Sessions" with the full dataset.</dev:code>
+        <dev:code>Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Generates an HTML report titled "Citrix Sessions" with the full dataset.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp
-Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx).</dev:code>
+        <dev:code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx).</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader | Select-Object Upn, DnsName, EstablishmentDate, AVG_ICA_RTT
-Returns objects to the host and selects common fields for quick inspection.</dev:code>
+        <dev:code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader | Select-Object Upn, DnsName, EstablishmentDate, AVG_ICA_RTT</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns objects to the host and selects common fields for quick inspection.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1069,18 +894,6 @@ Returns objects to the host and selects common fields for quick inspection.</dev
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1092,18 +905,6 @@ Returns objects to the host and selects common fields for quick inspection.</dev
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1145,18 +946,16 @@ Returns objects to the host and selects common fields for quick inspection.</dev
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, TotalMachines, InMaintenanceMode
-Lists group name, total machines, and maintenance status.</dev:code>
+        <dev:code>Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, TotalMachines, InMaintenanceMode</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists group name, total machines, and maintenance status.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Where-Object { $_.IsBroken }
-Shows delivery groups marked as broken.</dev:code>
+        <dev:code>Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Where-Object { $_.IsBroken }</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows delivery groups marked as broken.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1254,18 +1053,6 @@ Shows delivery groups marked as broken.</dev:code>
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1341,18 +1128,6 @@ Shows delivery groups marked as broken.</dev:code>
         </dev:type>
         <dev:defaultValue>$env:temp</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -1390,26 +1165,23 @@ Shows delivery groups marked as broken.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
-Returns connection failures to the host.</dev:code>
+        <dev:code>Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns connection failures to the host.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
-Exports machine failures for the last 48 hours to an Excel workbook.</dev:code>
+        <dev:code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Exports machine failures for the last 48 hours to an Excel workbook.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Connection | Select-Object User, DnsName, FailureDate, PowerState
-Shows common fields for connection failures.</dev:code>
+        <dev:code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Connection | Select-Object User, DnsName, FailureDate, PowerState</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows common fields for connection failures.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1447,18 +1219,6 @@ Shows common fields for connection failures.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1470,18 +1230,6 @@ Shows common fields for connection failures.</dev:code>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1523,18 +1271,16 @@ Shows common fields for connection failures.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Select-Object Name, HostingType, Enabled
-Lists hypervisor name, hosting type, and enabled state.</dev:code>
+        <dev:code>Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Select-Object Name, HostingType, Enabled</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists hypervisor name, hosting type, and enabled state.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Where-Object { $_.IsBroken }
-Shows hypervisors marked as broken.</dev:code>
+        <dev:code>Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Where-Object { $_.IsBroken }</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows hypervisors marked as broken.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1584,18 +1330,6 @@ Shows hypervisors marked as broken.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1619,18 +1353,6 @@ Shows hypervisors marked as broken.</dev:code>
         <command:parameterValue required="true" variableLength="false">String</command:parameterValue>
         <dev:type>
           <maml:name>String</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1672,19 +1394,16 @@ Shows hypervisors marked as broken.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7
-$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id
-Retrieves low-level operations for the first high-level operation in the past 7 days.</dev:code>
+        <dev:code>$ConfigLog = Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>$LowLevelOperations = Get-CTXAPI_LowLevelOperation -APIHeader $APIHeader -HighLevelID $ConfigLog[0].id Retrieves low-level operations for the first high-level operation in the past 7 days.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>" | Select-Object OperationType, Property, OldValue, NewValue
-Shows key fields for each low-level change.</dev:code>
+        <dev:code>" | Select-Object OperationType, Property, OldValue, NewValue</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows key fields for each low-level change.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1722,18 +1441,6 @@ Shows key fields for each low-level change.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1745,18 +1452,6 @@ Shows key fields for each low-level change.</dev:code>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1798,18 +1493,16 @@ Shows key fields for each low-level change.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$machines = Get-CTXAPI_Machine -APIHeader $APIHeader
-Retrieves all machines and stores them for reuse.</dev:code>
+        <dev:code>$machines = Get-CTXAPI_Machine -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Retrieves all machines and stores them for reuse.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Machine -APIHeader $APIHeader | Select-Object DnsName, IPAddress, OSType, RegistrationState
-Lists key machine fields for quick inspection.</dev:code>
+        <dev:code>Get-CTXAPI_Machine -APIHeader $APIHeader | Select-Object DnsName, IPAddress, OSType, RegistrationState</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists key machine fields for quick inspection.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1847,18 +1540,6 @@ Lists key machine fields for quick inspection.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -1870,18 +1551,6 @@ Lists key machine fields for quick inspection.</dev:code>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -1923,18 +1592,16 @@ Lists key machine fields for quick inspection.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$MachineCatalogs = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader
-Retrieves all machine catalogs and stores them for reuse.</dev:code>
+        <dev:code>$MachineCatalogs = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Retrieves all machine catalogs and stores them for reuse.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Select-Object Name, SessionSupport, TotalCount, IsPowerManaged
-Lists key catalog fields including session support, total machines, and power management.</dev:code>
+        <dev:code>Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Select-Object Name, SessionSupport, TotalCount, IsPowerManaged</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists key catalog fields including session support, total machines, and power management.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -1996,18 +1663,6 @@ Lists key catalog fields including session support, total machines, and power ma
           </dev:type>
           <dev:defaultValue>All</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_MonitorData</maml:name>
@@ -2058,18 +1713,6 @@ Lists key catalog fields including session support, total machines, and power ma
             <maml:uri />
           </dev:type>
           <dev:defaultValue>All</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -2134,18 +1777,6 @@ Lists key catalog fields including session support, total machines, and power ma
         </dev:type>
         <dev:defaultValue>All</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -2183,26 +1814,23 @@ Lists key catalog fields including session support, total machines, and power ma
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>$MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 24
-Collects the last 24 hours of Monitor OData and returns a CTXMonitorData object.</dev:code>
+        <dev:code>$MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 24</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Collects the last 24 hours of Monitor OData and returns a CTXMonitorData object.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_MonitorData -APIHeader $APIHeader -BeginDate (Get-Date).AddDays(-2) -EndDate (Get-Date).AddDays(-1) -MonitorDetails Connections,Session
-Collects data for a specific date range and includes only Connections and Session entities.</dev:code>
+        <dev:code>Get-CTXAPI_MonitorData -APIHeader $APIHeader -BeginDate (Get-Date).AddDays(-2) -EndDate (Get-Date).AddDays(-1) -MonitorDetails Connections,Session</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Collects data for a specific date range and includes only Connections and Session entities.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 48 | Select-Object -ExpandProperty Connections
-Expands and lists connection records for the past 48 hours.</dev:code>
+        <dev:code>Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 48 | Select-Object -ExpandProperty Connections</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Expands and lists connection records for the past 48 hours.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2240,18 +1868,6 @@ Expands and lists connection records for the past 48 hours.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2263,18 +1879,6 @@ Expands and lists connection records for the past 48 hours.</dev:code>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -2316,18 +1920,16 @@ Expands and lists connection records for the past 48 hours.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
-Lists all Resource Locations for the tenant.</dev:code>
+        <dev:code>Get-CTXAPI_ResourceLocation -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists all Resource Locations for the tenant.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceLocation -APIHeader $APIHeader | Select-Object name, description, id
-Selects key fields from the returned items.</dev:code>
+        <dev:code>Get-CTXAPI_ResourceLocation -APIHeader $APIHeader | Select-Object name, description, id</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Selects key fields from the returned items.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2401,18 +2003,6 @@ Selects key fields from the returned items.</dev:code>
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_ResourceUtilization</maml:name>
@@ -2451,18 +2041,6 @@ Selects key fields from the returned items.</dev:code>
             <maml:uri />
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
-        </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
       </command:syntaxItem>
     </command:syntax>
@@ -2527,18 +2105,6 @@ Selects key fields from the returned items.</dev:code>
         </dev:type>
         <dev:defaultValue>$env:temp</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -2576,26 +2142,23 @@ Selects key fields from the returned items.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export Excel -ReportPath C:\temp\
-Exports an Excel workbook (Resources_Audit-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with aggregated resource metrics.</dev:code>
+        <dev:code>Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export Excel -ReportPath C:\temp\</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Exports an Excel workbook (Resources_Audit-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with aggregated resource metrics.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp
-Generates an HTML report titled "Citrix Resources" for the last 48 hours.</dev:code>
+        <dev:code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Generates an HTML report titled "Citrix Resources" for the last 48 hours.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader | Select-Object DnsName, AVGPercentCpu, AVGUsedMemory, AVGSessionCount
-Returns objects to the host and selects common fields for quick inspection.</dev:code>
+        <dev:code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader | Select-Object DnsName, AVGPercentCpu, AVGUsedMemory, AVGSessionCount</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns objects to the host and selects common fields for quick inspection.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2633,18 +2196,6 @@ Returns objects to the host and selects common fields for quick inspection.</dev
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2656,18 +2207,6 @@ Returns objects to the host and selects common fields for quick inspection.</dev
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -2709,18 +2248,16 @@ Returns objects to the host and selects common fields for quick inspection.</dev
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Session -APIHeader $APIHeader
-Retrieves and lists current session objects.</dev:code>
+        <dev:code>Get-CTXAPI_Session -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Retrieves and lists current session objects.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Session -APIHeader $APIHeader | Select-Object UserName, DnsName, LogOnDuration, ConnectionState
-Shows key fields for each session.</dev:code>
+        <dev:code>Get-CTXAPI_Session -APIHeader $APIHeader | Select-Object UserName, DnsName, LogOnDuration, ConnectionState</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows key fields for each session.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2758,18 +2295,6 @@ Shows key fields for each session.</dev:code>
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2781,18 +2306,6 @@ Shows key fields for each session.</dev:code>
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -2834,18 +2347,16 @@ Shows key fields for each session.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_SiteDetail -APIHeader $APIHeader
-Returns the site details for the current `Citrix-InstanceId`.</dev:code>
+        <dev:code>Get-CTXAPI_SiteDetail -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns the site details for the current `Citrix-InstanceId`.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_SiteDetail -APIHeader $APIHeader | Select-Object Name, FunctionalLevel, LicensingMode
-Selects key fields from the site object.</dev:code>
+        <dev:code>Get-CTXAPI_SiteDetail -APIHeader $APIHeader | Select-Object Name, FunctionalLevel, LicensingMode</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Selects key fields from the site object.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -2907,18 +2418,6 @@ Selects key fields from the site object.</dev:code>
           </dev:type>
           <dev:defaultValue>$env:temp</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -2958,18 +2457,6 @@ Selects key fields from the site object.</dev:code>
         </dev:type>
         <dev:defaultValue>$env:temp</dev:defaultValue>
       </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
     </command:parameters>
     <command:inputTypes>
       <command:inputType>
@@ -3007,26 +2494,23 @@ Selects key fields from the site object.</dev:code>
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\
-Exports an Excel workbook (VDAUptime-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with uptime details.</dev:code>
+        <dev:code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Exports an Excel workbook (VDAUptime-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with uptime details.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
-Generates an HTML report titled "Citrix Uptime".</dev:code>
+        <dev:code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Generates an HTML report titled "Citrix Uptime".</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 3 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState
-Returns objects to the host and selects common fields for quick inspection.</dev:code>
+        <dev:code>Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Returns objects to the host and selects common fields for quick inspection.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3064,18 +2548,6 @@ Returns objects to the host and selects common fields for quick inspection.</dev
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -3087,18 +2559,6 @@ Returns objects to the host and selects common fields for quick inspection.</dev
         <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
         <dev:type>
           <maml:name>Object</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>None</dev:defaultValue>
@@ -3140,18 +2600,16 @@ Returns objects to the host and selects common fields for quick inspection.</dev
     <command:examples>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 1 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Zone -APIHeader $APIHeader
-Lists all zones for the tenant.</dev:code>
+        <dev:code>Get-CTXAPI_Zone -APIHeader $APIHeader</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Lists all zones for the tenant.</maml:para>
         </dev:remarks>
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_Zone -APIHeader $APIHeader | Select-Object Name, Enabled, Description
-Shows key fields for each zone.</dev:code>
+        <dev:code>Get-CTXAPI_Zone -APIHeader $APIHeader | Select-Object Name, Enabled, Description</dev:code>
         <dev:remarks>
-          <maml:para></maml:para>
+          <maml:para>Shows key fields for each zone.</maml:para>
         </dev:remarks>
       </command:example>
     </command:examples>
@@ -3200,18 +2658,6 @@ Shows key fields for each zone.</dev:code>
           </dev:type>
           <dev:defaultValue>False</dev:defaultValue>
         </command:parameter>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-          <maml:name>ProgressAction</maml:name>
-          <maml:description>
-            <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-          </maml:description>
-          <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-          <dev:type>
-            <maml:name>ActionPreference</maml:name>
-            <maml:uri />
-          </dev:type>
-          <dev:defaultValue>None</dev:defaultValue>
-        </command:parameter>
       </command:syntaxItem>
     </command:syntax>
     <command:parameters>
@@ -3238,18 +2684,6 @@ Shows key fields for each zone.</dev:code>
           <maml:uri />
         </dev:type>
         <dev:defaultValue>False</dev:defaultValue>
-      </command:parameter>
-      <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="proga">
-        <maml:name>ProgressAction</maml:name>
-        <maml:description>
-          <maml:para>{{ Fill ProgressAction Description }}</maml:para>
-        </maml:description>
-        <command:parameterValue required="true" variableLength="false">ActionPreference</command:parameterValue>
-        <dev:type>
-          <maml:name>ActionPreference</maml:name>
-          <maml:uri />
-        </dev:type>
-        <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
     <command:inputTypes />

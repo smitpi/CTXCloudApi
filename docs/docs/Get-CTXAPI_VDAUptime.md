@@ -13,8 +13,7 @@ Calculate VDA uptime and export or return results.
 ## SYNTAX
 
 ```
-Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,20 +24,23 @@ Calculates VDA machine uptime based on registration/deregistration timestamps.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\
-Exports an Excel workbook (VDAUptime-<yyyy.MM.dd-HH.mm>.xlsx) with uptime details.
 ```
+
+Exports an Excel workbook (VDAUptime-\<yyyy.MM.dd-HH.mm\>.xlsx) with uptime details.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
-Generates an HTML report titled "Citrix Uptime".
 ```
+
+Generates an HTML report titled "Citrix Uptime".
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState
-Returns objects to the host and selects common fields for quick inspection.
 ```
+
+Returns objects to the host and selects common fields for quick inspection.
 
 ## PARAMETERS
 
@@ -85,21 +87,6 @@ Aliases:
 Required: False
 Position: 3
 Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

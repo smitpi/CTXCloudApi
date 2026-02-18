@@ -13,7 +13,7 @@ Returns details about Delivery Groups (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_DeliveryGroup [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_DeliveryGroup [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about Delivery Groups from Citrix Cloud CVAD.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Select-Object Name, TotalMachines, InMaintenanceMode
-Lists group name, total machines, and maintenance status.
 ```
+
+Lists group name, total machines, and maintenance status.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Where-Object { $_.IsBroken }
-Shows delivery groups marked as broken.
 ```
+
+Shows delivery groups marked as broken.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

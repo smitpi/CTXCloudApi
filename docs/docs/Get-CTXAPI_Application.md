@@ -13,7 +13,7 @@ Returns details about published applications (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_Application [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_Application [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about published applications from Citrix Cloud CVAD.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_Application -APIHeader $APIHeader | Select-Object Name, Enabled, NumAssociatedDeliveryGroups
-Lists application names, enabled state, and associated delivery group count.
 ```
+
+Lists application names, enabled state, and associated delivery group count.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
-Shows only enabled applications.
 ```
+
+Shows only enabled applications.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -15,13 +15,13 @@ Reports on connection or machine failures in the last X hours.
 ### Fetch odata (Default)
 ```
 Get-CTXAPI_FailureReport -APIHeader <Object> [-hours <Int32>] -FailureType <String> [-Export <String>]
- [-ReportPath <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ### Got odata
 ```
 Get-CTXAPI_FailureReport -APIHeader <Object> [-MonitorData <Object>] [-hours <Int32>] -FailureType <String>
- [-Export <String>] [-ReportPath <String>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-Export <String>] [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,20 +32,23 @@ Reports on machine or connection failures in the last X hours using Monitor ODat
 ### EXAMPLE 1
 ```
 Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
-Returns connection failures to the host.
 ```
+
+Returns connection failures to the host.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
-Exports machine failures for the last 48 hours to an Excel workbook.
 ```
+
+Exports machine failures for the last 48 hours to an Excel workbook.
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Connection | Select-Object User, DnsName, FailureDate, PowerState
-Shows common fields for connection failures.
 ```
+
+Shows common fields for connection failures.
 
 ## PARAMETERS
 
@@ -141,21 +144,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

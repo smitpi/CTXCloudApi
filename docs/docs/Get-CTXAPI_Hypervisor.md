@@ -13,7 +13,7 @@ Returns details about hosting (hypervisor) connections (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_Hypervisor [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_Hypervisor [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about hosting (hypervisor) connections from Citrix Cloud CVAD.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Select-Object Name, HostingType, Enabled
-Lists hypervisor name, hosting type, and enabled state.
 ```
+
+Lists hypervisor name, hosting type, and enabled state.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_Hypervisor -APIHeader $APIHeader | Where-Object { $_.IsBroken }
-Shows hypervisors marked as broken.
 ```
+
+Shows hypervisors marked as broken.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

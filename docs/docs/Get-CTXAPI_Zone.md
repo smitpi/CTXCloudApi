@@ -13,7 +13,7 @@ Returns Zone details (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_Zone [[-APIHeader] <Object>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_Zone [[-APIHeader] <Object>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns Zone details from Citrix Cloud CVAD.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_Zone -APIHeader $APIHeader
-Lists all zones for the tenant.
 ```
+
+Lists all zones for the tenant.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_Zone -APIHeader $APIHeader | Select-Object Name, Enabled, Description
-Shows key fields for each zone.
 ```
+
+Shows key fields for each zone.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: False
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

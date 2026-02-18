@@ -15,13 +15,13 @@ Resource utilization in the last X hours.
 ### Fetch odata (Default)
 ```
 Get-CTXAPI_ResourceUtilization -APIHeader <Object> [-hours <Int32>] [-Export <String>] [-ReportPath <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### Got odata
 ```
 Get-CTXAPI_ResourceUtilization [-MonitorData <Object>] [-Export <String>] [-ReportPath <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,20 +32,23 @@ Reports on resource utilization for VDA machines over the past X hours.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export Excel -ReportPath C:\temp\
-Exports an Excel workbook (Resources_Audit-<yyyy.MM.dd-HH.mm>.xlsx) with aggregated resource metrics.
 ```
+
+Exports an Excel workbook (Resources_Audit-\<yyyy.MM.dd-HH.mm\>.xlsx) with aggregated resource metrics.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp
-Generates an HTML report titled "Citrix Resources" for the last 48 hours.
 ```
+
+Generates an HTML report titled "Citrix Resources" for the last 48 hours.
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader | Select-Object DnsName, AVGPercentCpu, AVGUsedMemory, AVGSessionCount
-Returns objects to the host and selects common fields for quick inspection.
 ```
+
+Returns objects to the host and selects common fields for quick inspection.
 
 ## PARAMETERS
 
@@ -125,21 +128,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

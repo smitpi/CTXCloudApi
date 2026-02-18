@@ -15,13 +15,13 @@ Collect Monitoring OData for other reports.
 ### hours
 ```
 Get-CTXAPI_MonitorData -APIHeader <Object> [-LastHours <Int32>] [-MonitorDetails <String[]>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [<CommonParameters>]
 ```
 
 ### specific
 ```
 Get-CTXAPI_MonitorData -APIHeader <Object> [-BeginDate <DateTime>] [-EndDate <DateTime>]
- [-MonitorDetails <String[]>] [-ProgressAction <ActionPreference>] [<CommonParameters>]
+ [-MonitorDetails <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -32,20 +32,23 @@ Collects Citrix Monitor OData entities for a specified time window and returns a
 ### EXAMPLE 1
 ```
 $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 24
-Collects the last 24 hours of Monitor OData and returns a CTXMonitorData object.
 ```
+
+Collects the last 24 hours of Monitor OData and returns a CTXMonitorData object.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_MonitorData -APIHeader $APIHeader -BeginDate (Get-Date).AddDays(-2) -EndDate (Get-Date).AddDays(-1) -MonitorDetails Connections,Session
-Collects data for a specific date range and includes only Connections and Session entities.
 ```
+
+Collects data for a specific date range and includes only Connections and Session entities.
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 48 | Select-Object -ExpandProperty Connections
-Expands and lists connection records for the past 48 hours.
 ```
+
+Expands and lists connection records for the past 48 hours.
 
 ## PARAMETERS
 
@@ -122,21 +125,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: All
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

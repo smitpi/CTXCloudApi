@@ -13,7 +13,7 @@ Returns details about your CVAD site.
 ## SYNTAX
 
 ```
-Get-CTXAPI_SiteDetail [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_SiteDetail [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about your CVAD site (farm) from Citrix Cloud.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_SiteDetail -APIHeader $APIHeader
-Returns the site details for the current `Citrix-InstanceId`.
 ```
+
+Returns the site details for the current \`Citrix-InstanceId\`.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_SiteDetail -APIHeader $APIHeader | Select-Object Name, FunctionalLevel, LicensingMode
-Selects key fields from the site object.
 ```
+
+Selects key fields from the site object.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

@@ -13,8 +13,7 @@ Checks that the connection is still valid, and the token hasn't expired.
 ## SYNTAX
 
 ```
-Test-CTXAPI_Header [[-APIHeader] <Object>] [-AutoRenew] [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Test-CTXAPI_Header [[-APIHeader] <Object>] [-AutoRenew] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -55,21 +54,6 @@ Aliases:
 Required: False
 Position: Named
 Default value: False
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

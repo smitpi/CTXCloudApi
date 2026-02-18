@@ -13,8 +13,7 @@ Reports on system config.
 ## SYNTAX
 
 ```
-Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>]
- [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_ConfigAudit [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -26,20 +25,23 @@ Collects audit data and either returns it to the host (default) or exports it to
 ### EXAMPLE 1
 ```
 Get-CTXAPI_ConfigAudit -APIHeader $APIHeader
-Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.
 ```
+
+Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
-Exports an Excel workbook (XD_Audit-<CustomerName>-<yyyy.MM.dd-HH.mm>.xlsx) with sheets for each dataset.
 ```
+
+Exports an Excel workbook (XD_Audit-\<CustomerName\>-\<yyyy.MM.dd-HH.mm\>.xlsx) with sheets for each dataset.
 
 ### EXAMPLE 3
 ```
 Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
-Generates an HTML report (XD_Audit-<CustomerName>-<yyyy.MM.dd-HH.mm>.html) with tables and branding.
 ```
+
+Generates an HTML report (XD_Audit-\<CustomerName\>-\<yyyy.MM.dd-HH.mm\>.html) with tables and branding.
 
 ## PARAMETERS
 
@@ -87,21 +89,6 @@ Aliases:
 Required: False
 Position: 3
 Default value: $env:temp
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
-Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```

@@ -13,8 +13,7 @@ Returns high-level configuration changes in the last X days.
 ## SYNTAX
 
 ```
-Get-CTXAPI_ConfigLog [-APIHeader] <Object> [-Days] <String> [-ProgressAction <ActionPreference>]
- [<CommonParameters>]
+Get-CTXAPI_ConfigLog [-APIHeader] <Object> [-Days] <String> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -25,14 +24,16 @@ Returns high-level configuration changes over the past X days from the Config Lo
 ### EXAMPLE 1
 ```
 Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 15 | Select-Object TimeStamp, ObjectType, OperationType, User
-Shows recent configuration operations with key fields for the past 15 days.
 ```
+
+Shows recent configuration operations with key fields for the past 15 days.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_ConfigLog -APIHeader $APIHeader -Days 7 | Where-Object { $_.ObjectType -eq 'DeliveryGroup' }
-Filters operations related to Delivery Groups in the last 7 days.
 ```
+
+Filters operations related to Delivery Groups in the last 7 days.
 
 ## PARAMETERS
 
@@ -61,21 +62,6 @@ Aliases:
 
 Required: True
 Position: 2
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

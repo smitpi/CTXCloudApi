@@ -13,7 +13,7 @@ Returns cloud Resource Locations.
 ## SYNTAX
 
 ```
-Get-CTXAPI_ResourceLocation [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_ResourceLocation [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns Citrix Cloud Resource Locations for the current customer.
 ### EXAMPLE 1
 ```
 Get-CTXAPI_ResourceLocation -APIHeader $APIHeader
-Lists all Resource Locations for the tenant.
 ```
+
+Lists all Resource Locations for the tenant.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_ResourceLocation -APIHeader $APIHeader | Select-Object name, description, id
-Selects key fields from the returned items.
 ```
+
+Selects key fields from the returned items.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False

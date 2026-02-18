@@ -58,17 +58,6 @@ Lists application names, enabled state, and associated delivery group count.
 .EXAMPLE
 Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
 Shows only enabled applications.
-
-.INPUTS
-None. Parameters are not accepted from the pipeline.
-
-.OUTPUTS
-System.Object[]
-Array of application objects returned from the CVAD Manage API.
-
-.LINK
-https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
-
 #>
 
 function Get-CTXAPI_Application {

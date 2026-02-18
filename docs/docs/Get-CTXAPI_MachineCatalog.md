@@ -13,7 +13,7 @@ Returns details about Machine Catalogs (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_MachineCatalog [-APIHeader] <Object> [-ProgressAction <ActionPreference>] [<CommonParameters>]
+Get-CTXAPI_MachineCatalog [-APIHeader] <Object> [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -24,14 +24,16 @@ Returns details about Machine Catalogs from Citrix Cloud CVAD.
 ### EXAMPLE 1
 ```
 $MachineCatalogs = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader
-Retrieves all machine catalogs and stores them for reuse.
 ```
+
+Retrieves all machine catalogs and stores them for reuse.
 
 ### EXAMPLE 2
 ```
 Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Select-Object Name, SessionSupport, TotalCount, IsPowerManaged
-Lists key catalog fields including session support, total machines, and power management.
 ```
+
+Lists key catalog fields including session support, total machines, and power management.
 
 ## PARAMETERS
 
@@ -45,21 +47,6 @@ Aliases:
 
 Required: True
 Position: 1
-Default value: None
-Accept pipeline input: False
-Accept wildcard characters: False
-```
-
-### -ProgressAction
-{{ Fill ProgressAction Description }}
-
-```yaml
-Type: ActionPreference
-Parameter Sets: (All)
-Aliases: proga
-
-Required: False
-Position: Named
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
