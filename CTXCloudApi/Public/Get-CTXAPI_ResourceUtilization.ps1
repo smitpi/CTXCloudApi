@@ -109,8 +109,6 @@ function Get-CTXAPI_ResourceUtilization {
     if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
     else { $monitor = $MonitorData }
     
-   
-
     [System.Collections.generic.List[PSObject]]$data = @()
     $InGroups = $monitor.ResourceUtilization | Group-Object -Property MachineId
     foreach ($machine in $InGroups) {

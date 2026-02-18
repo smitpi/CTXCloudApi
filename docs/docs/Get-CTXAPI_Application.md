@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudAPI-help.xml
 Module Name: CTXCloudApi
-online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
+online version: https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
 schema: 2.0.0
 ---
 
@@ -57,14 +57,9 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
 ### System.Object[]
-### Array of application objects returned from the CVAD Manage API.
 ## NOTES
 
 ## RELATED LINKS
-
-[https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application)
-

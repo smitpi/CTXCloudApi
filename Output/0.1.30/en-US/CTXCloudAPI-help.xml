@@ -206,28 +206,11 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None. Parameters are not accepted from the pipeline.</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
+    <command:inputTypes />
     <command:returnValues>
       <command:returnValue>
         <dev:type>
           <maml:name>System.Object[]</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>Array of application objects returned from the CVAD Manage API.</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -257,8 +240,8 @@
     </command:examples>
     <command:relatedLinks>
       <maml:navigationLink>
-        <maml:linkText>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application</maml:linkText>
-        <maml:uri>https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application</maml:uri>
+        <maml:linkText>Online Version:</maml:linkText>
+        <maml:uri>https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI</maml:uri>
       </maml:navigationLink>
     </command:relatedLinks>
   </command:command>

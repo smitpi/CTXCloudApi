@@ -139,7 +139,6 @@ function Get-CTXAPI_VDAUptime {
                 })
         }
     } catch { Write-Warning 'Date calculation failed' }
-    ##TODO - fix error  Message:Cannot convert null to type "System.DateTime".
     if ($Export -eq 'Excel') { 
         $ExcelOptions = @{
             Path             = $ReportPath + '\VDAUptime-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
