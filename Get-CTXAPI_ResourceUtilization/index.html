@@ -98,8 +98,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
  [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="got-odata">Got odata</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -APIHeader &lt;Object&gt; [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;]
+ [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Reports on resource utilization for VDA machines over the past X hours.</p>
@@ -120,7 +120,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h3 id="-apiheader">-APIHeader</h3>
 <p>Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object</span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
