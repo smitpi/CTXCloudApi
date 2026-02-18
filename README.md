@@ -38,8 +38,10 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/CTXCloudA
 - Removed
 - .whitesource
 - instructions.md
+- Issues.xlsx
 - LICENSE
 - ScriptInfo.zip
+- Version.json
  
 ## Functions
 - [`Connect-CTXAPI`](https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI) -- Connects to Citrix Cloud and creates required API headers.
