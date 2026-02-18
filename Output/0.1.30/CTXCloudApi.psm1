@@ -217,7 +217,7 @@ $script:PowerStateCode = [PSCustomObject]@{
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:06 AM
-# ModifiedOn:       2/18/2026 11:04:14 AM
+# ModifiedOn:       2/18/2026 11:40:26 AM
 # Synopsis:         Connects to Citrix Cloud and creates required API headers.
 #############################################
  
@@ -239,9 +239,6 @@ OAuth Client Secret for the above Client ID.
 
 .PARAMETER Customer_Name
 Display name used in reports/filenames to identify this connection.
-
-.PARAMETER ProgressAction
-Specifies how PowerShell responds to progress updates. Valid values include Continue, SilentlyContinue, Stop, Inquire, Ignore, and Suspend.
 
 .EXAMPLE
 $splat = @{
@@ -328,7 +325,7 @@ Export-ModuleMember -Function Connect-CTXAPI
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:56 AM
-# ModifiedOn:       2/18/2026 11:22:22 AM
+# ModifiedOn:       2/18/2026 11:41:49 AM
 # Synopsis:         Returns details about published applications (handles pagination).
 #############################################
  
@@ -349,6 +346,16 @@ Lists application names, enabled state, and associated delivery group count.
 .EXAMPLE
 Get-CTXAPI_Application -APIHeader $APIHeader | Where-Object Enabled | Select-Object Name
 Shows only enabled applications.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+Array of application objects returned from the CVAD Manage API.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
 #>
 
 function Get-CTXAPI_Application {
@@ -1833,7 +1840,7 @@ function Get-CTXAPI_ResourceUtilization {
             $AVGTotalMemory = [math]::Round($machine.Group[0].TotalMemory / 1gb)
 
         }
- catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
+        catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
         $data.Add([PSCustomObject]@{
                 DnsName                  = $MachineDetails.DnsName
                 IsInMaintenanceMode      = $MachineDetails.IsInMaintenanceMode
@@ -2104,7 +2111,7 @@ function Get-CTXAPI_VDAUptime {
                     $Uptime = $null
                 }
             }
- catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" } 
+            catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" } 
             
             $complist.Add([PSCustomObject]@{
                     DnsName           = $machine.DnsName

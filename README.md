@@ -29,12 +29,6 @@ Get-Help about_CTXCloudApi
 Documentation can be found at: [Github_Pages](https://smitpi.github.io/CTXCloudApi)
  
 ## PS Controller Scripts
-- .vscode
-- Private
-- Public
-- CTXCloudApi.Format.ps1xml
-- CTXCloudAPI.psd1
-- CTXCloudApi.psm1
  
 ## Functions
 - [`Connect-CTXAPI`](https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI) -- Connects to Citrix Cloud and creates required API headers.
