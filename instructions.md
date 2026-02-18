@@ -1,8 +1,7 @@
 # CTXCloudApi
  
 ## Description
-A wrapper for Citrix Cloud CVAD API. You do not require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with the Connect-CTXAPI function to connect, it will create the needed headers for the other functions.
- 
+CTXCloudApi is a PowerShell module for Citrix DaaS (CVAD) Manage & Monitor OData APIs. It eliminates the need for the Citrix SDK and provides a single, secure connection via `Connect-CTXAPI`, after which you can manage and query applications, delivery groups, machine catalogs, hypervisors, sessions, and monitoring data across Citrix Cloud tenants. The module includes robust reporting and export options (Excel/HTML) to support inventory, uptime, failures, utilization, and configuration audits.
 ## Getting Started
 - Install from PowerShell Gallery [PS Gallery](https://www.powershellgallery.com/packages/CTXCloudApi)
 ```

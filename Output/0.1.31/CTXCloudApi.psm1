@@ -3,7 +3,7 @@
 ########### Private Function ###############
 # Source:           Export-Odata.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Company:          Private
 # CreatedOn:        11/26/2024 11:31:21 AM
 # ModifiedOn:       2/18/2026 9:57:34 AM
@@ -73,7 +73,7 @@ function Export-Odata {
 ########### Private Function ###############
 # Source:           Reports-Variables.ps1
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Company:          Private
 # CreatedOn:        11/26/2024 11:31:29 AM
 # ModifiedOn:       2/13/2026 6:12:21 PM
@@ -213,7 +213,7 @@ $script:PowerStateCode = [PSCustomObject]@{
 ######## Function 1 of 20 ##################
 # Function:         Connect-CTXAPI
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:06 AM
@@ -321,7 +321,7 @@ Export-ModuleMember -Function Connect-CTXAPI
 ######## Function 2 of 20 ##################
 # Function:         Get-CTXAPI_Application
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:56 AM
@@ -406,7 +406,7 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 ######## Function 3 of 20 ##################
 # Function:         Get-CTXAPI_CloudService
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:40 AM
@@ -463,7 +463,7 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 ######## Function 4 of 20 ##################
 # Function:         Get-CTXAPI_ConfigAudit
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:50 AM
@@ -681,7 +681,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigAudit
 ######## Function 5 of 20 ##################
 # Function:         Get-CTXAPI_ConfigLog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:14 AM
@@ -743,7 +743,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 ######## Function 6 of 20 ##################
 # Function:         Get-CTXAPI_ConnectionReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:17 AM
@@ -897,7 +897,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConnectionReport
 ######## Function 7 of 20 ##################
 # Function:         Get-CTXAPI_DeliveryGroup
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:59 AM
@@ -985,7 +985,7 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 ######## Function 8 of 20 ##################
 # Function:         Get-CTXAPI_FailureReport
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:25 AM
@@ -1145,7 +1145,7 @@ Export-ModuleMember -Function Get-CTXAPI_FailureReport
 ######## Function 9 of 20 ##################
 # Function:         Get-CTXAPI_Hypervisor
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:11 AM
@@ -1232,7 +1232,7 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 ######## Function 10 of 20 ##################
 # Function:         Get-CTXAPI_LowLevelOperation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:53 AM
@@ -1297,7 +1297,7 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 ######## Function 11 of 20 ##################
 # Function:         Get-CTXAPI_Machine
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:38 AM
@@ -1383,7 +1383,7 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 ######## Function 12 of 20 ##################
 # Function:         Get-CTXAPI_MachineCatalog
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:43 AM
@@ -1469,7 +1469,7 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 ######## Function 13 of 20 ##################
 # Function:         Get-CTXAPI_MonitorData
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:30 AM
@@ -1693,7 +1693,7 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 ######## Function 14 of 20 ##################
 # Function:         Get-CTXAPI_ResourceLocation
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:33 AM
@@ -1750,7 +1750,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 ######## Function 15 of 20 ##################
 # Function:         Get-CTXAPI_ResourceUtilization
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:03 AM
@@ -1840,7 +1840,7 @@ function Get-CTXAPI_ResourceUtilization {
             $AVGTotalMemory = [math]::Round($machine.Group[0].TotalMemory / 1gb)
 
         }
-        catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
+ catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" }
         $data.Add([PSCustomObject]@{
                 DnsName                  = $MachineDetails.DnsName
                 IsInMaintenanceMode      = $MachineDetails.IsInMaintenanceMode
@@ -1881,7 +1881,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceUtilization
 ######## Function 16 of 20 ##################
 # Function:         Get-CTXAPI_Session
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:28 AM
@@ -1965,7 +1965,7 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 ######## Function 17 of 20 ##################
 # Function:         Get-CTXAPI_SiteDetail
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:39 AM
@@ -2024,7 +2024,7 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 ######## Function 18 of 20 ##################
 # Function:         Get-CTXAPI_VDAUptime
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:45 AM
@@ -2111,7 +2111,7 @@ function Get-CTXAPI_VDAUptime {
                     $Uptime = $null
                 }
             }
-            catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" } 
+ catch { Write-Warning "Error: `n`tMessage:$($_.Exception.Message)" } 
             
             $complist.Add([PSCustomObject]@{
                     DnsName           = $machine.DnsName
@@ -2158,7 +2158,7 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 ######## Function 19 of 20 ##################
 # Function:         Get-CTXAPI_Zone
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:48 AM
@@ -2242,7 +2242,7 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 ######## Function 20 of 20 ##################
 # Function:         Test-CTXAPI_Header
 # Module:           CTXCloudApi
-# ModuleVersion:    0.1.30
+# ModuleVersion:    0.1.31
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:08 AM
