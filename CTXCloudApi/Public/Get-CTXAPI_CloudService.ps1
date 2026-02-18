@@ -63,7 +63,7 @@ Shows services that are not currently enabled.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of service state objects returned from the Core Workspaces API.
 
 .LINK
@@ -74,7 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudService
 function Get-CTXAPI_CloudService {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudService')]
     [Alias('Get-CTXAPI_CloudServices')]
-    [OutputType([System.Object[]])]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)

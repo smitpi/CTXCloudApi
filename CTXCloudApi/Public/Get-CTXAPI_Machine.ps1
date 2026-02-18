@@ -65,7 +65,7 @@ Lists key machine fields for quick inspection.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of machine objects returned from the CVAD Manage API.
 
 .LINK
@@ -76,6 +76,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machine
 function Get-CTXAPI_Machine {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machine')]
     [Alias('Get-CTXAPI_Machines')]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader

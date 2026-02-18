@@ -54,11 +54,8 @@ Header object created by Connect-CTXAPI; contains authentication and request hea
 .PARAMETER MonitorData
 Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
 
-.PARAMETER region
-Deprecated. Not required.
-
-.PARAMETER hours
-Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.
+.PARAMETER LastHours
+Duration window in hours used when fetching Monitor OData. Default: 24.
 
 .PARAMETER Export
 Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
@@ -71,7 +68,7 @@ Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c
 Generates an HTML report titled "Citrix Sessions" with the full dataset.
 
 .EXAMPLE
-Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp
+Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -LastHours 48 -Export Excel -ReportPath c:\temp
 Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-<yyyy.MM.dd-HH.mm>.xlsx).
 
 .EXAMPLE
@@ -93,16 +90,16 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport
 function Get-CTXAPI_ConnectionReport {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport')]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [PSTypeName('CTXMonitorData')]$MonitorData,
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
-        [int]$hours = 24,
+        [int]$LastHours = 24,
         [Parameter(Mandatory = $false)]
-        [ValidateSet('Excel', 'HTML')]
+        [ValidateSet('Excel', 'HTML', 'Host')]
         [string]$Export = 'Host',
         [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]
@@ -112,7 +109,7 @@ function Get-CTXAPI_ConnectionReport {
 
 
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours }
     else { $mondata = $MonitorData }
 
     [System.Collections.generic.List[PSObject]]$data = @()
@@ -121,9 +118,9 @@ function Get-CTXAPI_ConnectionReport {
     foreach ($connection in $mondata.Connections) {
         Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($mondata.Connections.IndexOf($connection) + 1) of $($mondata.Connections.Count)"
         try {
-            $OneSession = $mondata.session | Where-Object { $_.SessionKey -eq $connection.SessionKey }
-            $user = $mondata.users | Where-Object { $_.id -like $OneSession.UserId }
-            $mashine = $mondata.machines | Where-Object { $_.id -like $OneSession.MachineId }
+            $OneSession = $mondata.Sessions | Where-Object { $_.SessionKey -eq $connection.SessionKey }
+            $user = $mondata.Users | Where-Object { $_.id -like $OneSession.UserId }
+            $mashine = $mondata.Machines | Where-Object { $_.id -like $OneSession.MachineId }
             try {
                 $avgrtt = 0
                 $avgrtt = $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey } | Measure-Object -Property IcaRttMS -Average

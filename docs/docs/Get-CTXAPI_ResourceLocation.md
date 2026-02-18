@@ -60,7 +60,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
-### System.Object[]
+### PSCustomObject[]
 ### Array of resource location objects returned from the Registry API.
 ## NOTES
 

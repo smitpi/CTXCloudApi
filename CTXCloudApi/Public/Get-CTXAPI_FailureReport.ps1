@@ -54,8 +54,8 @@ Header object created by Connect-CTXAPI; contains authentication and request hea
 .PARAMETER MonitorData
 Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
 
-.PARAMETER hours
-Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.
+.PARAMETER LastHours
+Duration window in hours used when fetching Monitor OData. Default: 24.
 
 .PARAMETER FailureType
 Type of failure to report on. Supported values: Connection, Machine.
@@ -71,7 +71,7 @@ Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection
 Returns connection failures to the host.
 
 .EXAMPLE
-Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
+Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -LastHours 48 -Export Excel -ReportPath C:\Temp
 Exports machine failures for the last 48 hours to an Excel workbook.
 
 .EXAMPLE
@@ -102,13 +102,13 @@ function Get-CTXAPI_FailureReport {
         [PSTypeName('CTXMonitorData')]$MonitorData,
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $false)]
-        [int]$hours = 24,
+        [int]$LastHours = 24,
         [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [ValidateSet('Connection', 'Machine')]
         [string]$FailureType,
         [Parameter(Mandatory = $false)]
-        [ValidateSet('Excel', 'HTML')]
+        [ValidateSet('Host', 'Excel', 'HTML')]
         [string]$Export = 'Host',
         [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]
@@ -116,7 +116,7 @@ function Get-CTXAPI_FailureReport {
 
     )
 
-    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
+    if ($Null -eq $MonitorData) { $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours }
     else { $mondata = $MonitorData }
 
     [System.Collections.generic.List[PSObject]]$Data = @()
@@ -148,7 +148,7 @@ function Get-CTXAPI_FailureReport {
     }
     if ($FailureType -eq 'Connection') {
         foreach ($log in $mondata.ConnectionFailureLogs) {
-            $session = $mondata.Session | Where-Object { $_.SessionKey -eq $log.SessionKey }
+            $session = $mondata.Sessions | Where-Object { $_.SessionKey -eq $log.SessionKey }
             $user = $mondata.users | Where-Object { $_.id -like $Session.UserId }
             $mashine = $mondata.machines | Where-Object { $_.id -like $Session.MachineId }
             $Data.Add([PSCustomObject]@{

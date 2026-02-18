@@ -63,7 +63,7 @@ Lists key catalog fields including session support, total machines, and power ma
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of machine catalog objects returned from the CVAD Manage API.
 
 .LINK
@@ -74,7 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalog
 function Get-CTXAPI_MachineCatalog {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalog')]
     [Alias('Get-CTXAPI_MachineCatalogs')]
-    [OutputType([System.Object[]])]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader	)

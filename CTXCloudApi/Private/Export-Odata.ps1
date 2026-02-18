@@ -4,21 +4,18 @@
         [string]$URI,
         [Hashtable]$headers)
 
-
-
-        
     [System.Collections.generic.List[PSObject]]$MonitorDataObject = @()
     $NextLink = $URI
 
     $uriObj = [Uri]($URI -replace '\\', '/')
     $resourceName = $uriObj.Segments[-1].TrimEnd('/')
-    Write-Color -Text 'Fetching :', $resourceName -Color Yellow, Cyan -ShowTime -DateTimeFormat HH:mm:ss -NoNewLine
-    $localTimer = [Diagnostics.Stopwatch]::StartNew()
+    Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Exporting OData resource: $resourceName"
     while (-not([string]::IsNullOrEmpty($NextLink))) {
+            Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Fetching next page..."
         try {
             $request = Invoke-RestMethod -Method Get -Uri $NextLink -Headers $headers -ErrorAction Stop
         } catch {
-            Write-Color -Text ' ERROR ', $_.Exception.Message -Color Red, Yellow -ShowTime -DateTimeFormat HH:mm:ss
+            Write-Error "[$(Get-Date -Format HH:mm:ss)] Failed to fetch data: $_"
             break
         }
 
@@ -30,8 +27,7 @@
             $errorProp = $request.PSObject.Properties['error']
         }
         if ($null -ne $errorProp) {
-            $msg = $errorProp.Value.PSObject.Properties['message']
-            Write-Color -Text ' OData error: ', ($msg.Value) -Color Red, Yellow -ShowTime -DateTimeFormat HH:mm:ss
+            Write-Error "[$(Get-Date -Format HH:mm:ss)] Failed to fetch data: $_"
             break
         }
 
@@ -52,8 +48,6 @@
         if ($null -ne $nextLinkProp -and -not [string]::IsNullOrEmpty($nextLinkProp.Value)) { $NextLink = $nextLinkProp.Value }
         else { $NextLink = $null }
     }
-    [String]$seconds = '[' + ([math]::Round($localTimer.Elapsed.TotalSeconds)).ToString() + ' sec]'
-    Write-Color $seconds -Color Red
     return $MonitorDataObject
 
 }

@@ -115,29 +115,11 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
     </command:parameters>
-    <command:inputTypes>
-      <command:inputType>
-        <dev:type>
-          <maml:name>None. Parameters are not accepted from the pipeline.</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:inputType>
-    </command:inputTypes>
-    <command:returnValues>
-      <command:returnValue>
-        <dev:type>
-          <maml:name>CTXAPIHeaderObject. Contains authentication headers and context for CTXCloudApi cmdlets.</maml:name>
-        </dev:type>
-        <maml:description>
-          <maml:para></maml:para>
-        </maml:description>
-      </command:returnValue>
-    </command:returnValues>
+    <command:inputTypes />
+    <command:returnValues />
     <maml:alertSet>
       <maml:alert>
-        <maml:para>The access token typically expires in ~1 hour. Re-run Connect-CTXAPI to refresh headers when needed.</maml:para>
+        <maml:para></maml:para>
       </maml:alert>
     </maml:alertSet>
     <command:examples>
@@ -156,12 +138,7 @@
         </dev:remarks>
       </command:example>
     </command:examples>
-    <command:relatedLinks>
-      <maml:navigationLink>
-        <maml:linkText>https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI</maml:linkText>
-        <maml:uri>https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI</maml:uri>
-      </maml:navigationLink>
-    </command:relatedLinks>
+    <command:relatedLinks />
   </command:command>
   <command:command xmlns:maml="http://schemas.microsoft.com/maml/2004/10" xmlns:command="http://schemas.microsoft.com/maml/dev/command/2004/10" xmlns:dev="http://schemas.microsoft.com/maml/dev/2004/10" xmlns:MSHelp="http://msdn.microsoft.com/mshelp">
     <command:details>
@@ -219,7 +196,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -318,7 +295,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -666,16 +643,16 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>hours</maml:name>
+          <maml:name>MonitorData</maml:name>
           <maml:description>
-            <maml:para>Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.</maml:para>
+            <maml:para>Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
-            <maml:name>Int32</maml:name>
+            <maml:name>Object</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>24</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
@@ -704,10 +681,10 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_ConnectionReport</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MonitorData</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>APIHeader</maml:name>
           <maml:description>
-            <maml:para>Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.</maml:para>
+            <maml:para>Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
@@ -715,6 +692,18 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>LastHours</maml:name>
+          <maml:description>
+            <maml:para>Duration window in hours used when fetching Monitor OData. Default: 24.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>24</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
@@ -768,9 +757,9 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>hours</maml:name>
+        <maml:name>LastHours</maml:name>
         <maml:description>
-          <maml:para>Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.</maml:para>
+          <maml:para>Duration window in hours used when fetching Monitor OData. Default: 24.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -847,7 +836,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp</dev:code>
+        <dev:code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -LastHours 48 -Export Excel -ReportPath c:\temp</dev:code>
         <dev:remarks>
           <maml:para>Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-&lt;yyyy.MM.dd-HH.mm&gt;.xlsx).</maml:para>
         </dev:remarks>
@@ -923,7 +912,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1006,9 +995,9 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>hours</maml:name>
+          <maml:name>LastHours</maml:name>
           <maml:description>
-            <maml:para>Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.</maml:para>
+            <maml:para>Duration window in hours used when fetching Monitor OData. Default: 24.</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
           <dev:type>
@@ -1081,9 +1070,9 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>hours</maml:name>
+        <maml:name>LastHours</maml:name>
         <maml:description>
-          <maml:para>Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.</maml:para>
+          <maml:para>Duration window in hours used when fetching Monitor OData. Default: 24.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -1172,7 +1161,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp</dev:code>
+        <dev:code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -LastHours 48 -Export Excel -ReportPath C:\Temp</dev:code>
         <dev:remarks>
           <maml:para>Exports machine failures for the last 48 hours to an Excel workbook.</maml:para>
         </dev:remarks>
@@ -1248,7 +1237,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1470,7 +1459,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1569,7 +1558,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1897,7 +1886,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -1968,16 +1957,16 @@
           <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>hours</maml:name>
+          <maml:name>MonitorData</maml:name>
           <maml:description>
-            <maml:para>Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.</maml:para>
+            <maml:para>Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.</maml:para>
           </maml:description>
-          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
-            <maml:name>Int32</maml:name>
+            <maml:name>Object</maml:name>
             <maml:uri />
           </dev:type>
-          <dev:defaultValue>24</dev:defaultValue>
+          <dev:defaultValue>None</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
@@ -2006,10 +1995,10 @@
       </command:syntaxItem>
       <command:syntaxItem>
         <maml:name>Get-CTXAPI_ResourceUtilization</maml:name>
-        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-          <maml:name>MonitorData</maml:name>
+        <command:parameter required="true" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>APIHeader</maml:name>
           <maml:description>
-            <maml:para>Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.</maml:para>
+            <maml:para>Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).</maml:para>
           </maml:description>
           <command:parameterValue required="true" variableLength="false">Object</command:parameterValue>
           <dev:type>
@@ -2017,6 +2006,18 @@
             <maml:uri />
           </dev:type>
           <dev:defaultValue>None</dev:defaultValue>
+        </command:parameter>
+        <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
+          <maml:name>LastHours</maml:name>
+          <maml:description>
+            <maml:para>Duration window in hours used when fetching Monitor OData. Default: 24.</maml:para>
+          </maml:description>
+          <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
+          <dev:type>
+            <maml:name>Int32</maml:name>
+            <maml:uri />
+          </dev:type>
+          <dev:defaultValue>24</dev:defaultValue>
         </command:parameter>
         <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
           <maml:name>Export</maml:name>
@@ -2070,9 +2071,9 @@
         <dev:defaultValue>None</dev:defaultValue>
       </command:parameter>
       <command:parameter required="false" variableLength="true" globbing="false" pipelineInput="False" position="named" aliases="none">
-        <maml:name>hours</maml:name>
+        <maml:name>LastHours</maml:name>
         <maml:description>
-          <maml:para>Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.</maml:para>
+          <maml:para>Duration window in hours used when fetching Monitor OData. Default: 24.</maml:para>
         </maml:description>
         <command:parameterValue required="true" variableLength="false">Int32</command:parameterValue>
         <dev:type>
@@ -2119,7 +2120,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2149,7 +2150,7 @@
       </command:example>
       <command:example>
         <maml:title>-------------------------- EXAMPLE 2 --------------------------</maml:title>
-        <dev:code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp</dev:code>
+        <dev:code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -LastHours 48 -Export HTML -ReportPath C:\temp</dev:code>
         <dev:remarks>
           <maml:para>Generates an HTML report titled "Citrix Resources" for the last 48 hours.</maml:para>
         </dev:remarks>
@@ -2225,7 +2226,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>PSCustomObject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2324,7 +2325,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object</maml:name>
+          <maml:name>PSCustomObject</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2471,7 +2472,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>psobject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>
@@ -2577,7 +2578,7 @@
     <command:returnValues>
       <command:returnValue>
         <dev:type>
-          <maml:name>System.Object[]</maml:name>
+          <maml:name>psobject[]</maml:name>
         </dev:type>
         <maml:description>
           <maml:para></maml:para>

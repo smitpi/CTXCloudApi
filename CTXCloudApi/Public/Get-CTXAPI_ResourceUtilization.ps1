@@ -54,8 +54,8 @@ Header object created by Connect-CTXAPI; contains authentication and request hea
 .PARAMETER MonitorData
 Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
 
-.PARAMETER hours
-Duration window (in hours) to fetch when retrieving Monitor OData. Default: 24.
+.PARAMETER LastHours
+Duration window in hours used when fetching Monitor OData. Default: 24.
 
 .PARAMETER Export
 Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
@@ -68,7 +68,7 @@ Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export Excel -ReportPa
 Exports an Excel workbook (Resources_Audit-<yyyy.MM.dd-HH.mm>.xlsx) with aggregated resource metrics.
 
 .EXAMPLE
-Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp
+Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -LastHours 48 -Export HTML -ReportPath C:\temp
 Generates an HTML report titled "Citrix Resources" for the last 48 hours.
 
 .EXAMPLE
@@ -79,7 +79,7 @@ Returns objects to the host and selects common fields for quick inspection.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 When Export is Host: array of resource utilization objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
 
 .LINK
@@ -90,23 +90,23 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization
 function Get-CTXAPI_ResourceUtilization {
     [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization')]
     param(
-        [Parameter(Mandatory = $true, ParameterSetName = 'Fetch odata')]
+        [Parameter(Mandatory = $true)]
         [ValidateNotNullOrEmpty()]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
         [PSTypeName('CTXMonitorData')]$MonitorData,
         [ValidateNotNullOrEmpty()]
         [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
-        [int]$hours = 24,
+        [int]$LastHours = 24,
         [Parameter(Mandatory = $false)]
-        [ValidateSet('Excel', 'HTML')]
+        [ValidateSet('Host', 'Excel', 'HTML')]
         [string]$Export = 'Host',
         [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]
         [string]$ReportPath = $env:temp
     )
 
-    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $hours }
+    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours }
     else { $monitor = $MonitorData }
     
     [System.Collections.generic.List[PSObject]]$data = @()

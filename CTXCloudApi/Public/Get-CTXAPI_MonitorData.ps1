@@ -129,10 +129,8 @@ function Get-CTXAPI_MonitorData {
             'All')]
         [string[]]$MonitorDetails = 'All'
     )
-        
-    $timer = [Diagnostics.Stopwatch]::StartNew();
-    $APItimer = [Diagnostics.Stopwatch]::StartNew();
-
+    
+    Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
     if ($PSCmdlet.ParameterSetName -eq 'hours' -and $null -ne $LastHours) {
         $BeginDate = Get-Date
         $EndDate = (Get-Date).AddHours(-$LastHours)
@@ -146,12 +144,6 @@ function Get-CTXAPI_MonitorData {
     $BeginDateStr = $BeginDate.ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
     $EndDateStr = $EndDate.ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
 
-    $datereport = $BeginDate - $EndDate
-
-    Write-Color -Text 'Getting data for:' -Color Yellow -LinesBefore 1 -ShowTime
-    Write-Color -Text 'Days: ', ([math]::Round($datereport.Totaldays)) -Color Yellow, Cyan -StartTab 4
-    Write-Color -Text 'Hours: ', ([math]::Round($datereport.Totalhours)) -Color Yellow, Cyan -StartTab 4 -LinesAfter 2
-    
     # Initialize all potential datasets to avoid strict-mode errors when not selected
     $ApplicationActivitySummaries = $null
     $ApplicationInstances = $null
@@ -209,6 +201,7 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'SessionMetricsLatest')) {$SessionMetricsLatest = Export-Odata -URI ('https://api.cloud.com/monitorodata/SessionMetricsLatest?$filter=(CreatedDate ge ' + $EndDateStr + ' and CreatedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers -verbose}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Users')) {$Users = Export-Odata -URI ('https://api.cloud.com/monitorodata/Users') -headers $APIHeader.headers}
 
+    Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Building composite object with retrieved datasets..."
     $datasets = [pscustomobject]@{
         PSTypeName = 'CTXMonitorData'
     }
@@ -240,8 +233,6 @@ function Get-CTXAPI_MonitorData {
     if ($null -ne $SessionMetricsLatest) { $datasets | Add-Member -NotePropertyName 'SessionMetricsLatest' -NotePropertyValue $SessionMetricsLatest }
     if ($null -ne $Users) { $datasets | Add-Member -NotePropertyName 'Users' -NotePropertyValue $Users }
 
-    $timer.Stop()
-    $APItimer.Stop()
     return $datasets
 } #end Function
 

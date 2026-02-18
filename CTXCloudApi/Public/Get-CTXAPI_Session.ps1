@@ -63,7 +63,7 @@ Shows key fields for each session.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of session objects returned from the CVAD Manage API.
 
 .LINK
@@ -74,7 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Session
 function Get-CTXAPI_Session {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Session')]
     [Alias('Get-CTXAPI_Sessions')]
-    [OutputType([System.Object[]])]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader

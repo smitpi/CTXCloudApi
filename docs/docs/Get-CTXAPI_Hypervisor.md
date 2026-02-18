@@ -60,7 +60,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
-### System.Object[]
+### PSCustomObject[]
 ### Array of hypervisor objects returned from the CVAD Manage API.
 ## NOTES
 

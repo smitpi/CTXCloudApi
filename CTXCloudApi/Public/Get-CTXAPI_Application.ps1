@@ -63,7 +63,7 @@ Shows only enabled applications.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of application objects returned from the CVAD Manage API.
 
 .LINK
@@ -73,7 +73,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
 function Get-CTXAPI_Application {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application')]
 	[Alias('Get-CTXAPI_Applications')]
-	[OutputType([System.Object[]])]
+	[OutputType([psobject[]])]
 	param(
 		[Parameter(Mandatory = $true)]
 		[PSTypeName('CTXAPIHeaderObject')]$APIHeader)

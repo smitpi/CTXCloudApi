@@ -99,7 +99,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
-### System.Object[]
+### psobject[]
 ### When Export is Host: array of uptime objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
 ## NOTES
 

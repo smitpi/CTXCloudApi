@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version: https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
+online version:
 schema: 2.0.0
 ---
 
@@ -110,15 +110,8 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
-### CTXAPIHeaderObject. Contains authentication headers and context for CTXCloudApi cmdlets.
 ## NOTES
-The access token typically expires in ~1 hour.
-Re-run Connect-CTXAPI to refresh headers when needed.
 
 ## RELATED LINKS
-
-[https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI](https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI)
-

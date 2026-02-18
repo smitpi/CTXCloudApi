@@ -63,7 +63,7 @@ Shows delivery groups marked as broken.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of delivery group objects returned from the CVAD Manage API.
 
 .LINK
@@ -74,7 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroup
 function Get-CTXAPI_DeliveryGroup {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroup')]
     [Alias('Get-CTXAPI_DeliveryGroups')]
-    [OutputType([System.Object[]])]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader

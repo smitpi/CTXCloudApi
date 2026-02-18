@@ -63,7 +63,7 @@ Shows hypervisors marked as broken.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of hypervisor objects returned from the CVAD Manage API.
 
 .LINK
@@ -74,7 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisor
 function Get-CTXAPI_Hypervisor {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisor')]
     [Alias('Get-CTXAPI_Hypervisors')]
-    [OutputType([System.Object[]])]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader

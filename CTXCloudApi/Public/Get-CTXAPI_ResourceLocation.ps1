@@ -63,7 +63,7 @@ Selects key fields from the returned items.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+PSCustomObject[]
 Array of resource location objects returned from the Registry API.
 
 .LINK
@@ -74,6 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocation
 function Get-CTXAPI_ResourceLocation {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocation')]
     [Alias('Get-CTXAPI_ResourceLocations')]
+    [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)

@@ -14,13 +14,13 @@ Reports on connection or machine failures in the last X hours.
 
 ### Fetch odata (Default)
 ```
-Get-CTXAPI_FailureReport -APIHeader <Object> [-hours <Int32>] -FailureType <String> [-Export <String>]
+Get-CTXAPI_FailureReport -APIHeader <Object> [-LastHours <Int32>] -FailureType <String> [-Export <String>]
  [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ### Got odata
 ```
-Get-CTXAPI_FailureReport -APIHeader <Object> [-MonitorData <Object>] [-hours <Int32>] -FailureType <String>
+Get-CTXAPI_FailureReport -APIHeader <Object> [-MonitorData <Object>] [-LastHours <Int32>] -FailureType <String>
  [-Export <String>] [-ReportPath <String>] [<CommonParameters>]
 ```
 
@@ -38,7 +38,7 @@ Returns connection failures to the host.
 
 ### EXAMPLE 2
 ```
-Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
+Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -LastHours 48 -Export Excel -ReportPath C:\Temp
 ```
 
 Exports machine failures for the last 48 hours to an Excel workbook.
@@ -83,8 +83,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-Duration window (in hours) to fetch when retrieving Monitor OData.
+### -LastHours
+Duration window in hours used when fetching Monitor OData.
 Default: 24.
 
 ```yaml

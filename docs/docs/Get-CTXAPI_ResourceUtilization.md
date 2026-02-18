@@ -14,14 +14,14 @@ Resource utilization in the last X hours.
 
 ### Fetch odata (Default)
 ```
-Get-CTXAPI_ResourceUtilization -APIHeader <Object> [-hours <Int32>] [-Export <String>] [-ReportPath <String>]
- [<CommonParameters>]
+Get-CTXAPI_ResourceUtilization -APIHeader <Object> [-LastHours <Int32>] [-Export <String>]
+ [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ### Got odata
 ```
-Get-CTXAPI_ResourceUtilization [-MonitorData <Object>] [-Export <String>] [-ReportPath <String>]
- [<CommonParameters>]
+Get-CTXAPI_ResourceUtilization -APIHeader <Object> [-MonitorData <Object>] [-Export <String>]
+ [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,7 +38,7 @@ Exports an Excel workbook (Resources_Audit-\<yyyy.MM.dd-HH.mm\>.xlsx) with aggre
 
 ### EXAMPLE 2
 ```
-Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp
+Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -LastHours 48 -Export HTML -ReportPath C:\temp
 ```
 
 Generates an HTML report titled "Citrix Resources" for the last 48 hours.
@@ -57,7 +57,7 @@ Header object created by Connect-CTXAPI; contains authentication and request hea
 
 ```yaml
 Type: Object
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -83,8 +83,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-Duration window (in hours) to fetch when retrieving Monitor OData.
+### -LastHours
+Duration window in hours used when fetching Monitor OData.
 Default: 24.
 
 ```yaml
@@ -140,7 +140,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ### None. Parameters are not accepted from the pipeline.
 ## OUTPUTS
 
-### System.Object[]
+### PSCustomObject[]
 ### When Export is Host: array of resource utilization objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
 ## NOTES
 

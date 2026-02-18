@@ -14,14 +14,14 @@ Creates a connection report from CVAD Monitor data.
 
 ### Fetch odata (Default)
 ```
-Get-CTXAPI_ConnectionReport -APIHeader <Object> [-hours <Int32>] [-Export <String>] [-ReportPath <String>]
+Get-CTXAPI_ConnectionReport -APIHeader <Object> [-LastHours <Int32>] [-Export <String>] [-ReportPath <String>]
  [<CommonParameters>]
 ```
 
 ### Got odata
 ```
-Get-CTXAPI_ConnectionReport [-MonitorData <Object>] [-Export <String>] [-ReportPath <String>]
- [<CommonParameters>]
+Get-CTXAPI_ConnectionReport -APIHeader <Object> [-MonitorData <Object>] [-Export <String>]
+ [-ReportPath <String>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -38,7 +38,7 @@ Generates an HTML report titled "Citrix Sessions" with the full dataset.
 
 ### EXAMPLE 2
 ```
-Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp
+Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -LastHours 48 -Export Excel -ReportPath c:\temp
 ```
 
 Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-\<yyyy.MM.dd-HH.mm\>.xlsx).
@@ -57,7 +57,7 @@ Header object created by Connect-CTXAPI; contains authentication and request hea
 
 ```yaml
 Type: Object
-Parameter Sets: Fetch odata
+Parameter Sets: (All)
 Aliases:
 
 Required: True
@@ -83,8 +83,8 @@ Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
-### -hours
-Duration window (in hours) to fetch when retrieving Monitor OData.
+### -LastHours
+Duration window in hours used when fetching Monitor OData.
 Default: 24.
 
 ```yaml

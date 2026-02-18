@@ -73,19 +73,6 @@ $APIHeader = Connect-CTXAPI @splat
 Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
 Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
 
-.INPUTS
-None. Parameters are not accepted from the pipeline.
-
-.OUTPUTS
-CTXAPIHeaderObject. Contains authentication headers and context for CTXCloudApi cmdlets.
-
-.LINK
-https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
-
-
-.NOTES
-The access token typically expires in ~1 hour. Re-run Connect-CTXAPI to refresh headers when needed.
-
 #>
 
 function Connect-CTXAPI {

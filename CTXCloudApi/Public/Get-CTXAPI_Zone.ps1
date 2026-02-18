@@ -63,7 +63,7 @@ Shows key fields for each zone.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+psobject[]
 Array of zone objects returned from the CVAD Manage API.
 
 .LINK
@@ -74,7 +74,7 @@ https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone
 function Get-CTXAPI_Zone {
     [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone')]
     [Alias('Get-CTXAPI_Zones')]
-    [OutputType([System.Object[]])]
+    [OutputType([psobject[]])]
     param(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )

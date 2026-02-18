@@ -78,7 +78,7 @@ Returns objects to the host and selects common fields for quick inspection.
 None. Parameters are not accepted from the pipeline.
 
 .OUTPUTS
-System.Object[]
+psobject[]
 When Export is Host: array of uptime objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
 
 .LINK
