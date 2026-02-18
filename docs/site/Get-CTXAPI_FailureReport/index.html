@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  
+  
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <meta name="author" content="Pierre Smit">
+    <link rel="canonical" href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport/">
+    <link rel="shortcut icon" href="../img/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+    <title>Get-CTXAPI_FailureReport - CTXCloudApi</title>
+    <link href="../css/bootstrap-3.3.7.min.css" rel="stylesheet">
+    <link href="../css/font-awesome-4.7.0.css" rel="stylesheet">
+    <link href="../css/base.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/highlight.css">
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="../js/jquery-3.2.1.min.js"></script>
+    <script src="../js/bootstrap-3.3.7.min.js"></script>
+    <script src="../js/highlight.pack.js"></script>
+    
+    <base target="_top">
+    <script>
+      var base_url = '..';
+      var is_top_frame = false;
+        
+        var pageToc = [
+          {title: "Get-CTXAPI_FailureReport", url: "#_top", children: [
+              {title: "SYNOPSIS", url: "#synopsis" },
+              {title: "SYNTAX", url: "#syntax" },
+              {title: "DESCRIPTION", url: "#description" },
+              {title: "EXAMPLES", url: "#examples" },
+              {title: "PARAMETERS", url: "#parameters" },
+              {title: "INPUTS", url: "#inputs" },
+              {title: "OUTPUTS", url: "#outputs" },
+              {title: "NOTES", url: "#notes" },
+              {title: "RELATED LINKS", url: "#related-links" },
+          ]},
+        ];
+
+    </script>
+    <script src="../js/base.js"></script> 
+</head>
+
+<body>
+<script>
+if (is_top_frame) { $('body').addClass('wm-top-page'); }
+</script>
+
+
+
+<div class="container-fluid wm-page-content">
+  <a name="_top"></a>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../Get-CTXAPI_Hypervisor/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../Get-CTXAPI_Hypervisor/" class="btn btn-xs btn-link">
+        Get-CTXAPI_Hypervisor
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Get-CTXAPI_DeliveryGroup/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Get-CTXAPI_DeliveryGroup/" class="btn btn-xs btn-link">
+        Get-CTXAPI_DeliveryGroup
+      </a>
+    </div>
+    
+  </div>
+
+    
+
+    <h1 id="get-ctxapi_failurereport">Get-CTXAPI_FailureReport</h1>
+<h2 id="synopsis">SYNOPSIS</h2>
+<p>Reports on connection or machine failures in the last X hours.</p>
+<h2 id="syntax">SYNTAX</h2>
+<h3 id="fetch-odata-default">Fetch odata (Default)</h3>
+<pre class="highlight"><code>Get-CTXAPI_FailureReport -APIHeader &lt;Object&gt; [-hours &lt;Int32&gt;] -FailureType &lt;String&gt; [-Export &lt;String&gt;]
+ [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]</code></pre>
+<h3 id="got-odata">Got odata</h3>
+<pre class="highlight"><code>Get-CTXAPI_FailureReport -APIHeader &lt;Object&gt; [-MonitorData &lt;Object&gt;] [-hours &lt;Int32&gt;] -FailureType &lt;String&gt;
+ [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]</code></pre>
+<h2 id="description">DESCRIPTION</h2>
+<p>Reports on machine or connection failures in the last X hours using Monitor OData.</p>
+<h2 id="examples">EXAMPLES</h2>
+<h3 id="example-1">EXAMPLE 1</h3>
+<pre class="highlight"><code>Get-CTXAPI_FailureReport -MonitorData $MonitorData -FailureType Connection</code></pre>
+<p>Returns connection failures to the host.</p>
+<h3 id="example-2">EXAMPLE 2</h3>
+<pre class="highlight"><code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp</code></pre>
+<p>Exports machine failures for the last 48 hours to an Excel workbook.</p>
+<h3 id="example-3">EXAMPLE 3</h3>
+<pre class="highlight"><code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Connection | Select-Object User, DnsName, FailureDate, PowerState</code></pre>
+<p>Shows common fields for connection failures.</p>
+<h2 id="parameters">PARAMETERS</h2>
+<h3 id="-apiheader">-APIHeader</h3>
+<p>Header object created by Connect-CTXAPI; contains authentication and request headers.</p>
+<pre class="highlight"><code class="language-yaml">Type: Object
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
+<h3 id="-monitordata">-MonitorData</h3>
+<p>Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData.
+If provided, the cmdlet will not fetch data.</p>
+<pre class="highlight"><code class="language-yaml">Type: Object
+Parameter Sets: Got odata
+Aliases:
+
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
+<h3 id="-hours">-hours</h3>
+<p>Duration window (in hours) to fetch when retrieving Monitor OData.
+Default: 24.</p>
+<pre class="highlight"><code class="language-yaml">Type: Int32
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: 24
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
+<h3 id="-failuretype">-FailureType</h3>
+<p>Type of failure to report on.
+Supported values: Connection, Machine.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
+<h3 id="-export">-Export</h3>
+<p>Destination/output for the report.
+Supported values: Host, Excel, HTML.
+Default: Host.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
+<h3 id="-reportpath">-ReportPath</h3>
+<p>Destination folder for exported files when using Excel or HTML.
+Defaults to $env:Temp.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
+
+Required: False
+Position: Named
+Default value: $env:temp
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
+<h3 id="commonparameters">CommonParameters</h3>
+<p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
+<h2 id="inputs">INPUTS</h2>
+<h3 id="none-parameters-are-not-accepted-from-the-pipeline">None. Parameters are not accepted from the pipeline.</h3>
+<h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
+<h3 id="when-export-is-host-array-of-failure-report-objects-when-export-is-excelhtml-no-output-objects-and-files-are-written-to-reportpath">When Export is Host: array of failure report objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.</h3>
+<h2 id="notes">NOTES</h2>
+<h2 id="related-links">RELATED LINKS</h2>
+<p><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport">https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport</a></p>
+
+  <br>
+    
+
+    
+    
+      
+    
+
+  <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
+    
+    <div class="wm-article-nav pull-right">
+      <a href="../Get-CTXAPI_Hypervisor/" class="btn btn-xs btn-default pull-right">
+        Next
+        <i class="fa fa-chevron-right" aria-hidden="true"></i>
+      </a>
+      <a href="../Get-CTXAPI_Hypervisor/" class="btn btn-xs btn-link">
+        Get-CTXAPI_Hypervisor
+      </a>
+    </div>
+    
+    <div class="wm-article-nav">
+      <a href="../Get-CTXAPI_DeliveryGroup/" class="btn btn-xs btn-default pull-left">
+        <i class="fa fa-chevron-left" aria-hidden="true"></i>
+        Previous</a><a href="../Get-CTXAPI_DeliveryGroup/" class="btn btn-xs btn-link">
+        Get-CTXAPI_DeliveryGroup
+      </a>
+    </div>
+    
+  </div>
+
+    <br>
+</div>
+
+<footer class="container-fluid wm-page-content">
+      <p>
+        <a href="https://github.com/smitpi/CTXCloudApi/edit/master/docs/Get-CTXAPI_FailureReport.md">Edit on smitpi/CTXCloudApi</a>
+      </p><p>(c) 2021 Pierre Smit. All rights reserved.</p>
+  <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a> using <a href="https://github.com/gristlabs/mkdocs-windmill">Windmill</a> theme by Grist Labs.</p>
+</footer>
+
+</body>
+</html>
