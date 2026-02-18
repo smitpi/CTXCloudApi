@@ -37,6 +37,7 @@
           {title: "CTXCloudApi", url: "#_top", children: [
               {title: "Description", url: "#description" },
               {title: "Getting Started", url: "#getting-started" },
+              {title: "PS Controller Scripts", url: "#ps-controller-scripts" },
               {title: "Functions", url: "#functions" },
           ]},
         ];
@@ -105,13 +106,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <ul class="wm-toctree">
         <li class="wm-toc-li wm-toc-lev1 "><a href="" class="wm-article-link wm-toc-text">CTXCloudApi</a>
 </li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="Add-CTXAPI_DefaultsToProfile/" class="wm-article-link wm-toc-text">Add-CTXAPI_DefaultsToProfile</a>
-</li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Connect-CTXAPI/" class="wm-article-link wm-toc-text">Connect-CTXAPI</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Application/" class="wm-article-link wm-toc-text">Get-CTXAPI_Application</a>
-</li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_CloudConnector/" class="wm-article-link wm-toc-text">Get-CTXAPI_CloudConnector</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_CloudService/" class="wm-article-link wm-toc-text">Get-CTXAPI_CloudService</a>
 </li>
@@ -124,8 +121,6 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_DeliveryGroup/" class="wm-article-link wm-toc-text">Get-CTXAPI_DeliveryGroup</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_FailureReport/" class="wm-article-link wm-toc-text">Get-CTXAPI_FailureReport</a>
-</li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_HealthCheck/" class="wm-article-link wm-toc-text">Get-CTXAPI_HealthCheck</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Hypervisor/" class="wm-article-link wm-toc-text">Get-CTXAPI_Hypervisor</a>
 </li>
@@ -145,13 +140,9 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_SiteDetail/" class="wm-article-link wm-toc-text">Get-CTXAPI_SiteDetail</a>
 </li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Test/" class="wm-article-link wm-toc-text">Get-CTXAPI_Test</a>
-</li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_VDAUptime/" class="wm-article-link wm-toc-text">Get-CTXAPI_VDAUptime</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Get-CTXAPI_Zone/" class="wm-article-link wm-toc-text">Get-CTXAPI_Zone</a>
-</li>
-        <li class="wm-toc-li wm-toc-lev1 "><a href="Set-CTXAPI_ReportColour/" class="wm-article-link wm-toc-text">Set-CTXAPI_ReportColour</a>
 </li>
         <li class="wm-toc-li wm-toc-lev1 "><a href="Test-CTXAPI_Header/" class="wm-article-link wm-toc-text">Test-CTXAPI_Header</a>
 </li>
@@ -175,12 +166,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="Add-CTXAPI_DefaultsToProfile/" class="btn btn-xs btn-default pull-right">
+      <a href="Connect-CTXAPI/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="Add-CTXAPI_DefaultsToProfile/" class="btn btn-xs btn-link">
-        Add-CTXAPI_DefaultsToProfile
+      <a href="Connect-CTXAPI/" class="btn btn-xs btn-link">
+        Connect-CTXAPI
       </a>
     </div>
     
@@ -190,55 +181,47 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     <h1 id="ctxcloudapi">CTXCloudApi</h1>
 <h2 id="description">Description</h2>
-<p>A wrapper for Citrix Cloud CVAD API. You do not require the installed SDK anymore. With this module you can manage your clients cloud infrastructure from anywhere. Start with the Connect-CTXAPI function to connect, it will create the needed headers for the other functions.</p>
+<p>CTXCloudApi is a PowerShell module for Citrix DaaS (CVAD) Manage &amp; Monitor OData APIs. It eliminates the need for the Citrix SDK and provides a single, secure connection via <code>Connect-CTXAPI</code>, after which you can manage and query applications, delivery groups, machine catalogs, hypervisors, sessions, and monitoring data across Citrix Cloud tenants. The module includes robust reporting and export options (Excel/HTML) to support inventory, uptime, failures, utilization, and configuration audits.</p>
 <h2 id="getting-started">Getting Started</h2>
 <ul>
 <li>Install from PowerShell Gallery <a href="https://www.powershellgallery.com/packages/CTXCloudApi">PS Gallery</a>
-<div class="highlight"><pre><span></span><code>Install-Module -Name CTXCloudApi -Verbose
-</code></pre></div></li>
+<pre class="highlight"><code>Install-Module -Name CTXCloudApi -Verbose</code></pre></li>
 <li>or run this script to install from GitHub <a href="https://github.com/smitpi/CTXCloudApi">GitHub Repo</a>
-<div class="highlight"><pre><span></span><code>$CurrentLocation = Get-Item .
-$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory &#39;Modules&#39;)).FullName -ChildPath CTXCloudApi)
+<pre class="highlight"><code>$CurrentLocation = Get-Item .
+$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath CTXCloudApi)
 git clone --depth 1 https://github.com/smitpi/CTXCloudApi $ModuleDestination 2&gt;&amp;1 | Write-Host -ForegroundColor Yellow
 Set-Location $ModuleDestination
 git filter-branch --prune-empty --subdirectory-filter Output HEAD 2&gt;&amp;1 | Write-Host -ForegroundColor Yellow
-Set-Location $CurrentLocation
-</code></pre></div></li>
+Set-Location $CurrentLocation</code></pre></li>
 <li>Then import the module into your session
-<div class="highlight"><pre><span></span><code>Import-Module CTXCloudApi -Verbose -Force
-</code></pre></div></li>
+<pre class="highlight"><code>Import-Module CTXCloudApi -Verbose -Force</code></pre></li>
 <li>or run these commands for more help and details.
-<div class="highlight"><pre><span></span><code>Get-Command -Module CTXCloudApi
-Get-Help about_CTXCloudApi
-</code></pre></div>
+<pre class="highlight"><code>Get-Command -Module CTXCloudApi
+Get-Help about_CTXCloudApi</code></pre>
 Documentation can be found at: <a href="https://smitpi.github.io/CTXCloudApi">Github_Pages</a></li>
 </ul>
+<h2 id="ps-controller-scripts">PS Controller Scripts</h2>
 <h2 id="functions">Functions</h2>
 <ul>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Add-CTXAPI_DefaultsToProfile"><code>Add-CTXAPI_DefaultsToProfile</code></a> -- This function will add connection settings to PSDefaultParameter and your profile.</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI"><code>Connect-CTXAPI</code></a> -- Connect to the cloud and create needed api headers</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application"><code>Get-CTXAPI_Application</code></a> -- Return details about published apps</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudConnector"><code>Get-CTXAPI_CloudConnector</code></a> -- Details about current Cloud Connectors</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudService"><code>Get-CTXAPI_CloudService</code></a> -- Return details about cloud services and subscription</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI"><code>Connect-CTXAPI</code></a> -- Connects to Citrix Cloud and creates required API headers.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application"><code>Get-CTXAPI_Application</code></a> -- Returns details about published applications (handles pagination).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_CloudService"><code>Get-CTXAPI_CloudService</code></a> -- Returns details about cloud services and subscription.</li>
 <li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit"><code>Get-CTXAPI_ConfigAudit</code></a> -- Reports on system config.</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigLog"><code>Get-CTXAPI_ConfigLog</code></a> -- Get high level configuration changes in the last x days.</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport"><code>Get-CTXAPI_ConnectionReport</code></a> -- Creates Connection report</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroup"><code>Get-CTXAPI_DeliveryGroup</code></a> -- Return details about Delivery Groups</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport"><code>Get-CTXAPI_FailureReport</code></a> -- Reports on failures in the last x hours.</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_HealthCheck"><code>Get-CTXAPI_HealthCheck</code></a> -- Show useful information for daily health check</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisor"><code>Get-CTXAPI_Hypervisor</code></a> -- Return details about hosting (hypervisor)</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation"><code>Get-CTXAPI_LowLevelOperation</code></a> -- Return details about low lever config change (More detailed)</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machine"><code>Get-CTXAPI_Machine</code></a> -- Return details about vda machines</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalog"><code>Get-CTXAPI_MachineCatalog</code></a> -- Return details about machine Catalogs</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MonitorData"><code>Get-CTXAPI_MonitorData</code></a> -- Collect Monitoring OData for other reports</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocation"><code>Get-CTXAPI_ResourceLocation</code></a> -- Get cloud Resource Locations</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization"><code>Get-CTXAPI_ResourceUtilization</code></a> -- Resource utilization in the last x hours</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Session"><code>Get-CTXAPI_Session</code></a> -- Return details about current sessions</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetail"><code>Get-CTXAPI_SiteDetail</code></a> -- Return details about your farm / site</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Test"><code>Get-CTXAPI_Test</code></a> -- Run Built in Citrix cloud tests</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime"><code>Get-CTXAPI_VDAUptime</code></a> -- Uses Registration date to calculate uptime</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone"><code>Get-CTXAPI_Zone</code></a> -- Get zone details</li>
-<li><a href="https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_ReportColour"><code>Set-CTXAPI_ReportColour</code></a> -- Set the colour and logo for HTML Reports</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigLog"><code>Get-CTXAPI_ConfigLog</code></a> -- Returns high-level configuration changes in the last X days.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport"><code>Get-CTXAPI_ConnectionReport</code></a> -- Creates a connection report from CVAD Monitor data.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_DeliveryGroup"><code>Get-CTXAPI_DeliveryGroup</code></a> -- Returns details about Delivery Groups (handles pagination).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_FailureReport"><code>Get-CTXAPI_FailureReport</code></a> -- Reports on connection or machine failures in the last X hours.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Hypervisor"><code>Get-CTXAPI_Hypervisor</code></a> -- Returns details about hosting (hypervisor) connections (handles pagination).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_LowLevelOperation"><code>Get-CTXAPI_LowLevelOperation</code></a> -- Returns details about low-level configuration changes (more detailed).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Machine"><code>Get-CTXAPI_Machine</code></a> -- Returns details about VDA machines (handles pagination).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MachineCatalog"><code>Get-CTXAPI_MachineCatalog</code></a> -- Returns details about Machine Catalogs (handles pagination).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_MonitorData"><code>Get-CTXAPI_MonitorData</code></a> -- Collect Monitoring OData for other reports.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceLocation"><code>Get-CTXAPI_ResourceLocation</code></a> -- Returns cloud Resource Locations.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization"><code>Get-CTXAPI_ResourceUtilization</code></a> -- Resource utilization in the last X hours.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Session"><code>Get-CTXAPI_Session</code></a> -- Returns details about current sessions (handles pagination).</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_SiteDetail"><code>Get-CTXAPI_SiteDetail</code></a> -- Returns details about your CVAD site.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_VDAUptime"><code>Get-CTXAPI_VDAUptime</code></a> -- Calculate VDA uptime and export or return results.</li>
+<li><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone"><code>Get-CTXAPI_Zone</code></a> -- Returns Zone details (handles pagination).</li>
 <li><a href="https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header"><code>Test-CTXAPI_Header</code></a> -- Checks that the connection is still valid, and the token hasn't expired.</li>
 </ul>
 
@@ -253,12 +236,12 @@ Documentation can be found at: <a href="https://smitpi.github.io/CTXCloudApi">Gi
   <div class="row wm-article-nav-buttons" role="navigation" aria-label="navigation">
     
     <div class="wm-article-nav pull-right">
-      <a href="Add-CTXAPI_DefaultsToProfile/" class="btn btn-xs btn-default pull-right">
+      <a href="Connect-CTXAPI/" class="btn btn-xs btn-default pull-right">
         Next
         <i class="fa fa-chevron-right" aria-hidden="true"></i>
       </a>
-      <a href="Add-CTXAPI_DefaultsToProfile/" class="btn btn-xs btn-link">
-        Add-CTXAPI_DefaultsToProfile
+      <a href="Connect-CTXAPI/" class="btn btn-xs btn-link">
+        Connect-CTXAPI
       </a>
     </div>
     
@@ -277,6 +260,6 @@ Documentation can be found at: <a href="https://smitpi.github.io/CTXCloudApi">Gi
 </body>
 </html>
 <!--
-MkDocs version : 1.3.1
-Build Date UTC : 2022-09-09 01:08:39.836244+00:00
+MkDocs version : 1.6.1
+Build Date UTC : 2026-02-18 11:03:02.996000+00:00
 -->

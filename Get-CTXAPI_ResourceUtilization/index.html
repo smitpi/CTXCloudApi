@@ -91,101 +91,97 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 
     <h1 id="get-ctxapi_resourceutilization">Get-CTXAPI_ResourceUtilization</h1>
 <h2 id="synopsis">SYNOPSIS</h2>
-<p>Resource utilization in the last x hours</p>
+<p>Resource utilization in the last X hours.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="fetch-odata-default">Fetch odata (Default)</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -APIHeader &lt;Object&gt; [-region &lt;String&gt;] [-hours &lt;Int32&gt;] [-Export &lt;String&gt;]
- [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
-</code></pre></div>
+<pre class="highlight"><code>Get-CTXAPI_ResourceUtilization -APIHeader &lt;Object&gt; [-hours &lt;Int32&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
+ [&lt;CommonParameters&gt;]</code></pre>
 <h3 id="got-odata">Got odata</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
- [&lt;CommonParameters&gt;]
-</code></pre></div>
+<pre class="highlight"><code>Get-CTXAPI_ResourceUtilization [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
+ [&lt;CommonParameters&gt;]</code></pre>
 <h2 id="description">DESCRIPTION</h2>
-<p>Resource utilization in the last x hours</p>
+<p>Reports on resource utilization for VDA machines over the past X hours.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export excel -ReportPath C:\temp\
-</code></pre></div>
+<pre class="highlight"><code>Get-CTXAPI_ResourceUtilization -MonitorData $MonitorData -Export Excel -ReportPath C:\temp\</code></pre>
+<p>Exports an Excel workbook (Resources_Audit-\&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with aggregated resource metrics.</p>
+<h3 id="example-2">EXAMPLE 2</h3>
+<pre class="highlight"><code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp</code></pre>
+<p>Generates an HTML report titled "Citrix Resources" for the last 48 hours.</p>
+<h3 id="example-3">EXAMPLE 3</h3>
+<pre class="highlight"><code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader | Select-Object DnsName, AVGPercentCpu, AVGUsedMemory, AVGSessionCount</code></pre>
+<p>Returns objects to the host and selects common fields for quick inspection.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-apiheader">-APIHeader</h3>
-<p>Use Connect-CTXAPI to create headers</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).</p>
+<pre class="highlight"><code class="language-yaml">Type: Object
+Parameter Sets: Fetch odata
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: True
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="-monitordata">-MonitorData</h3>
-<p>Use Get-CTXAPI_MonitorData to create OData</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Got odata</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData.
+If provided, the cmdlet will not fetch data.</p>
+<pre class="highlight"><code class="language-yaml">Type: Object
+Parameter Sets: Got odata
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
-<h3 id="-region">-region</h3>
-<p>Your Cloud instance hosted region.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
-
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: False
+Position: Named
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="-hours">-hours</h3>
-<p>Amount of time to report on.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Duration window (in hours) to fetch when retrieving Monitor OData.
+Default: 24.</p>
+<pre class="highlight"><code class="language-yaml">Type: Int32
+Parameter Sets: Fetch odata
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">24</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: False
+Position: Named
+Default value: 24
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="-export">-Export</h3>
-<p>In what format to export the reports.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Destination/output for the report.
+Supported values: Host, Excel, HTML.
+Default: Host.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Host</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: False
+Position: Named
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="-reportpath">-ReportPath</h3>
-<p>Destination folder for the exported report.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Destination folder for exported files when using Excel or HTML.
+Defaults to $env:Temp.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$env:temp</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: False
+Position: Named
+Default value: $env:temp
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="commonparameters">CommonParameters</h3>
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
+<h3 id="none-parameters-are-not-accepted-from-the-pipeline">None. Parameters are not accepted from the pipeline.</h3>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="systemobject">System.Object[]</h3>
+<h3 id="when-export-is-host-array-of-resource-utilization-objects-when-export-is-excelhtml-no-output-objects-and-files-are-written-to-reportpath">When Export is Host: array of resource utilization objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
+<p><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization">https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ResourceUtilization</a></p>
 
   <br>
     

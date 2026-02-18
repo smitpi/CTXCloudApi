@@ -93,57 +93,67 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="synopsis">SYNOPSIS</h2>
 <p>Reports on system config.</p>
 <h2 id="syntax">SYNTAX</h2>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConfigAudit [-APIHeader] &lt;Object&gt; [-Export] &lt;String&gt; [[-ReportPath] &lt;String&gt;] [&lt;CommonParameters&gt;]
-</code></pre></div>
+<pre class="highlight"><code>Get-CTXAPI_ConfigAudit [-APIHeader] &lt;Object&gt; [[-Export] &lt;String&gt;] [[-ReportPath] &lt;String&gt;] [&lt;CommonParameters&gt;]</code></pre>
 <h2 id="description">DESCRIPTION</h2>
-<p>Reports on machine Catalog, delivery groups and published desktops.</p>
+<p>Reports on Machine Catalogs, Delivery Groups, Published Applications, and VDI Machines.
+Collects audit data and either returns it to the host (default) or exports it to Excel/HTML.</p>
 <h2 id="examples">EXAMPLES</h2>
 <h3 id="example-1">EXAMPLE 1</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp
-</code></pre></div>
+<pre class="highlight"><code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader</code></pre>
+<p>Returns a PSCustomObject containing Machine_Catalogs, Delivery_Groups, Published_Apps, and VDI_Devices.</p>
+<h3 id="example-2">EXAMPLE 2</h3>
+<pre class="highlight"><code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export Excel -ReportPath C:\Temp</code></pre>
+<p>Exports an Excel workbook (XD_Audit-\&lt;CustomerName&gt;-\&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with sheets for each dataset.</p>
+<h3 id="example-3">EXAMPLE 3</h3>
+<pre class="highlight"><code>Get-CTXAPI_ConfigAudit -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp</code></pre>
+<p>Generates an HTML report (XD_Audit-\&lt;CustomerName&gt;-\&lt;yyyy.MM.dd-HH.mm&gt;.html) with tables and branding.</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-apiheader">-APIHeader</h3>
-<p>Use Connect-CTXAPI to create headers.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Header object created by Connect-CTXAPI; contains authentication and context.</p>
+<pre class="highlight"><code class="language-yaml">Type: Object
+Parameter Sets: (All)
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">1</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: True
+Position: 1
+Default value: None
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="-export">-Export</h3>
-<p>In what format to export the reports.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Destination/output for the report.
+Supported values: Host, Excel, HTML.
+Default: Host.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">2</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">None</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: False
+Position: 2
+Default value: Host
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="-reportpath">-ReportPath</h3>
-<p>Destination folder for the exported report.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span><span class="w"></span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span><span class="w"></span>
-<span class="nt">Aliases</span><span class="p">:</span><span class="w"></span>
+<p>Destination folder for exported files when using Excel or HTML.
+Defaults to $env:Temp.</p>
+<pre class="highlight"><code class="language-yaml">Type: String
+Parameter Sets: (All)
+Aliases:
 
-<span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">3</span><span class="w"></span>
-<span class="nt">Default value</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">$env:temp</span><span class="w"></span>
-<span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-<span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span><span class="w"></span>
-</code></pre></div>
+Required: False
+Position: 3
+Default value: $env:temp
+Accept pipeline input: False
+Accept wildcard characters: False</code></pre>
 <h3 id="commonparameters">CommonParameters</h3>
 <p>This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable, -InformationAction, -InformationVariable, -OutVariable, -OutBuffer, -PipelineVariable, -Verbose, -WarningAction, and -WarningVariable. For more information, see <a href="http://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
+<h3 id="none-parameters-are-not-accepted-from-the-pipeline">None. Parameters are not accepted from the pipeline.</h3>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="when-export-is-host-pscustomobject-with-properties-machine_catalogs-delivery_groups-published_apps-vdi_devices">When Export is Host: PSCustomObject with properties Machine_Catalogs, Delivery_Groups, Published_Apps, VDI_Devices.</h3>
+<h3 id="when-export-is-excel-or-html-no-objects-returned-files-are-written-to-reportpath">When Export is Excel or HTML: No objects returned; files are written to ReportPath.</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
+<p><a href="https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit">https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConfigAudit</a></p>
 
   <br>
     
