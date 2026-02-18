@@ -185,19 +185,23 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h2 id="getting-started">Getting Started</h2>
 <ul>
 <li>Install from PowerShell Gallery <a href="https://www.powershellgallery.com/packages/CTXCloudApi">PS Gallery</a>
-<pre class="highlight"><code>Install-Module -Name CTXCloudApi -Verbose</code></pre></li>
+<div class="highlight"><pre><span></span><code>Install-Module -Name CTXCloudApi -Verbose
+</code></pre></div></li>
 <li>or run this script to install from GitHub <a href="https://github.com/smitpi/CTXCloudApi">GitHub Repo</a>
-<pre class="highlight"><code>$CurrentLocation = Get-Item .
-$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory 'Modules')).FullName -ChildPath CTXCloudApi)
+<div class="highlight"><pre><span></span><code>$CurrentLocation = Get-Item .
+$ModuleDestination = (Join-Path (Get-Item (Join-Path (Get-Item $profile).Directory &#39;Modules&#39;)).FullName -ChildPath CTXCloudApi)
 git clone --depth 1 https://github.com/smitpi/CTXCloudApi $ModuleDestination 2&gt;&amp;1 | Write-Host -ForegroundColor Yellow
 Set-Location $ModuleDestination
 git filter-branch --prune-empty --subdirectory-filter Output HEAD 2&gt;&amp;1 | Write-Host -ForegroundColor Yellow
-Set-Location $CurrentLocation</code></pre></li>
+Set-Location $CurrentLocation
+</code></pre></div></li>
 <li>Then import the module into your session
-<pre class="highlight"><code>Import-Module CTXCloudApi -Verbose -Force</code></pre></li>
+<div class="highlight"><pre><span></span><code>Import-Module CTXCloudApi -Verbose -Force
+</code></pre></div></li>
 <li>or run these commands for more help and details.
-<pre class="highlight"><code>Get-Command -Module CTXCloudApi
-Get-Help about_CTXCloudApi</code></pre>
+<div class="highlight"><pre><span></span><code>Get-Command -Module CTXCloudApi
+Get-Help about_CTXCloudApi
+</code></pre></div>
 Documentation can be found at: <a href="https://smitpi.github.io/CTXCloudApi">Github_Pages</a></li>
 </ul>
 <h2 id="ps-controller-scripts">PS Controller Scripts</h2>
@@ -261,5 +265,5 @@ Documentation can be found at: <a href="https://smitpi.github.io/CTXCloudApi">Gi
 </html>
 <!--
 MkDocs version : 1.6.1
-Build Date UTC : 2026-02-18 11:03:02.996000+00:00
+Build Date UTC : 2026-02-18 11:34:17.866056+00:00
 -->
