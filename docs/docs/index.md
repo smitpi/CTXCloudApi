@@ -40,6 +40,7 @@ Documentation can be found at: [Github_Pages](https://smitpi.github.io/CTXCloudA
 - instructions.md
 - LICENSE
 - README.md
+- ScriptInfo.zip
  
 ## Functions
 - [`Connect-CTXAPI`](https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI) -- Connects to Citrix Cloud and creates required API headers.

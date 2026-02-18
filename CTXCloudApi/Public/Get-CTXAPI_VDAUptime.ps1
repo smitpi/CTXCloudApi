@@ -1,16 +1,16 @@
 <#PSScriptInfo
 
-.VERSION 1.1.7
+.VERSION 1.1.8
 
 .GUID bc970a9f-0566-4048-8332-0bceda215135
 
 .AUTHOR Pierre Smit
 
-.COMPANYNAME HTPCZA Tech
+.COMPANYNAME Private
 
 .COPYRIGHT 
 
-.TAGS api citrix ctx cvad ps
+.TAGS ctx ps api
 
 .LICENSEURI 
 

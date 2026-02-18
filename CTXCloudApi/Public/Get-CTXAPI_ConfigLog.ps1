@@ -1,13 +1,13 @@
 
 <#PSScriptInfo
 
-.VERSION 1.1.7
+.VERSION 1.1.8
 
-.GUID 0c05b9c5-196a-4edb-9f46-03d59275f52d
+.GUID f59cc498-a4c5-4ca9-9de5-bee2682d67ca
 
 .AUTHOR Pierre Smit
 
-.COMPANYNAME HTPCZA Tech
+.COMPANYNAME Private
 
 .COPYRIGHT
 
