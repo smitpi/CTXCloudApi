@@ -94,11 +94,11 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Reports on connection or machine failures in the last X hours.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="fetch-odata-default">Fetch odata (Default)</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_FailureReport -APIHeader &lt;Object&gt; [-hours &lt;Int32&gt;] -FailureType &lt;String&gt; [-Export &lt;String&gt;]
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_FailureReport -APIHeader &lt;Object&gt; [-LastHours &lt;Int32&gt;] -FailureType &lt;String&gt; [-Export &lt;String&gt;]
  [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="got-odata">Got odata</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_FailureReport -APIHeader &lt;Object&gt; [-MonitorData &lt;Object&gt;] [-hours &lt;Int32&gt;] -FailureType &lt;String&gt;
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_FailureReport -APIHeader &lt;Object&gt; [-MonitorData &lt;Object&gt;] [-LastHours &lt;Int32&gt;] -FailureType &lt;String&gt;
  [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
@@ -109,7 +109,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </code></pre></div>
 <p>Returns connection failures to the host.</p>
 <h3 id="example-2">EXAMPLE 2</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -hours 48 -Export Excel -ReportPath C:\Temp
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_FailureReport -APIHeader $APIHeader -FailureType Machine -LastHours 48 -Export Excel -ReportPath C:\Temp
 </code></pre></div>
 <p>Exports machine failures for the last 48 hours to an Excel workbook.</p>
 <h3 id="example-3">EXAMPLE 3</h3>
@@ -142,8 +142,8 @@ If provided, the cmdlet will not fetch data.</p>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-hours">-hours</h3>
-<p>Duration window (in hours) to fetch when retrieving Monitor OData.
+<h3 id="-lasthours">-LastHours</h3>
+<p>Duration window in hours used when fetching Monitor OData.
 Default: 24.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>

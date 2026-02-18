@@ -94,12 +94,12 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Creates a connection report from CVAD Monitor data.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="fetch-odata-default">Fetch odata (Default)</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConnectionReport -APIHeader &lt;Object&gt; [-hours &lt;Int32&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConnectionReport -APIHeader &lt;Object&gt; [-LastHours &lt;Int32&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
  [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="got-odata">Got odata</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConnectionReport [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConnectionReport -APIHeader &lt;Object&gt; [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;]
+ [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="description">DESCRIPTION</h2>
 <p>Reports on user session connections for the last X hours.</p>
@@ -109,7 +109,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </code></pre></div>
 <p>Generates an HTML report titled "Citrix Sessions" with the full dataset.</p>
 <h3 id="example-2">EXAMPLE 2</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -hours 48 -Export Excel -ReportPath c:\temp
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -LastHours 48 -Export Excel -ReportPath c:\temp
 </code></pre></div>
 <p>Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-\&lt;yyyy.MM.dd-HH.mm&gt;.xlsx).</p>
 <h3 id="example-3">EXAMPLE 3</h3>
@@ -120,7 +120,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <h3 id="-apiheader">-APIHeader</h3>
 <p>Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Object</span>
-<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span>
+<span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
 <span class="nt">Aliases</span><span class="p">:</span>
 
 <span class="nt">Required</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">True</span>
@@ -142,8 +142,8 @@ If provided, the cmdlet will not fetch data.</p>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-hours">-hours</h3>
-<p>Duration window (in hours) to fetch when retrieving Monitor OData.
+<h3 id="-lasthours">-LastHours</h3>
+<p>Duration window in hours used when fetching Monitor OData.
 Default: 24.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span>

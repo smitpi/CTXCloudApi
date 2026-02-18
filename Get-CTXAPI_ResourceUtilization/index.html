@@ -94,8 +94,8 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 <p>Resource utilization in the last X hours.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="fetch-odata-default">Fetch odata (Default)</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -APIHeader &lt;Object&gt; [-hours &lt;Int32&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
- [&lt;CommonParameters&gt;]
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -APIHeader &lt;Object&gt; [-LastHours &lt;Int32&gt;] [-Export &lt;String&gt;]
+ [-ReportPath &lt;String&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h3 id="got-odata">Got odata</h3>
 <div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization [-MonitorData &lt;Object&gt;] [-Export &lt;String&gt;] [-ReportPath &lt;String&gt;]
@@ -109,7 +109,7 @@ if (is_top_frame) { $('body').addClass('wm-top-page'); }
 </code></pre></div>
 <p>Exports an Excel workbook (Resources_Audit-\&lt;yyyy.MM.dd-HH.mm&gt;.xlsx) with aggregated resource metrics.</p>
 <h3 id="example-2">EXAMPLE 2</h3>
-<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -hours 48 -Export HTML -ReportPath C:\temp
+<div class="highlight"><pre><span></span><code>Get-CTXAPI_ResourceUtilization -APIHeader $APIHeader -LastHours 48 -Export HTML -ReportPath C:\temp
 </code></pre></div>
 <p>Generates an HTML report titled "Citrix Resources" for the last 48 hours.</p>
 <h3 id="example-3">EXAMPLE 3</h3>
@@ -142,8 +142,8 @@ If provided, the cmdlet will not fetch data.</p>
 <span class="nt">Accept pipeline input</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 <span class="nt">Accept wildcard characters</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">False</span>
 </code></pre></div>
-<h3 id="-hours">-hours</h3>
-<p>Duration window (in hours) to fetch when retrieving Monitor OData.
+<h3 id="-lasthours">-LastHours</h3>
+<p>Duration window in hours used when fetching Monitor OData.
 Default: 24.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Int32</span>
 <span class="nt">Parameter Sets</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Fetch odata</span>
@@ -187,7 +187,7 @@ Defaults to $env:Temp.</p>
 <h2 id="inputs">INPUTS</h2>
 <h3 id="none-parameters-are-not-accepted-from-the-pipeline">None. Parameters are not accepted from the pipeline.</h3>
 <h2 id="outputs">OUTPUTS</h2>
-<h3 id="systemobject">System.Object[]</h3>
+<h3 id="pscustomobject">PSCustomObject[]</h3>
 <h3 id="when-export-is-host-array-of-resource-utilization-objects-when-export-is-excelhtml-no-output-objects-and-files-are-written-to-reportpath">When Export is Host: array of resource utilization objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.</h3>
 <h2 id="notes">NOTES</h2>
 <h2 id="related-links">RELATED LINKS</h2>
