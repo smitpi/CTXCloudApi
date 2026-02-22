@@ -79,34 +79,31 @@ function Get-CTXAPI_Machine {
     [OutputType([psobject[]])]
     param(
         [Parameter(Mandatory = $true)]
-        [PSTypeName('CTXAPIHeaderObject')]$APIHeader
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+        [Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [Alias('DNSName', 'Id')]
+        [string[]]$Name
     )
 
-    $requestUri = 'https://api.cloud.com/cvad/manage/Machines?limit=1000'
-    $response = Invoke-RestMethod -Uri $requestUri -Method GET -Headers $APIHeader.headers
-
-    # Safely get initial continuation token if present
-    if ($response.PSObject.Properties['ContinuationToken']) {
-        $ContinuationToken = $response.ContinuationToken
+    if ($PSBoundParameters.ContainsKey('Name')) {
+        [System.Collections.generic.List[PSObject]]$MachineObject = @()
+        $name | ForEach-Object {
+            $NamerequestUri = [string]::Format('https://api.cloud.com/cvad/manage/Machines/{0}', $_)
+            try {
+                Write-Verbose "Retrieving machine details for: $_"
+                $Nameresponse = Invoke-RestMethod -Uri $NamerequestUri -Method GET -Headers $APIHeader.headers
+                $MachineObject.Add($Nameresponse)
+            } catch {
+                Write-Warning "Failed to retrieve machine details for: $_."
+            }            
+        }
+        return $MachineObject
     } else {
-        $ContinuationToken = $null
+        Write-Verbose 'No Name filter applied; retrieving all machines.'
+    
+        $requestUri = 'https://api.cloud.com/cvad/manage/Machines?limit=1000'
+        $data = Get-CTXAPIDatapages -APIHeader $apiHeader -uri $requestUri
+        return $data
+
     }
-
-    while (-not [string]::IsNullOrEmpty($ContinuationToken)) {
-        $requestUriContinue = $requestUri + '&continuationtoken=' + $ContinuationToken
-        $responsePage = Invoke-RestMethod -Uri $requestUriContinue -Method GET -Headers $APIHeader.headers
-
-        # Merge items from the next page when available
-        if ($responsePage.PSObject.Properties['Items']) {
-            $response.Items += $responsePage.Items
-        }
-
-        # Safely read continuation token for the next page
-        if ($responsePage.PSObject.Properties['ContinuationToken'] -and -not [string]::IsNullOrEmpty($responsePage.ContinuationToken)) {
-            $ContinuationToken = $responsePage.ContinuationToken
-        } else {
-            $ContinuationToken = $null
-        }
-    }
-    $response.items
 } #end Function

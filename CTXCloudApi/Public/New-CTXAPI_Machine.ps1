@@ -70,7 +70,7 @@ Creates 2 new machines in the "Win10-Catalog" Machine Catalog and adds them to t
 https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Machine
 #>
 function New-CTXAPI_Machine {
-	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Machine', SupportsShouldProcess = $true, SupportsPaging = $false, ConfirmImpact = 'None')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Machine', SupportsShouldProcess = $true, SupportsPaging = $false, ConfirmImpact = 'None')]
 	[OutputType([System.Object[]])]
 
 	param(
@@ -120,24 +120,30 @@ function New-CTXAPI_Machine {
 	Write-Verbose "Retrieving Delivery Group: $DeliveryGroupName"
 	$DeliveryGroup = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader | Where-Object Name -EQ $DeliveryGroupName
 	Write-Verbose 'Retrieving all machines.'
-	$machines = Get-CTXAPI_Machine -APIHeader $APIHeader
-	$newmachines = $machines | Where-Object {($_.MachineCatalog.id -like $catid.Id) -and ($_.DeliveryGroup.id -like $null)}
+	
+	$mac = Get-CTXAPI_Machine -APIHeader $APIHeader
+	$newmachines = $mac | Where-Object {($_.MachineCatalog.id -eq $catid.id) -and ($null -eq $_.DeliveryGroup)}
+
 	Write-Verbose ('Found {0} new machines to add to Delivery Group.' -f ($newmachines | Measure-Object | Select-Object -ExpandProperty Count))
 	[System.Collections.generic.List[PSObject]]$ResultObject = @()
-	$newmachines | ForEach-Object {
-		Write-Verbose "Assigning machine $($_.Name) to Delivery Group $($DeliveryGroup.Name)"
-		$deliveryobject = [pscustomobject]@{
-			MachineCatalog        = $catid.FullName
-			AssignMachinesToUsers = @(
-				@{
-					Machine = $_.Name
-				}
-			)
-		} | ConvertTo-Json -Depth 10
-		$deliveryrequestUri = [string]::Format('https://api.cloud.com/cvad/manage/DeliveryGroups/{0}/Machines', $DeliveryGroup.id)
-		Write-Verbose "Invoking REST method to add machine to Delivery Group. URI: $deliveryrequestUri"
-		$invoke = Invoke-RestMethod -Uri $deliveryrequestUri -Method POST -Headers $APIHeader.headers -Body $deliveryobject
-		$ResultObject.Add($invoke)
+	if ($newmachines) {
+		$newmachines | ForEach-Object {
+			Write-Verbose "Assigning machine $($_.Name) to Delivery Group $($DeliveryGroup.Name)"
+			$deliveryobject = [pscustomobject]@{
+				MachineCatalog        = $catid.FullName
+				AssignMachinesToUsers = @(
+					@{
+						Machine = $_.Name
+					}
+				)
+			} | ConvertTo-Json -Depth 10
+			$deliveryrequestUri = [string]::Format('https://api.cloud.com/cvad/manage/DeliveryGroups/{0}/Machines', $DeliveryGroup.id)
+			Write-Verbose "Invoking REST method to add machine to Delivery Group. URI: $deliveryrequestUri"
+			$invoke = Invoke-RestMethod -Uri $deliveryrequestUri -Method POST -Headers $APIHeader.headers -Body $deliveryobject
+			$ResultObject.Add($invoke)
+		}
+	} else {
+		Write-Verbose 'No new machines found to add to Delivery Group.'
 	}
 	Write-Verbose 'Returning result object.'
 	$ResultObject
