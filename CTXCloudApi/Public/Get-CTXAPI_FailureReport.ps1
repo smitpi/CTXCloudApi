@@ -125,23 +125,28 @@ function Get-CTXAPI_FailureReport {
         Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] ""Fetching machine data from API"
         $machines = Get-CTXAPI_Machine -APIHeader $APIHeader
         foreach ($log in $mondata.MachineFailureLogs) {
+            #$filtersession = $mondata.Sessions | Where-Object { $_.MachineId -eq $log.MachineId }
             $MonDataMachine = $mondata.machines | Where-Object { $_.id -like $log.MachineId }
             $MachinesFiltered = $machines | Where-Object {$_.Name -like $MonDataMachine.Name }
             $Data.Add([PSCustomObject]@{
-                    Name                     = $MonDataMachine.DnsName
-                    AssociatedUserUPNs       = $MonDataMachine.AssociatedUserUPNs
-                    OSType                   = $MonDataMachine.OSType
-                    FailureStartDate         = $log.FailureStartDate
-                    FailureEndDate           = $log.FailureEndDate
-                    FaultState               = $MachineFaultStateCode.($log.FaultState)
-                    LastDeregistrationReason = $MachinesFiltered.LastDeregistrationReason 
-                    LastDeregistrationTime   = $MachinesFiltered.LastDeregistrationTime
-                    LastConnectionFailure    = $MachinesFiltered.LastConnectionFailure
-                    LastErrorReason          = $MachinesFiltered.LastErrorReason
-                    CurrentFaultState        = $MachinesFiltered.FaultState
-                    InMaintenanceMode        = $MachinesFiltered.InMaintenanceMode
-                    MaintenanceModeReason    = $MachinesFiltered.MaintenanceModeReason
-                    RegistrationState        = $MachinesFiltered.RegistrationState
+                    Name                         = $MonDataMachine.DnsName
+                    AssociatedUserUPNs           = $MonDataMachine.AssociatedUserNames
+                    OSType                       = $MonDataMachine.OSType
+                    IsAssigned                   = $MonDataMachine.IsAssigned
+                    FailureStartDate             = if ($null -eq $log.FailureStartDate) { $null } else { Convert-UTCtoLocal -Time $log.FailureStartDate }
+                    FailureEndDate               = if ($null -eq $log.FailureEndDate) { $null } else { Convert-UTCtoLocal -Time $log.FailureEndDate }
+                    FaultState                   = $MachineFaultStateCode.($log.FaultState)
+                    LastDeregistrationReason     = $MachinesFiltered.LastDeregistrationReason
+                    LastDeregisteredCode         = $MachineDeregistration.($MonDataMachine.LastDeregisteredCode)
+                    LastDeregisteredDate         = if ($null -eq $MonDataMachine.LastDeregisteredDate) { $null } else { Convert-UTCtoLocal -Time $MonDataMachine.LastDeregisteredDate }
+                    LastConnectionFailure        = $MachinesFiltered.LastConnectionFailure
+                    LastPowerActionCompletedDate = if ($null -eq $MonDataMachine.LastPowerActionCompletedDate) { $null } else { Convert-UTCtoLocal -Time $MonDataMachine.LastPowerActionCompletedDate }
+                    LastPowerActionFailureReason = $MachineDeregistration.($MonDataMachine.LastPowerActionFailureReason)
+                    LastErrorReason              = $MachinesFiltered.LastErrorReason
+                    CurrentFaultState            = $MachinesFiltered.FaultState
+                    InMaintenanceMode            = $MachinesFiltered.InMaintenanceMode
+                    MaintenanceModeReason        = $MachinesFiltered.MaintenanceModeReason
+                    RegistrationState            = $MachinesFiltered.RegistrationState
                 })
 
         }
@@ -155,11 +160,15 @@ function Get-CTXAPI_FailureReport {
                     User                       = $user.Upn
                     DnsName                    = $mashine.DnsName
                     CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
-                    FailureDate                = $log.FailureDate
+                    FailureDate                = if ($null -eq $session.FailureDate) { $null } else { Convert-UTCtoLocal -Time $session.FailureDate }
                     ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
                     IsInMaintenanceMode        = $log.IsInMaintenanceMode
                     PowerState                 = $PowerStateCode.($log.PowerState)
                     RegistrationState          = $RegistrationState.($log.RegistrationState)
+                    FailureId                  = $ConnectionFailureType.($session.FailureId)
+                    ConnectionState            = $ConnectionState.($session.ConnectionState)
+                    LifecycleState             = $LifecycleState.($session.LifecycleState)
+                    SessionType                = $SessionType.($session.SessionType)
 
                 })
         }

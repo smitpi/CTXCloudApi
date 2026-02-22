@@ -95,53 +95,67 @@ function Get-CTXAPI_ConfigAudit {
         [string]$ReportPath = $env:temp
     )
     #TODO - fix this
-    $catalogs = @()
-    Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | ForEach-Object {
-        $catalogs += [pscustomobject]@{
-            Name                     = $_.Name
-            OSType                   = $_.OSType
-            AllocationType           = $_.AllocationType
-            AssignedCount            = $_.AssignedCount
-            AvailableAssignedCount   = $_.AvailableAssignedCount
-            AvailableCount           = $_.AvailableCount
-            AvailableUnassignedCount = $_.AvailableUnassignedCount
-            IsPowerManaged           = $_.IsPowerManaged
-            IsRemotePC               = $_.IsRemotePC
-            MinimumFunctionalLevel   = $_.MinimumFunctionalLevel
-            PersistChanges           = $_.PersistChanges
-            ProvisioningType         = $_.ProvisioningType
-            SessionSupport           = $_.SessionSupport
-            TotalCount               = $_.TotalCount
-            IsBroken                 = $_.IsBroken
-            MasterImageName          = $_.ProvisioningScheme.MasterImage.name
-            MasterImagePath          = $_.ProvisioningScheme.MasterImage.XDPath
-        }
-    }
-    $deliverygroups = @()
-    $groups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
+    [System.Collections.generic.List[PSObject]]$catalogs = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader 
+        
+    # Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | ForEach-Object {
+    #     $tmp = [pscustomobject]@{
+    #         Name                     = $_.Name
+    #         OSType                   = $_.OSType
+    #         AllocationType           = $_.AllocationType
+    #         AssignedCount            = $_.AssignedCount
+    #         AvailableAssignedCount   = $_.AvailableAssignedCount
+    #         AvailableCount           = $_.AvailableCount
+    #         AvailableUnassignedCount = $_.AvailableUnassignedCount
+    #         IsPowerManaged           = $_.IsPowerManaged
+    #         IsRemotePC               = $_.IsRemotePC
+    #         MinimumFunctionalLevel   = $_.MinimumFunctionalLevel
+    #         PersistChanges           = $_.PersistChanges
+    #         ProvisioningType         = $_.ProvisioningType
+    #         SessionSupport           = $_.SessionSupport
+    #         TotalCount               = $_.TotalCount
+    #         IsBroken                 = $_.IsBroken
+    #         MasterImageName          = $_.ProvisioningScheme.MasterImage.name
+    #         MasterImagePath          = $_.ProvisioningScheme.MasterImage.XDPath
+    #     }
+    #     Write-Verbose $tmp
+    #     $catalogs.Add($tmp)
+    # }
+    [System.Collections.generic.List[PSObject]]$deliverygroups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader 
+     
+    #$groups = Get-CTXAPI_DeliveryGroup -APIHeader $APIHeader
 
-    foreach ($grp in $groups) {
-        $SimpleAccessPolicy = $grp.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
-        $deliverygroups += [pscustomobject]@{
-            Name                      = $grp.Name
-            MachinesInMaintenanceMode = $grp.MachinesInMaintenanceMode
-            RegisteredMachines        = $grp.RegisteredMachines
-            TotalMachines             = $grp.TotalMachines
-            UnassignedMachines        = $grp.UnassignedMachines
-            UserManagement            = $grp.UserManagement
-            DeliveryType              = $grp.DeliveryType
-            DesktopsAvailable         = $grp.DesktopsAvailable
-            DesktopsUnregistered      = $grp.DesktopsUnregistered
-            DesktopsFaulted           = $grp.DesktopsFaulted
-            InMaintenanceMode         = $grp.InMaintenanceMode
-            IsBroken                  = $grp.IsBroken
-            MinimumFunctionalLevel    = $grp.MinimumFunctionalLevel
-            SessionSupport            = $grp.SessionSupport
-            TotalApplications         = $grp.TotalApplications
-            TotalDesktops             = $grp.TotalDesktops
-            IncludedUsers             = @(($SimpleAccessPolicy) | Out-String).Trim()
-        }
-    }
+    # foreach ($grp in $groups) {
+    #     try {
+    #         $SimpleAccessPolicy = $null
+    #         if ($grp.SimpleAccessPolicy -and $grp.SimpleAccessPolicy.PSObject.Properties['IncludedUsers']) {
+    #             $SimpleAccessPolicy = $grp.SimpleAccessPolicy.IncludedUsers | ForEach-Object { $_.samname }
+    #             if ($null -eq $SimpleAccessPolicy) { $SimpleAccessPolicy = 'N/A' }
+    #             else { $SimpleAccessPolicy = @(($SimpleAccessPolicy) | Out-String).Trim() }
+    #         } else {
+    #             $SimpleAccessPolicy = 'N/A'
+    #         }
+    #         $tmp2 = [pscustomobject]@{
+    #             Name                   = if ($grp.PSObject.Properties['Name']) { $grp.Name } else { $null }
+    #             UserManagement         = if ($grp.PSObject.Properties['UserManagement']) { $grp.UserManagement } else { $null }
+    #             DeliveryType           = if ($grp.PSObject.Properties['DeliveryType']) { $grp.DeliveryType } else { $null }
+    #             DesktopsAvailable      = if ($grp.PSObject.Properties['DesktopsAvailable']) { $grp.DesktopsAvailable } else { $null }
+    #             DesktopsUnregistered   = if ($grp.PSObject.Properties['DesktopsUnregistered']) { $grp.DesktopsUnregistered } else { $null }
+    #             DesktopsFaulted        = if ($grp.PSObject.Properties['DesktopsFaulted']) { $grp.DesktopsFaulted } else { $null }
+    #             InMaintenanceMode      = if ($grp.PSObject.Properties['InMaintenanceMode']) { $grp.InMaintenanceMode } else { $null }
+    #             IsBroken               = if ($grp.PSObject.Properties['IsBroken']) { $grp.IsBroken } else { $null }
+    #             MinimumFunctionalLevel = if ($grp.PSObject.Properties['MinimumFunctionalLevel']) { $grp.MinimumFunctionalLevel } else { $null }
+    #             SessionSupport         = if ($grp.PSObject.Properties['SessionSupport']) { $grp.SessionSupport } else { $null }
+    #             TotalApplications      = if ($grp.PSObject.Properties['TotalApplications']) { $grp.TotalApplications } else { $null }
+    #             TotalDesktops          = if ($grp.PSObject.Properties['TotalDesktops']) { $grp.TotalDesktops } else { $null }
+    #             IncludedUsers          = $SimpleAccessPolicy
+    #         }
+    #         Write-Verbose $tmp2
+    #         $deliverygroups.Add($tmp2)
+    #     } catch {
+    #         Write-Verbose $tmp2
+    #         Write-Warning "Error processing delivery group $($grp.Name) - $_.Exception.Message"
+    #     }
+    # }
 
     $apps = @()
     $assgroups = @()

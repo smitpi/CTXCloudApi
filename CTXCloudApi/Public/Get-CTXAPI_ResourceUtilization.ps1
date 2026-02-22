@@ -106,24 +106,37 @@ function Get-CTXAPI_ResourceUtilization {
         [string]$ReportPath = $env:temp
     )
 
-    if ($Null -eq $MonitorData) { $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours }
-    else { $monitor = $MonitorData }
-    
+    Write-Verbose "Starting Get-CTXAPI_ResourceUtilization with Export: $Export and ReportPath: $ReportPath"
+    if ($Null -eq $MonitorData) {
+        Write-Verbose "Fetching MonitorData using Get-CTXAPI_MonitorData for last $LastHours hours."
+        $monitor = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours
+    } else {
+        Write-Verbose 'Using provided MonitorData.'
+        $monitor = $MonitorData
+    }
+
     [System.Collections.generic.List[PSObject]]$data = @()
     $InGroups = $monitor.ResourceUtilization | Group-Object -Property MachineId
+    Write-Verbose ('Processing {0} machine groups.' -f $InGroups.Count)
     foreach ($machine in $InGroups) {
+        Write-Verbose "Processing MachineId: $($machine.Name) with $($machine.Group.Count) data points."
         $MachineDetails = $monitor.Machines | Where-Object {$_.id -like $machine.Name}
         $catalog = $monitor.Catalogs | Where-Object { $_.id -eq $MachineDetails.CatalogId } | ForEach-Object { $_.name }
         $desktopgroup = $monitor.DesktopGroups | Where-Object { $_.id -eq $MachineDetails.DesktopGroupId } | ForEach-Object { $_.name }
-    
+
         try {
             $AVGPercentCpu = [math]::Round(($machine.Group | Measure-Object -Property PercentCpu -Average).Average)
             $AVGUsedMemory = [math]::Ceiling((($machine.Group | Measure-Object -Property UsedMemory -Average).Average) / 1gb)
             $AVGSessionCount = [math]::Ceiling(($machine.Group | Measure-Object -Property SessionCount -Average).Average)
             $AVGTotalMemory = [math]::Round($machine.Group[0].TotalMemory / 1gb)
-
+            $StartCollection = $machine.Group.CollectedDate | Sort-Object | Select-Object -First 1
+            $EndCollection = $machine.Group.CollectedDate | Sort-Object -Descending | Select-Object -First 1
+            $timespan = New-TimeSpan -Start $StartCollection -End $EndCollection
+            Write-Verbose "Averages: CPU=$AVGPercentCpu, UsedMemory=$AVGUsedMemory, SessionCount=$AVGSessionCount, TotalMemory=$AVGTotalMemory"
+            Write-Verbose "Collection window: $StartCollection to $EndCollection ($timespan)"
         } catch {Write-Warning "Error: `n`tMessage:$($_.Exception.Message)"}
         $data.Add([PSCustomObject]@{
+                AssociatedUserNames      = $MachineDetails.AssociatedUserNames
                 DnsName                  = $MachineDetails.DnsName
                 IsInMaintenanceMode      = $MachineDetails.IsInMaintenanceMode
                 AgentVersion             = $MachineDetails.AgentVersion
@@ -131,12 +144,17 @@ function Get-CTXAPI_ResourceUtilization {
                 OSType                   = $MachineDetails.OSType
                 Catalog                  = $catalog
                 DesktopGroup             = $desktopgroup
+                Datametric               = $machine.Count
                 AVGPercentCpu            = $AVGPercentCpu
                 AVGUsedMemory            = $AVGUsedMemory
                 AVGTotalMemory           = $AVGTotalMemory
                 AVGSessionCount          = $AVGSessionCount
+                StartCollection          = if ($null -eq $StartCollection) { $null } else { Convert-UTCtoLocal -Time $StartCollection }
+                EndCollection            = if ($null -eq $EndCollection) { $null } else { Convert-UTCtoLocal -Time $EndCollection }
+                CollectionDuration       = if ($null -eq $timespan) { $null } else { $timespan }
             })
     }
+    Write-Verbose ('Total resource utilization objects: {0}' -f $data.Count)
     if ($Export -eq 'Excel') {
         $ExcelOptions = @{
             Path             = $ReportPath + '\Resources_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'

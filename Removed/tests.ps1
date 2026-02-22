@@ -4,9 +4,8 @@
 Import-Module "C:\Users\ladmin\Dropbox\#Profile\Documents\PowerShell\ProdModules\CTXCloudApi\CTXCloudApi\CTXCloudApi.psm1" -Force -Verbose
 
 $api = Connect-CTXAPI -Customer_Id $PrdCustomerID -Client_Id $Client_Id -Client_Secret $Client_Secret -Customer_Name Rabobankprd
-$mon = Get-CTXAPI_MonitorData -APIHeader $api -LastHours 4 -MonitorDetails All -verbose
+$mon = Get-CTXAPI_MonitorData -APIHeader $api -LastHours 6 -MonitorDetails All -verbose
 $app = Get-CTXAPI_Application -APIHeader $api
-$config = Get-CTXAPI_ConfigAudit -APIHeader $api # not working
 $connection = Get-CTXAPI_ConnectionReport -APIHeader $api -MonitorData $mon
 $dl = Get-CTXAPI_DeliveryGroup -APIHeader $api -verbose
 $connection = Get-CTXAPI_FailureReport -APIHeader $api -MonitorData $mon -FailureType Connection
@@ -14,7 +13,7 @@ $machinefail = Get-CTXAPI_FailureReport -APIHeader $api -MonitorData $mon -Failu
 $hyp = Get-CTXAPI_Hypervisor -APIHeader $api
 $mac = Get-CTXAPI_Machine -APIHeader $api
 $cat = Get-CTXAPI_MachineCatalog -APIHeader $api
-$util = Get-CTXAPI_ResourceUtilization -APIHeader $api -MonitorData $mon
+$util = Get-CTXAPI_ResourceUtilization -APIHeader $api -MonitorData $mon -Verbose
 $session = Get-CTXAPI_Session -APIHeader $api
 $site = Get-CTXAPI_SiteDetail -APIHeader $api
 $uptime = Get-CTXAPI_VDAUptime -APIHeader $api -Verbose
