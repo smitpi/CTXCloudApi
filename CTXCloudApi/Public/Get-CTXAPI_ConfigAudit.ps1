@@ -94,7 +94,7 @@ function Get-CTXAPI_ConfigAudit {
         [ValidateScript( { (Test-Path $_) })]
         [string]$ReportPath = $env:temp
     )
-
+    #TODO - fix this
     $catalogs = @()
     Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | ForEach-Object {
         $catalogs += [pscustomobject]@{
@@ -237,9 +237,9 @@ function Get-CTXAPI_ConfigAudit {
     if ($Export -eq 'Host') {
         [PSCustomObject]@{
             Machine_Catalogs = $catalogs
-            Delivery_Groups   = $deliverygroups
-            Published_Apps    = $apps
-            VDI_Devices       = $machines
+            Delivery_Groups  = $deliverygroups
+            Published_Apps   = $apps
+            VDI_Devices      = $machines
         }
     }
 } #end Function
