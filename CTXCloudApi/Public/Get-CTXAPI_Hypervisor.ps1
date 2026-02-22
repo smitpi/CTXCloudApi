@@ -80,7 +80,7 @@ function Get-CTXAPI_Hypervisor {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
 
-    $requestUri = 'https://api-eu.cloud.com/cvad/manage/hypervisors?limit=1000'
+    $requestUri = 'https://api.cloud.com/cvad/manage/hypervisors?limit=1000'
     $response = Invoke-RestMethod -Uri $requestUri -Method GET -Headers $APIHeader.headers
 
     # Safely get initial continuation token if present
