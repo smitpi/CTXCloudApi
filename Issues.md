@@ -20,18 +20,29 @@ body {
 
 ---
 
-| Catagory      | File                    | details                                                                       |
-| ------------- | ----------------------- | ----------------------------------------------------------------------------- |
-|               |                         |                                                                               |
-| External Help | Get-CTXAPI_Machine.md   | Get-CTXAPI_Machine.md - ### -Name - {{ Fill Name Description }}               |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ## SYNOPSIS - {{ Fill in the Synopsis }}            |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ## DESCRIPTION - {{ Fill in the Description }}      |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ```powershell - PS C:\> {{ Add example code here }} |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md -  - {{ Add example description here }}               |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ### -APIHeader - {{ Fill APIHeader Description }}   |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ### -Export - {{ Fill Export Description }}         |
-| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ### -ReportPath - {{ Fill ReportPath Description }} |
+| Catagory      | File                         | details                     |
+| ------------- | ---------------------------- | --------------------------- |
+| External Help | Connect-CTXAPI               | Did not create the .md file |
+| External Help | Get-CTXAPI_Application       | Did not create the .md file |
+| External Help | Get-CTXAPI_CloudService      | Did not create the .md file |
+| External Help | Get-CTXAPI_ConfigLog         | Did not create the .md file |
+| External Help | Get-CTXAPI_DeliveryGroup     | Did not create the .md file |
+| External Help | Get-CTXAPI_Hypervisor        | Did not create the .md file |
+| External Help | Get-CTXAPI_LowLevelOperation | Did not create the .md file |
+| External Help | Get-CTXAPI_Machine           | Did not create the .md file |
+| External Help | Get-CTXAPI_MachineCatalog    | Did not create the .md file |
+| External Help | Get-CTXAPI_MonitorData       | Did not create the .md file |
+| External Help | Get-CTXAPI_ResourceLocation  | Did not create the .md file |
+| External Help | Get-CTXAPI_Session           | Did not create the .md file |
+| External Help | Get-CTXAPI_SiteDetail        | Did not create the .md file |
+| External Help | Get-CTXAPI_VDAUptime         | Did not create the .md file |
+| External Help | Get-CTXAPI_Zone              | Did not create the .md file |
+| External Help | New-CTXAPI_Machine           | Did not create the .md file |
+| External Help | New-CTXAPI_Report            | Did not create the .md file |
+| External Help | Set-CTXAPI_MachinePowerState | Did not create the .md file |
+| External Help | Test-CTXAPI_Header           | Did not create the .md file |
+|               |                              |                             |
 
 ---
 
-*Updated: Monday, February 23, 2026 8:08:12 AM UTC*
+*Updated: Monday, February 23, 2026 1:49:01 PM UTC*
