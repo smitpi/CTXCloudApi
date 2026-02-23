@@ -8,44 +8,31 @@ schema: 2.0.0
 # Get-CTXAPI_VDAUptime
 
 ## SYNOPSIS
-Calculate VDA uptime and export or return results.
+{{ Fill in the Synopsis }}
 
 ## SYNTAX
 
 ```
-Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <String>] [<CommonParameters>]
+Get-CTXAPI_VDAUptime [-APIHeader] <Object> [[-Export] <String>] [[-ReportPath] <DirectoryInfo>]
+ [<CommonParameters>]
 ```
 
 ## DESCRIPTION
-Calculates VDA machine uptime based on registration/deregistration timestamps.
+{{ Fill in the Description }}
 
 ## EXAMPLES
 
-### EXAMPLE 1
-```
-Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export Excel -ReportPath C:\temp\
-```
-
-Exports an Excel workbook (VDAUptime-\<yyyy.MM.dd-HH.mm\>.xlsx) with uptime details.
-
-### EXAMPLE 2
-```
-Get-CTXAPI_VDAUptime -APIHeader $APIHeader -Export HTML -ReportPath C:\Temp
+### Example 1
+```powershell
+PS C:\> {{ Add example code here }}
 ```
 
-Generates an HTML report titled "Citrix Uptime".
-
-### EXAMPLE 3
-```
-Get-CTXAPI_VDAUptime -APIHeader $APIHeader | Select-Object DnsName, Days, OnlineSince, SummaryState
-```
-
-Returns objects to the host and selects common fields for quick inspection.
+{{ Add example description here }}
 
 ## PARAMETERS
 
 ### -APIHeader
-Header object created by Connect-CTXAPI; contains authentication and request headers.
+{{ Fill APIHeader Description }}
 
 ```yaml
 Type: Object
@@ -53,40 +40,39 @@ Parameter Sets: (All)
 Aliases:
 
 Required: True
-Position: 1
+Position: 0
 Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -Export
-Destination/output for the report.
-Supported values: Host, Excel, HTML.
-Default: Host.
+{{ Fill Export Description }}
 
 ```yaml
 Type: String
 Parameter Sets: (All)
 Aliases:
+Accepted values: Host, Excel, HTML
 
 Required: False
-Position: 2
-Default value: Host
+Position: 1
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
 
 ### -ReportPath
-Destination folder for the exported report.
+{{ Fill ReportPath Description }}
 
 ```yaml
-Type: String
+Type: DirectoryInfo
 Parameter Sets: (All)
 Aliases:
 
 Required: False
-Position: 3
-Default value: $env:temp
+Position: 2
+Default value: None
 Accept pipeline input: False
 Accept wildcard characters: False
 ```
@@ -96,11 +82,11 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
-### None. Parameters are not accepted from the pipeline.
+### None
+
 ## OUTPUTS
 
-### psobject[]
-### When Export is Host: array of uptime objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
+### System.Object
 ## NOTES
 
 ## RELATED LINKS

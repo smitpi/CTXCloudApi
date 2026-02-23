@@ -3,7 +3,7 @@
 
 .VERSION 0.1.0
 
-.GUID d6f75dce-2fe6-41f4-bce4-2289bcb3365d
+.GUID eada9ddb-93d9-481d-8dd3-d7f034f5e27e
 
 .AUTHOR Pierre Smit
 
@@ -26,47 +26,53 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [22/02/2026_14:02] Initial Script
+Created [23/02/2026_09:03] Initial Script
 
 .PRIVATEDATA
 
 #>
 
 <# 
+
+.DESCRIPTION 
+ Starts or shutdown machines. 
+
+#> 
+
+
 <#
 .SYNOPSIS
-Starts, shuts down, restarts, or logs off Citrix Cloud machines.
+Starts, shuts down, restarts, or logs off Citrix machines via CTX API.
 
 .DESCRIPTION
-This function performs power actions (Start, Shutdown, Restart, Logoff) on one or more machines in Citrix Cloud using the CTXCloudApi module. Supports verbose output for detailed process tracking.
+This function allows you to remotely control the power state of Citrix machines using the CTX API. You can start, shut down, restart, or log off one or more machines by specifying their name, DNS name, or ID.
 
 .PARAMETER APIHeader
-The authentication header object returned by Connect-CTXAPI, required for all API calls.
+The CTX API authentication header object (type CTXAPIHeaderObject) required for API calls.
 
 .PARAMETER Name
-The name, DNS name, or ID of the machine(s) to target for the power action.
+The name, DNS name, or ID of the Citrix Machine(s) to target. Accepts an array of strings.
 
-.PARAMETER Action
-The power action to perform. Valid values: Start, Shutdown, Restart, Logoff.
-
-.EXAMPLE
-Set-CTXAPI_MachinePowerState -APIHeader $header -Name "CTXPRD01" -Action Start -Verbose
-
-Starts the machine named "CTXPRD01" and shows verbose output.
+.PARAMETER PowerAction
+The desired power action to perform. Valid values: Start, Shutdown, Restart, Logoff.
 
 .EXAMPLE
-Set-CTXAPI_MachinePowerState -APIHeader $header -Name "CTXPRD01","CTXPRD02" -Action Shutdown
+Set-CTXAPI_MachinePowerState -APIHeader $header -Name "CTX-Machine01" -PowerAction Start
+Starts the specified Citrix Machine.
 
-Shuts down multiple machines.
+.EXAMPLE
+Set-CTXAPI_MachinePowerState -APIHeader $header -Name "CTX-Machine01","CTX-Machine02" -PowerAction Shutdown
+Shuts down multiple Citrix Machines.
+
+.INPUTS
+
+
+.OUTPUTS
+System.Object[]. Returns the API response objects for each machine processed.
 
 .NOTES
 
-.LINK
-https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachinePowerState
 #>
-
-#TODO - Test pipeline options
-
 function Set-CTXAPI_MachinePowerState {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachinePowerState')]
 	[OutputType([System.Object[]])]
@@ -80,7 +86,7 @@ function Set-CTXAPI_MachinePowerState {
 		[Alias('DNSName', 'Id')]
 		[string[]]$Name,
 		[ValidateSet('Start', 'Shutdown', 'Restart', 'Logoff')]
-		[string]$Action
+		[string]$PowerAction
 	)
 	#endregion
 	begin {
@@ -94,9 +100,9 @@ function Set-CTXAPI_MachinePowerState {
 		} catch {
 			Write-Warning "Error retrieving machines - $_.Exception.Message"
 		}        
-		if ($PSBoundParameters.ContainsKey('Action')) {
-			Write-Verbose "Action specified: $Action"
-			switch ($Action) {
+		if ($PSBoundParameters.ContainsKey('PowerAction')) {
+			Write-Verbose "Action specified: $PowerAction"
+			switch ($PowerAction) {
 				'Start' { $endpoint = 'start' }
 				'Shutdown' { $endpoint = 'shutdown' }
 				'Restart' { $endpoint = 'reboot' }
@@ -104,7 +110,7 @@ function Set-CTXAPI_MachinePowerState {
 			}
 			Write-Verbose "API endpoint resolved: $endpoint"
 		} else {
-			Write-Warning 'No action specified. Please provide an action using the -Action parameter (Start, Shutdown, Restart, Logoff).'
+			Write-Warning 'No action specified. Please provide an action using the -PowerAction parameter (Start, Shutdown, Restart, Logoff).'
 		}
 	} #End Begin
 	process {
@@ -117,7 +123,7 @@ function Set-CTXAPI_MachinePowerState {
 					$apiResult = Invoke-RestMethod -Uri $baseuri -Method POST -Headers $APIHeader.headers
 					Write-Verbose "API call result: $($apiResult | ConvertTo-Json -Depth 3)"
 					$ResultObject.Add($apiResult)
-					Write-Verbose "Performed action '$Action' on machine '$($machine.DnsName)' (ID: $($machine.Id))"
+					Write-Verbose "Performed action '$PowerAction' on machine '$($machine.DnsName)' (ID: $($machine.Id))"
 				} catch {
 					Write-Warning "API call failed for machine '$($machine.DnsName)' - $_.Exception.Message"
 				}

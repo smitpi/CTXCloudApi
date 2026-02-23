@@ -1,0 +1,200 @@
+
+<#PSScriptInfo
+
+.VERSION 1.1.8
+
+.GUID 18e98a85-d22b-4262-8004-2455e5d540dc
+
+.AUTHOR Pierre Smit
+
+.COMPANYNAME Private
+
+.COPYRIGHT
+
+.TAGS
+
+.LICENSEURI
+
+.PROJECTURI
+
+.ICONURI
+
+.EXTERNALMODULEDEPENDENCIES 
+
+.REQUIREDSCRIPTS
+
+.EXTERNALSCRIPTDEPENDENCIES
+
+.RELEASENOTES
+
+
+.PRIVATEDATA
+
+#>
+
+<# 
+
+.DESCRIPTION 
+ Creates a connection report from CVAD Monitor data. 
+
+#> 
+
+
+
+<#
+.SYNOPSIS
+Creates a connection report from CVAD Monitor data.
+
+.DESCRIPTION
+Reports on user session connections for the last X hours.
+
+.PARAMETER APIHeader
+Header object created by Connect-CTXAPI; contains authentication and request headers (used to fetch Monitor OData).
+
+.PARAMETER MonitorData
+Pre-fetched CVAD Monitor OData created by Get-CTXAPI_MonitorData. If provided, the cmdlet will not fetch data.
+
+.PARAMETER LastHours
+Duration window in hours used when fetching Monitor OData. Default: 24.
+
+.PARAMETER Export
+Destination/output for the report. Supported values: Host, Excel, HTML. Default: Host.
+
+.PARAMETER ReportPath
+Destination folder for exported files when using Excel or HTML. Defaults to $env:Temp.
+
+.EXAMPLE
+Get-CTXAPI_ConnectionReport -MonitorData $MonitorData -Export HTML -ReportPath c:\temp
+Generates an HTML report titled "Citrix Sessions" with the full dataset.
+
+.EXAMPLE
+Get-CTXAPI_ConnectionReport -APIHeader $APIHeader -LastHours 48 -Export Excel -ReportPath c:\temp
+Fetches 48 hours of Monitor data and exports an Excel workbook (Session_Audit-<yyyy.MM.dd-HH.mm>.xlsx).
+
+.EXAMPLE
+Get-CTXAPI_ConnectionReport -APIHeader $APIHeader | Select-Object Upn, DnsName, EstablishmentDate, AVG_ICA_RTT
+Returns objects to the host and selects common fields for quick inspection.
+
+.INPUTS
+None. Parameters are not accepted from the pipeline.
+
+.OUTPUTS
+System.Object[]
+When Export is Host: array of connection report objects; when Export is Excel/HTML: no output objects and files are written to ReportPath.
+
+.LINK
+https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport
+
+#>
+
+
+function Get-CTXAPI_ConnectionReport {
+    [Cmdletbinding(DefaultParameterSetName = 'Fetch odata', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_ConnectionReport')]
+    param(
+        [Parameter(Mandatory = $true)]
+        [ValidateNotNullOrEmpty()]
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+        [Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
+        [PSTypeName('CTXMonitorData')]$MonitorData,
+        [ValidateNotNullOrEmpty()]
+        [Parameter(Mandatory = $false, ParameterSetName = 'Fetch odata')]
+        [int]$LastHours = 24,
+        [Parameter(Mandatory = $false)]
+        [ValidateSet('Excel', 'HTML', 'Host')]
+        [string]$Export = 'Host',
+        [Parameter(Mandatory = $false)]
+        [ValidateScript( { (Test-Path $_) })]
+        [System.IO.DirectoryInfo]$ReportPath = $env:temp
+    )
+
+    Write-Verbose "Starting Get-CTXAPI_ConnectionReport with Export: $Export and ReportPath: $ReportPath"
+
+    if ($Null -eq $MonitorData) {
+        Write-Verbose "Fetching MonitorData using Get-CTXAPI_MonitorData for last $LastHours hours."
+        $mondata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours
+    } else {
+        Write-Verbose 'Using provided MonitorData.'
+        $mondata = $MonitorData
+    }
+
+    [System.Collections.generic.List[PSObject]]$data = @()
+    Write-Verbose ('Processing {0} connections.' -f $mondata.Connections.Count)
+
+    foreach ($connection in $mondata.Connections) {
+        Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($mondata.Connections.IndexOf($connection) + 1) of $($mondata.Connections.Count)"
+        try {
+            $OneSession = $mondata.Sessions | Where-Object { $_.SessionKey -eq $connection.SessionKey }
+            $user = $mondata.Users | Where-Object { $_.id -like $OneSession.UserId }
+            $mashine = $mondata.Machines | Where-Object { $_.id -like $OneSession.MachineId }
+            Write-Verbose "SessionKey: $($connection.SessionKey), User: $($user.upn), Machine: $($mashine.DnsName)"
+            try {
+                $avgrtt = 0
+                $ctxlatency = 0
+                $sessdata = $mondata.SessionMetrics | Where-Object { $_.Sessionid -like $OneSession.SessionKey }
+                $avgrtt = $sessdata | Measure-Object -Property IcaRttMS -Average
+                $ctxlatency = $sessdata | Measure-Object -Property IcaLatency -Average
+                $StartCollection = $sessdata.CollectedDate | Sort-Object | Select-Object -First 1
+                $EndCollection = $sessdata.CollectedDate | Sort-Object -Descending | Select-Object -First 1
+                $timespan = New-TimeSpan -Start $StartCollection -End $EndCollection
+
+                Write-Verbose "Metrics: RTT=$($avgrtt.Average), Latency=$($ctxlatency.Average)"
+            } catch { Write-Warning "Not enough RTT data - $_.Exception.Message" }
+        } catch { Write-Warning "Error processing - $_.Exception.Message" }
+        $data.Add([PSCustomObject]@{
+                Upn                      = $user.upn
+                ConnectionState          = $ConnectionState.($OneSession.ConnectionState)
+                DnsName                  = $mashine.DnsName
+                IPAddress                = $mashine.IPAddress
+                IsInMaintenanceMode      = $mashine.IsInMaintenanceMode
+                CurrentRegistrationState = $RegistrationState.($mashine.CurrentRegistrationState)
+                OSType                   = $mashine.OSType
+                ClientName               = $connection.ClientName
+                ClientVersion            = $connection.ClientVersion
+                ClientAddress            = $connection.ClientAddress
+                ClientPlatform           = $connection.ClientPlatform
+                IsReconnect              = $connection.IsReconnect
+                IsSecureIca              = $connection.IsSecureIca
+                Protocol                 = $connection.Protocol
+                EstablishmentDate        = if ($null -eq $connection.EstablishmentDate) { $null } else { Convert-UTCtoLocal -Time $connection.EstablishmentDate }
+                LogOnStartDate           = if ($null -eq $connection.LogOnStartDate) { $null } else { Convert-UTCtoLocal -Time $connection.LogOnStartDate }
+                LogOnEndDate             = if ($null -eq $connection.LogOnEndDate) { $null } else { Convert-UTCtoLocal -Time $connection.LogOnEndDate }
+                AuthenticationDuration   = $connection.AuthenticationDuration
+                LogOnDuration            = $OneSession.LogOnDuration
+                DisconnectDate           = if ($null -eq $connection.DisconnectDate) { $null } else { Convert-UTCtoLocal -Time $connection.DisconnectDate }
+                EndDate                  = if ($null -eq $OneSession.EndDate) { $null } else { Convert-UTCtoLocal -Time $OneSession.EndDate }
+                ExitCode                 = $SessionFailureCode.($OneSession.ExitCode)
+                FailureDate              = if ($null -eq $OneSession.FailureDate) { $null } else { Convert-UTCtoLocal -Time $OneSession.FailureDate }
+                MetricsCounted           = if ($null -eq $sessdata) { 0 } else { $sessdata.Count }
+                AVG_ICA_RTT              = if ($null -eq $avgrtt) { 0 } else { [math]::Round($avgrtt.Average) }
+                AVG_ICA_Latency          = if ($null -eq $ctxlatency) { 0 } else { [math]::Round($ctxlatency.Average) }
+                StartCollection          = if ($null -eq $StartCollection) { $null } else { Convert-UTCtoLocal -Time $StartCollection }
+                EndCollection            = if ($null -eq $EndCollection) { $null } else { Convert-UTCtoLocal -Time $EndCollection }
+                CollectionDuration       = if ($null -eq $timespan) { $null } else { $timespan }
+            }) #PSList
+    }
+
+    Write-Verbose ('Total connection report objects: {0}' -f $data.Count)
+    if ($Export -eq 'Excel') { 
+        $ExcelOptions = @{
+            Path             = $ReportPath + '\Session_Audit-' + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+            AutoSize         = $True
+            AutoFilter       = $True
+            TitleBold        = $True
+            TitleSize        = '28'
+            TitleFillPattern = 'LightTrellis'
+            TableStyle       = 'Light20'
+            FreezeTopRow     = $True
+            FreezePane       = '3'
+        }
+        Write-Verbose ('Exporting to Excel: {0}' -f $ExcelOptions.Path)
+        $data | Export-Excel -Title Sessions -WorksheetName Sessions @ExcelOptions
+    }
+    if ($Export -eq 'HTML') {
+        Write-Verbose 'Exporting to HTML view.'
+        $data | Out-HtmlView -DisablePaging -Title 'Citrix Sessions' -HideFooter -SearchHighlight -FixedHeader
+    }
+    if ($Export -eq 'Host') {
+        Write-Verbose ('Returning {0} connection report objects to host.' -f $data.Count)
+        $data
+    }
+} #end Function

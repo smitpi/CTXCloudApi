@@ -13,7 +13,7 @@ Returns details about VDA machines (handles pagination).
 ## SYNTAX
 
 ```
-Get-CTXAPI_Machine [-APIHeader] <Object> [<CommonParameters>]
+Get-CTXAPI_Machine [-APIHeader] <Object> [[-Name] <String[]>] [<CommonParameters>]
 ```
 
 ## DESCRIPTION
@@ -49,6 +49,21 @@ Required: True
 Position: 1
 Default value: None
 Accept pipeline input: False
+Accept wildcard characters: False
+```
+
+### -Name
+{{ Fill Name Description }}
+
+```yaml
+Type: String[]
+Parameter Sets: (All)
+Aliases: DNSName, Id
+
+Required: False
+Position: 2
+Default value: None
+Accept pipeline input: True (ByPropertyName, ByValue)
 Accept wildcard characters: False
 ```
 

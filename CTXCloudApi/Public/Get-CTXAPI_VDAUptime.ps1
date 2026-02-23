@@ -97,7 +97,7 @@ function Get-CTXAPI_VDAUptime {
         [string]$Export = 'Host',
         [Parameter(Mandatory = $false)]
         [ValidateScript( { (Test-Path $_) })]
-        [string]$ReportPath = $env:temp)
+        [System.IO.DirectoryInfo]$ReportPath = $env:temp)
 
     Write-Verbose "Starting Get-CTXAPI_VDAUptime with Export: $Export and ReportPath: $ReportPath"
     try {

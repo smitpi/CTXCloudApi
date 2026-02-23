@@ -201,6 +201,25 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'SessionMetricsLatest')) {$SessionMetricsLatest = Export-Odata -URI ('https://api.cloud.com/monitorodata/SessionMetricsLatest?$filter=(CreatedDate ge ' + $EndDateStr + ' and CreatedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers -verbose}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Users')) {$Users = Export-Odata -URI ('https://api.cloud.com/monitorodata/Users') -headers $APIHeader.headers}
 
+
+
+    $Sessions = Export-Odata -URI ('https://api.cloud.com/monitorodata/UserResourceUtilizationSummary') -headers $APIHeader.headers
+
+
+    
+    # UserResourceUtilizationSummary
+    # MachineMetricSummary
+    # ProcessUtilizationDaySummary
+    # EndpointMetrics
+    # DesktopOSDesktopSummaries
+    # FailureLogSummaries
+    # LogOnSummaries
+    # ReconnectSummaries
+    # SessionActivitySummaries
+    # UserMachineLogSummaries
+    # SessionLogonMetrics
+    # MachinePowerActionLogs
+
     Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Building composite object with retrieved datasets..."
     $datasets = [pscustomobject]@{
         PSTypeName = 'CTXMonitorData'

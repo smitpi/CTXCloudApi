@@ -1,7 +1,7 @@
 ---
 external help file: CTXCloudApi-help.xml
 Module Name: CTXCloudApi
-online version: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone
+online version: https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Machine
 schema: 2.0.0
 ---
 

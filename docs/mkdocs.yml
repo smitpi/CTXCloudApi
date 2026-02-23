@@ -19,4 +19,4 @@ markdown_extensions:
   - pymdownx.snippets
   - pymdownx.superfences
  
-theme: windmill
+theme: material

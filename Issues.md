@@ -20,12 +20,18 @@ body {
 
 ---
 
-| Catagory | File | details |
-| -------- | ---- | ------- |
-|          |      |         |
-|          |      |         |
-|          |      |         |
+| Catagory      | File                    | details                                                                       |
+| ------------- | ----------------------- | ----------------------------------------------------------------------------- |
+|               |                         |                                                                               |
+| External Help | Get-CTXAPI_Machine.md   | Get-CTXAPI_Machine.md - ### -Name - {{ Fill Name Description }}               |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ## SYNOPSIS - {{ Fill in the Synopsis }}            |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ## DESCRIPTION - {{ Fill in the Description }}      |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ```powershell - PS C:\> {{ Add example code here }} |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md -  - {{ Add example description here }}               |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ### -APIHeader - {{ Fill APIHeader Description }}   |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ### -Export - {{ Fill Export Description }}         |
+| External Help | Get-CTXAPI_VDAUptime.md | Get-CTXAPI_VDAUptime.md - ### -ReportPath - {{ Fill ReportPath Description }} |
 
 ---
 
-*Updated: Wednesday, February 18, 2026 1:38:00 PM UTC*
+*Updated: Monday, February 23, 2026 8:08:12 AM UTC*
