@@ -203,7 +203,7 @@ function Get-CTXAPI_MonitorData {
 
 
 
-    $Sessions = Export-Odata -URI ('https://api.cloud.com/monitorodata/UserResourceUtilizationSummary') -headers $APIHeader.headers
+    #$Sessions = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineMetricSummary') -headers $APIHeader.headers
 
 
     
