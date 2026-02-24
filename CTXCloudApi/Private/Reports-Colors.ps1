@@ -23,7 +23,7 @@ $script:SectionSettings = @{
 	HeaderTextAlignment   = 'center'
 	HeaderTextColor       = $CTXAPI_Color2
 	HeaderTextSize        = '20'
-	BorderRadius          = '25px'
+	BorderRadius          = '15px'
 }
 $script:TableSectionSettings = @{
 	BackgroundColor       = 'white'
@@ -31,7 +31,7 @@ $script:TableSectionSettings = @{
 	HeaderBackGroundColor = $CTXAPI_Color2
 	HeaderTextAlignment   = 'center'
 	HeaderTextColor       = $CTXAPI_Color1
-	HeaderTextSize        = '20'
+	HeaderTextSize        = '15'
 }
 #endregion
 

@@ -115,12 +115,18 @@ function New-CTXAPI_Report {
 		Write-Verbose ('Fetched MonitorData: Sessions={0}, Connections={1}, Machines={2}, Users={3}' -f $monitordata.sessions.Count, $monitordata.connections.Count, $monitordata.machines.Count, $monitordata.users.Count)
 	}
 
-	if ($PSBoundParameters.ContainsKey('ReportType') -and $ReportType -contains 'ResourceUtilization') {
+	$ResourceUtilizationObject = $null
+	$ConnectionReportObject = $null
+	$ConnectionFailureReportObject = $null
+	$MachineFailureReportObject = $null
+	$SessionReportObject = $null
+	$MachineReportObject = $null
 
+	if (($PSBoundParameters['ReportType'] -contains 'ResourceUtilization') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
 		[System.Collections.generic.List[PSObject]]$ResourceUtilizationObject = @()
 		$InGroups = $monitordata.ResourceUtilization | Group-Object -Property MachineId
-		Write-Verbose ('Processing {0} machine groups.' -f $InGroups.Count)
 		foreach ($machine in $InGroups) {
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($InGroups.IndexOf($($machine)) + 1) of $($InGroups.Count)"		
 			Write-Verbose "Processing MachineId: $($machine.Name) with $($machine.Group.Count) data points."
 			$MachineDetails = $monitordata.Machines | Where-Object {$_.id -like $machine.Name}
 			$catalog = $monitordata.Catalogs | Where-Object { $_.id -eq $MachineDetails.CatalogId } | ForEach-Object { $_.name }
@@ -158,7 +164,7 @@ function New-CTXAPI_Report {
 
 	}
 
-	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'ConnectionReport') {
+	if (($PSBoundParameters['ReportType'] -contains 'ConnectionReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
 		[System.Collections.generic.List[PSObject]]$ConnectionReportObject = @()
 		Write-Verbose ('Processing {0} connections.' -f $monitordata.Connections.Count)
 
@@ -216,37 +222,39 @@ function New-CTXAPI_Report {
 		}
 	}
 
-	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'ConnectionFailureReport') {
+	if (($PSBoundParameters['ReportType'] -contains 'ConnectionFailureReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
 		[System.Collections.generic.List[PSObject]]$ConnectionFailureReportObject = @()
 		foreach ($log in $monitordata.ConnectionFailureLogs) {
 			$session = $monitordata.Sessions | Where-Object { $_.SessionKey -eq $log.SessionKey }
 			$user = $monitordata.users | Where-Object { $_.id -like $Session.UserId }
 			$mashine = $monitordata.machines | Where-Object { $_.id -like $Session.MachineId }
-			$ConnectionFailureReportObject.Add([PSCustomObject]@{
-					User                       = $user.Upn
-					DnsName                    = $mashine.DnsName
-					CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
-					FailureDate                = if ($null -eq $session.FailureDate) { $null } else { Convert-UTCtoLocal -Time $session.FailureDate }
-					ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
-					IsInMaintenanceMode        = $log.IsInMaintenanceMode
-					PowerState                 = $PowerStateCode.($log.PowerState)
-					RegistrationState          = $RegistrationState.($log.RegistrationState)
-					FailureId                  = $ConnectionFailureType.($session.FailureId)
-					ConnectionState            = $ConnectionState.($session.ConnectionState)
-					LifecycleState             = $LifecycleState.($session.LifecycleState)
-					SessionType                = $SessionType.($session.SessionType)
+			try {
+				$ConnectionFailureReportObject.Add([PSCustomObject]@{
+						User                       = $user.Upn
+						DnsName                    = $mashine.DnsName
+						CurrentRegistrationState   = $RegistrationState.($mashine.CurrentRegistrationState)
+						FailureDate                = if ($null -eq $session.FailureDate) { $null } else { Convert-UTCtoLocal -Time $session.FailureDate }
+						ConnectionFailureEnumValue	= $SessionFailureCode.($log.ConnectionFailureEnumValue)
+						IsInMaintenanceMode        = $log.IsInMaintenanceMode
+						PowerState                 = $PowerStateCode.($log.PowerState)
+						RegistrationState          = $RegistrationState.($log.RegistrationState)
+						FailureId                  = $ConnectionFailureType.($session.FailureId)
+						ConnectionState            = $ConnectionState.($session.ConnectionState)
+						LifecycleState             = $LifecycleState.($session.LifecycleState)
+						SessionType                = $SessionType.($session.SessionType)
 
-				})
+					})
+			} catch { Write-Warning "Error processing connection failure log - $_" }
 		}
 	}
 
-	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'MachineFailureReport') {
+	if (($PSBoundParameters['ReportType'] -contains 'MachineFailureReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
 		[System.Collections.generic.List[PSObject]]$MachineFailureReportObject = @()
 
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] ""Fetching machine data from API"
-		$machines = Get-CTXAPI_Machine -APIHeader $APIHeader
-		foreach ($log in $mondata.MachineFailureLogs) {
-			$MonDataMachine = $mondata.machines | Where-Object { $_.id -like $log.MachineId }
+		$machines = $monitordata.machines
+		foreach ($log in $monitordata.MachineFailureLogs) {
+			$MonDataMachine = $monitordata.machines | Where-Object { $_.id -like $log.MachineId }
 			$MachinesFiltered = $machines | Where-Object {$_.Name -like $MonDataMachine.Name }
 			$MachineFailureReportObject.Add([PSCustomObject]@{
 					Name                         = $MonDataMachine.DnsName
@@ -271,7 +279,7 @@ function New-CTXAPI_Report {
 		}
 	}
 
-	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'SessionReport') {
+	if (($PSBoundParameters['ReportType'] -contains 'SessionReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
 		[System.Collections.generic.List[PSObject]]$SessionReportObject = @()
 		$sessionCount = $monitordata.sessions.Count
 		Write-Verbose ('Processing {0} sessions for SessionReport.' -f $sessionCount)
@@ -306,7 +314,7 @@ function New-CTXAPI_Report {
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) DONE] "
 	}
 
-	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'MachineReport') {
+	if (($PSBoundParameters['ReportType'] -contains 'MachineReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
 		[System.Collections.generic.List[PSObject]]$MachineReportObject = @()
 		$machineList = $monitordata.machines | Where-Object {$_.LifecycleState -eq 0}
 		$machineCount = $machineList.Count
@@ -355,22 +363,19 @@ function New-CTXAPI_Report {
 	}
 
 
-	$retun = @(
-		[PSCustomObject]@{
-			ResourceUtilizationReport = $ResourceUtilizationObject
-			ConnectionReport          = $ConnectionReportObject
-			ConnectionFailureReport   = $ConnectionFailureReportObject
-			MachineFailureReport      = $MachineFailureReportObject
-			SessionReport             = $SessionReportObject
-			MachineReport             = $MachineReportObject
-		}
-	)
+	$ReturnObject = [pscustomobject]@{}
+	if ($null -ne $ResourceUtilizationObject) { $ReturnObject | Add-Member -NotePropertyName 'ResourceUtilization' -NotePropertyValue $ResourceUtilizationObject }
+	if ($null -ne $ConnectionReportObject) { $ReturnObject | Add-Member -NotePropertyName 'ConnectionReport' -NotePropertyValue $ConnectionReportObject }
+	if ($null -ne $ConnectionFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'ConnectionFailureReport' -NotePropertyValue $ConnectionFailureReportObject }
+	if ($null -ne $MachineFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineFailureReport' -NotePropertyValue $MachineFailureReportObject }
+	if ($null -ne $SessionReportObject) { $ReturnObject | Add-Member -NotePropertyName 'SessionReport' -NotePropertyValue $SessionReportObject }
+	if ($null -ne $MachineReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineReport' -NotePropertyValue $MachineReportObject }
 
-	if ($PSBoundParameters.ContainsKey('ReportType') -and $Export -contains 'Host') {
+	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'Host') {
 		Write-Verbose 'Returning report object to host.'
-		return $retun
+		return $ReturnObject
 	}
-	if ($PSBoundParameters.ContainsKey('ReportType') -and $Export -contains 'Excel') {
+	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'Excel') {
 		$ReportFilename = "Citrix_Report-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
 		[string]$ExcelReportname = Join-Path -Path $ReportPath -ChildPath $ReportFilename
 		$ExcelOptions = @{
@@ -385,74 +390,77 @@ function New-CTXAPI_Report {
 			FreezePane       = '3'
 		}
 		Write-Verbose ('Exporting to Excel: {0}' -f $ExcelOptions.Path)
-		if ($retun.ResourceUtilizationReport) { 
-			Write-Verbose ('Exporting ResourceUtilizationReport with {0} rows' -f $retun.ResourceUtilizationReport.Count)
-			$retun.ResourceUtilizationReport | Export-Excel -Title ResourceUtilization -WorksheetName ResourceUtilization @ExcelOptions
+		
+
+		if ($ReturnObject.psobject.properties.name -contains 'ResourceUtilization') { 
+			Write-Verbose ('Exporting ResourceUtilization with {0} rows' -f $ReturnObject.ResourceUtilization.Count)
+			$ReturnObject.ResourceUtilization | Export-Excel -Title 'Resource Utilization' -WorksheetName 'ResourceUtilization' @ExcelOptions
 		}
-		if ($retun.ConnectionReport) { 
-			Write-Verbose ('Exporting ConnectionReport with {0} rows' -f $retun.ConnectionReport.Count)
-			$retun.ConnectionReport | Export-Excel -Title 'Connection Report' -WorksheetName 'Connection' @ExcelOptions
+		if ($ReturnObject.psobject.properties.name -contains 'ConnectionReport') { 
+			Write-Verbose ('Exporting ConnectionReport with {0} rows' -f $ReturnObject.ConnectionReport.Count)
+			$ReturnObject.ConnectionReport | Export-Excel -Title 'Connection Report' -WorksheetName 'Connection' @ExcelOptions
 		}
-		if ($retun.ConnectionFailureReport) { 
-			Write-Verbose ('Exporting ConnectionFailureReport with {0} rows' -f $retun.ConnectionFailureReport.Count)
-			$retun.ConnectionFailureReport | Export-Excel -Title 'Connection Failure Report' -WorksheetName 'ConnectionFailure' @ExcelOptions
+		if ($ReturnObject.psobject.properties.name -contains 'ConnectionFailureReport') { 
+			Write-Verbose ('Exporting ConnectionFailureReport with {0} rows' -f $ReturnObject.ConnectionFailureReport.Count)
+			$ReturnObject.ConnectionFailureReport | Export-Excel -Title 'Connection Failure Report' -WorksheetName 'ConnectionFailure' @ExcelOptions
 		}
-		if ($retun.MachineFailureReport) { 
-			Write-Verbose ('Exporting MachineFailureReport with {0} rows' -f $retun.MachineFailureReport.Count)
-			$retun.MachineFailureReport | Export-Excel -Title 'Machine Failure Report' -WorksheetName 'MachineFailure' @ExcelOptions
+		if ($ReturnObject.psobject.properties.name -contains 'MachineFailureReport') { 
+			Write-Verbose ('Exporting MachineFailureReport with {0} rows' -f $ReturnObject.MachineFailureReport.Count)
+			$ReturnObject.MachineFailureReport | Export-Excel -Title 'Machine Failure Report' -WorksheetName 'MachineFailure' @ExcelOptions
 		}
-		if ($retun.SessionReport) { 
-			Write-Verbose ('Exporting SessionReport with {0} rows' -f $retun.SessionReport.Count)
-			$retun.SessionReport | Export-Excel -Title 'Session Report' -WorksheetName 'Session' @ExcelOptions
+		if ($ReturnObject.psobject.properties.name -contains 'SessionReport') { 
+			Write-Verbose ('Exporting SessionReport with {0} rows' -f $ReturnObject.SessionReport.Count)
+			$ReturnObject.SessionReport | Export-Excel -Title 'Session Report' -WorksheetName 'Session' @ExcelOptions
 		}
-		if ($retun.MachineReport) { 
-			Write-Verbose ('Exporting MachineReport with {0} rows' -f $retun.MachineReport.Count)
-			$retun.MachineReport | Export-Excel -Title 'Machine Report' -WorksheetName 'Machine' @ExcelOptions
+		if ($ReturnObject.psobject.properties.name -contains 'MachineReport') { 
+			Write-Verbose ('Exporting MachineReport with {0} rows' -f $ReturnObject.MachineReport.Count)
+			$ReturnObject.MachineReport | Export-Excel -Title 'Machine Report' -WorksheetName 'Machine' @ExcelOptions
 		}
 	}
 
-	if ($PSBoundParameters.ContainsKey('ReportType') -and $Export -contains 'HTML') {
+	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'HTML') {
 		if ($null -eq $ReportPath) {
 			Write-Warning 'HTML export failed. ReportPath is null or empty. Please specify a valid path using -ReportPath.'
 			return
 		}
 		try {
+			$HeadingText = "$($APIHeader.CustomerName) Citrix Report - Generated on $(Get-Date -Format 'yyyy-MM-dd HH:mm')"
 			$ReportFilename = "Citrix_Report-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 			[System.IO.FileInfo]$HTMLReportname = Join-Path -Path $ReportPath -ChildPath $ReportFilename
 			New-HTML -TitleText "$($APIHeader.CustomerName) Citrix Report" -FilePath $HTMLReportname.fullname -ShowHTML {
 				New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
-				if ($retun.ResourceUtilizationReport ) {
+				if ($ReturnObject.psobject.properties.name -contains 'ResourceUtilization') {
 					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Resource Utilization Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.ResourceUtilizationReport  }
+						New-HTMLSection -HeaderText 'Resource Utilization Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.ResourceUtilization  }
 					}
 				}
-				if ($retun.ConnectionReport) {
+				if ($ReturnObject.psobject.properties.name -contains 'ConnectionReport') {
 					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Connection Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.ConnectionReport }
+						New-HTMLSection -HeaderText 'Connection Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.ConnectionReport }
 					}
 				}
-				if ($retun.ConnectionFailureReport) {
+				if ($ReturnObject.psobject.properties.name -contains 'ConnectionFailureReport') {
 					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Connection Failures Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.ConnectionFailureReport }
+						New-HTMLSection -HeaderText 'Connection Failures Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.ConnectionFailureReport }
 					}
 				}
-				if ($retun.MachineFailureReport) {
+				if ($ReturnObject.psobject.properties.name -contains 'MachineFailureReport') {
 					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Machine Failures Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.MachineFailureReport }
+						New-HTMLSection -HeaderText 'Machine Failures Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.MachineFailureReport }
 					}
 				}
-				if ($retun.MachineReport) {
+				if ($ReturnObject.psobject.properties.name -contains 'MachineReport') {
 					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Machine Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.MachineReport }
+						New-HTMLSection -HeaderText 'Machine Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.MachineReport }
 					}
 				}
-				if ($retun.SessionReport) {
+				if ($ReturnObject.psobject.properties.name -contains 'SessionReport') {
 					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Session Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.SessionReport }
+						New-HTMLSection -HeaderText 'Session Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.SessionReport }
 					}
 				}
 			}
 			Write-Verbose ('HTML report generated at: {0}' -f $HTMLReportname.fullname)
-		} catch { Write-Warning "HTML export failed. $($Error[0])" }
+		} catch { Write-Warning "HTML export failed. $($_)" }
 	}
 } #end Function
