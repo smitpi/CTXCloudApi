@@ -91,11 +91,11 @@ function New-CTXAPI_Report {
 		[Parameter(Mandatory = $false, ParameterSetName = 'Got odata')]
 		[PSTypeName('CTXMonitorData')]$MonitorData,
 		[ValidateNotNullOrEmpty()]
-		[Parameter(Mandatory = $false)]
+		[Parameter(Mandatory = $false, ParameterSetName = 'Needdata')]
 		[int]$LastHours = 24,
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[ValidateSet('ConnectionReport', 'ResourceUtilization', 'ConnectionFailureReport', 'MachineFailureReport', 'All')]
+		[ValidateSet('ConnectionReport', 'ResourceUtilization', 'ConnectionFailureReport', 'MachineFailureReport', 'SessionReport', 'MachineReport', 'All')]
 		[string[]]$ReportType,
 		[Parameter(Mandatory = $false)]
 		[ValidateSet('Host', 'Excel', 'HTML')]
@@ -108,9 +108,11 @@ function New-CTXAPI_Report {
 	if ($PSBoundParameters.ContainsKey('MonitorData')) {
 		Write-Verbose 'Using provided MonitorData.'
 		$monitordata = $MonitorData
+		Write-Verbose ('MonitorData contains: Sessions={0}, Connections={1}, Machines={2}, Users={3}' -f $monitordata.sessions.Count, $monitordata.connections.Count, $monitordata.machines.Count, $monitordata.users.Count)
 	} else {
 		Write-Verbose "Fetching MonitorData using Get-CTXAPI_MonitorData for last $LastHours hours."
 		$monitordata = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours $LastHours
+		Write-Verbose ('Fetched MonitorData: Sessions={0}, Connections={1}, Machines={2}, Users={3}' -f $monitordata.sessions.Count, $monitordata.connections.Count, $monitordata.machines.Count, $monitordata.users.Count)
 	}
 
 	if ($PSBoundParameters.ContainsKey('ReportType') -and $ReportType -contains 'ResourceUtilization') {
@@ -214,7 +216,6 @@ function New-CTXAPI_Report {
 		}
 	}
 
-
 	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'ConnectionFailureReport') {
 		[System.Collections.generic.List[PSObject]]$ConnectionFailureReportObject = @()
 		foreach ($log in $monitordata.ConnectionFailureLogs) {
@@ -270,6 +271,89 @@ function New-CTXAPI_Report {
 		}
 	}
 
+	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'SessionReport') {
+		[System.Collections.generic.List[PSObject]]$SessionReportObject = @()
+		$sessionCount = $monitordata.sessions.Count
+		Write-Verbose ('Processing {0} sessions for SessionReport.' -f $sessionCount)
+		$sessionIndex = 0
+		foreach ($session in $monitordata.sessions) {
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($sessionIndex + 1) of $($sessionCount)"
+			$sessionIndex++
+			$connections = $monitordata.connections | Where-Object { $_.SessionKey -like $session.SessionKey }
+			$sessionmetrics = $monitordata.SessionMetrics | Where-Object { $_.SessionId -like $session.SessionKey }
+			$machine = $monitordata.machines | Where-Object { $_.Id -like $session.MachineId }
+			$user = $monitordata.users | Where-Object { $_.Id -like $session.UserId }
+
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Doing icartt and latency calculations for session with"
+			$IcaRttMS = $sessionmetrics | Measure-Object -Property IcaRttMS -AllStats
+			$IcaLatency = $sessionmetrics | Measure-Object -Property IcaLatency -AllStats
+
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Adding to object"
+			$SessionReportObject.Add([PSCustomObject]@{
+					MachineName         = $machine.Name
+					UserName            = $user.Upn
+					SessionStartTime    = if ($null -eq $session.StartDate) { $null } else { Convert-UTCtoLocal -Time $session.StartDate }
+					SessionEndTime      = if ($null -eq $session.EndDate) { $null } else { Convert-UTCtoLocal -Time $session.EndDate }
+					LogOnDuration       = $session.LogOnDuration
+					ClientLogOnDuration = $session.ClientLogOnDuration
+					FailureId           = $SessionFailureCode.($session.FailureId)
+					ConnectionState     = $ConnectionState.($session.ConnectionState)
+					BrokeringDuration   = $connections.BrokeringDuration
+					IcaRttMS            = [math]::Round($IcaRttMS.Average)
+					IcaLatency          = [math]::Round($IcaLatency.Average)
+				}) #PSList
+		}
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) DONE] "
+	}
+
+	if ($psboundparameters.containskey('ReportType') -and $ReportType -contains 'MachineReport') {
+		[System.Collections.generic.List[PSObject]]$MachineReportObject = @()
+		$machineList = $monitordata.machines | Where-Object {$_.LifecycleState -eq 0}
+		$machineCount = $machineList.Count
+		Write-Verbose ('Processing {0} machines for MachineReport.' -f $machineCount)
+		$machineIndex = 0
+		foreach ($machine in $machineList) {
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($machineIndex + 1) of $($machineCount)"
+			$machineIndex++
+			$resourceUtilization = $monitordata.ResourceUtilizationSummary | Where-Object { $_.MachineId -like $machine.id }
+			$catalog = $monitordata.catalogs | Where-Object { $_.Id -like $machine.CatalogId }
+			$desktopGroup = $monitordata.DesktopGroups | Where-Object { $_.Id -like $machine.DesktopGroupId }
+
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Doing icartt and latency calculations for session with"
+			$AvgPercentCpu = $resourceUtilization | Measure-Object -Property AvgPercentCpu -Average
+			$AvgUsedMemory = $resourceUtilization | Measure-Object -Property AvgUsedMemory -Average
+			$AvgIcaRttInMs = $resourceUtilization | Measure-Object -Property AvgIcaRttInMs -Average
+			$AvgLogOnDurationInMs = $resourceUtilization | Measure-Object -Property AvgLogOnDurationInMs -Average
+			$UptimeInMinutes = $resourceUtilization | Measure-Object -Property UptimeInMinutes -Average
+			$UpTimeWithoutSessionInMinutes = $resourceUtilization | Measure-Object -Property UpTimeWithoutSessionInMinutes -Average
+			$AvgDiskLatency = $resourceUtilization | Measure-Object -Property AvgDiskLatency -Average
+
+			Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] Adding to object"
+
+			$MachineReportObject.Add([PSCustomObject]@{
+					Name                          = $machine.Name
+					IsAssigned                    = $machine.IsAssigned
+					IsInMaintenanceMode           = $machine.IsInMaintenanceMode
+					AssociatedUserUPNs            = $machine.AssociatedUserUPNs
+					CurrentRegistrationState      = $MachineDeregistration.($machine.CurrentRegistrationState)
+					CurrentPowerState             = $PowerStateCode.($machine.CurrentPowerState)
+					CurrentSessionCount           = $machine.CurrentSessionCount
+					FaultState                    = $MachineFaultStateCode.($machine.FaultState)
+					CatalogName                   = $catalog.Name
+					DesktopGroupName              = $desktopGroup.Name	
+					AvgPercentCpu                 = [math]::Round($AvgPercentCpu.Average)
+					AvgUsedMemory                 = [math]::Round($AvgUsedMemory.Average)
+					AvgIcaRttInMs                 = [math]::Round($AvgIcaRttInMs.Average)
+					AvgLogOnDurationInMs          = [math]::Round($AvgLogOnDurationInMs.Average)
+					UptimeInMinutes               = [math]::Round($UptimeInMinutes.Average)
+					UpTimeWithoutSessionInMinutes = [math]::Round($UpTimeWithoutSessionInMinutes.Average)
+					AvgDiskLatency                = [math]::Round($AvgDiskLatency.Average)
+				}) #PSList
+		}
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) DONE] "
+
+	}
+
 
 	$retun = @(
 		[PSCustomObject]@{
@@ -277,15 +361,17 @@ function New-CTXAPI_Report {
 			ConnectionReport          = $ConnectionReportObject
 			ConnectionFailureReport   = $ConnectionFailureReportObject
 			MachineFailureReport      = $MachineFailureReportObject
+			SessionReport             = $SessionReportObject
+			MachineReport             = $MachineReportObject
 		}
 	)
 
-
-	if ($psboundparameters.containskey('ReportType') -and $Export -contains 'Host') {
+	if ($PSBoundParameters.ContainsKey('ReportType') -and $Export -contains 'Host') {
+		Write-Verbose 'Returning report object to host.'
 		return $retun
 	}
-	if ($psboundparameters.containskey('ReportType') -and $Export -contains 'Excel') {
-		$ReportFilename =  "Citrix_Report-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
+	if ($PSBoundParameters.ContainsKey('ReportType') -and $Export -contains 'Excel') {
+		$ReportFilename = "Citrix_Report-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.xlsx'
 		[string]$ExcelReportname = Join-Path -Path $ReportPath -ChildPath $ReportFilename
 		$ExcelOptions = @{
 			Path             = $ExcelReportname
@@ -300,16 +386,28 @@ function New-CTXAPI_Report {
 		}
 		Write-Verbose ('Exporting to Excel: {0}' -f $ExcelOptions.Path)
 		if ($retun.ResourceUtilizationReport) { 
+			Write-Verbose ('Exporting ResourceUtilizationReport with {0} rows' -f $retun.ResourceUtilizationReport.Count)
 			$retun.ResourceUtilizationReport | Export-Excel -Title ResourceUtilization -WorksheetName ResourceUtilization @ExcelOptions
 		}
 		if ($retun.ConnectionReport) { 
-			$retun.ConnectionReport | Export-Excel -Title Connection -WorksheetName Connection @ExcelOptions
+			Write-Verbose ('Exporting ConnectionReport with {0} rows' -f $retun.ConnectionReport.Count)
+			$retun.ConnectionReport | Export-Excel -Title 'Connection Report' -WorksheetName 'Connection' @ExcelOptions
 		}
 		if ($retun.ConnectionFailureReport) { 
-			$retun.ConnectionFailureReport | Export-Excel -Title ConnectionFailure -WorksheetName ConnectionFailure @ExcelOptions
+			Write-Verbose ('Exporting ConnectionFailureReport with {0} rows' -f $retun.ConnectionFailureReport.Count)
+			$retun.ConnectionFailureReport | Export-Excel -Title 'Connection Failure Report' -WorksheetName 'ConnectionFailure' @ExcelOptions
 		}
 		if ($retun.MachineFailureReport) { 
-			$retun.MachineFailureReport | Export-Excel -Title MachineFailure -WorksheetName MachineFailure @ExcelOptions
+			Write-Verbose ('Exporting MachineFailureReport with {0} rows' -f $retun.MachineFailureReport.Count)
+			$retun.MachineFailureReport | Export-Excel -Title 'Machine Failure Report' -WorksheetName 'MachineFailure' @ExcelOptions
+		}
+		if ($retun.SessionReport) { 
+			Write-Verbose ('Exporting SessionReport with {0} rows' -f $retun.SessionReport.Count)
+			$retun.SessionReport | Export-Excel -Title 'Session Report' -WorksheetName 'Session' @ExcelOptions
+		}
+		if ($retun.MachineReport) { 
+			Write-Verbose ('Exporting MachineReport with {0} rows' -f $retun.MachineReport.Count)
+			$retun.MachineReport | Export-Excel -Title 'Machine Report' -WorksheetName 'Machine' @ExcelOptions
 		}
 	}
 
@@ -319,7 +417,7 @@ function New-CTXAPI_Report {
 			return
 		}
 		try {
-			$ReportFilename =  "Citrix_Report-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
+			$ReportFilename = "Citrix_Report-$($APIHeader.CustomerName)-" + (Get-Date -Format yyyy.MM.dd-HH.mm) + '.html'
 			[System.IO.FileInfo]$HTMLReportname = Join-Path -Path $ReportPath -ChildPath $ReportFilename
 			New-HTML -TitleText "$($APIHeader.CustomerName) Citrix Report" -FilePath $HTMLReportname.fullname -ShowHTML {
 				New-HTMLHeading -Heading h1 -HeadingText $HeadingText -Color Black
@@ -341,6 +439,16 @@ function New-CTXAPI_Report {
 				if ($retun.MachineFailureReport) {
 					New-HTMLSection @SectionSettings -Content {
 						New-HTMLSection -HeaderText 'Machine Failures Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.MachineFailureReport }
+					}
+				}
+				if ($retun.MachineReport) {
+					New-HTMLSection @SectionSettings -Content {
+						New-HTMLSection -HeaderText 'Machine Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.MachineReport }
+					}
+				}
+				if ($retun.SessionReport) {
+					New-HTMLSection @SectionSettings -Content {
+						New-HTMLSection -HeaderText 'Session Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $retun.SessionReport }
 					}
 				}
 			}
