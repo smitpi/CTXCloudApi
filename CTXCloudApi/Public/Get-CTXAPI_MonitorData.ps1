@@ -150,7 +150,7 @@ function Get-CTXAPI_MonitorData {
     $Applications = $null
     $Catalogs = $null
     $ConnectionFailureLogs = $null
-    $ConnectionFailureCategories =$null
+    $ConnectionFailureCategories = $null
     $Connections = $null
     $DesktopGroups = $null
     $DesktopOSDesktopSummaries = $null
@@ -195,6 +195,7 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ResourceUtilization')) {$ResourceUtilization = Export-Odata -URI ('https://api.cloud.com/monitorodata/ResourceUtilization?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ResourceUtilizationSummary')) {$ResourceUtilizationSummary = Export-Odata -URI ('https://api.cloud.com/monitorodata/ResourceUtilizationSummary?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ServerOSDesktopSummaries')) {$ServerOSDesktopSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/ServerOSDesktopSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
+    ##TODO - create a report on SessionActivitySummaries
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'SessionActivitySummaries')) {$SessionActivitySummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/SessionActivitySummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'SessionAutoReconnects')) {$SessionAutoReconnects = Export-Odata -URI ('https://api.cloud.com/monitorodata/SessionAutoReconnects?$filter=(CreatedDate ge ' + $EndDateStr + ' and CreatedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Sessions')) {$Sessions = Export-Odata -URI ('https://api.cloud.com/monitorodata/Sessions?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}

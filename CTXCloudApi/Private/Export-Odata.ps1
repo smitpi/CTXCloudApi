@@ -7,6 +7,7 @@
     [System.Collections.generic.List[PSObject]]$MonitorDataObject = @()
     $NextLink = $URI
 
+    ##TODO - add page count 
     $uriObj = [Uri]($URI -replace '\\', '/')
     $resourceName = $uriObj.Segments[-1].TrimEnd('/')
     Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Exporting OData resource: `t`t$resourceName"
