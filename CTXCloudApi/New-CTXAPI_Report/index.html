@@ -843,6 +843,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#needdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Needdata
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1036,6 +1047,17 @@
   
     <nav class="md-nav" aria-label="OUTPUTS">
       <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pscustomobject-containing-one-or-more-of-the-following-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSCustomObject containing one or more of the following properties
+      
+    </span>
+  </a>
+  
+</li>
         
           <li class="md-nav__item">
   <a href="#systemobject" class="md-nav__link">
@@ -1207,6 +1229,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#needdata" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Needdata
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1402,6 +1435,17 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
+  <a href="#pscustomobject-containing-one-or-more-of-the-following-properties" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        PSCustomObject containing one or more of the following properties
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
   <a href="#systemobject" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -1465,14 +1509,18 @@
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="got-odata">Got odata</h3>
 <div class="highlight"><pre><span></span><code>New-CTXAPI_Report -APIHeader &lt;CTXAPIHeaderObject&gt; -ReportType &lt;string[]&gt;
- [-MonitorData &lt;CTXMonitorData&gt;] [-LastHours &lt;int&gt;] [-Export &lt;string&gt;] [-ReportPath &lt;DirectoryInfo&gt;]
+ [-MonitorData &lt;CTXMonitorData&gt;] [-Export &lt;string&gt;] [-ReportPath &lt;DirectoryInfo&gt;]
  [&lt;CommonParameters&gt;]
+</code></pre></div>
+<h3 id="needdata">Needdata</h3>
+<div class="highlight"><pre><span></span><code>New-CTXAPI_Report -APIHeader &lt;CTXAPIHeaderObject&gt; -ReportType &lt;string[]&gt; [-LastHours &lt;int&gt;]
+ [-Export &lt;string&gt;] [-ReportPath &lt;DirectoryInfo&gt;] [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="aliases">ALIASES</h2>
 <p>This cmdlet has the following aliases,
   {{Insert list of aliases}}</p>
 <h2 id="description">DESCRIPTION</h2>
-<p>New-CTXAPI_Report generates detailed Citrix Cloud monitoring reports, including resource utilization, connection activity, connection failures, and machine failures.
+<p>New-CTXAPI_Report generates detailed Citrix Cloud monitoring reports, including resource utilization, connection activity, connection failures, session reports, machine failures, and login duration analytics.
 The function can output reports to the host, export to Excel, or create a styled HTML report with embedded branding.
 Data can be sourced from a provided MonitorData object or fetched live via API.</p>
 <h2 id="examples">EXAMPLES</h2>
@@ -1480,11 +1528,11 @@ Data can be sourced from a provided MonitorData object or fetched live via API.<
 <p>New-CTXAPI_Report -APIHeader $header -ReportType All -Export HTML -ReportPath C:\Reports</p>
 <p>Generates all available reports and exports them as a styled HTML file to C:\Reports.</p>
 <h3 id="example-2">EXAMPLE 2</h3>
-<p>New-CTXAPI_Report -APIHeader $header -ReportType ResourceUtilization -Export Excel</p>
-<p>Exports only the resource utilization report to Excel in the default temp directory.</p>
+<p>New-CTXAPI_Report -APIHeader $header -ReportType LoginDurationReport -Export Excel -ReportPath C:\Reports</p>
+<p>Generates per-hour and total login duration reports and exports them to Excel.</p>
 <h3 id="example-3">EXAMPLE 3</h3>
-<p>New-CTXAPI_Report -APIHeader $header -MonitorData $data -ReportType ConnectionReport</p>
-<p>Outputs the connection report to the host using pre-fetched monitoring data.</p>
+<p>New-CTXAPI_Report -APIHeader $header -ReportType SessionReport -Export Host</p>
+<p>Returns session analytics to the host (console output).</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-apiheader">-APIHeader</h3>
 <p>The authentication header object for Citrix Cloud API requests.
@@ -1531,7 +1579,7 @@ Used only if MonitorData is not provided.</p>
 <span class="nt">SupportsWildcards</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
 <span class="nt">ParameterSets</span><span class="p">:</span>
-<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">(All)</span>
+<span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">Name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Needdata</span>
 <span class="w">  </span><span class="nt">Position</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">Named</span>
 <span class="w">  </span><span class="nt">IsRequired</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="w">  </span><span class="nt">ValueFromPipeline</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
@@ -1581,7 +1629,13 @@ Must exist.</p>
 </code></pre></div>
 <h3 id="-reporttype">-ReportType</h3>
 <p>Specifies which report(s) to generate.
-Valid values: ConnectionReport, ResourceUtilization, ConnectionFailureReport, MachineFailureReport, All.</p>
+Valid values:
+ - ConnectionFailureReport: Details on failed connection attempts.
+ - MachineFailureReport: Details on machine failures and fault states.
+ - SessionReport: Session-level analytics and metrics.
+ - MachineReport: Machine resource utilization and status.
+ - LoginDurationReport: Per-hour and total login duration breakdowns.
+ - All: All available reports.</p>
 <div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String[]</span>
 <span class="nt">DefaultValue</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="nt">SupportsWildcards</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
@@ -1604,9 +1658,13 @@ Valid values: ConnectionReport, ResourceUtilization, ConnectionFailureReport, Ma
 <a href="https://go.microsoft.com/fwlink/?LinkID=113216">about_CommonParameters</a>.</p>
 <h2 id="inputs">INPUTS</h2>
 <h2 id="outputs">OUTPUTS</h2>
+<h3 id="pscustomobject-containing-one-or-more-of-the-following-properties">PSCustomObject containing one or more of the following properties</h3>
+<p>{{ Fill in the Description }}</p>
 <h3 id="systemobject">System.Object</h3>
 <p>{{ Fill in the Description }}</p>
 <h2 id="notes">NOTES</h2>
+<p>Requires the ImportExcel and PSHTML modules for Excel and HTML export functionality.
+ReportPath must exist for file exports.</p>
 <h2 id="related-links">RELATED LINKS</h2>
 <p>{{ Fill in the related links here }}</p>
 
