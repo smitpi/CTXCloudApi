@@ -3,7 +3,7 @@
 # =========================
 # AllocationType
 # =========================
-$script:AllocationType = [ordered]@{
+$script:AllocationType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Static'
     2 = 'Random'
@@ -13,7 +13,7 @@ $script:AllocationType = [ordered]@{
 # =========================
 # SessionFailureCode
 # =========================
-$script:SessionFailureCode = [ordered]@{
+$script:SessionFailureCode = [PSCustomObject]@{
     0   = 'Unknown'
     1   = 'None'
     2   = 'SessionPreparation'
@@ -47,7 +47,7 @@ $script:SessionFailureCode = [ordered]@{
 # =========================
 # CatalogType
 # =========================
-$script:CatalogType = [ordered]@{
+$script:CatalogType = [PSCustomObject]@{
     0 = 'ThinCloned'
     1 = 'SingleImage'
     2 = 'PowerManaged'
@@ -60,7 +60,7 @@ $script:CatalogType = [ordered]@{
 # =========================
 # ConditionTargetType
 # =========================
-$script:ConditionTargetType = [ordered]@{
+$script:ConditionTargetType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Site'
     2 = 'Controller'
@@ -74,7 +74,7 @@ $script:ConditionTargetType = [ordered]@{
 # =========================
 # ConnectionFailureType
 # =========================
-$script:ConnectionFailureType = [ordered]@{
+$script:ConnectionFailureType = [PSCustomObject]@{
     0 = 'None'
     1 = 'ClientConnectionFailure'
     2 = 'MachineFailure'
@@ -86,7 +86,7 @@ $script:ConnectionFailureType = [ordered]@{
 # =========================
 # ConnectionState
 # =========================
-$script:ConnectionState = [ordered]@{
+$script:ConnectionState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Connected'
     2 = 'Disconnected'
@@ -102,7 +102,7 @@ $script:ConnectionState = [ordered]@{
 # =========================
 # DeliveryType
 # =========================
-$script:DeliveryType = [ordered]@{
+$script:DeliveryType = [PSCustomObject]@{
     0 = 'DesktopsOnly'
     1 = 'AppsOnly'
     2 = 'DesktopsAndApps'
@@ -111,7 +111,7 @@ $script:DeliveryType = [ordered]@{
 # =========================
 # MachineDeregistration
 # =========================
-$script:MachineDeregistration = [ordered]@{
+$script:MachineDeregistration = [PSCustomObject]@{
     0    = 'AgentShutdown'
     1    = 'AgentSuspended'
     2    = 'AgentRequested'
@@ -152,7 +152,7 @@ $script:MachineDeregistration = [ordered]@{
 # =========================
 # DesktopKind
 # =========================
-$script:DesktopKind = [ordered]@{
+$script:DesktopKind = [PSCustomObject]@{
     0 = 'Private'
     1 = 'Shared'
 }
@@ -160,7 +160,7 @@ $script:DesktopKind = [ordered]@{
 # =========================
 # DesktopType
 # =========================
-$script:DesktopType = [ordered]@{
+$script:DesktopType = [PSCustomObject]@{
     0 = 'None'
     1 = 'Vdi'
     2 = 'RemotePc'
@@ -171,7 +171,7 @@ $script:DesktopType = [ordered]@{
 # =========================
 # FailureCategory
 # =========================
-$script:FailureCategory = [ordered]@{
+$script:FailureCategory = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Connection'
     2 = 'Machine'
@@ -180,7 +180,7 @@ $script:FailureCategory = [ordered]@{
 # =========================
 # LifecycleState
 # =========================
-$script:LifecycleState = [ordered]@{
+$script:LifecycleState = [PSCustomObject]@{
     0 = 'Active'
     1 = 'Deleted'
     2 = 'RequiresResolution'
@@ -190,7 +190,7 @@ $script:LifecycleState = [ordered]@{
 # =========================
 # LogonBreakdownType
 # =========================
-$script:LogonBreakdownType = [ordered]@{
+$script:LogonBreakdownType = [PSCustomObject]@{
     0 = 'None'
     1 = 'UsersLastSession'
     2 = 'UsersSessionAverage'
@@ -200,7 +200,7 @@ $script:LogonBreakdownType = [ordered]@{
 # =========================
 # LogOnStep
 # =========================
-$script:LogOnStep = [ordered]@{
+$script:LogOnStep = [PSCustomObject]@{
     0 = 'Total'
     1 = 'Brokering'
     2 = 'VMStart'
@@ -215,7 +215,7 @@ $script:LogOnStep = [ordered]@{
 # =========================
 # MachineFaultStateCode
 # =========================
-$script:MachineFaultStateCode = [ordered]@{
+$script:MachineFaultStateCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'None'
     2 = 'FailedToStart'
@@ -228,7 +228,7 @@ $script:MachineFaultStateCode = [ordered]@{
 # =========================
 # MachineRole
 # =========================
-$script:MachineRole = [ordered]@{
+$script:MachineRole = [PSCustomObject]@{
     0 = 'Vda'
     1 = 'Ddc'
     2 = 'Both'
@@ -237,7 +237,7 @@ $script:MachineRole = [ordered]@{
 # =========================
 # PowerActionReasonCode
 # =========================
-$script:PowerActionReasonCode = [ordered]@{
+$script:PowerActionReasonCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Reset'
     2 = 'Pvd'
@@ -252,7 +252,7 @@ $script:PowerActionReasonCode = [ordered]@{
 # =========================
 # PowerActionTypeCode
 # =========================
-$script:PowerActionTypeCode = [ordered]@{
+$script:PowerActionTypeCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'PowerOn'
     2 = 'PowerOff'
@@ -266,7 +266,7 @@ $script:PowerActionTypeCode = [ordered]@{
 # =========================
 # ProvisioningType
 # =========================
-$script:ProvisioningType = [ordered]@{
+$script:ProvisioningType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'MCS'
     2 = 'PVS'
@@ -276,7 +276,7 @@ $script:ProvisioningType = [ordered]@{
 # =========================
 # PowerStateCode
 # =========================
-$script:PowerStateCode = [ordered]@{
+$script:PowerStateCode = [PSCustomObject]@{
     0  = 'Unknown'
     1  = 'Unavailable'
     2  = 'Off'
@@ -294,21 +294,21 @@ $script:PowerStateCode = [ordered]@{
 # =========================
 # PersistentUserChangesType
 # =========================
-$script:PersistentUserChangesType = [ordered]@{
+$script:PersistentUserChangesType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Discard'
     2 = 'OnLocal'
     3 = 'OnPvd'
 }
 
-$script:AllocationType = [ordered]@{
+$script:AllocationType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Static'
     2 = 'Random'
     3 = 'Permanent'
 }
 
-$script:SessionFailureCode = [ordered]@{
+$script:SessionFailureCode = [PSCustomObject]@{
     0   = 'Unknown'
     1   = 'None'
     2   = 'SessionPreparation'
@@ -339,7 +339,7 @@ $script:SessionFailureCode = [ordered]@{
     101 = 'MachineNotFunctional'
 }
 
-$script:CatalogType = [ordered]@{
+$script:CatalogType = [PSCustomObject]@{
     0 = 'ThinCloned'
     1 = 'SingleImage'
     2 = 'PowerManaged'
@@ -349,7 +349,7 @@ $script:CatalogType = [ordered]@{
     6 = 'PvsPvd'
 }
 
-$script:ConditionTargetType = [ordered]@{
+$script:ConditionTargetType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Site'
     2 = 'Controller'
@@ -360,7 +360,7 @@ $script:ConditionTargetType = [ordered]@{
     7 = 'User'
 }
 
-$script:ConnectionFailureType = [ordered]@{
+$script:ConnectionFailureType = [PSCustomObject]@{
     0 = 'None'
     1 = 'ClientConnectionFailure'
     2 = 'MachineFailure'
@@ -369,7 +369,7 @@ $script:ConnectionFailureType = [ordered]@{
     5 = 'Configuration'
 }
 
-$script:ConnectionState = [ordered]@{
+$script:ConnectionState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Connected'
     2 = 'Disconnected'
@@ -382,13 +382,13 @@ $script:ConnectionState = [ordered]@{
     9 = 'Pending'
 }
 
-$script:DeliveryType = [ordered]@{
+$script:DeliveryType = [PSCustomObject]@{
     0 = 'DesktopsOnly'
     1 = 'AppsOnly'
     2 = 'DesktopsAndApps'
 }
 
-$script:MachineDeregistration = [ordered]@{
+$script:MachineDeregistration = [PSCustomObject]@{
     0    = 'AgentShutdown'
     1    = 'AgentSuspended'
     2    = 'AgentRequested'
@@ -426,12 +426,12 @@ $script:MachineDeregistration = [ordered]@{
     1002 = 'Unknown'
 }
 
-$script:DesktopKind = [ordered]@{
+$script:DesktopKind = [PSCustomObject]@{
     0 = 'Private'
     1 = 'Shared'
 }
 
-$script:DesktopType = [ordered]@{
+$script:DesktopType = [PSCustomObject]@{
     0 = 'None'
     1 = 'Vdi'
     2 = 'RemotePc'
@@ -439,27 +439,27 @@ $script:DesktopType = [ordered]@{
     4 = 'Unknown'
 }
 
-$script:FailureCategory = [ordered]@{
+$script:FailureCategory = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Connection'
     2 = 'Machine'
 }
 
-$script:LifecycleState = [ordered]@{
+$script:LifecycleState = [PSCustomObject]@{
     0 = 'Active'
     1 = 'Deleted'
     2 = 'RequiresResolution'
     3 = 'Stub'
 }
 
-$script:LogonBreakdownType = [ordered]@{
+$script:LogonBreakdownType = [PSCustomObject]@{
     0 = 'None'
     1 = 'UsersLastSession'
     2 = 'UsersSessionAverage'
     3 = 'DesktopGroupAverage'
 }
 
-$script:LogOnStep = [ordered]@{
+$script:LogOnStep = [PSCustomObject]@{
     0 = 'Total'
     1 = 'Brokering'
     2 = 'VMStart'
@@ -471,7 +471,7 @@ $script:LogOnStep = [ordered]@{
     8 = 'Interactive'
 }
 
-$script:MachineFaultStateCode = [ordered]@{
+$script:MachineFaultStateCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'None'
     2 = 'FailedToStart'
@@ -481,13 +481,13 @@ $script:MachineFaultStateCode = [ordered]@{
     6 = 'VirtualMachineNotFound'
 }
 
-$script:MachineRole = [ordered]@{
+$script:MachineRole = [PSCustomObject]@{
     0 = 'Vda'
     1 = 'Ddc'
     2 = 'Both'
 }
 
-$script:PowerActionReasonCode = [ordered]@{
+$script:PowerActionReasonCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Reset'
     2 = 'Pvd'
@@ -499,7 +499,7 @@ $script:PowerActionReasonCode = [ordered]@{
     8 = 'IdlePool'
 }
 
-$script:PowerActionTypeCode = [ordered]@{
+$script:PowerActionTypeCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'PowerOn'
     2 = 'PowerOff'
@@ -510,14 +510,14 @@ $script:PowerActionTypeCode = [ordered]@{
     7 = 'Resume'
 }
 
-$script:ProvisioningType = [ordered]@{
+$script:ProvisioningType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'MCS'
     2 = 'PVS'
     3 = 'Manual'
 }
 
-$script:PowerStateCode = [ordered]@{
+$script:PowerStateCode = [PSCustomObject]@{
     0  = 'Unknown'
     1  = 'Unavailable'
     2  = 'Off'
@@ -532,7 +532,7 @@ $script:PowerStateCode = [ordered]@{
     11 = 'VirtualMachineNotFound'
 }
 
-$script:PersistentUserChangesType = [ordered]@{
+$script:PersistentUserChangesType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Discard'
     2 = 'OnLocal'
@@ -541,7 +541,7 @@ $script:PersistentUserChangesType = [ordered]@{
 # =========================
 # RegistrationState
 # =========================
-$script:RegistrationState = [ordered]@{
+$script:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Registered'
     2 = 'Unregistered'
@@ -550,7 +550,7 @@ $script:RegistrationState = [ordered]@{
 # =========================
 # SessionType
 # =========================
-$script:SessionType = [ordered]@{
+$script:SessionType = [PSCustomObject]@{
     0 = 'Desktop'
     1 = 'Application'
 }
@@ -558,7 +558,7 @@ $script:SessionType = [ordered]@{
 # =========================
 # SessionSupportCode
 # =========================
-$script:SessionSupportCode = [ordered]@{
+$script:SessionSupportCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'SingleSession'
     2 = 'MultiSession'
@@ -567,7 +567,7 @@ $script:SessionSupportCode = [ordered]@{
 # =========================
 # CostType
 # =========================
-$script:CostType = [ordered]@{
+$script:CostType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'AssumedCost'
     2 = 'ConfiguredCostFromStudio'
@@ -579,7 +579,7 @@ $script:CostType = [ordered]@{
 # =========================
 # CurrencyType
 # =========================
-$script:CurrencyType = [ordered]@{
+$script:CurrencyType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'USD'
     2 = 'EUR'
@@ -595,7 +595,7 @@ $script:CurrencyType = [ordered]@{
 # =========================
 # CostSavingsSummaryGranularity
 # =========================
-$script:CostSavingsSummaryGranularity = [ordered]@{
+$script:CostSavingsSummaryGranularity = [PSCustomObject]@{
     0 = 'Hour'
     1 = 'Day'
     2 = 'Month'
@@ -605,7 +605,7 @@ $script:CostSavingsSummaryGranularity = [ordered]@{
 # =========================
 # HypervisorType
 # =========================
-$script:HypervisorType = [ordered]@{
+$script:HypervisorType = [PSCustomObject]@{
     0 = 'None'
     1 = 'Unknown'
     2 = 'Azure'
@@ -620,7 +620,7 @@ $script:HypervisorType = [ordered]@{
 # =========================
 # WorkspaceType
 # =========================
-$script:WorkspaceType = [ordered]@{
+$script:WorkspaceType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Windows'
     2 = 'Mac'
