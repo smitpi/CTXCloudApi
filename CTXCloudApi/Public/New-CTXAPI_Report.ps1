@@ -3,7 +3,7 @@
 
 .VERSION 0.1.0
 
-.GUID 208b6ee0-ecf1-44f3-a04e-ee2cbc2f3117
+.GUID f76fe7fa-dc1a-49a2-b033-ed82b3568f83
 
 .AUTHOR Pierre Smit
 
@@ -26,16 +26,24 @@
 .EXTERNALSCRIPTDEPENDENCIES
 
 .RELEASENOTES
-Created [23/02/2026_06:21] Initial Script
+Created [26/02/2026_10:38] Initial Script
 
 .PRIVATEDATA
 
 #>
 
-#<
+<# 
+
+.DESCRIPTION 
+ Creates varius reports from the monitor data 
+
+#> 
+
+
+<#
 
 .SYNOPSIS
-Generate Citrix Cloud monitoring reports in multiple formats (Get-Host, Excel, HTML).
+Generate Citrix Cloud monitoring reports in multiple formats (Host, Excel, HTML).
 
 .DESCRIPTION
 New-CTXAPI_Report generates detailed Citrix Cloud monitoring reports, including resource utilization, connection activity, connection failures, session reports, machine failures, and login duration analytics. The function can output reports to the host, export to Excel, or create a styled HTML report with embedded branding. Data can be sourced from a provided MonitorData object or fetched live via API.
@@ -51,12 +59,12 @@ Optional. Number of hours of historical data to include (default: 24). Used only
 
 .PARAMETER ReportType
 Specifies which report(s) to generate. Valid values:
-- ConnectionFailureReport: Details on failed connection attempts.
-- MachineFailureReport: Details on machine failures and fault states.
-- SessionReport: Session-level analytics and metrics.
-- MachineReport: Machine resource utilization and status.
-- LoginDurationReport: Per-hour and total login duration breakdowns (NEW).
-- All: All available reports.
+ - ConnectionFailureReport: Details on failed connection attempts.
+ - MachineFailureReport: Details on machine failures and fault states.
+ - SessionReport: Session-level analytics and metrics.
+ - MachineReport: Machine resource utilization and status.
+ - LoginDurationReport: Per-hour and total login duration breakdowns.
+ - All: All available reports.
 
 .PARAMETER Export
 Specifies the output format. Valid values: Host (default), Excel, HTML.
@@ -66,12 +74,16 @@ Directory path for exported reports (Excel/HTML). Defaults to $env:TEMP. Must ex
 
 .OUTPUTS
 PSCustomObject containing one or more of the following properties, depending on ReportType:
-- ConnectionFailureReport
-- MachineFailureReport
-- SessionReport
-- MachineReport
-- PerHourLoginDurationReport (LoginDurationReport)
-- TotalLoginDurationReport (LoginDurationReport)
+ - ConnectionFailureReport
+ - MachineFailureReport
+ - SessionReport
+ - MachineReport
+ - PerHourLoginDurationReport (LoginDurationReport)
+ - TotalLoginDurationReport (LoginDurationReport)
+
+.NOTES
+Requires the ImportExcel and PSHTML modules for Excel and HTML export functionality.
+ReportPath must exist for file exports.
 
 .EXAMPLE
 New-CTXAPI_Report -APIHeader $header -ReportType All -Export HTML -ReportPath C:\Reports
@@ -85,8 +97,9 @@ Generates per-hour and total login duration reports and exports them to Excel.
 New-CTXAPI_Report -APIHeader $header -ReportType SessionReport -Export Host
 Returns session analytics to the host (console output).
 
+
 #>
-#>
+
 function New-CTXAPI_Report {
 	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Report')]
 	[OutputType([System.Object[]])]
@@ -584,109 +597,3 @@ function New-CTXAPI_Report {
 	}
 	Write-Verbose "[$(Get-Date -Format HH:mm:ss) Function] - Complete"
 } #end Function
-
-
-
-
-# 	[System.Collections.generic.List[PSObject]]$SessionReportObject = @()
-# 	$AllSessions = $monitordata.sessions
-# 	$AllsessionMetrics = $monitordata.SessionMetrics | Group-Object -Property SessionId
-# 	$ColGroup = $monitordata.connections | Group-Object -Property SessionKey
-# 	foreach ($session in $AllSessions) {
-# 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) SessionReport] $($AllSessions.IndexOf($session) + 1) of $($AllSessions.Count) - SessionKey: $($session.SessionKey)"
-# 		[System.Collections.generic.List[PSObject]]$connections = @()
-# 		$ColGroup | Where-Object { $_.Name -like $session.SessionKey } | ForEach-Object { $connections.Add($_.Group) }
-# 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) SessionReport] `t`t connections - $($connections.Count)"
-# 		try {
-# 			if (-not [string]::IsNullOrEmpty($connections)) {
-# 				if ($connections.count -gt 1) {
-# 					$LastConnection = $connections[-1]
-# 					$connections = $connections
-# 				} else {
-# 					$LastConnection = $connections[0]
-# 					$connections = $connections
-# 				}
-# 				# if ($null -ne $LastConnection.WorkspaceType) {
-# 				# 	$WorkspaceType = $WorkspaceType.($LastConnection.WorkspaceType)
-# 				# } else {
-# 				# 	$WorkspaceType = $null
-# 				# }
-# 				try {
-# 					$AuthenticationDuration = $LastConnection.AuthenticationDuration
-# 					$BrokeringDuration = $LastConnection.BrokeringDuration
-# 					#$AuthenticationDuration = [math]::Round(($connections.AuthenticationDuration | Measure-Object -Sum -ErrorAction SilentlyContinue).Sum / 1000) 
-# 					#$BrokeringDuration = [math]::Round(($connections.BrokeringDuration | Measure-Object -Sum -ErrorAction SilentlyContinue).Sum / 1000)
-# 				} catch { 
-# 					Write-Warning "Error calculating AuthenticationDuration or BrokeringDuration - Message: $($_.Exception.Message)"
-# 					$AuthenticationDuration = $null
-# 					$BrokeringDuration = $null
-# 				}
-# 				$IsReconnect = if ($null -ne $LastConnection.IsReconnect) { $LastConnection.IsReconnect } else { $null }
-# 				$ClientLocationCountry = $LastConnection.ClientLocationCountry
-# 				$ClientPlatform = $LastConnection.ClientPlatform
-# 			} else {
-# 				$WorkspaceType = $null
-# 				$AuthenticationDuration = $null
-# 				$BrokeringDuration = $null
-# 				$IsReconnect = $null
-# 				$ClientLocationCountry = $null
-# 				$ClientPlatform = $null
-# 				$LastConnection = $null
-# 				$connections = $null
-# 			}
-# 		} catch {
-# 			Write-Warning "Error processing session connections.- SessionKey: $($session.SessionKey)"
-# 			Write-Warning "Message: $($_.Exception.Message)"
-# 			Write-Warning "Script Line: $($_.InvocationInfo.ScriptLineNumber)"
-# 		} # `n`n$($connections | Out-String)
-# 		try {
-# 			[System.Collections.generic.List[PSObject]]$sessionmetrics = @()
-# 			$AllsessionMetrics | Where-Object { $_.Name -like $session.SessionKey } | ForEach-Object { $sessionmetrics.Add($_.Group) }
-# 			Write-Verbose "[$(Get-Date -Format HH:mm:ss) SessionReport] `t`t Sessionmetrics - $($sessionmetrics.Count)"
-# 			$IcaRttMS = $sessionmetrics | Measure-Object -Property IcaRttMS -Average -ErrorAction SilentlyContinue
-# 			$IcaLatency = $sessionmetrics | Measure-Object -Property IcaLatency -Average -ErrorAction SilentlyContinue
-# 			#$IcaRttMS = if ($sessionmetrics.IcaRttMS) { ($sessionmetrics.IcaRttMS | Measure-Object -Average).Average } else { $null }
-# 			#$IcaLatency = if ($sessionmetrics.IcaLatency) { ($sessionmetrics.IcaLatency | Measure-Object -Average).Average } else { $null }
-# 		} catch { 
-# 			Write-Warning "Error processing session metrics.- SessionKey: $($session.SessionKey)"
-# 			Write-Warning "Message: $($_.Exception.Message)"
-# 			Write-Warning "Script Line: $($_.InvocationInfo.ScriptLineNumber)"$user.Upn
-# 			Write-Warning "metricscount: $($sessionmetrics.count | Out-String)"
-
-# 		}	
-# 		$machine = $monitordata.machines | Where-Object { $_.Id -like $session.MachineId }
-# 		$user = $monitordata.users | Where-Object { $_.Id -like $session.UserId }
-# 		if (-not [string]::IsNullOrEmpty($session.LogOnDuration)) {
-# 			$LogOnDuration = [math]::Round($session.LogOnDuration / 1000)
-# 		} else {
-# 			$LogOnDuration = $null
-# 		}
-# 		if (-not [string]::IsNullOrEmpty($session.ClientLogOnDuration)) {
-# 			$ClientLogOnDuration = [math]::Round($session.ClientLogOnDuration / 1000)
-# 		} else {
-# 			$ClientLogOnDuration = $null
-# 		}
-# 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) SessionReport] Adding to object"
-# 		$SessionReportObject.Add([PSCustomObject]@{
-# 				MachineName            = Check-Variable -VariableName $machine.Name
-# 				UserName               = Check-Variable -VariableName $user.Upn -ErrorAction SilentlyContinue
-# 				ConnectionState        = Check-Variable -VariableName $ConnectionState.($session.ConnectionState)
-# 				#IsReconnect            = Check-Variable -VariableName $IsReconnect
-# 				LogOnDuration          = Check-Variable -VariableName $LogOnDuration
-# 				ClientLogOnDuration    = Check-Variable -VariableName $ClientLogOnDuration
-# 				AuthenticationDuration = Check-Variable -VariableName $AuthenticationDuration
-# 				BrokeringDuration      = Check-Variable -VariableName $BrokeringDuration
-# 				IcaRttMS               = Check-Variable -VariableName $IcaRttMS
-# 				IcaLatency             = Check-Variable -VariableName $IcaLatency
-# 				#WorkspaceType          = Check-Variable -VariableName $WorkspaceType
-# 				ClientLocationCountry  = Check-Variable -VariableName $ClientLocationCountry
-# 				ClientPlatform         = Check-Variable -VariableName $ClientPlatform
-# 				FailureId              = Check-Variable -VariableName $SessionFailureCode.($session.FailureId)
-# 				FailureDate            = Check-Variable -VariableName $session.FailureDate
-# 				SessionStartTime       = Check-Variable -VariableName $session.StartDate
-# 				SessionEndTime         = Check-Variable -VariableName $session.EndDate
-# 			}) #PSList
-# 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) SessionReport] Object added`n`n`n"
-# 	}
-# 	Write-Verbose "[$(Get-Date -Format HH:mm:ss) SessionReport] - Complete"
-# }

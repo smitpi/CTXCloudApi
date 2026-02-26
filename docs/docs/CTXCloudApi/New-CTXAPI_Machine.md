@@ -4,7 +4,7 @@ external help file: CTXCloudApi-Help.xml
 HelpUri: https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Machine
 Locale: en-US
 Module Name: CTXCloudApi
-ms.date: 02/23/2026
+ms.date: 02/26/2026
 PlatyPS schema version: 2024-05-01
 title: New-CTXAPI_Machine
 ---

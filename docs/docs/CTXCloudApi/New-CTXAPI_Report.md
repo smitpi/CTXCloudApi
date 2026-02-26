@@ -4,7 +4,7 @@ external help file: CTXCloudApi-Help.xml
 HelpUri: https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Report
 Locale: en-US
 Module Name: CTXCloudApi
-ms.date: 02/23/2026
+ms.date: 02/26/2026
 PlatyPS schema version: 2024-05-01
 title: New-CTXAPI_Report
 ---
@@ -21,8 +21,15 @@ Generate Citrix Cloud monitoring reports in multiple formats (Host, Excel, HTML)
 
 ```
 New-CTXAPI_Report -APIHeader <CTXAPIHeaderObject> -ReportType <string[]>
- [-MonitorData <CTXMonitorData>] [-LastHours <int>] [-Export <string>] [-ReportPath <DirectoryInfo>]
+ [-MonitorData <CTXMonitorData>] [-Export <string>] [-ReportPath <DirectoryInfo>]
  [<CommonParameters>]
+```
+
+### Needdata
+
+```
+New-CTXAPI_Report -APIHeader <CTXAPIHeaderObject> -ReportType <string[]> [-LastHours <int>]
+ [-Export <string>] [-ReportPath <DirectoryInfo>] [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -32,7 +39,7 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-New-CTXAPI_Report generates detailed Citrix Cloud monitoring reports, including resource utilization, connection activity, connection failures, and machine failures.
+New-CTXAPI_Report generates detailed Citrix Cloud monitoring reports, including resource utilization, connection activity, connection failures, session reports, machine failures, and login duration analytics.
 The function can output reports to the host, export to Excel, or create a styled HTML report with embedded branding.
 Data can be sourced from a provided MonitorData object or fetched live via API.
 
@@ -46,15 +53,15 @@ Generates all available reports and exports them as a styled HTML file to C:\Rep
 
 ### EXAMPLE 2
 
-New-CTXAPI_Report -APIHeader $header -ReportType ResourceUtilization -Export Excel
+New-CTXAPI_Report -APIHeader $header -ReportType LoginDurationReport -Export Excel -ReportPath C:\Reports
 
-Exports only the resource utilization report to Excel in the default temp directory.
+Generates per-hour and total login duration reports and exports them to Excel.
 
 ### EXAMPLE 3
 
-New-CTXAPI_Report -APIHeader $header -MonitorData $data -ReportType ConnectionReport
+New-CTXAPI_Report -APIHeader $header -ReportType SessionReport -Export Host
 
-Outputs the connection report to the host using pre-fetched monitoring data.
+Returns session analytics to the host (console output).
 
 ## PARAMETERS
 
@@ -114,7 +121,7 @@ DefaultValue: 24
 SupportsWildcards: false
 Aliases: []
 ParameterSets:
-- Name: (All)
+- Name: Needdata
   Position: Named
   IsRequired: false
   ValueFromPipeline: false
@@ -174,7 +181,13 @@ HelpMessage: ''
 ### -ReportType
 
 Specifies which report(s) to generate.
-Valid values: ConnectionReport, ResourceUtilization, ConnectionFailureReport, MachineFailureReport, All.
+Valid values:
+ - ConnectionFailureReport: Details on failed connection attempts.
+ - MachineFailureReport: Details on machine failures and fault states.
+ - SessionReport: Session-level analytics and metrics.
+ - MachineReport: Machine resource utilization and status.
+ - LoginDurationReport: Per-hour and total login duration breakdowns.
+ - All: All available reports.
 
 ```yaml
 Type: String[]
@@ -204,11 +217,19 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## OUTPUTS
 
+### PSCustomObject containing one or more of the following properties
+
+{{ Fill in the Description }}
+
 ### System.Object
 
 {{ Fill in the Description }}
 
 ## NOTES
+
+Requires the ImportExcel and PSHTML modules for Excel and HTML export functionality.
+ReportPath must exist for file exports.
+
 
 ## RELATED LINKS
 
