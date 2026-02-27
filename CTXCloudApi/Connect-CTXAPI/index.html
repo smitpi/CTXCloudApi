@@ -456,6 +456,17 @@
   
 </li>
         
+          <li class="md-nav__item">
+  <a href="#example-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EXAMPLE 3
+      
+    </span>
+  </a>
+  
+</li>
+        
       </ul>
     </nav>
   
@@ -1041,14 +1052,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../Set-CTXAPI_MachinePowerState/" class="md-nav__link">
+      <a href="../Set-CTXAPI_MachineMaintenanceMode/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Set-CTXAPI_MachinePowerState
+    Set-CTXAPI_MachineMaintenanceMode
   
 
     
@@ -1069,14 +1080,14 @@
   
   
     <li class="md-nav__item">
-      <a href="../Test-CTXAPI_Header/" class="md-nav__link">
+      <a href="../Set-CTXAPI_MachinePowerState/" class="md-nav__link">
         
   
   
   <span class="md-ellipsis">
     
   
-    Test-CTXAPI_Header
+    Set-CTXAPI_MachinePowerState
   
 
     
@@ -1212,6 +1223,17 @@
     <span class="md-ellipsis">
       
         EXAMPLE 2
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#example-3" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        EXAMPLE 3
       
     </span>
   </a>
@@ -1364,7 +1386,7 @@
 <p>Connects to Citrix Cloud and creates required API headers.</p>
 <h2 id="syntax">SYNTAX</h2>
 <h3 id="__allparametersets">__AllParameterSets</h3>
-<div class="highlight"><pre><span></span><code>Connect-CTXAPI [-Customer_Id] &lt;string&gt; [-Client_Id] &lt;string&gt; [-Client_Secret] &lt;string&gt;
+<div class="highlight"><pre><span></span><code>Connect-CTXAPI [-Customer_Id] &lt;string&gt; [-Client_Id] &lt;string&gt; [-Client_Secret] &lt;securestring&gt;
  [-Customer_Name] &lt;string&gt; [&lt;CommonParameters&gt;]
 </code></pre></div>
 <h2 id="aliases">ALIASES</h2>
@@ -1386,6 +1408,9 @@ $APIHeader = Connect-CTXAPI @splat</p>
 <p>Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"</p>
 <p>Creates and returns a <code>CTXAPIHeaderObject</code>.
 Store it in a variable (e.g., <code>$APIHeader</code>) and pass to other cmdlets.</p>
+<h3 id="example-3">EXAMPLE 3</h3>
+<p>Read-Host -AsSecureString -Prompt "Enter Citrix API Secret" | Export-Clixml -Path "C:\Temp\CTX_Secret.xml"</p>
+<p>$SecureSecret = Import-Clixml -Path "C:\Secure\CTX_Secret.xml"</p>
 <h2 id="parameters">PARAMETERS</h2>
 <h3 id="-client_id">-Client_Id</h3>
 <p>OAuth Client ID created under Citrix Cloud API access.</p>
@@ -1406,7 +1431,7 @@ Store it in a variable (e.g., <code>$APIHeader</code>) and pass to other cmdlets
 </code></pre></div>
 <h3 id="-client_secret">-Client_Secret</h3>
 <p>OAuth Client Secret for the above Client ID.</p>
-<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">String</span>
+<div class="highlight"><pre><span></span><code><span class="nt">Type</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">SecureString</span>
 <span class="nt">DefaultValue</span><span class="p">:</span><span class="w"> </span><span class="s">&#39;&#39;</span>
 <span class="nt">SupportsWildcards</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">false</span>
 <span class="nt">Aliases</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[]</span>
