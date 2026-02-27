@@ -104,7 +104,6 @@ function Get-CTXAPI_MonitorData {
             'Applications',
             'Catalogs',
             'ConnectionFailureLogs',
-            'ConnectionFailureCategories',
             'Connections',
             'DesktopGroups',
             'DesktopOSDesktopSummaries',
@@ -116,6 +115,7 @@ function Get-CTXAPI_MonitorData {
             'MachineCostSavingsSummaries',
             'MachineFailureLogs',
             'MachineMetric',
+            'MachineSummaries',
             'Machines',
             'ResourceUtilization',
             'ResourceUtilizationSummary',
@@ -141,8 +141,8 @@ function Get-CTXAPI_MonitorData {
         throw 'Specify either -LastHours or both -BeginDate and -EndDate.'
     }
 
-    $BeginDateStr = $BeginDate.ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
-    $EndDateStr = $EndDate.ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
+    $BeginDateStr = ($BeginDate.ToUniversalTime()).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
+    $EndDateStr = ($EndDate.ToUniversalTime()).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
 
     # Initialize all potential datasets to avoid strict-mode errors when not selected
     $ApplicationActivitySummaries = $null
@@ -150,7 +150,6 @@ function Get-CTXAPI_MonitorData {
     $Applications = $null
     $Catalogs = $null
     $ConnectionFailureLogs = $null
-    $ConnectionFailureCategories = $null
     $Connections = $null
     $DesktopGroups = $null
     $DesktopOSDesktopSummaries = $null
@@ -162,6 +161,7 @@ function Get-CTXAPI_MonitorData {
     $MachineCostSavingsSummaries = $null
     $MachineFailureLogs = $null
     $MachineMetric = $null
+    $MachineSummaries = $null
     $Machines = $null
     $ResourceUtilization = $null
     $ResourceUtilizationSummary = $null
@@ -178,7 +178,6 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Applications')) {$Applications = Export-Odata -URI ('https://api.cloud.com/monitorodata/Applications') -headers $APIHeader.headers                                                                                                                                }
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Catalogs')) {$Catalogs = Export-Odata -URI ('https://api.cloud.com/monitorodata/Catalogs') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ConnectionFailureLogs')) {$ConnectionFailureLogs = Export-Odata -URI ('https://api.cloud.com/monitorodata/ConnectionFailureLogs?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
-    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ConnectionFailureCategories')) {$ConnectionFailureCategories = Export-Odata -URI ('https://api.cloud.com/monitorodata/ConnectionFailureCategories') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Connections')) {$Connections = Export-Odata -URI ('https://api.cloud.com/monitorodata/Connections?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'DesktopGroups')) {$DesktopGroups = Export-Odata -URI ('https://api.cloud.com/monitorodata/DesktopGroups') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'DesktopOSDesktopSummaries')) {$DesktopOSDesktopSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/DesktopOSDesktopSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
@@ -188,9 +187,11 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'LogOnMetrics')) {$LogOnMetrics = Export-Odata -URI ('https://api.cloud.com/monitorodata/LogOnMetrics?$filter=(UserInitStartDate ge ' + $EndDateStr + ' and UserInitStartDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'LogOnSummaries')) {$LogOnSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/LogOnSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineCosts')) {$MachineCosts = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineCosts') -headers $APIHeader.headers}
-    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineCostSavingsSummaries')) {$MachineCostSavingsSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineCostSavingsSummaries?$filter=(SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
+    #TODO Report on machine costs
+    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineCostSavingsSummaries')) {$MachineCostSavingsSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineCostSavingsSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineFailureLogs')) {$MachineFailureLogs = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineFailureLogs?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineMetric')) {$MachineMetric = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineMetric?$filter=(CollectedDate ge ' + $EndDateStr + ' and CollectedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
+    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineSummaries')) {$MachineSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Machines')) {$Machines = Export-Odata -URI ('https://api.cloud.com/monitorodata/Machines') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ResourceUtilization')) {$ResourceUtilization = Export-Odata -URI ('https://api.cloud.com/monitorodata/ResourceUtilization?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ResourceUtilizationSummary')) {$ResourceUtilizationSummary = Export-Odata -URI ('https://api.cloud.com/monitorodata/ResourceUtilizationSummary?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
@@ -203,6 +204,7 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'SessionMetricsLatest')) {$SessionMetricsLatest = Export-Odata -URI ('https://api.cloud.com/monitorodata/SessionMetricsLatest?$filter=(CreatedDate ge ' + $EndDateStr + ' and CreatedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers -verbose}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Users')) {$Users = Export-Odata -URI ('https://api.cloud.com/monitorodata/Users') -headers $APIHeader.headers}
 
+
     Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Building composite object with retrieved datasets..."
     $datasets = [pscustomobject]@{
         PSTypeName = 'CTXMonitorData'
@@ -212,7 +214,6 @@ function Get-CTXAPI_MonitorData {
     if ($null -ne $Applications) { $datasets | Add-Member -NotePropertyName 'Applications' -NotePropertyValue $Applications }
     if ($null -ne $Catalogs) { $datasets | Add-Member -NotePropertyName 'Catalogs' -NotePropertyValue $Catalogs }
     if ($null -ne $ConnectionFailureLogs) { $datasets | Add-Member -NotePropertyName 'ConnectionFailureLogs' -NotePropertyValue $ConnectionFailureLogs }
-    if ($null -ne $ConnectionFailureCategories) { $datasets | Add-Member -NotePropertyName 'ConnectionFailureCategories' -NotePropertyValue $ConnectionFailureCategories }
     if ($null -ne $Connections) { $datasets | Add-Member -NotePropertyName 'Connections' -NotePropertyValue $Connections }
     if ($null -ne $DesktopGroups) { $datasets | Add-Member -NotePropertyName 'DesktopGroups' -NotePropertyValue $DesktopGroups }
     if ($null -ne $DesktopOSDesktopSummaries) { $datasets | Add-Member -NotePropertyName 'DesktopOSDesktopSummaries' -NotePropertyValue $DesktopOSDesktopSummaries }
@@ -224,6 +225,7 @@ function Get-CTXAPI_MonitorData {
     if ($null -ne $MachineCostSavingsSummaries) { $datasets | Add-Member -NotePropertyName 'MachineCostSavingsSummaries' -NotePropertyValue $MachineCostSavingsSummaries }
     if ($null -ne $MachineFailureLogs) { $datasets | Add-Member -NotePropertyName 'MachineFailureLogs' -NotePropertyValue $MachineFailureLogs }
     if ($null -ne $MachineMetric) { $datasets | Add-Member -NotePropertyName 'MachineMetric' -NotePropertyValue $MachineMetric }
+    if ($null -ne $MachineSummaries) { $datasets | Add-Member -NotePropertyName 'MachineSummaries' -NotePropertyValue $MachineSummaries }
     if ($null -ne $Machines) { $datasets | Add-Member -NotePropertyName 'Machines' -NotePropertyValue $Machines }
     if ($null -ne $ResourceUtilization) { $datasets | Add-Member -NotePropertyName 'ResourceUtilization' -NotePropertyValue $ResourceUtilization }
     if ($null -ne $ResourceUtilizationSummary) { $datasets | Add-Member -NotePropertyName 'ResourceUtilizationSummary' -NotePropertyValue $ResourceUtilizationSummary }

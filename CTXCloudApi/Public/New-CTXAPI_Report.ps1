@@ -115,7 +115,7 @@ function New-CTXAPI_Report {
 		[int]$LastHours = 24,
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[ValidateSet('ConnectionFailureReport', 'MachineFailureReport', 'SessionReport', 'MachineReport', 'LoginDurationReport', 'All')]
+		[ValidateSet('ConnectionFailureReport', 'MachineFailureReport', 'SessionReport', 'MachineReport', 'LoginDurationReport', 'FailureSummaries', 'All')]
 		[string[]]$ReportType,
 		[Parameter(Mandatory = $false)]
 		[ValidateSet('Host', 'Excel', 'HTML')]
@@ -141,7 +141,7 @@ function New-CTXAPI_Report {
 	$MachineReportObject = $null
 	$PerHourLoginDurationReportObject = $null
 	$TotalLoginDurationReportObject = $null
-
+	$FailureSummariesObject = $null
 
 
 	if (($PSBoundParameters['ReportType'] -contains 'ConnectionFailureReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
@@ -162,7 +162,6 @@ function New-CTXAPI_Report {
 				$IsInMaintenanceMode = $log.IsInMaintenanceMode
 				$PowerState = $script:PowerStateCode.([int]$log.PowerState)
 				$RegistrationState = $script:RegistrationState.([int]$log.RegistrationState)
-				$FailureId = $script:SessionFailureCode.([int]$session.FailureId)
 				$ConnectionState = $script:ConnectionState.([int]$session.ConnectionState)
 				$LifecycleState = $script:LifecycleState.([int]$session.LifecycleState)
 				$SessionType = $script:SessionType.([int]$session.SessionType)
@@ -174,7 +173,6 @@ function New-CTXAPI_Report {
 						IsInMaintenanceMode        = Check-Variable -VariableName $IsInMaintenanceMode
 						PowerState                 = Check-Variable -VariableName $PowerState
 						RegistrationState          = Check-Variable -VariableName $RegistrationState
-						FailureId                  = Check-Variable -VariableName $FailureId
 						ConnectionState            = Check-Variable -VariableName $ConnectionState
 						LifecycleState             = Check-Variable -VariableName $LifecycleState
 						SessionType                = Check-Variable -VariableName $SessionType
@@ -197,23 +195,24 @@ function New-CTXAPI_Report {
 		foreach ($log in $AllMachineFailureLogs) {
 			try {
 				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineFailureReport] $($AllMachineFailureLogs.IndexOf($log) + 1) of $($AllMachineFailureLogs.Count)"
-				$MonDataMachine = $monitordata.machines | Where-Object { $_.id -like $log.MachineId }
-				$MachinesFiltered = $machines | Where-Object {$_.Name -like $MonDataMachine.Name }
+				$MachinesFiltered = $monitordata.machines | Where-Object { $_.id -like $log.MachineId }
 
-				$DnsName = $MonDataMachine.DnsName
-				$AssociatedUserNames = $MonDataMachine.AssociatedUserNames
-				$OSType = $MonDataMachine.OSType
-				$IsAssigned = $MonDataMachine.IsAssigned
+				$DnsName = $MachinesFiltered.DnsName
+				$AssociatedUserNames = $MachinesFiltered.AssociatedUserNames
+				$OSType = $MachinesFiltered.OSType
+				$IsAssigned = $MachinesFiltered.IsAssigned
 				$FailureStartDate = $log.FailureStartDate
 				$FailureEndDate = $log.FailureEndDate
-				$FaultState = $MachineFaultStateCode.([int]$log.FaultState)
+				$FailureReason = $script:MachineFaultStateCode.([int]$log.FaultState)
 				$LastDeregistrationReason = $script:MachineDeregistration.([int]$MachinesFiltered.LastDeregisteredCode)
-				$LastDeregisteredDate = $MonDataMachine.LastDeregisteredDate
-				$LastPowerActionCompletedDate = $MonDataMachine.LastPowerActionCompletedDate
-				$LastPowerActionFailureReason = $script:MachineDeregistration.([int]$MonDataMachine.LastPowerActionFailureReason)
+				$LastDeregisteredDate = $MachinesFiltered.LastDeregisteredDate
+				$LastPowerActionType = $script:PowerActionTypeCode.([int]$MachinesFiltered.LastPowerActionType)
+				$LastPowerActionReason = $script:PowerActionReasonCode.([int]$MachinesFiltered.LastPowerActionReason)
+				$LastPowerActionFailureReason = $script:MachineDeregistration.([int]$MachinesFiltered.LastPowerActionFailureReason)
+				$LastPowerActionCompletedDate = $MachinesFiltered.LastPowerActionCompletedDate
 				$CurrentFaultState = $script:MachineFaultStateCode.([int]$MachinesFiltered.FaultState)
-				$IsInMaintenanceMode = $MachinesFiltered.IsInMaintenanceMode
-				$RegistrationState = $script:RegistrationState.([int]$MachinesFiltered.CurrentRegistrationState)
+				$CurrentIsInMaintenanceMode = $MachinesFiltered.IsInMaintenanceMode
+				$CurrentRegistrationState = $script:RegistrationState.([int]$MachinesFiltered.CurrentRegistrationState)
 
 				$MachineFailureReportObject.Add([PSCustomObject]@{
 						Name                         = Check-Variable -VariableName $DnsName
@@ -222,14 +221,16 @@ function New-CTXAPI_Report {
 						IsAssigned                   = Check-Variable -VariableName $IsAssigned
 						FailureStartDate             = Check-Variable -VariableName $FailureStartDate
 						FailureEndDate               = Check-Variable -VariableName $FailureEndDate
-						FaultState                   = Check-Variable -VariableName $FaultState
+						FailureReason                = Check-Variable -VariableName $FailureReason
 						LastDeregistrationReason     = Check-Variable -VariableName $LastDeregistrationReason
 						LastDeregisteredDate         = Check-Variable -VariableName $LastDeregisteredDate
-						LastPowerActionCompletedDate = Check-Variable -VariableName $LastPowerActionCompletedDate
+						LastPowerActionType          = Check-Variable -VariableName $LastPowerActionType
+						LastPowerActionReason        = Check-Variable -VariableName $LastPowerActionReason
 						LastPowerActionFailureReason = Check-Variable -VariableName $LastPowerActionFailureReason
+						LastPowerActionCompletedDate = Check-Variable -VariableName $LastPowerActionCompletedDate
 						CurrentFaultState            = Check-Variable -VariableName $CurrentFaultState
-						InMaintenanceMode            = Check-Variable -VariableName $IsInMaintenanceMode
-						RegistrationState            = Check-Variable -VariableName $RegistrationState
+						CurrentIsInMaintenanceMode   = Check-Variable -VariableName $IsInMaintenanceMode
+						CurrentRegistrationState     = Check-Variable -VariableName $CurrentRegistrationState
 					})
 			} catch {
 				Write-Warning "[MachineFailureReport] Error processing session metrics.- SessionKey: $($log.MachineId)"
@@ -252,7 +253,7 @@ function New-CTXAPI_Report {
 				Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($AllSessions.IndexOf($session) + 1) of $($AllSessions.Count)"
 				$machine = $monitordata.machines | Where-Object { $_.Id -like $session.MachineId }
 				$user = $monitordata.users | Where-Object { $_.Id -like $session.UserId }
-				
+				##todo use sessions.currentconnectionid $monitordata.Connections | Where-Object { $_.id -like "8238504" }
 				$FilterConnect = $ColGroup | Where-Object { $_.Name -like $session.SessionKey } 
 				[System.Collections.generic.List[PSObject]]$Connections = @()
 				if ($FilterConnect) {
@@ -260,8 +261,8 @@ function New-CTXAPI_Report {
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Connections] $($FilterConnect.Count) connections found for session $($session.SessionKey)"
 					$ConnectionState = $script:ConnectionState.([int]$session.ConnectionState)
 					$IsReconnect = $Connections[-1].IsReconnect
-					$AuthenticationDuration = ($Connections.AuthenticationDuration | Measure-Object -Sum).Sum
-					$BrokeringDuration = ($Connections.BrokeringDuration | Measure-Object -Sum).Sum
+					$AuthenticationDuration = (($Connections.AuthenticationDuration | Measure-Object -Sum).Sum /1000) 
+					$BrokeringDuration = (($Connections.BrokeringDuration | Measure-Object -Sum).Sum / 1000)
 					$WorkspaceType = $script:WorkspaceType.([int]$Connections[-1].WorkspaceType)
 					$ClientLocationCountry = $Connections[-1].ClientLocationCountry
 					$ClientPlatform = $Connections[-1].ClientPlatform
@@ -279,8 +280,8 @@ function New-CTXAPI_Report {
 				[System.Collections.generic.List[PSObject]]$SessionMetrics = @()
 				if ($FilterMetrics) { 
 					$FilterMetrics.Group | ForEach-Object { $SessionMetrics.Add($_) } 
-					$IcaLatency = [math]::Round(($SessionMetrics.icaLatency | Measure-Object -Average).Average)	
-					$IcaRttMS = [math]::Round(($SessionMetrics.icaRttMS | Measure-Object -Average).Average)
+					$IcaLatency = [math]::Round((($SessionMetrics.icaLatency | Measure-Object -Average).Average))
+					$IcaRttMS = [math]::Round((($SessionMetrics.icaRttMS | Measure-Object -Average).Average))
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Metrics] $($FilterMetrics.Count) metrics found for session $($session.SessionKey)"
 				} else {
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Metrics] No metrics found for session $($session.SessionKey)"
@@ -290,8 +291,8 @@ function New-CTXAPI_Report {
 				$MachineName = if ($machine) { $machine.Name } else { $null }
 				$User = if ($user) { $user.Upn } else { $null }
 
-				$LogOnDuration = $session.LogOnDuration
-				$ClientLogOnDuration = $session.ClientLogOnDuration
+				$LogOnDuration = if ($session.LogOnDuration -ne $null) { [math]::Round($session.LogOnDuration / 1000) } else { $null }
+				$ClientLogOnDuration = if ($session.ClientLogOnDuration -ne $null) { [math]::Round($session.ClientLogOnDuration / 1000) } else { $null }
 
 				$FailureId = $script:SessionFailureCode.([int]$session.FailureId)
 				$FailureDate = $session.FailureDate
@@ -418,15 +419,15 @@ function New-CTXAPI_Report {
 						$Hour = $CollectDate.ToString('HH:00')
 						$DesktopGroupName = $DesktopGroup.Name
 						$TotalHourLogins = $Perhour.TotalCount
-						$AvgBrokeringDuration = Calc-Avg -Duration $Perhour.BrokeringDuration -Count $Perhour.TotalCount
-						$avgVMPowerOnDuration = Calc-Avg -Duration $Perhour.VMPowerOnDuration -Count $Perhour.TotalCount
-						$avgVMRegistrationDuration = Calc-Avg -Duration $Perhour.VMRegistrationDuration -Count $Perhour.TotalCount
-						$avgAuthenticationDuration = Calc-Avg -Duration $Perhour.AuthenticationDuration -Count $Perhour.TotalCount
-						$avgGpoDuration = Calc-Avg -Duration $Perhour.GpoDuration -Count $Perhour.TotalCount
-						$avgLogOnScriptsDuration = Calc-Avg -Duration $Perhour.LogOnScriptsDuration -Count $Perhour.TotalCount
-						$avgInteractiveDuration = Calc-Avg -Duration $Perhour.InteractiveDuration -Count $Perhour.TotalCount
-						$avgProfileLoadDuration = Calc-Avg -Duration $Perhour.ProfileLoadDuration -Count $Perhour.TotalCount
-						$avgClientLogOnDuration = Calc-Avg -Duration $Perhour.ClientLogOnDuration -Count $Perhour.TotalCount
+						$AvgBrokeringDuration = Calc-Avg -Duration $Perhour.BrokeringDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgVMPowerOnDuration = Calc-Avg -Duration $Perhour.VMPowerOnDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgVMRegistrationDuration = Calc-Avg -Duration $Perhour.VMRegistrationDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgAuthenticationDuration = Calc-Avg -Duration $Perhour.AuthenticationDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgGpoDuration = Calc-Avg -Duration $Perhour.GpoDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgLogOnScriptsDuration = Calc-Avg -Duration $Perhour.LogOnScriptsDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgInteractiveDuration = Calc-Avg -Duration $Perhour.InteractiveDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgProfileLoadDuration = Calc-Avg -Duration $Perhour.ProfileLoadDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgClientLogOnDuration = Calc-Avg -Duration $Perhour.ClientLogOnDuration -Count $Perhour.TotalCount -ToSeconds
 				
 						$PerHourLoginDurationReportObject.Add([PSCustomObject]@{
 								CollectDate               = Check-Variable -VariableName $CollectDate
@@ -453,16 +454,16 @@ function New-CTXAPI_Report {
 
 				
 				$DesktopGroupName = $DesktopGroup.Name
-				$TotalDuration = [math]::Round(($login.Group | Measure-Object -Property TotalDuration -Sum).Sum)
+				$TotalDuration = [math]::Round(($login.Group | Measure-Object -Property TotalDuration -Sum).Sum / 1000)
 				$TotalCount = ($login.Group | Measure-Object -Property TotalCount -Sum).Sum
-				$BrokeringDuration = [math]::Round(($login.Group | Measure-Object -Property BrokeringDuration -Sum).Sum)
-				$VMPowerOnDuration = [math]::Round(($login.Group | Measure-Object -Property VMPowerOnDuration -Sum).Sum)
-				$VMRegistrationDuration = [math]::Round(($login.Group | Measure-Object -Property VMRegistrationDuration -Sum).Sum)
-				$AuthenticationDuration = [math]::Round(($login.Group | Measure-Object -Property AuthenticationDuration -Sum).Sum)
-				$GpoDuration = [math]::Round(($login.Group | Measure-Object -Property GpoDuration -Sum).Sum)
-				$InteractiveDuration = [math]::Round(($login.Group | Measure-Object -Property InteractiveDuration -Sum).Sum)
-				$ProfileLoadDuration = [math]::Round(($login.Group | Measure-Object -Property ProfileLoadDuration -Sum).Sum)
-				$ClientLogOnDuration = [math]::Round(($login.Group | Measure-Object -Property ClientLogOnDuration -Sum).Sum)
+				$BrokeringDuration = [math]::Round(($login.Group | Measure-Object -Property BrokeringDuration -Sum).Sum / 1000)
+				$VMPowerOnDuration = [math]::Round(($login.Group | Measure-Object -Property VMPowerOnDuration -Sum).Sum / 1000)
+				$VMRegistrationDuration = [math]::Round(($login.Group | Measure-Object -Property VMRegistrationDuration -Sum).Sum / 1000)
+				$AuthenticationDuration = [math]::Round(($login.Group | Measure-Object -Property AuthenticationDuration -Sum).Sum / 1000)
+				$GpoDuration = [math]::Round(($login.Group | Measure-Object -Property GpoDuration -Sum).Sum / 1000)
+				$InteractiveDuration = [math]::Round(($login.Group | Measure-Object -Property InteractiveDuration -Sum).Sum / 1000)
+				$ProfileLoadDuration = [math]::Round(($login.Group | Measure-Object -Property ProfileLoadDuration -Sum).Sum / 1000)
+				$ClientLogOnDuration = [math]::Round(($login.Group | Measure-Object -Property ClientLogOnDuration -Sum).Sum / 1000)
 				$StartSumDate = Convert-UTCtoLocal $login.Group.SummaryDate[0]
 				$EndSumDate = Convert-UTCtoLocal $login.Group.SummaryDate[-1]
 
@@ -493,6 +494,13 @@ function New-CTXAPI_Report {
 		}
 	}
 
+	if (($PSBoundParameters['ReportType'] -contains 'FailureSummaries') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
+		[System.Collections.generic.List[PSObject]]$FailureSummariesObject = @()
+		$Catagory = $MonitorData.FailureLogSummaries | Group-Object -Property FailureCategory
+		$ConnectionFails = $Catagory | Where-Object {$_.name -like '1'}
+		$MachineFails = $Catagory | Where-Object {$_.name -like '2'}
+
+	}
 
 	$ReturnObject = [pscustomobject]@{}
 	if ($null -ne $ConnectionFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'ConnectionFailureReport' -NotePropertyValue $ConnectionFailureReportObject }
@@ -501,6 +509,8 @@ function New-CTXAPI_Report {
 	if ($null -ne $MachineReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineReport' -NotePropertyValue $MachineReportObject }
 	if ($null -ne $PerHourLoginDurationReportObject) { $ReturnObject | Add-Member -NotePropertyName 'PerHourLoginDurationReport' -NotePropertyValue $PerHourLoginDurationReportObject }
 	if ($null -ne $TotalLoginDurationReportObject) { $ReturnObject | Add-Member -NotePropertyName 'TotalLoginDurationReport' -NotePropertyValue $TotalLoginDurationReportObject }
+	if ($null -ne $FailureSummariesObject) { $ReturnObject | Add-Member -NotePropertyName 'FailureSummariesReport' -NotePropertyValue $FailureSummariesObject }
+
 
 	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'Host') {
 		Write-Verbose 'Returning report object to host.'
@@ -547,6 +557,10 @@ function New-CTXAPI_Report {
 			Write-Verbose ('Exporting TotalLoginDurationReport with {0} rows' -f $ReturnObject.TotalLoginDurationReport.Count)
 			$ReturnObject.TotalLoginDurationReport | Export-Excel -Title 'Total Login Duration Report' -WorksheetName 'TotalLoginDuration' @ExcelOptions
 		}
+		if ($ReturnObject.psobject.properties.name -contains 'FailureSummariesReport') { 
+			Write-Verbose ('Exporting FailureSummariesReport with {0} rows' -f $ReturnObject.FailureSummariesReport.Count)
+			$ReturnObject.FailureSummariesReport | Export-Excel -Title 'Failure Summaries' -WorksheetName 'FailureSummaries' @ExcelOptions
+		}
 	}
 
 	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'HTML') {
@@ -589,6 +603,11 @@ function New-CTXAPI_Report {
 				if ($ReturnObject.psobject.properties.name -contains 'TotalLoginDurationReport') {
 					New-HTMLSection @SectionSettings -Content {
 						New-HTMLSection -HeaderText 'Total Login Duration Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.TotalLoginDurationReport }
+					}
+				}
+				if ($ReturnObject.psobject.properties.name -contains 'FailureSummariesReport') {
+					New-HTMLSection @SectionSettings -Content {
+						New-HTMLSection -HeaderText 'Failure Summeries' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.FailureSummariesReport }
 					}
 				}
 			}

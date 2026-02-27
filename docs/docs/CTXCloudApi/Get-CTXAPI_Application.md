@@ -85,6 +85,7 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### PSCustomObject[]
+
 Array of application objects returned from the CVAD Manage API.
 
 {{ Fill in the Description }}
