@@ -90,6 +90,9 @@ function Set-CTXAPI_MachinePowerState {
 	)
 	#endregion
 	begin {
+		if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+		else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
 		[System.Collections.generic.List[PSObject]]$Machines = @()
 		[System.Collections.generic.List[PSObject]]$ResultObject = @()

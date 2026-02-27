@@ -4,7 +4,7 @@ external help file: CTXCloudApi-Help.xml
 HelpUri: https://smitpi.github.io/CTXCloudApi/Connect-CTXAPI
 Locale: en-US
 Module Name: CTXCloudApi
-ms.date: 02/26/2026
+ms.date: 02/27/2026
 PlatyPS schema version: 2024-05-01
 title: Connect-CTXAPI
 ---
@@ -20,7 +20,7 @@ Connects to Citrix Cloud and creates required API headers.
 ### __AllParameterSets
 
 ```
-Connect-CTXAPI [-Customer_Id] <string> [-Client_Id] <string> [-Client_Secret] <string>
+Connect-CTXAPI [-Customer_Id] <string> [-Client_Id] <string> [-Client_Secret] <securestring>
  [-Customer_Name] <string> [<CommonParameters>]
 ```
 
@@ -54,6 +54,12 @@ Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy=="
 Creates and returns a `CTXAPIHeaderObject`.
 Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
 
+### EXAMPLE 3
+
+Read-Host -AsSecureString -Prompt "Enter Citrix API Secret" | Export-Clixml -Path "C:\Temp\CTX_Secret.xml"
+
+$SecureSecret = Import-Clixml -Path "C:\Secure\CTX_Secret.xml"
+
 ## PARAMETERS
 
 ### -Client_Id
@@ -82,7 +88,7 @@ HelpMessage: ''
 OAuth Client Secret for the above Client ID.
 
 ```yaml
-Type: String
+Type: SecureString
 DefaultValue: ''
 SupportsWildcards: false
 Aliases: []

@@ -4,7 +4,7 @@ external help file: CTXCloudApi-Help.xml
 HelpUri: https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Application
 Locale: en-US
 Module Name: CTXCloudApi
-ms.date: 02/26/2026
+ms.date: 02/27/2026
 PlatyPS schema version: 2024-05-01
 title: Get-CTXAPI_Application
 ---
@@ -85,7 +85,6 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 ## OUTPUTS
 
 ### PSCustomObject[]
-
 Array of application objects returned from the CVAD Manage API.
 
 {{ Fill in the Description }}

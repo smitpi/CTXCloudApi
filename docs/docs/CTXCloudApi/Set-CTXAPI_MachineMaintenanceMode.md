@@ -1,27 +1,27 @@
 ---
 document type: cmdlet
 external help file: CTXCloudApi-Help.xml
-HelpUri: https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachinePowerState
+HelpUri: https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachineMaintenanceMode
 Locale: en-US
 Module Name: CTXCloudApi
 ms.date: 02/27/2026
 PlatyPS schema version: 2024-05-01
-title: Set-CTXAPI_MachinePowerState
+title: Set-CTXAPI_MachineMaintenanceMode
 ---
 
-# Set-CTXAPI_MachinePowerState
+# Set-CTXAPI_MachineMaintenanceMode
 
 ## SYNOPSIS
 
-Starts, shuts down, restarts, or logs off Citrix machines via CTX API.
+Enables or disables Maintenance Mode for Citrix machines via CTX API, with an optional reason.
 
 ## SYNTAX
 
-### __AllParameterSets
+### Set1 (Default)
 
 ```
-Set-CTXAPI_MachinePowerState [-APIHeader] <CTXAPIHeaderObject> [-Name <string[]>]
- [-PowerAction <string>] [<CommonParameters>]
+Set-CTXAPI_MachineMaintenanceMode [-APIHeader] <CTXAPIHeaderObject> -Name <string[]>
+ -InMaintenanceMode <bool> [<CommonParameters>]
 ```
 
 ## ALIASES
@@ -31,22 +31,16 @@ This cmdlet has the following aliases,
 
 ## DESCRIPTION
 
-This function allows you to remotely control the power state of Citrix machines using the CTX API.
-You can start, shut down, restart, or log off one or more machines by specifying their name, DNS name, or ID.
+This function allows you to remotely toggle the Maintenance Mode state of Citrix machines using the CTX API.
+You can modify one or more machines by specifying their name, DNS name, or ID.
 
 ## EXAMPLES
 
 ### EXAMPLE 1
 
-Set-CTXAPI_MachinePowerState -APIHeader $header -Name "CTX-Machine01" -PowerAction Start
+Set-CTXAPI_MachineMaintenanceMode -APIHeader $header -Name "CTX-Machine01" -InMaintenanceMode $true -Reason "Ticket INC-12345: RAM upgrade"
 
-Starts the specified Citrix Machine.
-
-### EXAMPLE 2
-
-Set-CTXAPI_MachinePowerState -APIHeader $header -Name "CTX-Machine01","CTX-Machine02" -PowerAction Shutdown
-
-Shuts down multiple Citrix Machines.
+Places the specified Citrix Machine into maintenance mode with an audit reason.
 
 ## PARAMETERS
 
@@ -71,6 +65,27 @@ AcceptedValues: []
 HelpMessage: ''
 ```
 
+### -InMaintenanceMode
+
+Boolean value to set the maintenance mode state ($true to enable, $false to disable).
+
+```yaml
+Type: Boolean
+DefaultValue: False
+SupportsWildcards: false
+Aliases: []
+ParameterSets:
+- Name: (All)
+  Position: Named
+  IsRequired: true
+  ValueFromPipeline: false
+  ValueFromPipelineByPropertyName: false
+  ValueFromRemainingArguments: false
+DontShow: false
+AcceptedValues: []
+HelpMessage: ''
+```
+
 ### -Name
 
 The name, DNS name, or ID of the Citrix Machine(s) to target.
@@ -86,31 +101,9 @@ Aliases:
 ParameterSets:
 - Name: (All)
   Position: Named
-  IsRequired: false
+  IsRequired: true
   ValueFromPipeline: true
   ValueFromPipelineByPropertyName: true
-  ValueFromRemainingArguments: true
-DontShow: false
-AcceptedValues: []
-HelpMessage: ''
-```
-
-### -PowerAction
-
-The desired power action to perform.
-Valid values: Start, Shutdown, Restart, Logoff.
-
-```yaml
-Type: String
-DefaultValue: ''
-SupportsWildcards: false
-Aliases: []
-ParameterSets:
-- Name: (All)
-  Position: Named
-  IsRequired: false
-  ValueFromPipeline: false
-  ValueFromPipelineByPropertyName: false
   ValueFromRemainingArguments: false
 DontShow: false
 AcceptedValues: []
@@ -126,13 +119,18 @@ This cmdlet supports the common parameters: -Debug, -ErrorAction, -ErrorVariable
 
 ## INPUTS
 
+### System.String
+
+{{ Fill in the Description }}
+
 ### System.String[]
 
 {{ Fill in the Description }}
 
 ## OUTPUTS
 
-### System.Object[]. Returns the API response objects for each machine processed.
+### System.Object[]
+Returns the API response objects for each machine processed.
 
 {{ Fill in the Description }}
 

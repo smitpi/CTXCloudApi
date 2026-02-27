@@ -115,7 +115,7 @@ function New-CTXAPI_Report {
 		[int]$LastHours = 24,
 		[Parameter(Mandatory = $true)]
 		[ValidateNotNullOrEmpty()]
-		[ValidateSet('ConnectionFailureReport', 'MachineFailureReport', 'SessionReport', 'MachineReport', 'LoginDurationReport', 'FailureSummaries', 'All')]
+		[ValidateSet('ConnectionFailureReport', 'MachineFailureReport', 'SessionReport', 'MachineReport', 'LoginDurationReport', 'All')]
 		[string[]]$ReportType,
 		[Parameter(Mandatory = $false)]
 		[ValidateSet('Host', 'Excel', 'HTML')]
@@ -124,6 +124,8 @@ function New-CTXAPI_Report {
 		[ValidateScript( { (Test-Path $_) })]
 		[System.IO.DirectoryInfo]$ReportPath = $env:temp
 	)
+	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 	if ($PSBoundParameters.ContainsKey('MonitorData')) {
 		Write-Verbose 'Using provided MonitorData.'
@@ -141,7 +143,6 @@ function New-CTXAPI_Report {
 	$MachineReportObject = $null
 	$PerHourLoginDurationReportObject = $null
 	$TotalLoginDurationReportObject = $null
-	$FailureSummariesObject = $null
 
 
 	if (($PSBoundParameters['ReportType'] -contains 'ConnectionFailureReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
@@ -261,7 +262,7 @@ function New-CTXAPI_Report {
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Connections] $($FilterConnect.Count) connections found for session $($session.SessionKey)"
 					$ConnectionState = $script:ConnectionState.([int]$session.ConnectionState)
 					$IsReconnect = $Connections[-1].IsReconnect
-					$AuthenticationDuration = (($Connections.AuthenticationDuration | Measure-Object -Sum).Sum /1000) 
+					$AuthenticationDuration = (($Connections.AuthenticationDuration | Measure-Object -Sum).Sum / 1000) 
 					$BrokeringDuration = (($Connections.BrokeringDuration | Measure-Object -Sum).Sum / 1000)
 					$WorkspaceType = $script:WorkspaceType.([int]$Connections[-1].WorkspaceType)
 					$ClientLocationCountry = $Connections[-1].ClientLocationCountry
@@ -337,7 +338,7 @@ function New-CTXAPI_Report {
 			try {
 				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineReport] $($machineList.IndexOf($machine) + 1) of $($machineList.Count)"
 				$resourceUtilization = $monitordata.ResourceUtilizationSummary | Where-Object { $_.MachineId -like $machine.id }
-				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineReport] `t`t ResourceUtilizationSummary - $($resourceUtilization.count)"
+				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineReport] `t`t ResourceUtilizationSummary"
 				$catalog = $monitordata.catalogs | Where-Object { $_.Id -like $machine.CatalogId }
 				$desktopGroup = $monitordata.DesktopGroups | Where-Object { $_.Id -like $machine.DesktopGroupId }
 
@@ -416,7 +417,7 @@ function New-CTXAPI_Report {
 						$DesktopGroup = $MonitorData.DesktopGroups | Where-Object { $_.Id -like $Perhour.DesktopGroupId }
 
 						$CollectDate = Convert-UTCtoLocal -Time $Perhour.SummaryDate
-						$Hour = $CollectDate.ToString('HH:00')
+						$Hour = $CollectDate.Hour
 						$DesktopGroupName = $DesktopGroup.Name
 						$TotalHourLogins = $Perhour.TotalCount
 						$AvgBrokeringDuration = Calc-Avg -Duration $Perhour.BrokeringDuration -Count $Perhour.TotalCount -ToSeconds
@@ -494,14 +495,6 @@ function New-CTXAPI_Report {
 		}
 	}
 
-	if (($PSBoundParameters['ReportType'] -contains 'FailureSummaries') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
-		[System.Collections.generic.List[PSObject]]$FailureSummariesObject = @()
-		$Catagory = $MonitorData.FailureLogSummaries | Group-Object -Property FailureCategory
-		$ConnectionFails = $Catagory | Where-Object {$_.name -like '1'}
-		$MachineFails = $Catagory | Where-Object {$_.name -like '2'}
-
-	}
-
 	$ReturnObject = [pscustomobject]@{}
 	if ($null -ne $ConnectionFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'ConnectionFailureReport' -NotePropertyValue $ConnectionFailureReportObject }
 	if ($null -ne $MachineFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineFailureReport' -NotePropertyValue $MachineFailureReportObject }
@@ -509,7 +502,6 @@ function New-CTXAPI_Report {
 	if ($null -ne $MachineReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineReport' -NotePropertyValue $MachineReportObject }
 	if ($null -ne $PerHourLoginDurationReportObject) { $ReturnObject | Add-Member -NotePropertyName 'PerHourLoginDurationReport' -NotePropertyValue $PerHourLoginDurationReportObject }
 	if ($null -ne $TotalLoginDurationReportObject) { $ReturnObject | Add-Member -NotePropertyName 'TotalLoginDurationReport' -NotePropertyValue $TotalLoginDurationReportObject }
-	if ($null -ne $FailureSummariesObject) { $ReturnObject | Add-Member -NotePropertyName 'FailureSummariesReport' -NotePropertyValue $FailureSummariesObject }
 
 
 	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'Host') {
@@ -557,10 +549,6 @@ function New-CTXAPI_Report {
 			Write-Verbose ('Exporting TotalLoginDurationReport with {0} rows' -f $ReturnObject.TotalLoginDurationReport.Count)
 			$ReturnObject.TotalLoginDurationReport | Export-Excel -Title 'Total Login Duration Report' -WorksheetName 'TotalLoginDuration' @ExcelOptions
 		}
-		if ($ReturnObject.psobject.properties.name -contains 'FailureSummariesReport') { 
-			Write-Verbose ('Exporting FailureSummariesReport with {0} rows' -f $ReturnObject.FailureSummariesReport.Count)
-			$ReturnObject.FailureSummariesReport | Export-Excel -Title 'Failure Summaries' -WorksheetName 'FailureSummaries' @ExcelOptions
-		}
 	}
 
 	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'HTML') {
@@ -603,11 +591,6 @@ function New-CTXAPI_Report {
 				if ($ReturnObject.psobject.properties.name -contains 'TotalLoginDurationReport') {
 					New-HTMLSection @SectionSettings -Content {
 						New-HTMLSection -HeaderText 'Total Login Duration Report' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.TotalLoginDurationReport }
-					}
-				}
-				if ($ReturnObject.psobject.properties.name -contains 'FailureSummariesReport') {
-					New-HTMLSection @SectionSettings -Content {
-						New-HTMLSection -HeaderText 'Failure Summeries' @TableSectionSettings { New-HTMLTable @TableSettings -DataTable $ReturnObject.FailureSummariesReport }
 					}
 				}
 			}

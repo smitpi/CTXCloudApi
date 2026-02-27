@@ -83,6 +83,8 @@ function New-CTXAPI_Machine {
 		[Parameter(Mandatory = $true)]
 		[int]$AmountOfMachines
 	)
+	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 	Write-Verbose "Retrieving Machine Catalog ID for: $MachineCatalogName"
 	$catid = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Where-Object Name -EQ $MachineCatalogName

@@ -80,6 +80,8 @@ function Get-CTXAPI_DeliveryGroup {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
 
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     
     $requestUri = 'https://api.cloud.com/cvad/manage/DeliveryGroups?limit=1000'

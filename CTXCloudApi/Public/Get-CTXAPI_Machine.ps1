@@ -84,6 +84,8 @@ function Get-CTXAPI_Machine {
         [Alias('DNSName', 'Id')]
         [string[]]$Name
     )
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     if ($PSBoundParameters.ContainsKey('Name')) {
         [System.Collections.generic.List[PSObject]]$MachineObject = @()

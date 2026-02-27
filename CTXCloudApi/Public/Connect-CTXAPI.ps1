@@ -73,6 +73,9 @@ $APIHeader = Connect-CTXAPI @splat
 Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
 Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
 
+.EXAMPLE
+Read-Host -AsSecureString -Prompt "Enter Citrix API Secret" | Export-Clixml -Path "C:\Temp\CTX_Secret.xml"
+$SecureSecret = Import-Clixml -Path "C:\Secure\CTX_Secret.xml"
 #>
 
 function Connect-CTXAPI {
@@ -83,15 +86,18 @@ function Connect-CTXAPI {
         [Parameter(Mandatory)]
         [string]$Client_Id,
         [Parameter(Mandatory)]
-        [string]$Client_Secret,
+        [securestring]$Client_Secret,
         [Parameter(Mandatory)]
         [string]$Customer_Name
     )
 
+    $PlainSecret = [System.Net.NetworkCredential]::new('', $Client_Secret).Password
+
+
     $body = @{
         grant_type    = 'client_credentials'
         client_id     = $Client_Id
-        client_secret = $Client_Secret
+        client_secret = $PlainSecret
     }
 
     $headers = @{

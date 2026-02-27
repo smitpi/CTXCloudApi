@@ -6,17 +6,22 @@
 # ModuleVersion:    0.1.33
 # Company:          Private
 # CreatedOn:        2/26/2026 9:21:34 AM
-# ModifiedOn:       2/26/2026 9:23:02 AM
+# ModifiedOn:       2/27/2026 8:46:15 PM
 ############################################
 function Calc-Avg {
 	param( 
 		[long]$Duration,
-		[int]$Count
+		[int]$Count,
+		[Switch]$ToSeconds =$false
 	) 
 
 	if ($Count -gt 0) { 
 		$calc = $Duration / [double]$Count
-		return [math]::Round($calc)
+		if ($ToSeconds) {
+			return [math]::Round($calc / 1000)
+		} else {
+			return [math]::Round($calc)
+		}
 	} else { return $null } 
 }
 #endregion
@@ -27,7 +32,7 @@ function Calc-Avg {
 # ModuleVersion:    0.1.33
 # Company:          Private
 # CreatedOn:        2/25/2026 7:13:19 AM
-# ModifiedOn:       2/25/2026 10:35:10 AM
+# ModifiedOn:       2/26/2026 10:45:38 AM
 ############################################
 function Check-Variable {
 	[CmdletBinding()]
@@ -39,7 +44,6 @@ function Check-Variable {
 		return $null
 	} else {
 		$Type = ($VariableName.GetType()).Name
-		Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Check-Variable]  Variable is of type $Type."
 		if ($Type -eq 'DateTime') {
 			Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Check-Variable]  Variable is of type DateTime. Converting to local time."
 			$out = Convert-UTCtoLocal -Time $VariableName
@@ -263,311 +267,10 @@ $script:TableSectionSettings = @{
 # ModuleVersion:    0.1.33
 # Company:          Private
 # CreatedOn:        11/26/2024 11:31:29 AM
-# ModifiedOn:       2/26/2026 8:08:50 AM
+# ModifiedOn:       2/27/2026 10:06:38 AM
 ############################################
 # https://developer-docs.citrix.com/en-us/monitor-service-odata-api/monitor-service-enums
 
-# =========================
-# AllocationType
-# =========================
-$script:AllocationType = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'Static'
-    2 = 'Random'
-    3 = 'Permanent'
-}
-
-# =========================
-# SessionFailureCode
-# =========================
-$script:SessionFailureCode = [PSCustomObject]@{
-    0   = 'Unknown'
-    1   = 'None'
-    2   = 'SessionPreparation'
-    3   = 'RegistrationTimeout'
-    4   = 'ConnectionTimeout'
-    5   = 'Licensing'
-    6   = 'Ticketing'
-    7   = 'Other'
-    8   = 'GeneralFail'
-    9   = 'MaintenanceMode'
-    10  = 'ApplicationDisabled'
-    11  = 'LicenseFeatureRefused'
-    12  = 'NoDesktopAvailable'
-    13  = 'SessionLimitReached'
-    14  = 'DisallowedProtocol'
-    15  = 'ResourceUnavailable'
-    16  = 'ActiveSessionReconnectDisabled'
-    17  = 'NoSessionToReconnect'
-    18  = 'SpinUpFailed'
-    19  = 'Refused'
-    20  = 'ConfigurationSetFailure'
-    21  = 'MaxTotalInstancesExceeded'
-    22  = 'MaxPerUserInstancesExceeded'
-    23  = 'CommunicationError'
-    24  = 'MaxPerMachineInstancesExceeded'
-    25  = 'MaxPerEntitlementInstancesExceeded'
-    100 = 'NoMachineAvailable'
-    101 = 'MachineNotFunctional'
-}
-
-# =========================
-# CatalogType
-# =========================
-$script:CatalogType = [PSCustomObject]@{
-    0 = 'ThinCloned'
-    1 = 'SingleImage'
-    2 = 'PowerManaged'
-    3 = 'UnManaged'
-    4 = 'Pvs'
-    5 = 'Pvd'
-    6 = 'PvsPvd'
-}
-
-# =========================
-# ConditionTargetType
-# =========================
-$script:ConditionTargetType = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'Site'
-    2 = 'Controller'
-    3 = 'DesktopGroup'
-    4 = 'Catalog'
-    5 = 'RdsWorker'
-    6 = 'Vdi'
-    7 = 'User'
-}
-
-# =========================
-# ConnectionFailureType
-# =========================
-$script:ConnectionFailureType = [PSCustomObject]@{
-    0 = 'None'
-    1 = 'ClientConnectionFailure'
-    2 = 'MachineFailure'
-    3 = 'NoCapacityAvailable'
-    4 = 'NoLicensesAvailable'
-    5 = 'Configuration'
-}
-
-# =========================
-# ConnectionState
-# =========================
-$script:ConnectionState = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'Connected'
-    2 = 'Disconnected'
-    3 = 'Terminated'
-    4 = 'PreparingSession'
-    5 = 'Active'
-    6 = 'Reconnecting'
-    7 = 'NonBrokeredSession'
-    8 = 'Other'
-    9 = 'Pending'
-}
-
-# =========================
-# DeliveryType
-# =========================
-$script:DeliveryType = [PSCustomObject]@{
-    0 = 'DesktopsOnly'
-    1 = 'AppsOnly'
-    2 = 'DesktopsAndApps'
-}
-
-# =========================
-# MachineDeregistration
-# =========================
-$script:MachineDeregistration = [PSCustomObject]@{
-    0    = 'AgentShutdown'
-    1    = 'AgentSuspended'
-    2    = 'AgentRequested'
-    100  = 'IncompatibleVersion'
-    101  = 'AgentAddressResolutionFailed'
-    102  = 'AgentNotContactable'
-    103  = 'AgentWrongActiveDirectoryOU'
-    104  = 'EmptyRegistrationRequest'
-    105  = 'MissingRegistrationCapabilities'
-    106  = 'MissingAgentVersion'
-    108  = 'NotLicensedForFeature'
-    109  = 'UnsupportedCredentialSecurityVersion'
-    110  = 'InvalidRegistrationRequest'
-    111  = 'SingleMultiSessionMismatch'
-    112  = 'FunctionalLevelTooLowForCatalog'
-    113  = 'FunctionalLevelTooLowForDesktopGroup'
-    114  = 'OSNotCompatibleWithDdc'
-    115  = 'VMNotCompatibleWithDdc'
-    200  = 'PowerOff'
-    201  = 'DesktopRestart'
-    202  = 'DesktopRemoved'
-    203  = 'AgentRejectedSettingsUpdate'
-    204  = 'SendSettingsFailure'
-    205  = 'SessionAuditFailure'
-    206  = 'SessionPrepareFailure'
-    207  = 'ContactLost'
-    208  = 'SettingsCreationFailure'
-    300  = 'UnknownError'
-    301  = 'BrokerRegistrationLimitReached'
-    400  = 'None'
-    401  = 'HypervisorReportedFailure'
-    402  = 'HypervisorRateLimitExceeded'
-    1000 = 'HardRegistrationPending'
-    1001 = 'SoftRegistered'
-    1002 = 'Unknown'
-}
-
-# =========================
-# DesktopKind
-# =========================
-$script:DesktopKind = [PSCustomObject]@{
-    0 = 'Private'
-    1 = 'Shared'
-}
-
-# =========================
-# DesktopType
-# =========================
-$script:DesktopType = [PSCustomObject]@{
-    0 = 'None'
-    1 = 'Vdi'
-    2 = 'RemotePc'
-    3 = 'Rds'
-    4 = 'Unknown'
-}
-
-# =========================
-# FailureCategory
-# =========================
-$script:FailureCategory = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'Connection'
-    2 = 'Machine'
-}
-
-# =========================
-# LifecycleState
-# =========================
-$script:LifecycleState = [PSCustomObject]@{
-    0 = 'Active'
-    1 = 'Deleted'
-    2 = 'RequiresResolution'
-    3 = 'Stub'
-}
-
-# =========================
-# LogonBreakdownType
-# =========================
-$script:LogonBreakdownType = [PSCustomObject]@{
-    0 = 'None'
-    1 = 'UsersLastSession'
-    2 = 'UsersSessionAverage'
-    3 = 'DesktopGroupAverage'
-}
-
-# =========================
-# LogOnStep
-# =========================
-$script:LogOnStep = [PSCustomObject]@{
-    0 = 'Total'
-    1 = 'Brokering'
-    2 = 'VMStart'
-    3 = 'Hdx'
-    4 = 'Authentication'
-    5 = 'Gpos'
-    6 = 'LogOnScripts'
-    7 = 'ProfileLoad'
-    8 = 'Interactive'
-}
-
-# =========================
-# MachineFaultStateCode
-# =========================
-$script:MachineFaultStateCode = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'None'
-    2 = 'FailedToStart'
-    3 = 'StuckOnBoot'
-    4 = 'Unregistered'
-    5 = 'MaxCapacity'
-    6 = 'VirtualMachineNotFound'
-}
-
-# =========================
-# MachineRole
-# =========================
-$script:MachineRole = [PSCustomObject]@{
-    0 = 'Vda'
-    1 = 'Ddc'
-    2 = 'Both'
-}
-
-# =========================
-# PowerActionReasonCode
-# =========================
-$script:PowerActionReasonCode = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'Reset'
-    2 = 'Pvd'
-    3 = 'Schedule'
-    4 = 'Launch'
-    5 = 'Admin'
-    6 = 'Untaint'
-    7 = 'Policy'
-    8 = 'IdlePool'
-}
-
-# =========================
-# PowerActionTypeCode
-# =========================
-$script:PowerActionTypeCode = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'PowerOn'
-    2 = 'PowerOff'
-    3 = 'Shutdown'
-    4 = 'Reset'
-    5 = 'Restart'
-    6 = 'Suspend'
-    7 = 'Resume'
-}
-
-# =========================
-# ProvisioningType
-# =========================
-$script:ProvisioningType = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'MCS'
-    2 = 'PVS'
-    3 = 'Manual'
-}
-
-# =========================
-# PowerStateCode
-# =========================
-$script:PowerStateCode = [PSCustomObject]@{
-    0  = 'Unknown'
-    1  = 'Unavailable'
-    2  = 'Off'
-    3  = 'On'
-    4  = 'Suspended'
-    5  = 'TurningOn'
-    6  = 'TurningOff'
-    7  = 'Suspending'
-    8  = 'Resuming'
-    9  = 'Unmanaged'
-    10 = 'NotSupported'
-    11 = 'VirtualMachineNotFound'
-}
-
-# =========================
-# PersistentUserChangesType
-# =========================
-$script:PersistentUserChangesType = [PSCustomObject]@{
-    0 = 'Unknown'
-    1 = 'Discard'
-    2 = 'OnLocal'
-    3 = 'OnPvd'
-}
-
 $script:AllocationType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Static'
@@ -805,35 +508,24 @@ $script:PersistentUserChangesType = [PSCustomObject]@{
     2 = 'OnLocal'
     3 = 'OnPvd'
 }
-# =========================
-# RegistrationState
-# =========================
+
 $script:RegistrationState = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Registered'
     2 = 'Unregistered'
 }
 
-# =========================
-# SessionType
-# =========================
 $script:SessionType = [PSCustomObject]@{
     0 = 'Desktop'
     1 = 'Application'
 }
 
-# =========================
-# SessionSupportCode
-# =========================
 $script:SessionSupportCode = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'SingleSession'
     2 = 'MultiSession'
 }
 
-# =========================
-# CostType
-# =========================
 $script:CostType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'AssumedCost'
@@ -843,9 +535,6 @@ $script:CostType = [PSCustomObject]@{
     5 = 'ActualCost'
 }
 
-# =========================
-# CurrencyType
-# =========================
 $script:CurrencyType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'USD'
@@ -859,9 +548,6 @@ $script:CurrencyType = [PSCustomObject]@{
     9 = 'KRW'
 }
 
-# =========================
-# CostSavingsSummaryGranularity
-# =========================
 $script:CostSavingsSummaryGranularity = [PSCustomObject]@{
     0 = 'Hour'
     1 = 'Day'
@@ -869,9 +555,6 @@ $script:CostSavingsSummaryGranularity = [PSCustomObject]@{
     3 = 'DayLevelInMinutes'
 }
 
-# =========================
-# HypervisorType
-# =========================
 $script:HypervisorType = [PSCustomObject]@{
     0 = 'None'
     1 = 'Unknown'
@@ -884,9 +567,6 @@ $script:HypervisorType = [PSCustomObject]@{
     8 = 'VSphere'
 }
 
-# =========================
-# WorkspaceType
-# =========================
 $script:WorkspaceType = [PSCustomObject]@{
     0 = 'Unknown'
     1 = 'Windows'
@@ -895,6 +575,100 @@ $script:WorkspaceType = [PSCustomObject]@{
     4 = 'HTML5'
     5 = 'Chrome'
 }
+#endregion
+#region Test-CTXAPI_Header.ps1
+########### Private Function ###############
+# Source:           Test-CTXAPI_Header.ps1
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.33
+# Company:          Private
+# CreatedOn:        11/26/2024 11:41:08 AM
+# ModifiedOn:       2/27/2026 8:48:24 PM
+############################################
+
+<#PSScriptInfo
+
+.VERSION 1.1.8
+
+.GUID d87929c1-2616-47b9-8d67-f268794e9d11
+
+.AUTHOR Pierre Smit
+
+.COMPANYNAME Private
+
+.COPYRIGHT
+
+.TAGS
+
+.LICENSEURI
+
+.PROJECTURI
+
+.ICONURI
+
+.EXTERNALMODULEDEPENDENCIES 
+
+.REQUIREDSCRIPTS
+
+.EXTERNALSCRIPTDEPENDENCIES
+
+.RELEASENOTES
+
+
+.PRIVATEDATA
+
+#>
+
+<# 
+
+.DESCRIPTION 
+ Checks that the connection is still valid, and the token hasn't expired. 
+
+#> 
+
+
+
+<#
+.SYNOPSIS
+Checks that the connection is still valid, and the token hasn't expired.
+
+.DESCRIPTION
+Checks that the connection is still valid, and the token hasn't expired.
+
+.PARAMETER APIHeader
+Use Connect-CTXAPI to create headers.
+
+.PARAMETER AutoRenew
+If the token has expired, it will connect and renew the variable.
+
+.EXAMPLE
+Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew
+
+#>
+
+function Test-CTXAPI_Header {
+    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header')]
+    [Alias('Test-CTXAPI_Headers')]
+    [OutputType([System.Boolean])]
+    param(
+        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+        [switch]$AutoRenew = $false
+    )
+
+    $timeleft = [math]::Truncate(($APIHeader.TokenExpireAt - (Get-Date)).totalminutes)
+    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Time Left in min: $($timeleft)"
+    if ($timeleft -lt 0) {
+        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Token Update Needed"
+        if ($AutoRenew) {
+            Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Updating Token"
+            $APItmp = Connect-CTXAPI -Customer_Id $APIHeader.CTXAPI.Customer_Id -Client_Id $APIHeader.CTXAPI.Client_Id -Client_Secret $APIHeader.CTXAPI.Client_Secret -Customer_Name $APIHeader.CustomerName
+            Get-Variable | Where-Object { $_.value -like '*TokenExpireAt=*' -and $_.Name -notlike 'APItmp' } | Set-Variable -Value $APItmp -Force -Scope Script
+            return $true
+        } else { return $false }
+    } else { return $true }
+
+
+} #end Function
 #endregion
 #endregion
  
@@ -907,7 +681,7 @@ $script:WorkspaceType = [PSCustomObject]@{
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:06 AM
-# ModifiedOn:       2/18/2026 12:33:17 PM
+# ModifiedOn:       2/27/2026 8:47:29 PM
 # Synopsis:         Connects to Citrix Cloud and creates required API headers.
 #############################################
  
@@ -943,6 +717,9 @@ $APIHeader = Connect-CTXAPI @splat
 Connect-CTXAPI -Customer_Id "xxx" -Client_Id "xxx-xxx" -Client_Secret "yyyyyy==" -Customer_Name "Prod"
 Creates and returns a `CTXAPIHeaderObject`. Store it in a variable (e.g., `$APIHeader`) and pass to other cmdlets.
 
+.EXAMPLE
+Read-Host -AsSecureString -Prompt "Enter Citrix API Secret" | Export-Clixml -Path "C:\Temp\CTX_Secret.xml"
+$SecureSecret = Import-Clixml -Path "C:\Secure\CTX_Secret.xml"
 #>
 
 function Connect-CTXAPI {
@@ -953,15 +730,18 @@ function Connect-CTXAPI {
         [Parameter(Mandatory)]
         [string]$Client_Id,
         [Parameter(Mandatory)]
-        [string]$Client_Secret,
+        [securestring]$Client_Secret,
         [Parameter(Mandatory)]
         [string]$Customer_Name
     )
 
+    $PlainSecret = [System.Net.NetworkCredential]::new('', $Client_Secret).Password
+
+
     $body = @{
         grant_type    = 'client_credentials'
         client_id     = $Client_Id
-        client_secret = $Client_Secret
+        client_secret = $PlainSecret
     }
 
     $headers = @{
@@ -1002,7 +782,7 @@ Export-ModuleMember -Function Connect-CTXAPI
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:56 AM
-# ModifiedOn:       2/22/2026 2:50:04 PM
+# ModifiedOn:       2/27/2026 9:29:05 PM
 # Synopsis:         Returns details about published applications (handles pagination).
 #############################################
  
@@ -1045,6 +825,9 @@ function Get-CTXAPI_Application {
 		[PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
 
+	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
 	$requestUri = 'https://api.cloud.com/cvad/manage/Applications?limit=1000'
 	$data = Get-CTXAPIDatapages -APIHeader $APIHeader -uri $requestUri
 	return $data
@@ -1062,7 +845,7 @@ Export-ModuleMember -Function Get-CTXAPI_Application
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:40 AM
-# ModifiedOn:       2/18/2026 1:44:53 PM
+# ModifiedOn:       2/27/2026 8:54:02 PM
 # Synopsis:         Returns details about cloud services and subscription.
 #############################################
  
@@ -1104,6 +887,10 @@ function Get-CTXAPI_CloudService {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
     (Invoke-RestMethod -Uri "https://core.citrixworkspacesapi.net/$($ApiHeader.headers.'Citrix-CustomerId')/serviceStates" -Headers $ApiHeader.headers).items
 
 } #end Function
@@ -1119,7 +906,7 @@ Export-ModuleMember -Function Get-CTXAPI_CloudService
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:14 AM
-# ModifiedOn:       2/18/2026 11:22:22 AM
+# ModifiedOn:       2/27/2026 8:54:06 PM
 # Synopsis:         Returns high-level configuration changes in the last X days.
 #############################################
  
@@ -1165,6 +952,8 @@ function Get-CTXAPI_ConfigLog {
         [string]$Days)
 
         
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     (Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations?days=$days" -Headers $APIHeader.headers).items
 
@@ -1181,7 +970,7 @@ Export-ModuleMember -Function Get-CTXAPI_ConfigLog
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:59 AM
-# ModifiedOn:       2/22/2026 1:20:26 PM
+# ModifiedOn:       2/27/2026 8:54:10 PM
 # Synopsis:         Returns details about Delivery Groups (handles pagination).
 #############################################
  
@@ -1224,6 +1013,8 @@ function Get-CTXAPI_DeliveryGroup {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
 
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     
     $requestUri = 'https://api.cloud.com/cvad/manage/DeliveryGroups?limit=1000'
@@ -1242,7 +1033,7 @@ Export-ModuleMember -Function Get-CTXAPI_DeliveryGroup
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:11 AM
-# ModifiedOn:       2/22/2026 1:20:55 PM
+# ModifiedOn:       2/27/2026 8:54:14 PM
 # Synopsis:         Returns details about hosting (hypervisor) connections (handles pagination).
 #############################################
  
@@ -1285,6 +1076,10 @@ function Get-CTXAPI_Hypervisor {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
 
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
     $requestUri = 'https://api.cloud.com/cvad/manage/hypervisors?limit=1000'
     $data = Get-CTXAPIDatapages -APIHeader $APIHeader -uri $requestUri
     return $data
@@ -1301,7 +1096,7 @@ Export-ModuleMember -Function Get-CTXAPI_Hypervisor
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:53 AM
-# ModifiedOn:       2/18/2026 10:39:53 AM
+# ModifiedOn:       2/27/2026 8:54:42 PM
 # Synopsis:         Returns details about low-level configuration changes (more detailed).
 #############################################
  
@@ -1350,6 +1145,10 @@ function Get-CTXAPI_LowLevelOperation {
         [ValidateNotNullOrEmpty()]
         [string]$HighLevelID)
 
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
     (Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/ConfigLog/Operations/$($HighLevelID)/LowLevelOperations" -Method get -Headers $APIHeader.headers).items
 
 
@@ -1366,7 +1165,7 @@ Export-ModuleMember -Function Get-CTXAPI_LowLevelOperation
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:38 AM
-# ModifiedOn:       2/22/2026 1:32:26 PM
+# ModifiedOn:       2/27/2026 8:54:46 PM
 # Synopsis:         Returns details about VDA machines (handles pagination).
 #############################################
  
@@ -1413,6 +1212,8 @@ function Get-CTXAPI_Machine {
         [Alias('DNSName', 'Id')]
         [string[]]$Name
     )
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     if ($PSBoundParameters.ContainsKey('Name')) {
         [System.Collections.generic.List[PSObject]]$MachineObject = @()
@@ -1448,7 +1249,7 @@ Export-ModuleMember -Function Get-CTXAPI_Machine
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:43 AM
-# ModifiedOn:       2/22/2026 1:21:20 PM
+# ModifiedOn:       2/27/2026 8:54:52 PM
 # Synopsis:         Returns details about Machine Catalogs (handles pagination).
 #############################################
  
@@ -1490,6 +1291,10 @@ function Get-CTXAPI_MachineCatalog {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
 
+        
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
 
     $requestUri = 'https://api.cloud.com/cvad/manage/MachineCatalogs?limit=1000'
     $data = Get-CTXAPIDatapages -APIHeader $APIHeader -uri $requestUri
@@ -1507,7 +1312,7 @@ Export-ModuleMember -Function Get-CTXAPI_MachineCatalog
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:30 AM
-# ModifiedOn:       2/25/2026 8:55:31 AM
+# ModifiedOn:       2/27/2026 8:55:01 PM
 # Synopsis:         Collect Monitoring OData for other reports.
 #############################################
  
@@ -1574,7 +1379,6 @@ function Get-CTXAPI_MonitorData {
             'Applications',
             'Catalogs',
             'ConnectionFailureLogs',
-            'ConnectionFailureCategories',
             'Connections',
             'DesktopGroups',
             'DesktopOSDesktopSummaries',
@@ -1586,6 +1390,7 @@ function Get-CTXAPI_MonitorData {
             'MachineCostSavingsSummaries',
             'MachineFailureLogs',
             'MachineMetric',
+            'MachineSummaries',
             'Machines',
             'ResourceUtilization',
             'ResourceUtilizationSummary',
@@ -1600,6 +1405,9 @@ function Get-CTXAPI_MonitorData {
         [string[]]$MonitorDetails = 'All'
     )
     
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
     Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
     if ($PSCmdlet.ParameterSetName -eq 'hours' -and $null -ne $LastHours) {
         $BeginDate = Get-Date
@@ -1611,8 +1419,8 @@ function Get-CTXAPI_MonitorData {
         throw 'Specify either -LastHours or both -BeginDate and -EndDate.'
     }
 
-    $BeginDateStr = $BeginDate.ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
-    $EndDateStr = $EndDate.ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
+    $BeginDateStr = ($BeginDate.ToUniversalTime()).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
+    $EndDateStr = ($EndDate.ToUniversalTime()).ToString('yyyy-MM-ddTHH:mm:ss.ffffZ')
 
     # Initialize all potential datasets to avoid strict-mode errors when not selected
     $ApplicationActivitySummaries = $null
@@ -1620,7 +1428,6 @@ function Get-CTXAPI_MonitorData {
     $Applications = $null
     $Catalogs = $null
     $ConnectionFailureLogs = $null
-    $ConnectionFailureCategories = $null
     $Connections = $null
     $DesktopGroups = $null
     $DesktopOSDesktopSummaries = $null
@@ -1632,6 +1439,7 @@ function Get-CTXAPI_MonitorData {
     $MachineCostSavingsSummaries = $null
     $MachineFailureLogs = $null
     $MachineMetric = $null
+    $MachineSummaries = $null
     $Machines = $null
     $ResourceUtilization = $null
     $ResourceUtilizationSummary = $null
@@ -1648,7 +1456,6 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Applications')) {$Applications = Export-Odata -URI ('https://api.cloud.com/monitorodata/Applications') -headers $APIHeader.headers                                                                                                                                }
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Catalogs')) {$Catalogs = Export-Odata -URI ('https://api.cloud.com/monitorodata/Catalogs') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ConnectionFailureLogs')) {$ConnectionFailureLogs = Export-Odata -URI ('https://api.cloud.com/monitorodata/ConnectionFailureLogs?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
-    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ConnectionFailureCategories')) {$ConnectionFailureCategories = Export-Odata -URI ('https://api.cloud.com/monitorodata/ConnectionFailureCategories') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Connections')) {$Connections = Export-Odata -URI ('https://api.cloud.com/monitorodata/Connections?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'DesktopGroups')) {$DesktopGroups = Export-Odata -URI ('https://api.cloud.com/monitorodata/DesktopGroups') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'DesktopOSDesktopSummaries')) {$DesktopOSDesktopSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/DesktopOSDesktopSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
@@ -1658,9 +1465,11 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'LogOnMetrics')) {$LogOnMetrics = Export-Odata -URI ('https://api.cloud.com/monitorodata/LogOnMetrics?$filter=(UserInitStartDate ge ' + $EndDateStr + ' and UserInitStartDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'LogOnSummaries')) {$LogOnSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/LogOnSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineCosts')) {$MachineCosts = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineCosts') -headers $APIHeader.headers}
-    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineCostSavingsSummaries')) {$MachineCostSavingsSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineCostSavingsSummaries?$filter=(SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
+    #TODO Report on machine costs
+    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineCostSavingsSummaries')) {$MachineCostSavingsSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineCostSavingsSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineFailureLogs')) {$MachineFailureLogs = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineFailureLogs?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineMetric')) {$MachineMetric = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineMetric?$filter=(CollectedDate ge ' + $EndDateStr + ' and CollectedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
+    if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'MachineSummaries')) {$MachineSummaries = Export-Odata -URI ('https://api.cloud.com/monitorodata/MachineSummaries?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Machines')) {$Machines = Export-Odata -URI ('https://api.cloud.com/monitorodata/Machines') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ResourceUtilization')) {$ResourceUtilization = Export-Odata -URI ('https://api.cloud.com/monitorodata/ResourceUtilization?$filter=(ModifiedDate ge ' + $EndDateStr + ' and ModifiedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'ResourceUtilizationSummary')) {$ResourceUtilizationSummary = Export-Odata -URI ('https://api.cloud.com/monitorodata/ResourceUtilizationSummary?$filter=(Granularity eq 60 and SummaryDate ge ' + $EndDateStr + ' and SummaryDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers}
@@ -1673,6 +1482,7 @@ function Get-CTXAPI_MonitorData {
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'SessionMetricsLatest')) {$SessionMetricsLatest = Export-Odata -URI ('https://api.cloud.com/monitorodata/SessionMetricsLatest?$filter=(CreatedDate ge ' + $EndDateStr + ' and CreatedDate le ' + $BeginDateStr + ' )') -headers $APIHeader.headers -verbose}
     if (($MonitorDetails -contains 'All') -or ($MonitorDetails -contains 'Users')) {$Users = Export-Odata -URI ('https://api.cloud.com/monitorodata/Users') -headers $APIHeader.headers}
 
+
     Write-Verbose "[$(Get-Date -Format HH:mm:ss)] Building composite object with retrieved datasets..."
     $datasets = [pscustomobject]@{
         PSTypeName = 'CTXMonitorData'
@@ -1682,7 +1492,6 @@ function Get-CTXAPI_MonitorData {
     if ($null -ne $Applications) { $datasets | Add-Member -NotePropertyName 'Applications' -NotePropertyValue $Applications }
     if ($null -ne $Catalogs) { $datasets | Add-Member -NotePropertyName 'Catalogs' -NotePropertyValue $Catalogs }
     if ($null -ne $ConnectionFailureLogs) { $datasets | Add-Member -NotePropertyName 'ConnectionFailureLogs' -NotePropertyValue $ConnectionFailureLogs }
-    if ($null -ne $ConnectionFailureCategories) { $datasets | Add-Member -NotePropertyName 'ConnectionFailureCategories' -NotePropertyValue $ConnectionFailureCategories }
     if ($null -ne $Connections) { $datasets | Add-Member -NotePropertyName 'Connections' -NotePropertyValue $Connections }
     if ($null -ne $DesktopGroups) { $datasets | Add-Member -NotePropertyName 'DesktopGroups' -NotePropertyValue $DesktopGroups }
     if ($null -ne $DesktopOSDesktopSummaries) { $datasets | Add-Member -NotePropertyName 'DesktopOSDesktopSummaries' -NotePropertyValue $DesktopOSDesktopSummaries }
@@ -1694,6 +1503,7 @@ function Get-CTXAPI_MonitorData {
     if ($null -ne $MachineCostSavingsSummaries) { $datasets | Add-Member -NotePropertyName 'MachineCostSavingsSummaries' -NotePropertyValue $MachineCostSavingsSummaries }
     if ($null -ne $MachineFailureLogs) { $datasets | Add-Member -NotePropertyName 'MachineFailureLogs' -NotePropertyValue $MachineFailureLogs }
     if ($null -ne $MachineMetric) { $datasets | Add-Member -NotePropertyName 'MachineMetric' -NotePropertyValue $MachineMetric }
+    if ($null -ne $MachineSummaries) { $datasets | Add-Member -NotePropertyName 'MachineSummaries' -NotePropertyValue $MachineSummaries }
     if ($null -ne $Machines) { $datasets | Add-Member -NotePropertyName 'Machines' -NotePropertyValue $Machines }
     if ($null -ne $ResourceUtilization) { $datasets | Add-Member -NotePropertyName 'ResourceUtilization' -NotePropertyValue $ResourceUtilization }
     if ($null -ne $ResourceUtilizationSummary) { $datasets | Add-Member -NotePropertyName 'ResourceUtilizationSummary' -NotePropertyValue $ResourceUtilizationSummary }
@@ -1722,7 +1532,7 @@ Export-ModuleMember -Function Get-CTXAPI_MonitorData
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:33 AM
-# ModifiedOn:       2/18/2026 1:45:33 PM
+# ModifiedOn:       2/27/2026 8:55:07 PM
 # Synopsis:         Returns cloud Resource Locations.
 #############################################
  
@@ -1764,6 +1574,8 @@ function Get-CTXAPI_ResourceLocation {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader)
 
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     (Invoke-RestMethod -Uri "https://registry.citrixworkspacesapi.net/$($APIHeader.headers.'Citrix-CustomerId')/resourcelocations" -Headers $APIHeader.headers).items
 
@@ -1780,7 +1592,7 @@ Export-ModuleMember -Function Get-CTXAPI_ResourceLocation
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:41:28 AM
-# ModifiedOn:       2/22/2026 1:21:52 PM
+# ModifiedOn:       2/27/2026 8:55:12 PM
 # Synopsis:         Returns details about current sessions (handles pagination).
 #############################################
  
@@ -1822,6 +1634,10 @@ function Get-CTXAPI_Session {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
     $requestUri = 'https://api.cloud.com/cvad/manage/Sessions?limit=1000'
     $data = Get-CTXAPIDatapages -APIHeader $APIHeader -uri $requestUri
     return $data
@@ -1838,7 +1654,7 @@ Export-ModuleMember -Function Get-CTXAPI_Session
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:39 AM
-# ModifiedOn:       2/18/2026 1:45:56 PM
+# ModifiedOn:       2/27/2026 8:55:18 PM
 # Synopsis:         Returns details about your CVAD site.
 #############################################
  
@@ -1880,6 +1696,10 @@ function Get-CTXAPI_SiteDetail {
         [Parameter(Mandatory = $true)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
 
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
     Invoke-RestMethod -Uri "https://api.cloud.com/cvad/manage/Sites/$($APIHeader.headers.'Citrix-InstanceId')" -Method get -Headers $APIHeader.headers
 
 
@@ -1897,7 +1717,7 @@ Export-ModuleMember -Function Get-CTXAPI_SiteDetail
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:45 AM
-# ModifiedOn:       2/23/2026 7:33:57 AM
+# ModifiedOn:       2/27/2026 8:55:30 PM
 # Synopsis:         
 Get-CTXAPI_VDAUptime [-APIHeader] <CTXAPIHeaderObject> [[-Export] <string>] [[-ReportPath] <DirectoryInfo>] [<CommonParameters>]
 
@@ -1956,6 +1776,11 @@ function Get-CTXAPI_VDAUptime {
         [ValidateScript( { (Test-Path $_) })]
         [System.IO.DirectoryInfo]$ReportPath = $env:temp)
 
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
+    
     Write-Verbose "Starting Get-CTXAPI_VDAUptime with Export: $Export and ReportPath: $ReportPath"
     try {
         [System.Collections.generic.List[PSObject]]$complist = @()
@@ -2045,7 +1870,7 @@ Export-ModuleMember -Function Get-CTXAPI_VDAUptime
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        11/26/2024 11:40:48 AM
-# ModifiedOn:       2/22/2026 1:22:32 PM
+# ModifiedOn:       2/27/2026 8:55:35 PM
 # Synopsis:         Returns Zone details (handles pagination).
 #############################################
  
@@ -2086,6 +1911,8 @@ function Get-CTXAPI_Zone {
     param(
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader
     )
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     $requestUri = 'https://api.cloud.com/cvad/manage/Zones?limit=1000'
     $data = Get-CTXAPIDatapages -APIHeader $APIHeader -uri $requestUri
@@ -2103,7 +1930,7 @@ Export-ModuleMember -Function Get-CTXAPI_Zone
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        2/19/2026 12:01:45 PM
-# ModifiedOn:       2/22/2026 2:00:02 PM
+# ModifiedOn:       2/27/2026 8:55:41 PM
 # Synopsis:         Creates and adds new machines to a Citrix Cloud Delivery Group.
 #############################################
  
@@ -2150,6 +1977,8 @@ function New-CTXAPI_Machine {
 		[Parameter(Mandatory = $true)]
 		[int]$AmountOfMachines
 	)
+	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 	Write-Verbose "Retrieving Machine Catalog ID for: $MachineCatalogName"
 	$catid = Get-CTXAPI_MachineCatalog -APIHeader $APIHeader | Where-Object Name -EQ $MachineCatalogName
@@ -2228,7 +2057,7 @@ Export-ModuleMember -Function New-CTXAPI_Machine
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        2/26/2026 10:38:39 AM
-# ModifiedOn:       2/26/2026 10:41:39 AM
+# ModifiedOn:       2/27/2026 8:55:49 PM
 # Synopsis:         Generate Citrix Cloud monitoring reports in multiple formats (Host, Excel, HTML).
 #############################################
  
@@ -2315,6 +2144,8 @@ function New-CTXAPI_Report {
 		[ValidateScript( { (Test-Path $_) })]
 		[System.IO.DirectoryInfo]$ReportPath = $env:temp
 	)
+	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 	if ($PSBoundParameters.ContainsKey('MonitorData')) {
 		Write-Verbose 'Using provided MonitorData.'
@@ -2332,7 +2163,6 @@ function New-CTXAPI_Report {
 	$MachineReportObject = $null
 	$PerHourLoginDurationReportObject = $null
 	$TotalLoginDurationReportObject = $null
-
 
 
 	if (($PSBoundParameters['ReportType'] -contains 'ConnectionFailureReport') -or ($PSBoundParameters['ReportType'] -contains 'All')) {
@@ -2353,7 +2183,6 @@ function New-CTXAPI_Report {
 				$IsInMaintenanceMode = $log.IsInMaintenanceMode
 				$PowerState = $script:PowerStateCode.([int]$log.PowerState)
 				$RegistrationState = $script:RegistrationState.([int]$log.RegistrationState)
-				$FailureId = $script:SessionFailureCode.([int]$session.FailureId)
 				$ConnectionState = $script:ConnectionState.([int]$session.ConnectionState)
 				$LifecycleState = $script:LifecycleState.([int]$session.LifecycleState)
 				$SessionType = $script:SessionType.([int]$session.SessionType)
@@ -2365,7 +2194,6 @@ function New-CTXAPI_Report {
 						IsInMaintenanceMode        = Check-Variable -VariableName $IsInMaintenanceMode
 						PowerState                 = Check-Variable -VariableName $PowerState
 						RegistrationState          = Check-Variable -VariableName $RegistrationState
-						FailureId                  = Check-Variable -VariableName $FailureId
 						ConnectionState            = Check-Variable -VariableName $ConnectionState
 						LifecycleState             = Check-Variable -VariableName $LifecycleState
 						SessionType                = Check-Variable -VariableName $SessionType
@@ -2388,23 +2216,24 @@ function New-CTXAPI_Report {
 		foreach ($log in $AllMachineFailureLogs) {
 			try {
 				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineFailureReport] $($AllMachineFailureLogs.IndexOf($log) + 1) of $($AllMachineFailureLogs.Count)"
-				$MonDataMachine = $monitordata.machines | Where-Object { $_.id -like $log.MachineId }
-				$MachinesFiltered = $machines | Where-Object {$_.Name -like $MonDataMachine.Name }
+				$MachinesFiltered = $monitordata.machines | Where-Object { $_.id -like $log.MachineId }
 
-				$DnsName = $MonDataMachine.DnsName
-				$AssociatedUserNames = $MonDataMachine.AssociatedUserNames
-				$OSType = $MonDataMachine.OSType
-				$IsAssigned = $MonDataMachine.IsAssigned
+				$DnsName = $MachinesFiltered.DnsName
+				$AssociatedUserNames = $MachinesFiltered.AssociatedUserNames
+				$OSType = $MachinesFiltered.OSType
+				$IsAssigned = $MachinesFiltered.IsAssigned
 				$FailureStartDate = $log.FailureStartDate
 				$FailureEndDate = $log.FailureEndDate
-				$FaultState = $MachineFaultStateCode.([int]$log.FaultState)
+				$FailureReason = $script:MachineFaultStateCode.([int]$log.FaultState)
 				$LastDeregistrationReason = $script:MachineDeregistration.([int]$MachinesFiltered.LastDeregisteredCode)
-				$LastDeregisteredDate = $MonDataMachine.LastDeregisteredDate
-				$LastPowerActionCompletedDate = $MonDataMachine.LastPowerActionCompletedDate
-				$LastPowerActionFailureReason = $script:MachineDeregistration.([int]$MonDataMachine.LastPowerActionFailureReason)
+				$LastDeregisteredDate = $MachinesFiltered.LastDeregisteredDate
+				$LastPowerActionType = $script:PowerActionTypeCode.([int]$MachinesFiltered.LastPowerActionType)
+				$LastPowerActionReason = $script:PowerActionReasonCode.([int]$MachinesFiltered.LastPowerActionReason)
+				$LastPowerActionFailureReason = $script:MachineDeregistration.([int]$MachinesFiltered.LastPowerActionFailureReason)
+				$LastPowerActionCompletedDate = $MachinesFiltered.LastPowerActionCompletedDate
 				$CurrentFaultState = $script:MachineFaultStateCode.([int]$MachinesFiltered.FaultState)
-				$IsInMaintenanceMode = $MachinesFiltered.IsInMaintenanceMode
-				$RegistrationState = $script:RegistrationState.([int]$MachinesFiltered.CurrentRegistrationState)
+				$CurrentIsInMaintenanceMode = $MachinesFiltered.IsInMaintenanceMode
+				$CurrentRegistrationState = $script:RegistrationState.([int]$MachinesFiltered.CurrentRegistrationState)
 
 				$MachineFailureReportObject.Add([PSCustomObject]@{
 						Name                         = Check-Variable -VariableName $DnsName
@@ -2413,14 +2242,16 @@ function New-CTXAPI_Report {
 						IsAssigned                   = Check-Variable -VariableName $IsAssigned
 						FailureStartDate             = Check-Variable -VariableName $FailureStartDate
 						FailureEndDate               = Check-Variable -VariableName $FailureEndDate
-						FaultState                   = Check-Variable -VariableName $FaultState
+						FailureReason                = Check-Variable -VariableName $FailureReason
 						LastDeregistrationReason     = Check-Variable -VariableName $LastDeregistrationReason
 						LastDeregisteredDate         = Check-Variable -VariableName $LastDeregisteredDate
-						LastPowerActionCompletedDate = Check-Variable -VariableName $LastPowerActionCompletedDate
+						LastPowerActionType          = Check-Variable -VariableName $LastPowerActionType
+						LastPowerActionReason        = Check-Variable -VariableName $LastPowerActionReason
 						LastPowerActionFailureReason = Check-Variable -VariableName $LastPowerActionFailureReason
+						LastPowerActionCompletedDate = Check-Variable -VariableName $LastPowerActionCompletedDate
 						CurrentFaultState            = Check-Variable -VariableName $CurrentFaultState
-						InMaintenanceMode            = Check-Variable -VariableName $IsInMaintenanceMode
-						RegistrationState            = Check-Variable -VariableName $RegistrationState
+						CurrentIsInMaintenanceMode   = Check-Variable -VariableName $IsInMaintenanceMode
+						CurrentRegistrationState     = Check-Variable -VariableName $CurrentRegistrationState
 					})
 			} catch {
 				Write-Warning "[MachineFailureReport] Error processing session metrics.- SessionKey: $($log.MachineId)"
@@ -2443,7 +2274,7 @@ function New-CTXAPI_Report {
 				Write-Verbose "[$(Get-Date -Format HH:mm:ss) PROCESS] $($AllSessions.IndexOf($session) + 1) of $($AllSessions.Count)"
 				$machine = $monitordata.machines | Where-Object { $_.Id -like $session.MachineId }
 				$user = $monitordata.users | Where-Object { $_.Id -like $session.UserId }
-				
+				##todo use sessions.currentconnectionid $monitordata.Connections | Where-Object { $_.id -like "8238504" }
 				$FilterConnect = $ColGroup | Where-Object { $_.Name -like $session.SessionKey } 
 				[System.Collections.generic.List[PSObject]]$Connections = @()
 				if ($FilterConnect) {
@@ -2451,8 +2282,8 @@ function New-CTXAPI_Report {
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Connections] $($FilterConnect.Count) connections found for session $($session.SessionKey)"
 					$ConnectionState = $script:ConnectionState.([int]$session.ConnectionState)
 					$IsReconnect = $Connections[-1].IsReconnect
-					$AuthenticationDuration = ($Connections.AuthenticationDuration | Measure-Object -Sum).Sum
-					$BrokeringDuration = ($Connections.BrokeringDuration | Measure-Object -Sum).Sum
+					$AuthenticationDuration = (($Connections.AuthenticationDuration | Measure-Object -Sum).Sum / 1000) 
+					$BrokeringDuration = (($Connections.BrokeringDuration | Measure-Object -Sum).Sum / 1000)
 					$WorkspaceType = $script:WorkspaceType.([int]$Connections[-1].WorkspaceType)
 					$ClientLocationCountry = $Connections[-1].ClientLocationCountry
 					$ClientPlatform = $Connections[-1].ClientPlatform
@@ -2470,8 +2301,8 @@ function New-CTXAPI_Report {
 				[System.Collections.generic.List[PSObject]]$SessionMetrics = @()
 				if ($FilterMetrics) { 
 					$FilterMetrics.Group | ForEach-Object { $SessionMetrics.Add($_) } 
-					$IcaLatency = [math]::Round(($SessionMetrics.icaLatency | Measure-Object -Average).Average)	
-					$IcaRttMS = [math]::Round(($SessionMetrics.icaRttMS | Measure-Object -Average).Average)
+					$IcaLatency = [math]::Round((($SessionMetrics.icaLatency | Measure-Object -Average).Average))
+					$IcaRttMS = [math]::Round((($SessionMetrics.icaRttMS | Measure-Object -Average).Average))
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Metrics] $($FilterMetrics.Count) metrics found for session $($session.SessionKey)"
 				} else {
 					Write-Verbose "[$(Get-Date -Format HH:mm:ss)] [Metrics] No metrics found for session $($session.SessionKey)"
@@ -2481,8 +2312,8 @@ function New-CTXAPI_Report {
 				$MachineName = if ($machine) { $machine.Name } else { $null }
 				$User = if ($user) { $user.Upn } else { $null }
 
-				$LogOnDuration = $session.LogOnDuration
-				$ClientLogOnDuration = $session.ClientLogOnDuration
+				$LogOnDuration = if ($session.LogOnDuration -ne $null) { [math]::Round($session.LogOnDuration / 1000) } else { $null }
+				$ClientLogOnDuration = if ($session.ClientLogOnDuration -ne $null) { [math]::Round($session.ClientLogOnDuration / 1000) } else { $null }
 
 				$FailureId = $script:SessionFailureCode.([int]$session.FailureId)
 				$FailureDate = $session.FailureDate
@@ -2527,7 +2358,7 @@ function New-CTXAPI_Report {
 			try {
 				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineReport] $($machineList.IndexOf($machine) + 1) of $($machineList.Count)"
 				$resourceUtilization = $monitordata.ResourceUtilizationSummary | Where-Object { $_.MachineId -like $machine.id }
-				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineReport] `t`t ResourceUtilizationSummary - $($resourceUtilization.count)"
+				Write-Verbose "[$(Get-Date -Format HH:mm:ss) MachineReport] `t`t ResourceUtilizationSummary"
 				$catalog = $monitordata.catalogs | Where-Object { $_.Id -like $machine.CatalogId }
 				$desktopGroup = $monitordata.DesktopGroups | Where-Object { $_.Id -like $machine.DesktopGroupId }
 
@@ -2606,18 +2437,18 @@ function New-CTXAPI_Report {
 						$DesktopGroup = $MonitorData.DesktopGroups | Where-Object { $_.Id -like $Perhour.DesktopGroupId }
 
 						$CollectDate = Convert-UTCtoLocal -Time $Perhour.SummaryDate
-						$Hour = $CollectDate.ToString('HH:00')
+						$Hour = $CollectDate.Hour
 						$DesktopGroupName = $DesktopGroup.Name
 						$TotalHourLogins = $Perhour.TotalCount
-						$AvgBrokeringDuration = Calc-Avg -Duration $Perhour.BrokeringDuration -Count $Perhour.TotalCount
-						$avgVMPowerOnDuration = Calc-Avg -Duration $Perhour.VMPowerOnDuration -Count $Perhour.TotalCount
-						$avgVMRegistrationDuration = Calc-Avg -Duration $Perhour.VMRegistrationDuration -Count $Perhour.TotalCount
-						$avgAuthenticationDuration = Calc-Avg -Duration $Perhour.AuthenticationDuration -Count $Perhour.TotalCount
-						$avgGpoDuration = Calc-Avg -Duration $Perhour.GpoDuration -Count $Perhour.TotalCount
-						$avgLogOnScriptsDuration = Calc-Avg -Duration $Perhour.LogOnScriptsDuration -Count $Perhour.TotalCount
-						$avgInteractiveDuration = Calc-Avg -Duration $Perhour.InteractiveDuration -Count $Perhour.TotalCount
-						$avgProfileLoadDuration = Calc-Avg -Duration $Perhour.ProfileLoadDuration -Count $Perhour.TotalCount
-						$avgClientLogOnDuration = Calc-Avg -Duration $Perhour.ClientLogOnDuration -Count $Perhour.TotalCount
+						$AvgBrokeringDuration = Calc-Avg -Duration $Perhour.BrokeringDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgVMPowerOnDuration = Calc-Avg -Duration $Perhour.VMPowerOnDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgVMRegistrationDuration = Calc-Avg -Duration $Perhour.VMRegistrationDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgAuthenticationDuration = Calc-Avg -Duration $Perhour.AuthenticationDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgGpoDuration = Calc-Avg -Duration $Perhour.GpoDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgLogOnScriptsDuration = Calc-Avg -Duration $Perhour.LogOnScriptsDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgInteractiveDuration = Calc-Avg -Duration $Perhour.InteractiveDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgProfileLoadDuration = Calc-Avg -Duration $Perhour.ProfileLoadDuration -Count $Perhour.TotalCount -ToSeconds
+						$avgClientLogOnDuration = Calc-Avg -Duration $Perhour.ClientLogOnDuration -Count $Perhour.TotalCount -ToSeconds
 				
 						$PerHourLoginDurationReportObject.Add([PSCustomObject]@{
 								CollectDate               = Check-Variable -VariableName $CollectDate
@@ -2644,16 +2475,16 @@ function New-CTXAPI_Report {
 
 				
 				$DesktopGroupName = $DesktopGroup.Name
-				$TotalDuration = [math]::Round(($login.Group | Measure-Object -Property TotalDuration -Sum).Sum)
+				$TotalDuration = [math]::Round(($login.Group | Measure-Object -Property TotalDuration -Sum).Sum / 1000)
 				$TotalCount = ($login.Group | Measure-Object -Property TotalCount -Sum).Sum
-				$BrokeringDuration = [math]::Round(($login.Group | Measure-Object -Property BrokeringDuration -Sum).Sum)
-				$VMPowerOnDuration = [math]::Round(($login.Group | Measure-Object -Property VMPowerOnDuration -Sum).Sum)
-				$VMRegistrationDuration = [math]::Round(($login.Group | Measure-Object -Property VMRegistrationDuration -Sum).Sum)
-				$AuthenticationDuration = [math]::Round(($login.Group | Measure-Object -Property AuthenticationDuration -Sum).Sum)
-				$GpoDuration = [math]::Round(($login.Group | Measure-Object -Property GpoDuration -Sum).Sum)
-				$InteractiveDuration = [math]::Round(($login.Group | Measure-Object -Property InteractiveDuration -Sum).Sum)
-				$ProfileLoadDuration = [math]::Round(($login.Group | Measure-Object -Property ProfileLoadDuration -Sum).Sum)
-				$ClientLogOnDuration = [math]::Round(($login.Group | Measure-Object -Property ClientLogOnDuration -Sum).Sum)
+				$BrokeringDuration = [math]::Round(($login.Group | Measure-Object -Property BrokeringDuration -Sum).Sum / 1000)
+				$VMPowerOnDuration = [math]::Round(($login.Group | Measure-Object -Property VMPowerOnDuration -Sum).Sum / 1000)
+				$VMRegistrationDuration = [math]::Round(($login.Group | Measure-Object -Property VMRegistrationDuration -Sum).Sum / 1000)
+				$AuthenticationDuration = [math]::Round(($login.Group | Measure-Object -Property AuthenticationDuration -Sum).Sum / 1000)
+				$GpoDuration = [math]::Round(($login.Group | Measure-Object -Property GpoDuration -Sum).Sum / 1000)
+				$InteractiveDuration = [math]::Round(($login.Group | Measure-Object -Property InteractiveDuration -Sum).Sum / 1000)
+				$ProfileLoadDuration = [math]::Round(($login.Group | Measure-Object -Property ProfileLoadDuration -Sum).Sum / 1000)
+				$ClientLogOnDuration = [math]::Round(($login.Group | Measure-Object -Property ClientLogOnDuration -Sum).Sum / 1000)
 				$StartSumDate = Convert-UTCtoLocal $login.Group.SummaryDate[0]
 				$EndSumDate = Convert-UTCtoLocal $login.Group.SummaryDate[-1]
 
@@ -2684,7 +2515,6 @@ function New-CTXAPI_Report {
 		}
 	}
 
-
 	$ReturnObject = [pscustomobject]@{}
 	if ($null -ne $ConnectionFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'ConnectionFailureReport' -NotePropertyValue $ConnectionFailureReportObject }
 	if ($null -ne $MachineFailureReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineFailureReport' -NotePropertyValue $MachineFailureReportObject }
@@ -2692,6 +2522,7 @@ function New-CTXAPI_Report {
 	if ($null -ne $MachineReportObject) { $ReturnObject | Add-Member -NotePropertyName 'MachineReport' -NotePropertyValue $MachineReportObject }
 	if ($null -ne $PerHourLoginDurationReportObject) { $ReturnObject | Add-Member -NotePropertyName 'PerHourLoginDurationReport' -NotePropertyValue $PerHourLoginDurationReportObject }
 	if ($null -ne $TotalLoginDurationReportObject) { $ReturnObject | Add-Member -NotePropertyName 'TotalLoginDurationReport' -NotePropertyValue $TotalLoginDurationReportObject }
+
 
 	if ($PSBoundParameters.ContainsKey('Export') -and $Export -contains 'Host') {
 		Write-Verbose 'Returning report object to host.'
@@ -2792,15 +2623,129 @@ function New-CTXAPI_Report {
 Export-ModuleMember -Function New-CTXAPI_Report
 #endregion
  
-#region Set-CTXAPI_MachinePowerState.ps1
+#region Set-CTXAPI_MachineMaintenanceMode.ps1
 ######## Function 18 of 19 ##################
+# Function:         Set-CTXAPI_MachineMaintenanceMode
+# Module:           CTXCloudApi
+# ModuleVersion:    0.1.33
+# Author:           Pierre Smit
+# Company:          Private
+# CreatedOn:        2/27/2026 8:37:09 PM
+# ModifiedOn:       2/27/2026 9:32:04 PM
+# Synopsis:         Enables or disables Maintenance Mode for Citrix machines via CTX API, with an optional reason.
+#############################################
+ 
+<#
+.SYNOPSIS
+Enables or disables Maintenance Mode for Citrix machines via CTX API, with an optional reason.
+
+.DESCRIPTION
+This function allows you to remotely toggle the Maintenance Mode state of Citrix machines using the CTX API. You can modify one or more machines by specifying their name, DNS name, or ID.
+
+.PARAMETER APIHeader
+The CTX API authentication header object (type CTXAPIHeaderObject) required for API calls.
+
+.PARAMETER Name
+The name, DNS name, or ID of the Citrix Machine(s) to target. Accepts an array of strings.
+
+.PARAMETER InMaintenanceMode
+Boolean value to set the maintenance mode state ($true to enable, $false to disable).
+
+.PARAMETER Reason
+An optional string to define the reason for enabling maintenance mode. This is visible in Citrix Studio and helps other administrators understand why the machine is unavailable.
+
+.EXAMPLE
+Set-CTXAPI_MachineMaintenanceMode -APIHeader $header -Name "CTX-Machine01" -InMaintenanceMode $true -Reason "Ticket INC-12345: RAM upgrade"
+Places the specified Citrix Machine into maintenance mode with an audit reason.
+
+.INPUTS
+System.String[]
+
+.OUTPUTS
+System.Object[]
+Returns the API response objects for each machine processed.
+#>
+function Set-CTXAPI_MachineMaintenanceMode {
+	[Cmdletbinding(DefaultParameterSetName = 'Set1', HelpURI = 'https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachineMaintenanceMode')]
+	[OutputType([System.Object[]])]
+	#region Parameter
+	#region Parameter
+	param(
+		[Parameter(Position = 0, Mandatory)]
+		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
+       
+		[Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName, Mandatory)]
+		[Alias('DNSName', 'Id')]
+		[string[]]$Name,
+       
+		[Parameter(Mandatory)]
+		[bool]$InMaintenanceMode
+	)
+	#endregion
+	begin {
+		if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+		else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
+		[System.Collections.generic.List[PSObject]]$Machines = @()
+		[System.Collections.generic.List[PSObject]]$ResultObject = @()
+		Write-Verbose "Retrieving machines matching: $($Name -join ', ')"
+       
+		try {
+			Get-CTXAPI_Machine -APIHeader $APIHeader |
+				Where-Object {($_.Name -in $Name) -or ($_.Id -in $Name) -or ($_.DnsName -in $Name)} |
+					ForEach-Object { $Machines.Add($_) }
+           
+			Write-Verbose ('Found {0} machines to process.' -f $Machines.Count)
+		} catch {
+			Write-Warning "Error retrieving machines - $_.Exception.Message"
+		}
+       
+		# Build the JSON payload required for the PATCH request
+		$body = @{
+			InMaintenanceMode = $InMaintenanceMode
+		}
+
+	} #End Begin
+   
+	process {
+		foreach ($machine in $Machines) {
+			Write-Verbose "Processing machine: $($machine.DnsName) (ID: $($machine.Id))"
+			try {
+				# The update endpoint requires a PATCH method directed at the specific machine ID
+				$baseuri = [string]::Format('https://api.cloud.com/cvad/manage/Machines/{0}', $machine.Id)
+				Write-Verbose "Calling API: $baseuri with method PATCH"
+               
+				$apiResult = Invoke-RestMethod -Uri $baseuri -Method PATCH -Headers $APIHeader.headers -Body ($body | ConvertTo-Json -Depth 3 )
+               
+				Write-Verbose "API call result: $($apiResult | ConvertTo-Json -Depth 3)"
+				$ResultObject.Add($apiResult)
+				Write-Verbose "Successfully set InMaintenanceMode to '$InMaintenanceMode' on machine '$($machine.DnsName)' (ID: $($machine.Id))"
+			
+			} catch {
+				Write-Warning "API call failed for machine '$($machine.DnsName)' - $_.Exception.Message"
+			}
+		}
+	} #End Process
+   
+	end {
+		Write-Verbose "[$(Get-Date -Format HH:mm:ss) END] Complete"
+		return $ResultObject
+	} #End End
+} #end Function
+ 
+Export-ModuleMember -Function Set-CTXAPI_MachineMaintenanceMode
+#endregion
+ 
+#region Set-CTXAPI_MachinePowerState.ps1
+######## Function 19 of 19 ##################
 # Function:         Set-CTXAPI_MachinePowerState
 # Module:           CTXCloudApi
 # ModuleVersion:    0.1.33
 # Author:           Pierre Smit
 # Company:          Private
 # CreatedOn:        2/23/2026 9:03:26 AM
-# ModifiedOn:       2/23/2026 9:05:42 AM
+# ModifiedOn:       2/27/2026 8:56:12 PM
 # Synopsis:         Starts, shuts down, restarts, or logs off Citrix machines via CTX API.
 #############################################
  
@@ -2854,6 +2799,9 @@ function Set-CTXAPI_MachinePowerState {
 	)
 	#endregion
 	begin {
+		if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+		else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
 		[System.Collections.generic.List[PSObject]]$Machines = @()
 		[System.Collections.generic.List[PSObject]]$ResultObject = @()
@@ -2903,63 +2851,6 @@ function Set-CTXAPI_MachinePowerState {
 } #end Function
  
 Export-ModuleMember -Function Set-CTXAPI_MachinePowerState
-#endregion
- 
-#region Test-CTXAPI_Header.ps1
-######## Function 19 of 19 ##################
-# Function:         Test-CTXAPI_Header
-# Module:           CTXCloudApi
-# ModuleVersion:    0.1.33
-# Author:           Pierre Smit
-# Company:          Private
-# CreatedOn:        11/26/2024 11:41:08 AM
-# ModifiedOn:       2/18/2026 10:40:08 AM
-# Synopsis:         Checks that the connection is still valid, and the token hasn't expired.
-#############################################
- 
-<#
-.SYNOPSIS
-Checks that the connection is still valid, and the token hasn't expired.
-
-.DESCRIPTION
-Checks that the connection is still valid, and the token hasn't expired.
-
-.PARAMETER APIHeader
-Use Connect-CTXAPI to create headers.
-
-.PARAMETER AutoRenew
-If the token has expired, it will connect and renew the variable.
-
-.EXAMPLE
-Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew
-
-#>
-
-function Test-CTXAPI_Header {
-    [Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header')]
-    [Alias('Test-CTXAPI_Headers')]
-    [OutputType([System.Boolean])]
-    param(
-        [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
-        [switch]$AutoRenew = $false
-    )
-
-    $timeleft = [math]::Truncate(($APIHeader.TokenExpireAt - (Get-Date)).totalminutes)
-    Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Time Left in min: $($timeleft)"
-    if ($timeleft -lt 0) {
-        Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Token Update Needed"
-        if ($AutoRenew) {
-            Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Updating Token"
-            $APItmp = Connect-CTXAPI -Customer_Id $APIHeader.CTXAPI.Customer_Id -Client_Id $APIHeader.CTXAPI.Client_Id -Client_Secret $APIHeader.CTXAPI.Client_Secret -Customer_Name $APIHeader.CustomerName
-            Get-Variable | Where-Object { $_.value -like '*TokenExpireAt=*' -and $_.Name -notlike 'APItmp' } | Set-Variable -Value $APItmp -Force -Scope global
-            return $true
-        } else { return $false }
-    } else { return $true }
-
-
-} #end Function
- 
-Export-ModuleMember -Function Test-CTXAPI_Header
 #endregion
  
 #endregion

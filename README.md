@@ -49,5 +49,5 @@ Get-CTXAPI_VDAUptime [-APIHeader] <CTXAPIHeaderObject> [[-Export] <string>] [[-R
 - [`Get-CTXAPI_Zone`](https://smitpi.github.io/CTXCloudApi/Get-CTXAPI_Zone) -- Returns Zone details (handles pagination).
 - [`New-CTXAPI_Machine`](https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Machine) -- Creates and adds new machines to a Citrix Cloud Delivery Group.
 - [`New-CTXAPI_Report`](https://smitpi.github.io/CTXCloudApi/New-CTXAPI_Report) -- Generate Citrix Cloud monitoring reports in multiple formats (Host, Excel, HTML).
+- [`Set-CTXAPI_MachineMaintenanceMode`](https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachineMaintenanceMode) -- Enables or disables Maintenance Mode for Citrix machines via CTX API, with an optional reason.
 - [`Set-CTXAPI_MachinePowerState`](https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachinePowerState) -- Starts, shuts down, restarts, or logs off Citrix machines via CTX API.
-- [`Test-CTXAPI_Header`](https://smitpi.github.io/CTXCloudApi/Test-CTXAPI_Header) -- Checks that the connection is still valid, and the token hasn't expired.

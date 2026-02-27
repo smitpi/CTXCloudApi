@@ -75,7 +75,7 @@ function Test-CTXAPI_Header {
         if ($AutoRenew) {
             Write-Verbose "$((Get-Date -Format HH:mm:ss).ToString()) [Processing] Updating Token"
             $APItmp = Connect-CTXAPI -Customer_Id $APIHeader.CTXAPI.Customer_Id -Client_Id $APIHeader.CTXAPI.Client_Id -Client_Secret $APIHeader.CTXAPI.Client_Secret -Customer_Name $APIHeader.CustomerName
-            Get-Variable | Where-Object { $_.value -like '*TokenExpireAt=*' -and $_.Name -notlike 'APItmp' } | Set-Variable -Value $APItmp -Force -Scope global
+            Get-Variable | Where-Object { $_.value -like '*TokenExpireAt=*' -and $_.Name -notlike 'APItmp' } | Set-Variable -Value $APItmp -Force -Scope Script
             return $true
         } else { return $false }
     } else { return $true }

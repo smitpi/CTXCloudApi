@@ -99,6 +99,11 @@ function Get-CTXAPI_VDAUptime {
         [ValidateScript( { (Test-Path $_) })]
         [System.IO.DirectoryInfo]$ReportPath = $env:temp)
 
+
+    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+
+    
     Write-Verbose "Starting Get-CTXAPI_VDAUptime with Export: $Export and ReportPath: $ReportPath"
     try {
         [System.Collections.generic.List[PSObject]]$complist = @()
