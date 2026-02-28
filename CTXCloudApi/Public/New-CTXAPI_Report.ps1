@@ -124,7 +124,7 @@ function New-CTXAPI_Report {
 		[ValidateScript( { (Test-Path $_) })]
 		[System.IO.DirectoryInfo]$ReportPath = $env:temp
 	)
-	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+		if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
 	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 	if ($PSBoundParameters.ContainsKey('MonitorData')) {

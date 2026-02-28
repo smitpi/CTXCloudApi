@@ -64,6 +64,7 @@ function Test-CTXAPI_Header {
     [Alias('Test-CTXAPI_Headers')]
     [OutputType([System.Boolean])]
     param(
+        [Parameter(ValueFromPipeline, Mandatory)]
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader,
         [switch]$AutoRenew = $false
     )

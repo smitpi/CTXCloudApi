@@ -1,7 +1,5 @@
 Describe 'Get-CTXAPI_VDAUptime' {
-    It 'Should return VDA uptime objects' {
-        $header = Connect-CTXAPI -ApiUrl 'https://api.cloud.com' -Username 'test' -Password 'test'
-        $uptime = Get-CTXAPI_VDAUptime -APIHeader $header
-        $uptime | Should -Not -BeNullOrEmpty
-    }
+	It 'Should not be exported (removed cmdlet)' {
+		Get-Command -Name 'Get-CTXAPI_VDAUptime' -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+	}
 }

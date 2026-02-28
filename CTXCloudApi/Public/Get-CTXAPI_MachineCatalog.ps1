@@ -80,8 +80,8 @@ function Get-CTXAPI_MachineCatalog {
         [PSTypeName('CTXAPIHeaderObject')]$APIHeader	)
 
         
-    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
-    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+    	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 
     $requestUri = 'https://api.cloud.com/cvad/manage/MachineCatalogs?limit=1000'

@@ -74,7 +74,7 @@ System.Object[]. Returns the API response objects for each machine processed.
 
 #>
 function Set-CTXAPI_MachinePowerState {
-	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachinePowerState')]
+	[Cmdletbinding(HelpURI = 'https://smitpi.github.io/CTXCloudApi/Set-CTXAPI_MachinePowerState', SupportsShouldProcess = $true, ConfirmImpact = 'Medium')]
 	[OutputType([System.Object[]])]
 	#region Parameter
 	param(
@@ -90,8 +90,8 @@ function Set-CTXAPI_MachinePowerState {
 	)
 	#endregion
 	begin {
-		if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
-		else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+			if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 		Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
 		[System.Collections.generic.List[PSObject]]$Machines = @()
@@ -113,7 +113,7 @@ function Set-CTXAPI_MachinePowerState {
 			}
 			Write-Verbose "API endpoint resolved: $endpoint"
 		} else {
-			Write-Warning 'No action specified. Please provide an action using the -PowerAction parameter (Start, Shutdown, Restart, Logoff).'
+			throw 'No action specified. Please provide an action using the -PowerAction parameter (Start, Shutdown, Restart, Logoff).'
 		}
 	} #End Begin
 	process {
@@ -122,16 +122,18 @@ function Set-CTXAPI_MachinePowerState {
 			try {
 				$baseuri = [string]::Format('https://api.cloud.com/cvad/manage/Machines/{0}/${1}', $($machine.Name), $endpoint)
 				Write-Verbose "Calling API: $baseuri"
-				try {
-					$apiResult = Invoke-RestMethod -Uri $baseuri -Method POST -Headers $APIHeader.headers
-					Write-Verbose "API call result: $($apiResult | ConvertTo-Json -Depth 3)"
-					$ResultObject.Add($apiResult)
-					Write-Verbose "Performed action '$PowerAction' on machine '$($machine.DnsName)' (ID: $($machine.Id))"
-				} catch {
-					Write-Warning "API call failed for machine '$($machine.DnsName)' - $_.Exception.Message"
+				if ($PSCmdlet.ShouldProcess("$($machine.DnsName) ($($machine.Id))", "$PowerAction")) {
+					try {
+						$apiResult = Invoke-RestMethod -Uri $baseuri -Method POST -Headers $APIHeader.headers -ErrorAction Stop
+						Write-Verbose "API call result: $($apiResult | ConvertTo-Json -Depth 3)"
+						$ResultObject.Add($apiResult)
+						Write-Verbose "Performed action '$PowerAction' on machine '$($machine.DnsName)' (ID: $($machine.Id))"
+					} catch {
+						Write-Warning "API call failed for machine '$($machine.DnsName)' - $($_.Exception.Message)"
+					}
 				}
 			} catch {
-				Write-Warning "Error processing machine '$($machine.DnsName)' - $_.Exception.Message"
+				Write-Warning "Error processing machine '$($machine.DnsName)' - $($_.Exception.Message)"
 			}
 		}
 	}#Process

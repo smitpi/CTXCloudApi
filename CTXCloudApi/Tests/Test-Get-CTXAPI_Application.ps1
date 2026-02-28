@@ -1,29 +1,31 @@
 Describe 'Get-CTXAPI_Application' {
-	Mock Get-CTXAPI_Application { return @( @{ Name = 'App1' }, @{ Name = 'App2' } ) }
+	BeforeAll {
+		$header = [pscustomobject]@{ PSTypeName = 'CTXAPIHeaderObject'; TokenExpireAt = (Get-Date).AddHours(1); CTXAPI = [pscustomobject]@{}; headers = @{} }
+	}
+
+	BeforeEach {
+		Mock Test-CTXAPI_Header { param($APIHeader) $APIHeader }
+	}
+
 	It 'Should return application objects' {
-		$header = @{ headers = @{ Authorization = 'Bearer token' } }
-		$header.PSObject.TypeNames.Insert(0, 'CTXAPIHeaderObject')
+		Mock Get-CTXAPIDatapages { @([pscustomobject]@{ Name = 'App1' }, [pscustomobject]@{ Name = 'App2' }) }
 		$apps = Get-CTXAPI_Application -APIHeader $header
-		$apps | Should Not BeNullOrEmpty
-		$apps[0].Name | Should Not BeNullOrEmpty
+		$apps | Should -Not -BeNullOrEmpty
+		$apps[0].Name | Should -Not -BeNullOrEmpty
 	}
 
-	Mock Get-CTXAPI_Application { return @() } -ParameterFilter { $APIHeader.headers.Authorization -eq 'fail' }
 	It 'Should handle empty response' {
-		$header = @{ headers = @{ Authorization = 'fail' } }
-		$header.PSObject.TypeNames.Insert(0, 'CTXAPIHeaderObject')
+		Mock Get-CTXAPIDatapages { @() }
 		$apps = Get-CTXAPI_Application -APIHeader $header
-		$apps | Should BeNullOrEmpty
+		$apps | Should -BeNullOrEmpty
 	}
 
-	Mock Get-CTXAPI_Application { throw 'API failure' } -ParameterFilter { $APIHeader.headers.Authorization -eq 'error' }
-	It 'Should handle API failure' {
-		$header = @{ headers = @{ Authorization = 'error' } }
-		$header.PSObject.TypeNames.Insert(0, 'CTXAPIHeaderObject')
-		{ Get-CTXAPI_Application -APIHeader $header } | Should Throw 'API failure'
+	It 'Should bubble API failure' {
+		Mock Get-CTXAPIDatapages { throw 'API failure' }
+		{ Get-CTXAPI_Application -APIHeader $header } | Should -Throw 'API failure'
 	}
 
 	It 'Should handle invalid input' {
-		{ Get-CTXAPI_Application -APIHeader $null } | Should Throw
+		{ Get-CTXAPI_Application -APIHeader $null } | Should -Throw
 	}
 }

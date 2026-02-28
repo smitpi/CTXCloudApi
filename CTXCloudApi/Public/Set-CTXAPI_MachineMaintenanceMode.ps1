@@ -76,7 +76,7 @@ function Set-CTXAPI_MachineMaintenanceMode {
 	#region Parameter
 	#region Parameter
 	param(
-		[Parameter(Position = 0, Mandatory)]
+		[Parameter(Mandatory)]
 		[PSTypeName('CTXAPIHeaderObject')]$APIHeader,
        
 		[Parameter(ValueFromPipeline, ValueFromPipelineByPropertyName, Mandatory)]
@@ -121,9 +121,9 @@ function Set-CTXAPI_MachineMaintenanceMode {
 				$baseuri = [string]::Format('https://api.cloud.com/cvad/manage/Machines/{0}', $machine.Id)
 				Write-Verbose "Calling API: $baseuri with method PATCH"
                
-				$apiResult = Invoke-RestMethod -Uri $baseuri -Method PATCH -Headers $APIHeader.headers -Body ($body | ConvertTo-Json -Depth 3 )
+				Invoke-RestMethod -Uri $baseuri -Method PATCH -Headers $APIHeader.headers -Body ($body | ConvertTo-Json -Depth 3 )
+				$apiResult = Invoke-RestMethod -Uri $baseuri -Method get -Headers $APIHeader.headers
                
-				Write-Verbose "API call result: $($apiResult | ConvertTo-Json -Depth 3)"
 				$ResultObject.Add($apiResult)
 				Write-Verbose "Successfully set InMaintenanceMode to '$InMaintenanceMode' on machine '$($machine.DnsName)' (ID: $($machine.Id))"
 			

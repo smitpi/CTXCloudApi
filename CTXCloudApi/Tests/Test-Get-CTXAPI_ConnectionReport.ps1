@@ -1,7 +1,5 @@
 Describe 'Get-CTXAPI_ConnectionReport' {
-    It 'Should return connection report objects' {
-        $header = Connect-CTXAPI -ApiUrl 'https://api.cloud.com' -Username 'test' -Password 'test'
-        $report = Get-CTXAPI_ConnectionReport -APIHeader $header
-        $report | Should -Not -BeNullOrEmpty
-    }
+	It 'Should not be exported (removed cmdlet)' {
+		Get-Command -Name 'Get-CTXAPI_ConnectionReport' -ErrorAction SilentlyContinue | Should -BeNullOrEmpty
+	}
 }

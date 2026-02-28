@@ -76,9 +76,10 @@ FunctionsToExport = 'Connect-CTXAPI', 'Get-CTXAPI_Application', 'Get-CTXAPI_Clou
                'Get-CTXAPI_Hypervisor', 'Get-CTXAPI_LowLevelOperation', 
                'Get-CTXAPI_Machine', 'Get-CTXAPI_MachineCatalog', 
                'Get-CTXAPI_MonitorData', 'Get-CTXAPI_ResourceLocation', 
-               'Get-CTXAPI_Session', 'Get-CTXAPI_SiteDetail', 'Get-CTXAPI_VDAUptime', 
+               'Get-CTXAPI_Session', 'Get-CTXAPI_SiteDetail', 
                'Get-CTXAPI_Zone', 'New-CTXAPI_Machine', 'New-CTXAPI_Report', 
-               'Set-CTXAPI_MachinePowerState', 'Test-CTXAPI_Header'
+               'Set-CTXAPI_MachineMaintenanceMode', 'Set-CTXAPI_MachinePowerState', 
+               'Test-CTXAPI_Header'
 
 # Cmdlets to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no cmdlets to export.
 CmdletsToExport = @()

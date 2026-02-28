@@ -68,7 +68,7 @@ $MonitorData = Get-CTXAPI_MonitorData -APIHeader $APIHeader -LastHours 24
 Collects the last 24 hours of Monitor OData and returns a CTXMonitorData object.
 
 .EXAMPLE
-Get-CTXAPI_MonitorData -APIHeader $APIHeader -BeginDate (Get-Date).AddDays(-2) -EndDate (Get-Date).AddDays(-1) -MonitorDetails Connections,Session
+Get-CTXAPI_MonitorData -APIHeader $APIHeader -BeginDate (Get-Date).AddDays(-2) -EndDate (Get-Date).AddDays(-1) -MonitorDetails Connections,Sessions
 Collects data for a specific date range and includes only Connections and Session entities.
 
 .EXAMPLE
@@ -99,7 +99,6 @@ function Get-CTXAPI_MonitorData {
         [Parameter(Mandatory = $false, ParameterSetName = 'specific')]
         [datetime]$EndDate,
         [ValidateSet('ApplicationActivitySummaries', 
-            'ApplicationActivitySummaries',
             'ApplicationInstances',
             'Applications',
             'Catalogs',
@@ -120,7 +119,7 @@ function Get-CTXAPI_MonitorData {
             'ResourceUtilization',
             'ResourceUtilizationSummary',
             'ServerOSDesktopSummaries',
-            'Session',
+            'Sessions',
             'SessionActivitySummaries',
             'SessionAutoReconnects',
             'SessionMetrics',
@@ -130,8 +129,8 @@ function Get-CTXAPI_MonitorData {
         [string[]]$MonitorDetails = 'All'
     )
     
-    if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
-    else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
+    	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
     Write-Verbose "[$(Get-Date -Format HH:mm:ss) BEGIN] Starting $($myinvocation.mycommand)"
     if ($PSCmdlet.ParameterSetName -eq 'hours' -and $null -ne $LastHours) {

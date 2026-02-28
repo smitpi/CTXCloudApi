@@ -83,7 +83,7 @@ function New-CTXAPI_Machine {
 		[Parameter(Mandatory = $true)]
 		[int]$AmountOfMachines
 	)
-	if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
+		if (-not(Test-CTXAPI_Header -APIHeader $APIHeader)) {Test-CTXAPI_Header -APIHeader $APIHeader -AutoRenew}
 	else {	Write-Verbose "[$(Get-Date -Format HH:mm:ss) APIHEADER] Header still valid"}
 
 	Write-Verbose "Retrieving Machine Catalog ID for: $MachineCatalogName"
@@ -101,18 +101,22 @@ function New-CTXAPI_Machine {
 		Write-Verbose "Starting creation of machine $i of $AmountOfMachines."
 		try {
 			Write-Verbose "Invoking REST method to create machine. URI: $requestUri"
-			Invoke-RestMethod -Uri $requestUri -Method POST -Headers $APIHeader.headers -Body $body
+			if ($PSCmdlet.ShouldProcess("MachineCatalog '$MachineCatalogName'", "Create machine ($i of $AmountOfMachines)")) {
+				Invoke-RestMethod -Uri $requestUri -Method POST -Headers $APIHeader.headers -Body $body -ErrorAction Stop
+			} else {
+				continue
+			}
 			Start-Sleep -Seconds 5
 			$Jobrequest = [string]::Format('https://api.cloud.com/cvad/manage/Jobs')
 			Write-Verbose "Checking job status at: $Jobrequest"
-			$jobresponse = Invoke-RestMethod -Uri $Jobrequest -Method get -Headers $APIHeader.headers
+			$jobresponse = Invoke-RestMethod -Uri $Jobrequest -Method get -Headers $APIHeader.headers -ErrorAction Stop
 			$topreponce = ($jobresponse.Items | Sort-Object -Property CreationTime -Descending)[0]
 			Write-Verbose "Job state: $($topreponce.status). Waiting for completion... Number $i"
 			while ($topreponce.status -eq 'InProgress') {
 				Write-Verbose "Job state: $($topreponce.status). Waiting for completion... Number $i"
 				Start-Sleep -Seconds 5
 				$Jobrequest = [string]::Format('https://api.cloud.com/cvad/manage/Jobs/{0}', $topreponce.id)
-				$topreponce = Invoke-RestMethod -Uri $Jobrequest -Method get -Headers $APIHeader.headers
+				$topreponce = Invoke-RestMethod -Uri $Jobrequest -Method get -Headers $APIHeader.headers -ErrorAction Stop
 			}
 			Write-Verbose 'Successfully created machine.'
 		} catch {
@@ -141,8 +145,10 @@ function New-CTXAPI_Machine {
 			} | ConvertTo-Json -Depth 10
 			$deliveryrequestUri = [string]::Format('https://api.cloud.com/cvad/manage/DeliveryGroups/{0}/Machines', $DeliveryGroup.id)
 			Write-Verbose "Invoking REST method to add machine to Delivery Group. URI: $deliveryrequestUri"
-			$invoke = Invoke-RestMethod -Uri $deliveryrequestUri -Method POST -Headers $APIHeader.headers -Body $deliveryobject
-			$ResultObject.Add($invoke)
+			if ($PSCmdlet.ShouldProcess("DeliveryGroup '$($DeliveryGroup.Name)'", "Add machine '$($_.Name)'")) {
+				$invoke = Invoke-RestMethod -Uri $deliveryrequestUri -Method POST -Headers $APIHeader.headers -Body $deliveryobject -ErrorAction Stop
+				$ResultObject.Add($invoke)
+			}
 		}
 	} else {
 		Write-Verbose 'No new machines found to add to Delivery Group.'

@@ -1,6 +1,12 @@
 Describe 'Get-CTXAPI_DeliveryGroup' {
+    BeforeAll {
+        $header = [pscustomobject]@{ PSTypeName = 'CTXAPIHeaderObject'; TokenExpireAt = (Get-Date).AddHours(1); CTXAPI = [pscustomobject]@{}; headers = @{} }
+    }
+    BeforeEach {
+        Mock Test-CTXAPI_Header { param($APIHeader) $APIHeader }
+        Mock Get-CTXAPIDatapages { @([pscustomobject]@{ Name = 'DG1' }) }
+    }
     It 'Should return delivery group objects' {
-        $header = Connect-CTXAPI -ApiUrl 'https://api.cloud.com' -Username 'test' -Password 'test'
         $groups = Get-CTXAPI_DeliveryGroup -APIHeader $header
         $groups | Should -Not -BeNullOrEmpty
     }
